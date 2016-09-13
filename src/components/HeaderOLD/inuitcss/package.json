@@ -1,0 +1,104 @@
+{
+  "_args": [
+    [
+      "inuitcss",
+      "/Users/Abdi/ReactReduxPearson"
+    ]
+  ],
+  "_from": "inuitcss@latest",
+  "_id": "inuitcss@6.0.0-beta.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/inuitcss",
+  "_nodeVersion": "4.4.7",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/inuitcss-6.0.0-beta.3.tgz_1472539857633_0.47405245737172663"
+  },
+  "_npmUser": {
+    "email": "harry@csswizardry.com",
+    "name": "csswizardry"
+  },
+  "_npmVersion": "3.10.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "inuitcss",
+    "raw": "inuitcss",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/inuitcss/-/inuitcss-6.0.0-beta.3.tgz",
+  "_shasum": "e7a84a56e29e0cd2e395fdfdad5592e085b6b3c6",
+  "_shrinkwrap": null,
+  "_spec": "inuitcss",
+  "_where": "/Users/Abdi/ReactReduxPearson",
+  "author": {
+    "email": "csswizardry@gmail.com",
+    "name": "Harry Roberts"
+  },
+  "bugs": {
+    "url": "https://github.com/inuitcss/inuitcss/issues"
+  },
+  "contributors": [
+    {
+      "name": "Anselm Hannemann"
+    },
+    {
+      "name": "Dennis Heibült"
+    },
+    {
+      "name": "Florian Bouvot"
+    },
+    {
+      "name": "Nenad Jelovac"
+    }
+  ],
+  "dependencies": {
+    "sass-mq": "^3.2.9"
+  },
+  "description": "Extensible, scalable, Sass-based, OOCSS framework for large and long-lasting UI projects.",
+  "devDependencies": {
+    "glob": "^7.0.5",
+    "mocha": "^3.0.2",
+    "node-sass": "^3.8.0",
+    "sass-true": "^2.1.3"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "e7a84a56e29e0cd2e395fdfdad5592e085b6b3c6",
+    "tarball": "https://registry.npmjs.org/inuitcss/-/inuitcss-6.0.0-beta.3.tgz"
+  },
+  "gitHead": "7c4efdd62f9323553726101a7ef23108cbaeb47e",
+  "homepage": "https://github.com/inuitcss/inuitcss#readme",
+  "keywords": [
+    "oocss",
+    "sass",
+    "bem",
+    "itcss",
+    "css"
+  ],
+  "license": "Apache-2.0",
+  "main": "example.main.scss",
+  "maintainers": [
+    {
+      "email": "harry@csswizardry.com",
+      "name": "csswizardry"
+    }
+  ],
+  "name": "inuitcss",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inuitcss/inuitcss.git"
+  },
+  "scripts": {
+    "test": "mocha test/run.js"
+  },
+  "version": "6.0.0-beta.3"
+}

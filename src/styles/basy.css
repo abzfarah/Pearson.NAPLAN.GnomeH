@@ -1,0 +1,175 @@
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Source Sans Pro Light"), local("SourceSansPro-Light"), url("https://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGPS42wKzre0cxmO5m5GyTsY.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Source Sans Pro"), local("SourceSansPro-Regular"), url("https://fonts.gstatic.com/s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlEY6Fu39Tt9XkmtSosaMoEA.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"), url("https://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGLlcMrNrsnL9dgADnXgYJjs.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  src: local("Source Sans Pro Italic"), local("SourceSansPro-It"), url("https://fonts.gstatic.com/s/sourcesanspro/v9/M2Jd71oPJhLKp0zdtTvoMzpKUtbt71woJ25xl7KOGD0.ttf") format("truetype");
+}
+
+.grommetux-footer {
+  min-height: 36px;
+  line-height: 36px;
+  width: 100%;
+}
+
+.grommetux-footer.grommetux---direction-row > h1,
+.grommetux-footer.grommetux---direction-row > h2,
+.grommetux-footer.grommetux---direction-row > h3,
+.grommetux-footer.grommetux---direction-row > h4 {
+  margin-bottom: 0px;
+}
+
+.grommetux-footer__content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.grommetux-footer__content > * {
+  margin-right: 48px;
+}
+
+.grommetux-footer__content > *:last-child {
+  margin-right: 0px;
+  text-align: left;
+}
+
+.grommetux-footer--primary {
+  height: auto;
+  padding: 24px;
+}
+
+.grommetux-footer--primary .grommetux-footer__content {
+  position: relative;
+  color: #666;
+  display: block;
+}
+
+.grommetux-footer--primary .grommetux-footer__content p {
+  padding-top: 12px;
+  margin: 0;
+  max-width: none;
+  text-align: right;
+  line-height: 24px;
+}
+
+.grommetux-footer--centered .grommetux-footer__content {
+  display: block;
+  text-align: center;
+}
+
+.grommetux-footer--centered .grommetux-footer__content > * {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.grommetux-footer--flush .grommetux-footer__content,
+.grommetux-footer--flush .grommetux-footer__wrapper {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.grommetux-footer--large {
+  min-height: 96px;
+  line-height: 96px;
+}
+
+.grommetux-footer--small {
+  min-height: 24px;
+  line-height: 24px;
+}
+
+.grommetux-footer--fixed .grommetux-footer__wrapper {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 3;
+}
+
+.grommetux-footer--fixed .grommetux-footer__wrapper--fill .grommetux-footer__wrapper {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.grommetux-footer--fixed.grommetux-footer--primary .grommetux-footer__wrapper {
+  position: fixed;
+}
+
+.grommetux-footer--fixed.grommetux-footer--primary .grommetux-footer__wrapper--fill .grommetux-footer__wrapper {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.grommetux-footer--fixed.grommetux-footer--primary .grommetux-footer__content {
+  position: static;
+  background-color: transparent;
+}
+
+.grommetux-footer__container {
+  flex-shrink: 0;
+}
+
+.grommetux-footer__container--float {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.grommetux-footer__container--fill .grommetux-footer {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.grommetux-footer__container--fixed {
+  position: relative;
+  width: 100%;
+}
+
+.grommetux-footer__container--fixed .grommetux-footer__wrapper {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 3;
+}
+
+.grommetux-footer__wrapper {
+  height: 36px;
+}
+
+.grommetux-footer__wrapper--large {
+  height: 96px;
+}
+
+.grommetux-footer__wrapper--small {
+  height: 24px;
+}
+
+*:not(.grommetux-footer__container--float) > .grommetux-footer--float {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}

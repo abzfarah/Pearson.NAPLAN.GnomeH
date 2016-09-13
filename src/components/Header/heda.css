@@ -1,0 +1,161 @@
+
+.grommetux-header {
+  min-height: 72px;
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .grommetux-header {
+    height: 71px;
+  }
+}
+
+.grommetux-header a:not(.grommetux-button) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.grommetux-header a:not(.grommetux-button):hover {
+  text-decoration: none;
+}
+
+.grommetux-header .grommetux-status-icon {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.grommetux-header--large {
+  min-height: 96px;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .grommetux-header--large {
+    height: 95px;
+  }
+}
+
+.grommetux-header--large .grommetux-header__content {
+  line-height: 96px;
+}
+
+.grommetux-header--small {
+  min-height: 48px;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .grommetux-header--small {
+    height: 47px;
+  }
+}
+
+.grommetux-header--small .grommetux-header__content {
+  line-height: 48px;
+}
+
+header.grommetux-header {
+  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: inherit;
+}
+
+header.grommetux-header h1,
+header.grommetux-header h2,
+header.grommetux-header h3,
+header.grommetux-header h4,
+header.grommetux-header h5 {
+  margin-bottom: 0;
+}
+
+.grommetux-header--splash {
+  -webkit-transform: translate(0, 40vh);
+  transform: translate(0, 40vh);
+}
+
+*:not(.grommetux-header__container--float) > header.grommetux-header--float {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+header.grommetux-header--primary .grommetux-header__wrapper {
+  border-bottom: none;
+}
+
+.grommetux-header:not(header).grommetux-box--separator-top {
+  padding-top: 6px;
+}
+
+.grommetux-header:not(header).grommetux-box--separator-bottom {
+  padding-bottom: 6px;
+}
+
+.grommetux-header__container {
+  flex-shrink: 0;
+}
+
+.grommetux-header__container--fill .grommetux-header {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.grommetux-header__container--fixed {
+  position: relative;
+}
+
+.grommetux-header__container--fixed .grommetux-header__wrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 3;
+}
+
+@media screen and (min-width: 45em) {
+  .grommetux-header__container--fixed .grommetux-header__wrapper .grommetux-header {
+    position: fixed;
+  }
+}
+
+.grommetux-header__container--float {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.grommetux-header__wrapper {
+  height: 72px;
+}
+
+.grommetux-header__wrapper--large {
+  height: 96px;
+}
+
+.grommetux-header__wrapper--small {
+  height: 48px;
+}
+
+.grommetux-header--fixed .grommetux-header__wrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 3;
+}
+
+.grommetux-header--fixed.grommetux-header--primary .grommetux-header__wrapper {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.grommetux-header--fixed.grommetux-header--primary .grommetux-header__content {
+  position: static;
+  background-color: transparent;
+}
+
+.grommetux-header--flush .grommetux-header__wrapper {
+  padding-left: 0px;
+  padding-right: 0px;
+}

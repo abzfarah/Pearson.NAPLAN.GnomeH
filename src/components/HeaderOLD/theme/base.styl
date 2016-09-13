@@ -1,0 +1,189 @@
+// Base Styles
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+body
+  line-height: $line-height;
+  font-family: $font-family;
+  color: $color-text-black
+  text-rendering: geometricPrecision;
+  font-size: $font-size-2px;
+  +breakpoint("tablet")
+    font-size: $font-size;
+
+h1, h2, h3, h4, h5, h6
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $color-text
+
+h4,h5
+  font-weight: 500;
+
+h1
+  font-size: 22px;
+h2
+  font-size: 20px;
+h3
+  font-size: 18px;
+h4
+  font-size: 16px;
+h5
+  font-size: 12px;
+
+// Larger than phablet
++breakpoint('tablet')
+  h1
+    font-size: 34px
+  h2
+    font-size: 32px;
+  h3
+    font-size: 28px;
+  h4
+    font-size: 22px;
+  h5
+    font-size: 18px;
+  h6
+    font-size: 16px;
+
+strong
+  font-weight: 600;
+
+// Blockquote
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+blockquote
+  text-align: center;
+  p
+    font-size: $font-size * 1.5;
+    line-height: $line-height*1.5;
+    font-style: italic;
+
+
+// Links
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+a
+  color: $link-color;
+  &:hover
+    color: darken($link-color, 5%);
+
+
+// Lists
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+ul
+  list-style: circle inside;
+
+ol
+  list-style: decimal inside;
+  padding-left: 0;
+  margin-top: 0;
+
+ul
+  padding-left: 0;
+  margin-top: 0;
+  ul, ol
+    margin: 1.5rem 0 1.5rem 3rem;
+    font-size: 90%;
+
+ol
+  ol, ul
+    margin: 1.5rem 0 1.5rem 3rem;
+    font-size: 90%;
+
+li
+  margin-bottom: 1rem;
+
+// Code
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+code
+  padding: 0 4px;
+  margin: 0 2px;
+  font-size: 90%;
+  font-family: $font-family-mono;
+  white-space: nowrap;
+  color: $color-text;
+  background: lighten($bg-color-3, 70%);
+  border-radius: $border-radius;
+
+pre > code
+  display: block;
+  padding: 1rem 1.5rem;
+  white-space: pre;
+
+p, h1, h2, h3, h4, h5, h6
+  code
+    display: inline-block;
+
+
+// Tables
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+th,
+td
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid $bg-color-4;
+
+
+th:first-child,
+td:first-child
+  padding-left: 0;
+
+th:last-child,
+td:last-child
+  padding-right: 0;
+
+// Spacing
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+input,
+textarea,
+select,
+fieldset
+  margin-bottom: 20px;
+
+pre,
+blockquote,
+dl,
+figure,
+table,
+p,
+ul,
+ol,
+form
+  margin-bottom: 20px;
+
+// Utilities
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+.pull-right
+  float: right;
+
+.pull-left
+  float: left;
+
+// Misc
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+hr
+  margin-top: 60px;
+  margin-bottom: 60px;
+  border-width: 0;
+  border-top: 1px solid $bg-color-4;
+
+.theme-dark
+  color: $color-text-contrast
+
+  h1, h2, h3, h4, h5, h6
+    color: $color-text-contrast
+
+  code
+    background: rgba(255,255,255,.2);
+    color: white;
+
+  blockquote
+    color $color-text-contrast
+    author
+      color $color-text-contrast
+  p
+    color $color-text-contrast
