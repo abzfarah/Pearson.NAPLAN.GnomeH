@@ -32,10 +32,6 @@ var _Add = require('./base/Add');
 
 var _Add2 = _interopRequireDefault(_Add);
 
-var _CSSClassnames = require('../../utils/CSSClassnames');
-
-var _CSSClassnames2 = _interopRequireDefault(_CSSClassnames);
-
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -44,7 +40,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
 
-var CLASS_ROOT = _CSSClassnames2.default.PULSE;
+var CLASS_ROOT =" _CSSClassnames2.default.PULSE";
 
 var Pulse = function (_Component) {
   (0, _inherits3.default)(Pulse, _Component);

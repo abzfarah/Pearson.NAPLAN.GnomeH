@@ -32,13 +32,10 @@ var _FormattedMessage = require('../../FormattedMessage');
 
 var _FormattedMessage2 = _interopRequireDefault(_FormattedMessage);
 
-var _CSSClassnames = require('../../../utils/CSSClassnames');
-
-var _CSSClassnames2 = _interopRequireDefault(_CSSClassnames);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var STATUS_ICON = _CSSClassnames2.default.STATUS_ICON; // (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+var STATUS_ICON = "_CSSClassnames2.default.STATUS_ICON"; // (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
 
 var Blank = function (_Component) {
   (0, _inherits3.default)(Blank, _Component);

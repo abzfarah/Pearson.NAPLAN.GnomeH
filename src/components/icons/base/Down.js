@@ -37,16 +37,12 @@ var _classnames2 = require('classnames');
 var _classnames3 = _interopRequireDefault(_classnames2);
 
 
-var _CSSClassnames = require('../../utils/CSSClassnames');
-
-var _CSSClassnames2 = _interopRequireDefault(_CSSClassnames);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // (C) Copyright 2014-2015 Hewlett Packard Enterprise Development LP
 
-var CLASS_ROOT = _CSSClassnames2.default.CONTROL_ICON;
-var COLOR_INDEX = _CSSClassnames2.default.COLOR_INDEX;
+var CLASS_ROOT =" _CSSClassnames2.default.CONTROL_ICON";
+var COLOR_INDEX = "_CSSClassnames2.default.COLOR_INDEX";
 
 var Icon = function (_Component) {
   (0, _inherits3.default)(Icon, _Component);
