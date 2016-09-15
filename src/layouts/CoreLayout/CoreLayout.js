@@ -15,39 +15,33 @@ const CLASS_ROOT = CSSClassnames.CALENDAR;
 
 
 export const CoreLayout = ({ children }) => (
-  <div >
-  <Header fixed={true} direction="row">
+    <Header fixed={true} direction="row" tag="header">
+    <div>
+      <nav   className="main-nav" >
+          <a href="http://imgur.com/OlNC7UY"><img  id="menuLogo"  src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />
 
-    <Box  tag="div" direction="row" justify="between"  className="first" >
-         <h1 id="menuLogo" className="vcaa-logo">
-            <a href="http://imgur.com/OlNC7UY"><img  id="menuLogo"  src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" /></a>
-         </h1>
+          </a>
 
-        <Box direction="row">
-            <Button label="Help" secondary={true} />
-            <Button label="Log Out" primary={true} />
-        </Box>
-
-     </Box>
-
-    <Box  tag="div" direction="row"  justify="between" className="second" >
-         <Box >
-            <div className="head-name">St. Paul's Anglican Grammar School</div>
-             <div className="head-code">School Code: 01678</div>
-         </Box>
-
-        <Box direction="row">
-            <button> Pas School </button>
-            <button> School cODE </button>
-        </Box>
-
-     </Box>
+          <ul className="menu">
+            <li><a href="#" className="active">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Domain</a></li>
+            <li><a href="#">Hosting</a></li>
+          </ul>
 
 
+          <div className="button-groups">
+              <Button label="Help" secondary={true} />
+              <Button label="Log Out" primary={true} />
+          </div>
 
-  </Header>
+       </nav>
 
-  </div>
+    </Header>
+
+    <Footer> </Footer>
+    </div>
 )
 
 

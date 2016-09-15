@@ -10,9 +10,9 @@ class AppContainer extends Component {
 
     return (
       <Provider store={store}>
-        <div style={{ }}>
+
           <Router history={history} children={routes} />
-        </div>
+
       </Provider>
     )
   }
