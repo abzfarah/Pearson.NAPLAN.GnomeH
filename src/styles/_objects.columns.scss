@@ -6,6 +6,16 @@
   width: 100%;
 }
 
+.#{$grommet-namespace}columns > div{
+  padding-left: 25px;
+}
+
+.item > * {
+  margin-bottom: 0px;
+  text-decoration: none;
+}
+
+
 .#{$grommet-namespace}columns__column {
   flex: 0 0 $tile-size;
   display: flex;

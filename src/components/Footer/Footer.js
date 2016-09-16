@@ -90,7 +90,6 @@ export default class Footer extends Component {
     // don't transfer size to Box since it means something different
     delete boxProps.size;
 
-    if (this.props.fixed) {
       return (
         <div className={containerClasses}>
           <div ref="mirror" className={`${CLASS_ROOT}__mirror`}></div>
@@ -103,16 +102,7 @@ export default class Footer extends Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <Box {...boxProps} tag="footer" className={classes}
-          containerClassName={containerClasses}
-          primary={false}>
-          {footerSkipLink}
-          {this.props.children}
-        </Box>
-      );
-    }
+
   }
 };
 

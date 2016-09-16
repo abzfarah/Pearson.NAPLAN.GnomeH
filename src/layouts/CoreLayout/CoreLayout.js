@@ -15,8 +15,9 @@ const CLASS_ROOT = CSSClassnames.CALENDAR;
 
 
 export const CoreLayout = ({ children }) => (
-    <Header fixed={true} direction="row" tag="header">
     <div>
+    <Header fixed={true} direction="row" tag="header">
+
       <nav   className="main-nav" >
           <a href="http://imgur.com/OlNC7UY"><img  id="menuLogo"  src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />
 
@@ -26,8 +27,8 @@ export const CoreLayout = ({ children }) => (
             <li><a href="#" className="active">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Pricing</a></li>
-            <li><a href="#">Domain</a></li>
-            <li><a href="#">Hosting</a></li>
+            <li><a href="#">Random</a></li>
+            <li><a href="#">Victoria</a></li>
           </ul>
 
 
@@ -38,10 +39,12 @@ export const CoreLayout = ({ children }) => (
 
        </nav>
 
-    </Header>
+        </Header>
 
-    <Footer> </Footer>
-    </div>
+        {children}
+
+        <Footer fixed="true"> </Footer>
+          </div>
 )
 
 
