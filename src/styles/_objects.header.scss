@@ -127,7 +127,6 @@ header  {
 .#{$grommet-namespace}header__wrapper {
   height: $header-height;
   width: 100%;
-  border-bottom: 1px solid
 
 }
 
@@ -343,6 +342,8 @@ header.#{$grommet-namespace}header--primary {
     .#{$grommet-namespace}header {
       @include media-query(lap-and-up) {
         position: fixed;
+        flex-direction: row;
+        justify-content: center;
       }
     }
   }

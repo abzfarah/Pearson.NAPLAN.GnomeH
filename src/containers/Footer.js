@@ -84,7 +84,7 @@ export default class BlogFooter extends Component {
             </Box>
 
         <Box direction="row" className="colopon" className="flexy3" >
-      
+
             <div className="column flexy4">
             <div className="social">
               <div className="twitter">
@@ -101,7 +101,7 @@ export default class BlogFooter extends Component {
               <li className="listy"><a href="https://auth0.com/terms">Terms of Service</a></li>
               <li className="listy"><span>© 2013-2016 VCAA®. All Rights Reserved.</span></li>
             </ul>
-         
+
 
         </Box>
         </Box>

@@ -25,10 +25,10 @@ export const CoreLayout = ({ children }) => (
 
           <ul className="menu">
             <li><a href="#" className="active">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">Random</a></li>
-            <li><a href="#">Victoria</a></li>
+            <li><a href="#">Tasks</a></li>
+            <li><a href="#">Manage Users</a></li>
+            <li><a href="#">Manage Schools</a></li>
+            <li><a href="#">Reports</a></li>
           </ul>
 
 
