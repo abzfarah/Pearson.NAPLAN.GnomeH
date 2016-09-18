@@ -73,13 +73,13 @@ var Icon = function (_Component) {
       var size = _props2.size;
 
 
-      var classes = (0, _classnames3.default)(CLASS_ROOT, CLASS_ROOT + '-more', className, (_classnames = {}, (0, _defineProperty3.default)(_classnames, CLASS_ROOT + '--' + size, size), (0, _defineProperty3.default)(_classnames, COLOR_INDEX + '-' + colorIndex, colorIndex), _classnames));
+      var classes = (0, _classnames3.default)(CLASS_ROOT, CLASS_ROOT + '-previous', className, (_classnames = {}, (0, _defineProperty3.default)(_classnames, CLASS_ROOT + '--' + size, size), (0, _defineProperty3.default)(_classnames, COLOR_INDEX + '-' + colorIndex, colorIndex), _classnames));
 
-      a11yTitle = a11yTitle || _react2.default.createElement(_FormattedMessage2.default, { id: 'more', defaultMessage: 'more' });
+      a11yTitle = a11yTitle || _react2.default.createElement(_FormattedMessage2.default, { id: 'previous', defaultMessage: 'previous' });
 
       return _react2.default.createElement(
         'svg',
-        { version: '1.1', viewBox: '0 0 24 24', width: '24px', height: '24px', role: 'img', className: classes, 'aria-labelledby': a11yTitleId },
+        { version: '1.1', viewBox: '0 0 24 25.2071', width: '24px', height: '24px', role: 'img', className: classes, 'aria-labelledby': a11yTitleId },
         _react2.default.createElement(
           'title',
           { id: a11yTitleId },
@@ -88,10 +88,8 @@ var Icon = function (_Component) {
         _react2.default.createElement(
           'g',
           null,
-          _react2.default.createElement('rect', { x: '0', y: '0', fill: 'none', width: '24', height: '24' }),
-          _react2.default.createElement('rect', { x: '0', y: '10', width: '4', height: '4' }),
-          _react2.default.createElement('rect', { x: '10', y: '10', width: '4', height: '4' }),
-          _react2.default.createElement('rect', { x: '20', y: '10', width: '4', height: '4' })
+          _react2.default.createElement('rect', { y: '1.2071', fill: 'none', width: '24', height: '24' }),
+          _react2.default.createElement('polyline', { fill: 'none', stroke: '#000000', strokeWidth: '2', strokeMiterlimit: '10', points: '16.1397,0.7071 5.1397,11.7071 \r 16.1397,22.7071 \t' })
         )
       );
     }
@@ -111,10 +109,10 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
-  a11yTitleId: 'more-title'
+  a11yTitleId: 'previous-title'
 };
 
 Icon.icon = true;
 
-Icon.displayName = 'More';
+Icon.displayName = 'Previous';
 module.exports = exports['default'];

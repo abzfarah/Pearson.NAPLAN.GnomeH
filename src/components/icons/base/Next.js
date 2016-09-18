@@ -73,9 +73,9 @@ var Icon = function (_Component) {
       var size = _props2.size;
 
 
-      var classes = (0, _classnames3.default)(CLASS_ROOT, CLASS_ROOT + '-more', className, (_classnames = {}, (0, _defineProperty3.default)(_classnames, CLASS_ROOT + '--' + size, size), (0, _defineProperty3.default)(_classnames, COLOR_INDEX + '-' + colorIndex, colorIndex), _classnames));
+      var classes = (0, _classnames3.default)(CLASS_ROOT, CLASS_ROOT + '-next', className, (_classnames = {}, (0, _defineProperty3.default)(_classnames, CLASS_ROOT + '--' + size, size), (0, _defineProperty3.default)(_classnames, COLOR_INDEX + '-' + colorIndex, colorIndex), _classnames));
 
-      a11yTitle = a11yTitle || _react2.default.createElement(_FormattedMessage2.default, { id: 'more', defaultMessage: 'more' });
+      a11yTitle = a11yTitle || _react2.default.createElement(_FormattedMessage2.default, { id: 'next', defaultMessage: 'next' });
 
       return _react2.default.createElement(
         'svg',
@@ -89,9 +89,7 @@ var Icon = function (_Component) {
           'g',
           null,
           _react2.default.createElement('rect', { x: '0', y: '0', fill: 'none', width: '24', height: '24' }),
-          _react2.default.createElement('rect', { x: '0', y: '10', width: '4', height: '4' }),
-          _react2.default.createElement('rect', { x: '10', y: '10', width: '4', height: '4' }),
-          _react2.default.createElement('rect', { x: '20', y: '10', width: '4', height: '4' })
+          _react2.default.createElement('polyline', { fill: 'none', stroke: '#000000', strokeWidth: '2', strokeMiterlimit: '10', points: '8,1.2101 19,12.2101 8,23.2101 \t' })
         )
       );
     }
@@ -111,10 +109,10 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
-  a11yTitleId: 'more-title'
+  a11yTitleId: 'next-title'
 };
 
 Icon.icon = true;
 
-Icon.displayName = 'More';
+Icon.displayName = 'Next';
 module.exports = exports['default'];

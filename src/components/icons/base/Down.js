@@ -36,20 +36,27 @@ var _classnames2 = require('classnames');
 
 var _classnames3 = _interopRequireDefault(_classnames2);
 
+var _FormattedMessage = require('../../../components/FormattedMessage');
+
+var _FormattedMessage2 = _interopRequireDefault(_FormattedMessage);
+
+var _CSSClassnames = require('../../utils/CSSClassnames');
+
+var _CSSClassnames2 = _interopRequireDefault(_CSSClassnames);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // (C) Copyright 2014-2015 Hewlett Packard Enterprise Development LP
 
-var CLASS_ROOT =" _CSSClassnames2.default.CONTROL_ICON";
-var COLOR_INDEX = "_CSSClassnames2.default.COLOR_INDEX";
+var CLASS_ROOT = _CSSClassnames2.default.CONTROL_ICON;
+var COLOR_INDEX = _CSSClassnames2.default.COLOR_INDEX;
 
 var Icon = function (_Component) {
   (0, _inherits3.default)(Icon, _Component);
 
   function Icon() {
     (0, _classCallCheck3.default)(this, Icon);
-    return (0, _possibleConstructorReturn3.default)(this, (Icon.__proto__ || (0, _getPrototypeOf2.default)(Icon)).apply(this, arguments));
+    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Icon).apply(this, arguments));
   }
 
   (0, _createClass3.default)(Icon, [{
@@ -68,7 +75,7 @@ var Icon = function (_Component) {
 
       var classes = (0, _classnames3.default)(CLASS_ROOT, CLASS_ROOT + '-down', className, (_classnames = {}, (0, _defineProperty3.default)(_classnames, CLASS_ROOT + '--' + size, size), (0, _defineProperty3.default)(_classnames, COLOR_INDEX + '-' + colorIndex, colorIndex), _classnames));
 
-      a11yTitle = a11yTitle;
+      a11yTitle = a11yTitle || _react2.default.createElement(_FormattedMessage2.default, { id: 'down', defaultMessage: 'down' });
 
       return _react2.default.createElement(
         'svg',

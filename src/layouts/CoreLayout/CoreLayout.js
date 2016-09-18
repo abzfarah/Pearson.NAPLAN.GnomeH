@@ -6,7 +6,7 @@ import Box from '../../components/Box'
 import Button from '../../components/Button'
 import Menu from '../../components/Menu'
 import Paragraph from '../../components/Paragraph'
-
+import Carousel from '../../components/Carousel'
 
 
 import CSSClassnames from '../../components/utils/CSSClassnames';

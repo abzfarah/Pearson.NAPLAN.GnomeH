@@ -43,9 +43,7 @@ export default class Header extends Component {
     var contentElement = ReactDOM.findDOMNode(this.contentRef);
     var mirrorElement = this.mirrorRef;
 
-    // constrain fixed content to the width of the mirror
-    var mirrorRect = mirrorElement.getBoundingClientRect();
-    contentElement.style.width = `${Math.floor(mirrorRect.width)}px`;
+
 
     // align the mirror height with the content's height
     var contentRect = contentElement.getBoundingClientRect();
