@@ -1,30 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-import { useRouterHistory } from 'react-router'
+
+
+
+import Router from 'react-router/BrowserRouter'
+import Match from 'react-router/Match'
+import Miss from 'react-router/Miss'
+import Link from 'react-router/Link'
+
+
+
+
 import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
-import  './styles/index.scss'
-// ========================================================
-// Browser History Setup
-// ========================================================
-const browserHistory = useRouterHistory(createBrowserHistory)({
-  basename: __BASENAME__
-})
+import CoreLayout from './layouts/CoreLayout/CoreLayout'
 
-// ========================================================
-// Store and History Instantiation
-// ========================================================
-// Create redux store and sync with react-router-redux. We have installed the
-// react-router-redux reducer under the routerKey "router" in src/routes/index.js,
-// so we need to provide a custom `selectLocationState` to inform
-// react-router-redux of its location.
+import { NamedLink, matchRoutesToLocation, RoutesProvider, MatchWithRoutes } from 'react-router-addons-routes'
+
+
 const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState, browserHistory)
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: (state) => state.router
-})
+const store = createStore(initialState)
 
 // ========================================================
 // Developer Tools Setup
@@ -35,20 +31,29 @@ if (__DEBUG__) {
   }
 }
 
+const routes = [
+  { pattern: '/home',
+    name: 'CoreLayout',
+    component: CoreLayout
+  }
+]
+
 // ========================================================
 // Render Setup
 // ========================================================
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  const routes = require('./routes/index').default(store)
+
 
   ReactDOM.render(
-    <AppContainer
-      store={store}
-      history={history}
-      routes={routes}
-    />,
+    <Router>
+      <RoutesProvider routes={routes}>
+        <div>
+          {routes.map(route => <MatchWithRoutes {...route}/>)}
+        </div>
+      </RoutesProvider>
+    </Router>,
     MOUNT_NODE
   )
 }

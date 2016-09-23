@@ -3,7 +3,6 @@
 .#{$grommet-namespace}header {
   min-height: $header-height;
   background-color: #fff;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
   text-align: left;
   width: 100%;
 
@@ -27,6 +26,37 @@
     flex-shrink: 0;
   }
 }
+div[role=tablist] {
+  width: 76%;
+  padding-top: 10px;
+}
+
+.holy {
+  text-decoration: none;
+
+}
+
+.under {
+  list-style-type: none;
+
+}
+
+.numba2 {
+
+  color: #fff;
+background-color: #e0e0e0;
+    width: 76%;
+height: 56px;
+line-height: 56px;
+
+}
+
+.numba1 {
+  width: 100%;
+}
+
+
+
 
 .count-ready {
   widows: 260px;
@@ -71,6 +101,11 @@ img {
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    width: 100%;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding-top: 6px;
+
 }
 
 ul.menu {
@@ -81,6 +116,9 @@ ul.menu {
     padding: 0;
     box-sizing: border-box;
     outline: none;
+    list-style-type: none;
+    text-decoration: none;
+
 }
 
 .menu a {
@@ -89,7 +127,39 @@ ul.menu {
     display: block;
     padding: 2rem;
     text-align: center;
+    text-decoration: none;
+
 }
+
+ul.breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.breadcrumb {
+  color: #fff;
+  background-color: #ee6e73;
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+}
+
+.breadcrumb a {
+    color: #202242;
+    font-size: 19px;
+    display: block;
+    padding: 2rem;
+    text-align: center;
+    text-decoration: none;
+}
+
 
 .button-groups {
     display: flex;
@@ -114,6 +184,11 @@ header  {
 .head-name, .head-code {
 
 }
+
+.bigup {
+  flex-direction: row;
+}
+
 .link {
   color: currentColor;
   cursor: pointer;
@@ -127,6 +202,9 @@ header  {
 .#{$grommet-namespace}header__wrapper {
   height: $header-height;
   width: 100%;
+  display: flex;
+  justify-content: center;
+
 
 }
 
@@ -344,6 +422,8 @@ header.#{$grommet-namespace}header--primary {
         position: fixed;
         flex-direction: row;
         justify-content: center;
+        flex-wrap: wrap;
+
       }
     }
   }

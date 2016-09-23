@@ -1,13 +1,20 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
-
 .#{$grommet-namespace}tabs {
-  margin: halve($inuit-base-spacing-unit) 0;
-  padding: 0;
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1200px;
   list-style: none;
-  border-bottom: 1px solid $border-color;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+
+  > a {
+    padding: 2em 0;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
 
   &--justify {
     &-center {
