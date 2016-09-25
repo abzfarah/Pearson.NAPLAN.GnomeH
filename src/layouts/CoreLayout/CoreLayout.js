@@ -44,9 +44,13 @@ export const CoreLayout = () => (
 
        </Box>
 
-       <MultiTab/>
+       
 
         </Header>
+
+        <Box className="mid">       <MultiTab/>   </Box>
+
+   
 
 
         <Footer fixed="true"> </Footer>

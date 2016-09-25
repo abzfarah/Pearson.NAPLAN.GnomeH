@@ -5,19 +5,42 @@
   font-weight: normal;
   font-style: normal;
 }
+.numberCircle {
+    border-radius: 50%;
+    width: 23px;
+    height: 19px;
+    padding: 7px;
+    background: #37a0eb;
+    /* border: 2px solid #666; */
+    color: #ffffff;
+    text-align: center;
+    font: 19px Arial,sans-serif;
+    display: inline-block;
+    margin-right: 11px;
+}
+.numberCircle + span {
+  display: inline-block;
+}
 
 
 
+h1, h2, h3 {
+  font-family:'AvantGardeGothicITCW01M_731087';
+font-weight:400; 
+font-style:normal;
+}
 
-
+h2 {
+  font-size: 23px;
+}
 
 #tab-0 {
 
   &:before {
-    content: "\f015";
+    content: url(./fonts/svg/basic1-007_house_home.svg);
     z-index: 10;
 
-    display: inline-block;
+    display: block;
     margin: 0 0.4em 0 0;
     vertical-align: middle;
     text-transform: none;
@@ -27,6 +50,7 @@
     font-family: 'FontAwesome';
     line-height: 1;
     speak: none;
+    margin-left: 13px; 
   }
 
   &:hover {
@@ -39,10 +63,10 @@
 #tab-1 {
 
   &:before {
-    content: "\f058";
+    content: url(./fonts/svg/basic1-174_ok_success_check.svg);
     z-index: 10;
 
-    display: inline-block;
+    display: block;
     margin: 0 0.4em 0 0;
     vertical-align: middle;
     text-transform: none;
@@ -64,10 +88,43 @@
 #tab-2 {
 
     &:before {
-    content: "\f058";
+    content: url(./fonts/svg/basic1-174_ok_success_check.svg);
     z-index: 10;
 
-    display: inline-block;
+    display: block;
+    margin: 0 0.4em 0 0;
+    vertical-align: middle;
+    text-transform: none;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 1.3em;
+    font-family: 'FontAwesome';
+    line-height: 1;
+    speak: none;
+  }
+
+  &:hover {
+
+    color: green;
+  }
+}
+
+.grommetux-tabs + div {
+  margin: 0 auto;
+  padding: 0;
+  background: #f7f7f7;
+}
+
+.grommetux-tabs > li > a {
+  font-size: 1.3rem;
+}
+#tab-3 {
+
+    &:before {
+    content: url(./fonts/svg/basic1-174_ok_success_check.svg);
+    z-index: 10;
+
+    display: block;
     margin: 0 0.4em 0 0;
     vertical-align: middle;
     text-transform: none;
@@ -97,6 +154,9 @@
   -moz-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  background: #ededed;
+  padding-top: 7px;
+
 
   .#{$grommet-namespace}tabs--justify-start &:first-of-type,
   .#{$grommet-namespace}tabs--justify-end &:first-of-type {
@@ -180,7 +240,14 @@
     border-bottom: $active-border-width solid transparent;
   }
 
-  &--active,
+  &--active {
+
+    background: #f7f7f7;
+    box-shadow: inset 0 3px 0 #282828;
+    color: #2CC185;
+    border-top-color: #2CC185;
+    border-bottom: none;
+  }
   &--active .#{$grommet-namespace}tab__link:hover {
     .#{$grommet-namespace}tab__label {
       color: $hover-text-color;

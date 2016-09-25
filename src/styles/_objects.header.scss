@@ -27,12 +27,15 @@
   }
 }
 div[role=tablist] {
-  width: 76%;
   padding-top: 10px;
+  width: 100%;
 }
 
-.holy {
+.mid {
   text-decoration: none;
+  width: 76%;
+  flex-direction: row;
+  margin: auto;
 
 }
 
@@ -404,7 +407,7 @@ header.#{$grommet-namespace}header--primary {
 
 .#{$grommet-namespace}header__container--fill {
   .#{$grommet-namespace}header {
-    background-color: $header-background-color;
+    background-color: hsla(0, 0%, 94%, 0.9);
   }
 }
 

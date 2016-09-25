@@ -15,6 +15,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 import CoreLayout from './layouts/CoreLayout/CoreLayout'
+import LoginPage from './layouts/CoreLayout/LoginPage'
 
 import { NamedLink, matchRoutesToLocation, RoutesProvider, MatchWithRoutes } from 'react-router-addons-routes'
 
@@ -35,6 +36,10 @@ const routes = [
   { pattern: '/home',
     name: 'CoreLayout',
     component: CoreLayout
+  },
+    { pattern: '/login',
+    name: 'LoginPage',
+    component: LoginPage
   }
 ]
 

@@ -9,10 +9,10 @@ const SchoolDetails = () => (
 
       <div>
            <h3>
-             Third Tab
+             School Details
            </h3>
            <p>
-             Contents of the thirdf tab
+             School Details
            </p>
        </div>
 

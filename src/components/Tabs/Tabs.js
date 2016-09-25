@@ -14,7 +14,7 @@ export default class Tabs extends Component {
     this._activateTab = this._activateTab.bind(this);
 
     this.state = {
-      activeIndex: props.initialIndex,
+      activeIndex: 0,
       justify: props.justify
     };
   }
@@ -50,7 +50,7 @@ export default class Tabs extends Component {
       var isTabActive = index === this.state.activeIndex;
 
       if (isTabActive) {
-        activeContainer = tabProps.children;
+        activeContainer = tabProps.inner;
         activeTitle = tabProps.title;
       }
 
