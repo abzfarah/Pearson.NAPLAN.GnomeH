@@ -9,7 +9,7 @@ import Paragraph from '../../components/Paragraph'
 import Carousel from '../../components/Carousel'
 import Tab from '../../components/Tab'
 import Tabs from '../../components/Tabs'
-import MultiTab from '../../components/MultiTab'
+import MultiTab from '../../components/layouts/MultiTab'
 
 import CSSClassnames from '../../components/utils/CSSClassnames';
 import '../../styles/core.scss'
@@ -44,13 +44,13 @@ export const CoreLayout = () => (
 
        </Box>
 
-       
+
 
         </Header>
 
         <Box className="mid">       <MultiTab/>   </Box>
 
-   
+
 
 
         <Footer fixed="true"> </Footer>
