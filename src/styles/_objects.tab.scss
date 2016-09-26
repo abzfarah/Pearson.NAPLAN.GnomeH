@@ -1,7 +1,162 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('./fonts/fontawesome-webfont.eot?v=4.6.3');
+  src: url('./fonts/fontawesome-webfont.eot?#iefix&v=4.6.3') format('embedded-opentype'), url('./fonts/fontawesome-webfont.woff2?v=4.6.3') format('woff2'), url('./fonts/fontawesome-webfont.woff?v=4.6.3') format('woff'), url('./fonts/fontawesome-webfont.ttf?v=4.6.3') format('truetype'), url('./fonts/fontawesome-webfont.svg?v=4.6.3#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.numberCircle {
+    border-radius: 50%;
+    width: 23px;
+    height: 19px;
+    padding: 7px;
+    background: #37a0eb;
+    /* border: 2px solid #666; */
+    color: #ffffff;
+    text-align: center;
+    font: 19px Arial,sans-serif;
+    display: inline-block;
+    margin-right: 11px;
+}
+.numberCircle + span {
+  display: inline-block;
+}
+
+
+
+h1, h2, h3 {
+  font-family:'AvantGardeGothicITCW01M_731087';
+font-weight:400; 
+font-style:normal;
+}
+
+h2 {
+  font-size: 23px;
+}
+
+#tab-0 {
+
+  &:before {
+    content: url(./fonts/svg/basic1-007_house_home.svg);
+    z-index: 10;
+
+    display: block;
+    margin: 0 0.4em 0 0;
+    vertical-align: middle;
+    text-transform: none;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 1.3em;
+    font-family: 'FontAwesome';
+    line-height: 1;
+    speak: none;
+    margin-left: 13px; 
+  }
+
+  &:hover {
+
+    color: green;
+  }
+
+}
+
+#tab-1 {
+
+  &:before {
+    content: url(./fonts/svg/basic1-174_ok_success_check.svg);
+    z-index: 10;
+
+    display: block;
+    margin: 0 0.4em 0 0;
+    vertical-align: middle;
+    text-transform: none;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 1.3em;
+    font-family: 'FontAwesome';
+    line-height: 1;
+    speak: none;
+  }
+
+  &:hover {
+
+    color: green;
+  }
+
+}
+
+#tab-2 {
+
+    &:before {
+    content: url(./fonts/svg/basic1-174_ok_success_check.svg);
+    z-index: 10;
+
+    display: block;
+    margin: 0 0.4em 0 0;
+    vertical-align: middle;
+    text-transform: none;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 1.3em;
+    font-family: 'FontAwesome';
+    line-height: 1;
+    speak: none;
+  }
+
+  &:hover {
+
+    color: green;
+  }
+}
+
+.grommetux-tabs + div {
+  margin: 0 auto;
+  padding: 0;
+  background: #f7f7f7;
+}
+
+.grommetux-tabs > li > a {
+  font-size: 1.3rem;
+}
+#tab-3 {
+
+    &:before {
+    content: url(./fonts/svg/basic1-174_ok_success_check.svg);
+    z-index: 10;
+
+    display: block;
+    margin: 0 0.4em 0 0;
+    vertical-align: middle;
+    text-transform: none;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 1.3em;
+    font-family: 'FontAwesome';
+    line-height: 1;
+    speak: none;
+  }
+
+  &:hover {
+
+    color: green;
+  }
+
+}
 
 .#{$grommet-namespace}tab {
   padding: 0 halve($inuit-base-spacing-unit);
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 0;
+  text-align: center;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background: #ededed;
+  padding-top: 7px;
+
 
   .#{$grommet-namespace}tabs--justify-start &:first-of-type,
   .#{$grommet-namespace}tabs--justify-end &:first-of-type {
@@ -24,6 +179,10 @@
   a {
     display: inline-block;
     text-decoration: none;
+    overflow: visible;
+    line-height: 1;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
 
     &:hover,
     &:visited,
@@ -31,6 +190,40 @@
     &:active {
       text-decoration: none;
     }
+
+    &:before {
+      z-index: 10;
+      display: inline-block;
+      margin: 0 0.4em 0 0;
+      vertical-align: middle;
+      text-transform: none;
+      font-weight: normal;
+      font-variant: normal;
+      font-size: 1.3em;
+      font-family: 'stroke7pixeden';
+      line-height: 1;
+      speak: none;
+      -webkit-backface-visibility: hidden;
+      -webkit-font-smoothing: antialiased;
+
+    }
+
+    &:after {
+      position: absolute;
+      top: 20%;
+      right: 0;
+      z-index: -1;
+      width: 1px;
+      height: 60%;
+      background: rgba(0,0,0,0.07);
+      content: '';
+    }
+
+
+
+
+
+
 
     &:focus:not(tab--active .#{$grommet-namespace}tab__link) {
       .#{$grommet-namespace}tab__label {
@@ -47,7 +240,14 @@
     border-bottom: $active-border-width solid transparent;
   }
 
-  &--active,
+  &--active {
+
+    background: #f7f7f7;
+    box-shadow: inset 0 3px 0 #282828;
+    color: #2CC185;
+    border-top-color: #2CC185;
+    border-bottom: none;
+  }
   &--active .#{$grommet-namespace}tab__link:hover {
     .#{$grommet-namespace}tab__label {
       color: $hover-text-color;
