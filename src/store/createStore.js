@@ -2,21 +2,37 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import makeRootReducer from './reducers'
+import createOidcMiddleware, { createUserManager } from 'redux-oidc';
+import createSagaMiddleware from 'redux-saga';
+import { loadSubstricptionsSaga } from '../sagas/saga';
+import userManager from '../utils/userManager';
 
 export default (initialState = {}, history) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk, routerMiddleware(history)]
+
+  const oidcMiddleware = createOidcMiddleware(userManager, null, false);
+
+  const sagaMiddleware = createSagaMiddleware();
+
+  const middleware = [
+                        thunk
+                      , routerMiddleware(history)
+                      , oidcMiddleware
+                      , sagaMiddleware
+                    ];
 
   // ======================================================
   // Store Enhancers
   // ======================================================
-  const enhancers = []
+  const enhancers = [];
+
   if (__DEBUG__) {
-    const devToolsExtension = window.devToolsExtension
+    const devToolsExtension = window.devToolsExtension;
+
     if (typeof devToolsExtension === 'function') {
-      enhancers.push(devToolsExtension())
+      enhancers.push(devToolsExtension());
     }
   }
 
@@ -30,15 +46,19 @@ export default (initialState = {}, history) => {
       applyMiddleware(...middleware),
       ...enhancers
     )
-  )
-  store.asyncReducers = {}
+  );
+
+  store.asyncReducers = {};
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      const reducers = require('./reducers').default
-      store.replaceReducer(reducers(store.asyncReducers))
+      const reducers = require('./reducers').default;
+      store.replaceReducer(reducers(store.asyncReducers));
     })
   }
 
-  return store
+  // sagas
+  sagaMiddleware.run(loadSubstriptionsSaga);
+
+  return store;
 }
