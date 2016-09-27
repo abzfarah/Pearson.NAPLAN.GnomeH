@@ -8,9 +8,12 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import createStore from './store/createStore';
 import AppContainer from './containers/AppContainer';
 import CoreLayout from './masterLayouts/CoreLayout/CoreLayout';
-import LoginPage from './masterLayouts/CoreLayout/LoginPage';
+import LoginPage from './components/layouts/LoginPage';
 import { NamedLink, matchRoutesToLocation, RoutesProvider, MatchWithRoutes } from 'react-router-addons-routes';
 import routes from './routes';
+import {Provider} from 'react-redux';
+import { OidcProvider } from 'redux-oidc';
+import userManager from './utils/userManager';
 
 const initialState = window.___INITIAL_STATE__;
 const store = createStore(initialState);
@@ -33,13 +36,17 @@ const MOUNT_NODE = document.getElementById('root')
 let render = () => {
 
   ReactDOM.render(
-    <Router>
-      <RoutesProvider routes={routes}>
-        <div>
-          {routes.map(route => <MatchWithRoutes {...route}/>)}
-        </div>
-      </RoutesProvider>
-    </Router>,
+    <RoutesProvider routes={routes}>
+      <Provider store={store}>
+          <OidcProvider store={store} userManager={userManager}>
+              <Router>
+              <div>
+                {routes.map(route => <MatchWithRoutes {...route}/>)}
+              </div>
+              </Router>
+          </OidcProvider>
+      </Provider>
+    </RoutesProvider>,
     MOUNT_NODE
   )
 }

@@ -1,6 +1,6 @@
 // We only need to import the modules necessary for initial render
-import CoreLayout from '../masterLayouts/CoreLayout/CoreLayout'
-import LoginPage from '../masterLayouts/CoreLayout/LoginPage'
+import CoreLayout from '../masterLayouts/CoreLayout/CoreLayout';
+import LoginPage from '../components/layouts/LoginPage';
 
 
 const routes = [
