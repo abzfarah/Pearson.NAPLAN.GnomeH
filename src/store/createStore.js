@@ -58,7 +58,7 @@ export default (initialState = {}, history) => {
   }
 
   // sagas
-  sagaMiddleware.run(loadSubstriptionsSaga);
+  // sagaMiddleware.run(loadSubstriptionsSaga);
 
   return store;
 }
