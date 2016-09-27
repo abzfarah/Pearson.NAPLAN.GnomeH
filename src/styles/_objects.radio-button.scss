@@ -3,7 +3,7 @@
 .#{$grommet-namespace}radio-button {
   margin-right: $inuit-base-spacing-unit;
   white-space: nowrap;
-
+  padding-bottom: 7px;
   &:not(.#{$grommet-namespace}radio-button--disabled) {
     cursor: pointer;
   }
@@ -82,14 +82,14 @@
   &__control {
     position: relative;
     display: inline-block;
-    width: $control-size;
-    height: $control-size;
+    width: 19px;
+    height: 19px;
     margin-right: halve($inuit-base-spacing-unit);
     vertical-align: middle;
     background-color: inherit;
     color: $brand-color-darker;
     border: $control-border-width solid $icon-color;
-    border-radius: $control-size;
+    border-radius: 19px;
 
     html.rtl & {
       margin-right: 0;

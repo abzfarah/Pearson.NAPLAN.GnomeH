@@ -7,7 +7,7 @@ import Router from 'react-router/BrowserRouter'
 import Match from 'react-router/Match'
 import Miss from 'react-router/Miss'
 import Link from 'react-router/Link'
-
+import MuiThemeProvider from './components/utils/materialStyles/MuiThemeProvider';
 
 
 
@@ -53,11 +53,13 @@ let render = () => {
 
   ReactDOM.render(
     <Router>
+    <MuiThemeProvider>
       <RoutesProvider routes={routes}>
         <div>
           {routes.map(route => <MatchWithRoutes {...route}/>)}
         </div>
       </RoutesProvider>
+      </MuiThemeProvider>
     </Router>,
     MOUNT_NODE
   )
