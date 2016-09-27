@@ -21,13 +21,13 @@ import Home from './Home'
 //  <Tabs initialIndex={1} justify="start" className="tablisty" steps={steps} />
 
 const MultiTab = () => (
-  <Tabs initialIndex={1} justify="start" className="tablisty">
+  <Tabs initialIndex={0} justify="start" className="tablisty">
 
      <Tab title="Home" className="home" inner={steps[0].component}/>
      <Tab title="Statement of Compliance" className="check" inner={steps[1].component}/>
      <Tab title="Authorised Staff" className="staff" inner={steps[2].component}/>
      <Tab title="School Details" className="staff" inner={steps[3].component}/>
- 
+
   </Tabs>
 )
 

@@ -8,7 +8,6 @@ $colored-select-drop-caret: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB
 
 @mixin form-field-content {
   display: block;
-  width: 100%;
   border: none;
   border-radius: 0px;
   @include inuit-font-size($content-font-size);
@@ -31,7 +30,6 @@ $colored-select-drop-caret: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB
 
   @include media-query(lap-and-up) {
     width: 100%;
-    overflow: auto;
     transition: all 0.4s, padding-top 0.3s 0.1s, padding-bottom 0.3s 0.1s;
   }
 
