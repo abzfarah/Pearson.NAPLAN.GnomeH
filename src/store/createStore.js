@@ -1,7 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
-import makeRootReducer from './reducers'
+import makeRootReducer from '../reducers/index'
 import createOidcMiddleware, { createUserManager } from 'redux-oidc';
 import createSagaMiddleware from 'redux-saga';
 import { loadSubstricptionsSaga } from '../sagas/saga';
@@ -51,14 +51,14 @@ export default (initialState = {}, history) => {
   store.asyncReducers = {};
 
   if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      const reducers = require('./reducers').default;
+    module.hot.accept('../reducers', () => {
+      const reducers = require('../reducers').default;
       store.replaceReducer(reducers(store.asyncReducers));
     })
   }
 
   // sagas
-  sagaMiddleware.run(loadSubstriptionsSaga);
+  // sagaMiddleware.run(loadSubstriptionsSaga);
 
   return store;
 }
