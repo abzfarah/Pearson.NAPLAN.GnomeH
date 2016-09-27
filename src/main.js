@@ -1,47 +1,29 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Router from 'react-router/BrowserRouter';
+import Match from 'react-router/Match';
+import Miss from 'react-router/Miss';
+import Link from 'react-router/Link';
+import { syncHistoryWithStore } from 'react-router-redux';
+import createStore from './store/createStore';
+import AppContainer from './containers/AppContainer';
+import CoreLayout from './masterLayouts/CoreLayout/CoreLayout';
+import LoginPage from './masterLayouts/CoreLayout/LoginPage';
+import { NamedLink, matchRoutesToLocation, RoutesProvider, MatchWithRoutes } from 'react-router-addons-routes';
+import routes from './routes';
 
-
-
-import Router from 'react-router/BrowserRouter'
-import Match from 'react-router/Match'
-import Miss from 'react-router/Miss'
-import Link from 'react-router/Link'
-
-
-
-
-import { syncHistoryWithStore } from 'react-router-redux'
-import createStore from './store/createStore'
-import AppContainer from './containers/AppContainer'
-import CoreLayout from './layouts/CoreLayout/CoreLayout'
-import LoginPage from './layouts/CoreLayout/LoginPage'
-
-import { NamedLink, matchRoutesToLocation, RoutesProvider, MatchWithRoutes } from 'react-router-addons-routes'
-
-
-const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState)
+const initialState = window.___INITIAL_STATE__;
+const store = createStore(initialState);
 
 // ========================================================
 // Developer Tools Setup
 // ========================================================
 if (__DEBUG__) {
   if (window.devToolsExtension) {
-    window.devToolsExtension.open()
+    window.devToolsExtension.open();
   }
 }
 
-const routes = [
-  { pattern: '/home',
-    name: 'CoreLayout',
-    component: CoreLayout
-  },
-    { pattern: '/login',
-    name: 'LoginPage',
-    component: LoginPage
-  }
-]
 
 // ========================================================
 // Render Setup
@@ -49,7 +31,6 @@ const routes = [
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-
 
   ReactDOM.render(
     <Router>
@@ -67,10 +48,9 @@ let render = () => {
 if (__DEV__) {
   if (module.hot) {
     // Development render functions
-    const renderApp = render
+    const renderApp = render;
     const renderError = (error) => {
       const RedBox = require('redbox-react').default
-
       ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
     }
 
@@ -86,8 +66,8 @@ if (__DEV__) {
     // Setup hot module replacement
     module.hot.accept('./routes/index', () => {
       setTimeout(() => {
-        ReactDOM.unmountComponentAtNode(MOUNT_NODE)
-        render()
+        ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+        render();
       })
     })
   }
