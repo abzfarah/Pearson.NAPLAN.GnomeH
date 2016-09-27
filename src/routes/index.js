@@ -4,15 +4,18 @@ import LoginPage from '../masterLayouts/CoreLayout/LoginPage'
 
 
 const routes = [
-  { pattern: '/',
+  {
+    pattern: '//',
     name: 'CoreLayout',
     component: CoreLayout
   },
-  { pattern: '/home',
+  {
+    pattern: '/home',
     name: 'CoreLayout',
     component: CoreLayout
   },
-    { pattern: '/login',
+  {
+    pattern: '/login',
     name: 'LoginPage',
     component: LoginPage
   }
