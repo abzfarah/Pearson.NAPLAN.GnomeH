@@ -4,32 +4,50 @@ import Tabs from '../Tabs'
 import Section from '../Section'
 import Heading from '../Heading'
 import Paragraph from '../Paragraph'
-
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from '../Table';
+import {orange500, blue500, black} from '../utils/materialStyles/colors';
 
 const Home = () => (
 
 
 <Section>
 
-    <Heading tag="h2">
-    <div className="numberCircle">1</div>
-      Statement of Compliance
-    </Heading>
-
-    <Paragraph>
-Principals are responsible for the security of the NAPLAN test materials and for the administration of the tests. Principals are required to submit an annual Statement of Compliance,
-indicating their understanding of the VCAA’s requirements in relation to test security and administration.
-While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
-Security Log. The Test Materials Security Log should be kept by the school for 12 months after the test and may be subject to audit by the VCAA.
-Fields marked with * in the form below are required.
-
-    </Paragraph>
-  	
-
-    
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHeaderColumn>ID</TableHeaderColumn>
+      <TableHeaderColumn>Name</TableHeaderColumn>
+      <TableHeaderColumn>Status</TableHeaderColumn>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableRowColumn>1</TableRowColumn>
+      <TableRowColumn>John Smith</TableRowColumn>
+      <TableRowColumn>Employed</TableRowColumn>
+    </TableRow>
+    <TableRow>
+      <TableRowColumn>2</TableRowColumn>
+      <TableRowColumn>Randal White</TableRowColumn>
+      <TableRowColumn>Unemployed</TableRowColumn>
+    </TableRow>
+    <TableRow>
+      <TableRowColumn>3</TableRowColumn>
+      <TableRowColumn>Stephanie Sanders</TableRowColumn>
+      <TableRowColumn>Employed</TableRowColumn>
+    </TableRow>
+    <TableRow>
+      <TableRowColumn>4</TableRowColumn>
+      <TableRowColumn>Steve Brown</TableRowColumn>
+      <TableRowColumn>Employed</TableRowColumn>
+    </TableRow>
+  </TableBody>
+</Table>
 
 
 </Section>
+
+
 
 
 

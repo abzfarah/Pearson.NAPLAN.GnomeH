@@ -13,13 +13,15 @@ import MultiTab from '../../components/MultiTab'
 
 import CSSClassnames from '../../components/utils/CSSClassnames';
 import '../../styles/core.scss'
+
+import { StickyContainer, Sticky } from '../../components/Sticky';
 const CLASS_ROOT = CSSClassnames.CALENDAR;
 
 
 export const CoreLayout = () => (
     <div>
-    <Header fixed={true} direction="row" tag="header" className="grommetux-box__container">
-
+    <StickyContainer>
+      <Sticky style={{zIndex: 5}}>
 
     <Box  direction="row"  className="footerContainer"  wrap={true} align="center" className="numba1" className="main-nav" >
 
@@ -45,8 +47,8 @@ export const CoreLayout = () => (
        </Box>
 
 
-
-        </Header>
+          </Sticky>
+        </StickyContainer>
 
         <Box className="mid">       <MultiTab/>   </Box>
 

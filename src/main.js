@@ -14,7 +14,7 @@ import routes from './routes';
 import {Provider} from 'react-redux';
 import { OidcProvider } from 'redux-oidc';
 import userManager from './utils/userManager';
-
+import MuiThemeProvider from './components/utils/materialStyles/MuiThemeProvider';
 const initialState = window.___INITIAL_STATE__;
 const store = createStore(initialState);
 
@@ -37,6 +37,7 @@ let render = () => {
 
   ReactDOM.render(
     <RoutesProvider routes={routes}>
+    <MuiThemeProvider>
       <Provider store={store}>
           <OidcProvider store={store} userManager={userManager}>
               <Router>
@@ -46,6 +47,7 @@ let render = () => {
               </Router>
           </OidcProvider>
       </Provider>
+      </MuiThemeProvider>
     </RoutesProvider>,
     MOUNT_NODE
   )
