@@ -112,6 +112,8 @@ class TableRow extends Component {
      * Override the inline-styles of the root element.
      */
     style: PropTypes.object,
+
+    status: PropTypes.string,
   };
 
   static defaultProps = {

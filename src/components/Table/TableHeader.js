@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import Checkbox from '../Checkbox';
+import CheckBox from '../CheckBox';
 import TableHeaderColumn from './TableHeaderColumn';
 
 function getStyles(props, context) {
@@ -8,6 +8,7 @@ function getStyles(props, context) {
   return {
     root: {
       borderBottom: `1px solid ${tableHeader.borderColor}`,
+      background: '#64B5F6'
     },
   };
 }
@@ -144,7 +145,7 @@ class TableHeader extends Component {
 
     const disabled = !this.props.enableSelectAll;
     const checkbox = (
-      <Checkbox
+      <CheckBox
         key="selectallcb"
         name="selectallcb"
         value="selected"
@@ -163,7 +164,7 @@ class TableHeader extends Component {
           cursor: disabled ? 'not-allowed' : 'inherit',
         }}
       >
-        {checkbox}
+  
       </TableHeaderColumn>
     );
   }

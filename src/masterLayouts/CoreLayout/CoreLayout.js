@@ -28,23 +28,25 @@ export const CoreLayout = () => (
         <div className="under">
         <a href="http://imgur.com/OlNC7UY"><img  id="menuLogo"  src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />  </a>
         </div>
+
+        <ul className="menu">
+           <li><a href="#" className="active">Home</a></li>
+           <li><a href="#">Tasks</a></li>
+           <li><a href="#">Search</a></li>
+           <li><a href="#">Reports</a></li>
+
+         </ul>
+
+
+
+
         <div className="button-groups">
             <Button label="Help" secondary={true} />
             <Button label="Log Out" primary={true} />
         </div>
         </Box>
 
-       <Box  direction="row" justify="start" className="breadcrumb" className="numba2">
-             <ul className="menu">
-               <li><a href="#" className="active">Home</a></li>
-               <li><a href="#">Tasks</a></li>
-               <li><a href="#">Manage Users</a></li>
-               <li><a href="#">Manage Schools</a></li>
-               <li><a href="#">Reports</a></li>
-               <li><a href="#">Help</a></li>
-             </ul>
 
-       </Box>
 
 
           </Sticky>

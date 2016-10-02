@@ -7,39 +7,53 @@ import Paragraph from '../Paragraph'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from '../Table';
 import {orange500, blue500, black} from '../utils/materialStyles/colors';
 
+var statusIndex = [0, 0, 1, 2, 2];
+
+
 const Home = () => (
 
 
-<Section>
+<Section className="tabwidth">
 
 <Table>
   <TableHeader>
-    <TableRow>
-      <TableHeaderColumn>ID</TableHeaderColumn>
-      <TableHeaderColumn>Name</TableHeaderColumn>
+    <TableRow >
+      <TableHeaderColumn>Task</TableHeaderColumn>
+      <TableHeaderColumn>Requirement</TableHeaderColumn>
+      <TableHeaderColumn>Due</TableHeaderColumn>
       <TableHeaderColumn>Status</TableHeaderColumn>
     </TableRow>
   </TableHeader>
-  <TableBody>
+  <TableBody status={statusIndex}>
     <TableRow>
-      <TableRowColumn>1</TableRowColumn>
-      <TableRowColumn>John Smith</TableRowColumn>
-      <TableRowColumn>Employed</TableRowColumn>
+      <TableRowColumn>Statement of Compliance</TableRowColumn>
+      <TableRowColumn>Required for all schools</TableRowColumn>
+      <TableRowColumn>Friday, 26 February 2016</TableRowColumn>
+      <TableRowColumn>Complete</TableRowColumn>
     </TableRow>
     <TableRow>
-      <TableRowColumn>2</TableRowColumn>
-      <TableRowColumn>Randal White</TableRowColumn>
-      <TableRowColumn>Unemployed</TableRowColumn>
+      <TableRowColumn>Authorized Staff</TableRowColumn>
+      <TableRowColumn>Required for all schools</TableRowColumn>
+      <TableRowColumn>Friday, 26 February 2016</TableRowColumn>
+      <TableRowColumn>Complete</TableRowColumn>
     </TableRow>
     <TableRow>
-      <TableRowColumn>3</TableRowColumn>
-      <TableRowColumn>Stephanie Sanders</TableRowColumn>
-      <TableRowColumn>Employed</TableRowColumn>
+      <TableRowColumn>School Details</TableRowColumn>
+      <TableRowColumn>Required for all schools</TableRowColumn>
+      <TableRowColumn>Friday, 26 February 2016</TableRowColumn>
+      <TableRowColumn>Incomplete</TableRowColumn>
     </TableRow>
     <TableRow>
-      <TableRowColumn>4</TableRowColumn>
-      <TableRowColumn>Steve Brown</TableRowColumn>
-      <TableRowColumn>Employed</TableRowColumn>
+      <TableRowColumn>Alternative Test Format Order</TableRowColumn>
+      <TableRowColumn>Optional</TableRowColumn>
+      <TableRowColumn>Friday, 26 February 2016</TableRowColumn>
+      <TableRowColumn>No orders placed</TableRowColumn>
+    </TableRow>
+    <TableRow>
+      <TableRowColumn>Student Registration Data</TableRowColumn>
+      <TableRowColumn>Independant Schools Only</TableRowColumn>
+      <TableRowColumn>Friday, 26 February 2016</TableRowColumn>
+      <TableRowColumn>Open</TableRowColumn>
     </TableRow>
   </TableBody>
 </Table>

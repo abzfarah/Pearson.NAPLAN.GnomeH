@@ -1,7 +1,16 @@
 import React, {Component, PropTypes} from 'react';
-import Checkbox from '../Checkbox';
+import CheckBox from '../CheckBox';
+
 import TableRowColumn from './TableRowColumn';
 import ClickAwayListener from '../utils/internal/ClickAwayListener';
+
+
+import ActionCheckCircle from '../svg-icons/action/check-circle';
+import AlertWarning from '../svg-icons/alert/warning.js';
+import AlertErrorOutline from '../svg-icons/alert/error-outline.js';
+
+import {blue500, grey200, greenA200, green500, orange500, orange600, orange700, orange800} from '../utils/materialStyles/colors';
+
 
 class TableBody extends Component {
   static muiName = 'TableBody';
@@ -198,13 +207,31 @@ class TableBody extends Component {
 
     const key = `${rowProps.rowNumber}-cb`;
     const disabled = !this.props.selectable;
-    const checkbox = (
-      <Checkbox
+
+    const currentRow = rowProps.rowNumber;
+    const currentStatus = this.props.status[rowProps.rowNumber]
+
+    const partialcomplete = (
+      <AlertErrorOutline
+        color= {orange700}
+      />
+    );
+
+    const incomplete = (
+      <AlertWarning
+        color= {orange700}
+      />
+    );
+
+    const complete = (
+      <ActionCheckCircle
         ref="rowSelectCB"
         name={key}
         value="selected"
         disabled={disabled}
         checked={rowProps.selected}
+        color= {green500}
+
       />
     );
 
@@ -217,7 +244,7 @@ class TableBody extends Component {
           cursor: disabled ? 'not-allowed' : 'inherit',
         }}
       >
-        {checkbox}
+        {currentStatus == 0 ? complete : (currentStatus == 1 ? incomplete : partialcomplete) }
       </TableRowColumn>
     );
   }

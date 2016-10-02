@@ -1,4 +1,4 @@
-import Sticky from './sticky';
+import Sticky from './Sticky';
 import Container from './container';
 import Channel from './channel';
 
