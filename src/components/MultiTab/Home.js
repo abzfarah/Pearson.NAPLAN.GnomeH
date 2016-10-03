@@ -4,32 +4,64 @@ import Tabs from '../Tabs'
 import Section from '../Section'
 import Heading from '../Heading'
 import Paragraph from '../Paragraph'
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from '../Table';
+import {orange500, blue500, black} from '../utils/materialStyles/colors';
+
+var statusIndex = [0, 0, 1, 2, 2];
 
 
 const Home = () => (
 
 
-<Section>
+<Section className="tabwidth">
 
-    <Heading tag="h2">
-    <div className="numberCircle">1</div>
-      Statement of Compliance
-    </Heading>
-
-    <Paragraph>
-Principals are responsible for the security of the NAPLAN test materials and for the administration of the tests. Principals are required to submit an annual Statement of Compliance,
-indicating their understanding of the VCAA’s requirements in relation to test security and administration.
-While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
-Security Log. The Test Materials Security Log should be kept by the school for 12 months after the test and may be subject to audit by the VCAA.
-Fields marked with * in the form below are required.
-
-    </Paragraph>
-  	
-
-    
+<Table>
+  <TableHeader>
+    <TableRow >
+      <TableHeaderColumn>Task</TableHeaderColumn>
+      <TableHeaderColumn>Requirement</TableHeaderColumn>
+      <TableHeaderColumn>Due</TableHeaderColumn>
+      <TableHeaderColumn>Status</TableHeaderColumn>
+    </TableRow>
+  </TableHeader>
+  <TableBody status={statusIndex}>
+    <TableRow>
+      <TableRowColumn>Statement of Compliance</TableRowColumn>
+      <TableRowColumn>Required for all schools</TableRowColumn>
+      <TableRowColumn>Friday, 26 February 2016</TableRowColumn>
+      <TableRowColumn>Complete</TableRowColumn>
+    </TableRow>
+    <TableRow>
+      <TableRowColumn>Authorized Staff</TableRowColumn>
+      <TableRowColumn>Required for all schools</TableRowColumn>
+      <TableRowColumn>Friday, 26 February 2016</TableRowColumn>
+      <TableRowColumn>Complete</TableRowColumn>
+    </TableRow>
+    <TableRow>
+      <TableRowColumn>School Details</TableRowColumn>
+      <TableRowColumn>Required for all schools</TableRowColumn>
+      <TableRowColumn>Friday, 26 February 2016</TableRowColumn>
+      <TableRowColumn>Incomplete</TableRowColumn>
+    </TableRow>
+    <TableRow>
+      <TableRowColumn>Alternative Test Format Order</TableRowColumn>
+      <TableRowColumn>Optional</TableRowColumn>
+      <TableRowColumn>Friday, 26 February 2016</TableRowColumn>
+      <TableRowColumn>No orders placed</TableRowColumn>
+    </TableRow>
+    <TableRow>
+      <TableRowColumn>Student Registration Data</TableRowColumn>
+      <TableRowColumn>Independant Schools Only</TableRowColumn>
+      <TableRowColumn>Friday, 26 February 2016</TableRowColumn>
+      <TableRowColumn>Open</TableRowColumn>
+    </TableRow>
+  </TableBody>
+</Table>
 
 
 </Section>
+
+
 
 
 

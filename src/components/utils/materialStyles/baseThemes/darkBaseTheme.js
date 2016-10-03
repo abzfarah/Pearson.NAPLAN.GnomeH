@@ -4,7 +4,7 @@ import {
   pinkA100, pinkA200, pinkA400,
   fullWhite,
 } from '../colors';
-import {fade} from '../../utils/colorManipulator';
+import {fade} from '../../colorManipulator';
 import spacing from '../spacing';
 
 export default {

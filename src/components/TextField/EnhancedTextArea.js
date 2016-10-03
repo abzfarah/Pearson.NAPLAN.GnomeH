@@ -29,7 +29,7 @@ function getStyles(props, context, state) {
   };
 }
 
-class EnhancedTextarea extends Component {
+class EnhancedTextArea extends Component {
   static propTypes = {
     defaultValue: PropTypes.any,
     disabled: PropTypes.bool,
@@ -178,4 +178,4 @@ class EnhancedTextarea extends Component {
   }
 }
 
-export default EnhancedTextarea;
+export default EnhancedTextArea;

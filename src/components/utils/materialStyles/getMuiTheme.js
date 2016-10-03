@@ -1,14 +1,14 @@
 import merge from 'lodash/merge';
-import {darken, fade, emphasize, lighten} from '../../utils/colorManipulator';
+import {darken, fade, emphasize, lighten} from '../colorManipulator';
 import lightBaseTheme from './baseThemes/lightBaseTheme';
 import zIndex from './zIndex';
-import autoprefixer from '../../utils/autoprefixer';
-import callOnce from '../../utils/callOnce';
-import rtl from '../../utils/rtl';
+import autoprefixer from '../autoprefixer';
+import callOnce from '../callOnce';
+import rtl from '../rtl';
 import compose from 'recompose/compose';
 import typography from './typography';
 import {
-  red500, grey400, grey500, grey600, grey700,
+  blue100, blue200, blue300, blue400, red500, grey400, grey500, grey600, grey700,
   transparent, lightWhite, white, darkWhite, lightBlack, black,
 } from './colors';
 
@@ -250,7 +250,7 @@ export default function getMuiTheme(muiTheme, ...more) {
       color: palette.textColor,
     },
     table: {
-      backgroundColor: palette.canvasColor,
+      backgroundColor: blue100,
     },
     tableFooter: {
       borderColor: palette.borderColor,
@@ -260,7 +260,7 @@ export default function getMuiTheme(muiTheme, ...more) {
       borderColor: palette.borderColor,
     },
     tableHeaderColumn: {
-      textColor: palette.accent3Color,
+      textColor: "white",
       height: 56,
       spacing: 24,
     },
