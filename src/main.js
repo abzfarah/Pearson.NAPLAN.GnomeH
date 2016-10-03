@@ -7,7 +7,7 @@ import Link from 'react-router/Link';
 import { syncHistoryWithStore } from 'react-router-redux';
 import createStore from './store/createStore';
 import AppContainer from './containers/AppContainer';
-import CoreLayout from './masterLayouts/CoreLayout/CoreLayout';
+//import CoreLayout from './masterLayouts/CoreLayout/CoreLayout';
 import LoginPage from './components/layouts/LoginPage';
 import { NamedLink, matchRoutesToLocation, RoutesProvider, MatchWithRoutes } from 'react-router-addons-routes';
 import routes from './routes';
