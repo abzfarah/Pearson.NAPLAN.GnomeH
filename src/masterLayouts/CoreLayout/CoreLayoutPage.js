@@ -15,9 +15,7 @@ class CoreLayoutPage extends React.Component {
   logoutUser(event) {
     event.preventDefault();
     userManager.signoutRedirect();
-
     // userManager.signoutRedirectCallback('http://localhost:8004/login');
-
   }
 
 

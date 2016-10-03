@@ -1,4 +1,4 @@
-import { LOAD_SUBSCRIPTIONS_START, LOAD_SUBSCRIPTIONS_SUCCESS } from '../constants/constants';
+import { LOAD_SUBSCRIPTIONS_START, LOAD_SUBSCRIPTIONS_SUCCESS } from './actionTypes';
 
 export function loadSubscriptionsStart() {
   return {
