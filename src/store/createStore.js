@@ -5,7 +5,7 @@ import makeRootReducer from '../reducers/index'
 import createOidcMiddleware, { createUserManager } from 'redux-oidc';
 import createSagaMiddleware from 'redux-saga';
 import { loadSubstricptionsSaga } from '../sagas/saga';
-import userManager from '../utils/userManager';
+import userManager from '../components/utils/oidc/userManager';
 
 export default (initialState = {}, history) => {
   // ======================================================
