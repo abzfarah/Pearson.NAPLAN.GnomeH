@@ -61,7 +61,6 @@
         "DEBUG": "app:*"
       }
     }
-
   },
   "repository": {
     "type": "git",
@@ -136,6 +135,7 @@
     "react-router-redux": "^4.0.0",
     "recompose": "^0.20.2",
     "redux": "^3.0.0",
+    "redux-immutable-state-invariant": "^1.2.4",
     "redux-oidc": "^2.1.0",
     "redux-saga": "^0.10.4",
     "redux-thunk": "^2.0.0",
