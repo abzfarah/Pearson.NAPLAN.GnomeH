@@ -1,4 +1,4 @@
-import store from '../../../store/createStore';
+import store from '../../../store';
 
 // a request helper which reads the access_token from the redux state and passes it in its HTTP request
 export default function apiRequest(url, method = 'GET') {

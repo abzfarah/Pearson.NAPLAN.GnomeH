@@ -1,4 +1,4 @@
-import { createUserManager } from 'redux-oidc';
+import  createUserManager  from '../../../helpers/createUserManager';
 
 // user manager configuration object, see oidc-client-js documentation for details
 const config = {

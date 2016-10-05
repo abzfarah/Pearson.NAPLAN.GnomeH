@@ -1,7 +1,7 @@
 import { take, put, select, call } from 'redux-saga/effects';
-import { LOAD_SUBSCRIPTIONS_START } from '../actions/actionTypes';
-import { loadSubscriptionsSuccess } from '../actions/sagaActions';
-import apiRequest from '../components/utils/oidc/request';
+import { LOAD_SUBSCRIPTIONS_START } from '../constants';
+import { loadSubscriptionsSuccess } from '../actions';
+import apiRequest from '../components/utils/oidc/request.js';
 
 export function* loadSubscriptionsSaga() {
   while (true) {

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import userManager from '../../components/utils/oidc/userManager';
 import { loadTokenInfo } from '../../actions/oidcActions';
 
-import store from '../../store/createStore';
+import store from '../../store';
 
 class CoreLayoutPage extends React.Component {
 
@@ -66,4 +66,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (CoreLayoutPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CoreLayoutPage);

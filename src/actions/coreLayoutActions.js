@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import store from '../store/createStore';
+import store from '../store';
 
 export function oidcLogoutSuccess() {
   return {

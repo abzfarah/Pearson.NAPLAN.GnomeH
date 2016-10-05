@@ -5,7 +5,7 @@ import Match from 'react-router/Match';
 import Miss from 'react-router/Miss';
 import Link from 'react-router/Link';
 import { syncHistoryWithStore } from 'react-router-redux';
-import createStore from './store/createStore';
+import createStore from './store';
 import AppContainer from './containers/AppContainer';
 import LoginPage from './components/layouts/LoginPage';
 import { NamedLink, matchRoutesToLocation, RoutesProvider, MatchWithRoutes } from 'react-router-addons-routes';
@@ -15,7 +15,9 @@ import { OidcProvider } from 'redux-oidc';
 import userManager from './components/utils/oidc/userManager';
 import MuiThemeProvider from './components/utils/materialStyles/MuiThemeProvider';
 const initialState = window.___INITIAL_STATE__;
-const store = createStore(initialState);
+import store from './store';
+
+
 
 // ========================================================
 // Developer Tools Setup
@@ -35,7 +37,7 @@ const MOUNT_NODE = document.getElementById('root')
 let render = () => {
 
   ReactDOM.render(
-    <RoutesProvider routes={routes}>
+    <RoutesProvider routes={routes} store={store}>
     <MuiThemeProvider>
       <Provider store={store}>
           <OidcProvider store={store} userManager={userManager}>
