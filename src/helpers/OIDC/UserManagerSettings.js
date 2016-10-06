@@ -31,7 +31,7 @@ export default class UserManagerSettings extends OidcClientSettings {
         this._popup_redirect_uri = popup_redirect_uri;
         this._popupWindowFeatures = popupWindowFeatures;
         this._popupWindowTarget = popupWindowTarget;
-        
+
         this._silent_redirect_uri = silent_redirect_uri;
         this._silentRequestTimeout = silentRequestTimeout;
         this._automaticSilentRenew = !!automaticSilentRenew;
@@ -42,7 +42,7 @@ export default class UserManagerSettings extends OidcClientSettings {
         this._redirectNavigator = redirectNavigator;
         this._popupNavigator = popupNavigator;
         this._iframeNavigator = iframeNavigator;
-        
+
         this._userStore = userStore;
     }
 
@@ -82,7 +82,7 @@ export default class UserManagerSettings extends OidcClientSettings {
     get iframeNavigator() {
         return this._iframeNavigator;
     }
-    
+
     get userStore() {
         return this._userStore;
     }

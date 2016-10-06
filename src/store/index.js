@@ -9,7 +9,7 @@ import userManager from '../components/utils/oidc/userManager';
 
 
 
-const oidcMiddleware = createOidcMiddleware(userManager, null, false);
+const oidcMiddleware = createOidcMiddleware(userManager, null, false, '/home');
 
 const sagaMiddleware = createSagaMiddleware();
 

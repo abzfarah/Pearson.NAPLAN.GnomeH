@@ -37,19 +37,23 @@ const MOUNT_NODE = document.getElementById('root')
 let render = () => {
 
   ReactDOM.render(
+    <Provider store={store}>
+      <OidcProvider store={store} userManager={userManager}>
     <RoutesProvider routes={routes} store={store}>
     <MuiThemeProvider>
-      <Provider store={store}>
-          <OidcProvider store={store} userManager={userManager}>
+
+
               <Router>
               <div>
                 {routes.map(route => <MatchWithRoutes {...route}/>)}
               </div>
               </Router>
-          </OidcProvider>
-      </Provider>
+
+
       </MuiThemeProvider>
-    </RoutesProvider>,
+    </RoutesProvider>
+      </OidcProvider>
+    </Provider>,
     MOUNT_NODE
   )
 }
