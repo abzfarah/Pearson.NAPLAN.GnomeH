@@ -62,7 +62,7 @@
       }
     },
     "test": {
-    "command": "babel-node ./node_modules/karma/bin/karma start build/karma.conf",
+      "command": "babel-node ./node_modules/karma/bin/karma start build/karma.conf",
       "env": {
         "NODE_ENV": "test",
         "DEBUG": "app:*"
@@ -129,6 +129,7 @@
     "nib": "^1.1.2",
     "node-sass": "^3.7.0",
     "normalize.css": "^4.1.1",
+    "oidc-client": "^1.2.0",
     "postcss-cssnext": "^2.7.0",
     "postcss-loader": "^0.9.0",
     "postcss-short": "^1.4.0",
