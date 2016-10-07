@@ -4,6 +4,9 @@ import { bindActionCreators } from 'redux';
 import * as coreLayoutActions from '../../actions/coreLayoutActions';
 import { connect } from 'react-redux';
 import userManager from '../../components/utils/oidc/userManager';
+import { loadTokenInfo } from '../../actions/oidcActions';
+
+import store from '../../store';
 
 class CoreLayoutPage extends React.Component {
 
@@ -15,11 +18,22 @@ class CoreLayoutPage extends React.Component {
   logoutUser(event) {
     event.preventDefault();
     userManager.signoutRedirect();
-    // userManager.signoutRedirectCallback('http://localhost:8004/login');
   }
+
+  // componentWillMount() {
+  //   debugger;
+  //   // const temp = loadTokenInfo();
+  //   const {temp} = this.props;
+  //   const te = Object.assign({}, temp);
+  // }
 
 
   render() {
+
+    // debugger;
+    // const {temp} = this.props;
+    // const te = Object.assign({}, temp);
+
     return (
       <CoreLayout
         onLogoutClick={this.logoutUser}
@@ -30,11 +44,20 @@ class CoreLayoutPage extends React.Component {
 }
 
 CoreLayoutPage.propTypes = {
-
+    actions: PropTypes.object.isRequired,
+    token: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, props) {
-  return {};
+function mapStateToProps(state) {
+  debugger;
+
+  const token = Object.assign({}, state.oidc);
+  const to = Object.assign({}, userManager.getUser());
+  const to1 = userManager.getUser();
+
+  return {
+    token: state.oidc
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -43,4 +66,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (CoreLayoutPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CoreLayoutPage);
