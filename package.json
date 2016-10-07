@@ -15,7 +15,7 @@
     "start": "better-npm-run start",
     "dev": "better-npm-run dev",
     "dev:no-debug": "npm run dev -- --no_debug",
-    "test": "jest --coverage",
+    "test": "better-npm-run test",
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
@@ -60,6 +60,13 @@
       "env": {
         "DEBUG": "app:*"
       }
+    },
+    "test": {
+    "command": "babel-node ./node_modules/karma/bin/karma start build/karma.conf",
+      "env": {
+        "NODE_ENV": "test",
+        "DEBUG": "app:*"
+      }
     }
   },
   "repository": {
@@ -89,6 +96,7 @@
     "elemental": "^0.6.1",
     "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.9.0",
+    "fixed-data-table": "^0.6.3",
     "fs-extra": "^0.30.0",
     "history": "^2.0.0",
     "html-webpack-plugin": "^2.7.1",
@@ -201,25 +209,6 @@
     "sinon-chai": "^2.8.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.6.0"
-  },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "unmockedModulePathPatterns": [
-      "react",
-      "react-dom",
-      "react-addons-test-utils",
-      "fbjs",
-      "enzyme",
-      "cheerio",
-      "htmlparser2",
-      "underscore",
-      "lodash",
-      "domhandler",
-      "object.assign",
-      "define-properties",
-      "function-bind",
-      "object-keys"
-    ]
   },
   "bugs": {
     "url": "https://github.com/davezuko/react-redux-starter-kit/issues"

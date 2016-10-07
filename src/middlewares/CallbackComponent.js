@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import { STORAGE_KEY } from './constants';
-import { redirectSuccess } from './actions';
+import { STORAGE_KEY } from '../constants';
+import { redirectSuccess } from '../actions';
 
 class CallbackComponent extends React.Component {
   static propTypes = {
