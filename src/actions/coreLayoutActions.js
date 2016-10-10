@@ -1,5 +1,4 @@
-import * as types from './actionTypes';
-import store from '../store';
+import * as types from '../constants';
 
 export function oidcLogoutSuccess() {
   return {
@@ -16,6 +15,5 @@ export function loadTokenError(token) {
 }
 
 export function loadTokenInfo(token) {
-  // const token = store.getState().oidc.user.access_token;
   return token ? dispatch(loadTokenSuccess(token)) : dispatch(loadTokenError(token));
 }
