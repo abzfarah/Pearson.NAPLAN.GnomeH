@@ -19,7 +19,7 @@ import { StickyContainer, Sticky } from '../../components/Sticky';
 const CLASS_ROOT = CSSClassnames.CALENDAR;
 
 
-const CoreLayout = ({onLogoutClick}) => {
+const CoreLayout = ({onLogoutClick, name}) => {
   return(
     <div>
       <StickyContainer>
@@ -37,6 +37,7 @@ const CoreLayout = ({onLogoutClick}) => {
             <div className="button-groups">
               <Button label="Help" secondary={true} />
               <Button label="Log Out" primary={true} onClick={onLogoutClick} />
+              {name}
             </div>
           </Box>
         </Sticky>
@@ -50,7 +51,8 @@ const CoreLayout = ({onLogoutClick}) => {
 }
 
 CoreLayout.propTypes = {
-  onLogoutClick: PropTypes.func.isRequired
+  onLogoutClick: PropTypes.func.isRequired,
+  name: PropTypes.string
 };
 
 export default CoreLayout

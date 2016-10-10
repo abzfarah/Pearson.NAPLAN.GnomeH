@@ -1,5 +1,4 @@
 import { applyMiddleware, compose, createStore } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import reducer from '../reducers';
 import createOidcMiddleware, { createUserManager } from 'redux-oidc';
@@ -7,22 +6,15 @@ import createSagaMiddleware from 'redux-saga';
 import { loadSubscriptionsSaga } from '../sagas';
 import userManager from '../components/utils/oidc/userManager';
 
-
-
-const oidcMiddleware = createOidcMiddleware(userManager, null, false, '/home');
-
+const oidcMiddleware = createOidcMiddleware(userManager, null, false, '/callback');
 const sagaMiddleware = createSagaMiddleware();
 
-
 const enhancers = [];
-
 const initialState = {};
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(oidcMiddleware, sagaMiddleware)
 )(createStore);
-
-
 
 const store = createStoreWithMiddleware(reducer, initialState);
 sagaMiddleware.run(loadSubscriptionsSaga);
@@ -40,6 +32,5 @@ if (module.hot) {
     store.replaceReducer(reducers(store.asyncReducers));
   })
 }
-
 
 export default store;

@@ -2,7 +2,7 @@ import  createUserManager  from '../../../helpers/createUserManager';
 
 const config = {
   client_id: 'VICRegWeb',
-  redirect_uri: 'http://localhost:8004/home',
+  redirect_uri: 'http://localhost:8004/callback',
   response_type: 'id_token token',
   scope: 'openid profile email roles VICRegScope',
   authority: 'https://melbndevweb1.epenau.local:1301/ids',
