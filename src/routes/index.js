@@ -1,7 +1,5 @@
-// We only need to import the modules necessary for initial render
-import CoreLayout from '../masterLayouts/CoreLayout/CoreLayoutPage';
 import LoginPage from '../components/layouts/LoginPage';
-import CallbackPage from '../components/callback';
+import CallBackPage from '../components/Callback';
 
 const routes = [
   {
@@ -10,14 +8,9 @@ const routes = [
     component: LoginPage
   },
   {
-    pattern: '/home',
-    name: 'CoreLayout',
-    component: CallbackPage
-  },
-  {
     pattern: '/callback',
     name: 'CallBackPage',
-    component: CoreLayout
+    component: CallBackPage
   },
   {
     pattern: '/login',

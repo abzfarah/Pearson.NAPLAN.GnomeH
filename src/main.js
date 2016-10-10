@@ -17,8 +17,6 @@ import MuiThemeProvider from './components/utils/materialStyles/MuiThemeProvider
 const initialState = window.___INITIAL_STATE__;
 import store from './store';
 
-
-
 // ========================================================
 // Developer Tools Setup
 // ========================================================
@@ -27,7 +25,6 @@ if (__DEBUG__) {
     window.devToolsExtension.open();
   }
 }
-
 
 // ========================================================
 // Render Setup
@@ -39,19 +36,15 @@ let render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <OidcProvider store={store} userManager={userManager}>
-    <RoutesProvider routes={routes} store={store}>
-    <MuiThemeProvider>
-
-
-              <Router>
+        <RoutesProvider routes={routes} store={store}>
+          <MuiThemeProvider>
+            <Router>
               <div>
                 {routes.map(route => <MatchWithRoutes {...route}/>)}
               </div>
-              </Router>
-
-
-      </MuiThemeProvider>
-    </RoutesProvider>
+            </Router>
+          </MuiThemeProvider>
+        </RoutesProvider>
       </OidcProvider>
     </Provider>,
     MOUNT_NODE

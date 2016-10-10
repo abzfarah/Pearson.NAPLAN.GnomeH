@@ -1,28 +1,55 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { CallbackComponent } from 'redux-oidc';
-import CoreLayout from '../../masterLayouts/CoreLayout/CoreLayoutPage';
-import { push } from 'react-router-redux';
+import CoreLayout from '../../masterLayouts/CoreLayout/CoreLayout';
+import { bindActionCreators } from 'redux';
+import * as coreLayoutActions from '../../actions/coreLayoutActions';
+import userManager from '../../components/utils/oidc/userManager';
+
 
 class CallbackPage extends React.Component {
+
+  constructor(props, context) {
+    super(props, context);
+    this.logoutUser = this.logoutUser.bind(this);
+    this.successCallback = this.successCallback.bind(this);
+  }
+
   successCallback = () => {
-    this.props.dispatch(push('/'));
+
+  }
+
+  logoutUser(event) {
+    event.preventDefault();
+    userManager.signoutRedirect();
   }
 
   render() {
-    return (
-      <CallbackComponent successCallback={this.successCallback.bind(this)}>
-        <CoreLayout/>
 
+    const { user } = this.props;
+
+    return (
+      <CallbackComponent successCallback={this.successCallback}>
+        <CoreLayout onLogoutClick={this.logoutUser} name={user ? user.profile.name : null} />
       </CallbackComponent>
     );
   }
 }
 
-function mapDispatchToProps(dispatch) {
+CallbackPage.propTypes = {
+  actions: PropTypes.object.isRequired
+}
+
+function mapStateToProps(state) {
   return {
-    dispatch
+    user: state.oidc.user
   };
 }
 
-export default connect(null, mapDispatchToProps)(CallbackPage);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(coreLayoutActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CallbackPage);
