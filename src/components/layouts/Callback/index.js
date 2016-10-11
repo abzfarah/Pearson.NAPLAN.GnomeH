@@ -41,8 +41,6 @@ CallbackPage.propTypes = {
 }
 
 function mapStateToProps(state) {
-  debugger;
-
   return {
     user: state.oidc.user
   };
