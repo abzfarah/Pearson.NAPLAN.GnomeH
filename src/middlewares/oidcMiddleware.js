@@ -79,8 +79,11 @@ export default function createOidcMiddleware(userManager, shouldValidate, trigge
         next(loadingUser());
         localStorage.setItem(STORAGE_KEY, true);
         userManager.getUser()
-          .then((user) => getUserSuccessCallback(next, userManager, user, triggerAuthFlow, action))
-          .catch(getUserErrorCallback);
+          .then((user) => {
+             if (user === null || user === undefined) {
+                getUserSuccessCallback(next, userManager, user, triggerAuthFlow, action)).catch(getUserErrorCallback);
+            }
+          }
       } else {
         // ELSE: user has been found and is NOT expired...
         return next(action);

@@ -12,4 +12,8 @@ export const SILENT_RENEW_ERROR = 'SILENT_RENEW_ERROR';
 export const SESSION_TERMINATED = 'SESSION_TERMINATED';
 export const USER_EXPIRING = 'USER_EXPIRING';
 export const USER_FOUND = 'USER_FOUND';
+
 export const LOADING_USER = 'LOADING_USER';
+
+export const SET_ERROR = 'SET_ERROR';
+export const REMOVE_ERROR = 'REMOVE_ERROR';

@@ -76,3 +76,30 @@ export function loadSubscriptionsSuccess(channels) {
     payload: channels
   };
 }
+
+
+export function setError(error) {
+  return {
+    type: SET_ERROR,
+    payload: error
+  }
+}
+
+export function removeError(error) {
+  return {
+    type: REMOVE_ERROR
+  }
+}
+
+// this will generate an error
+export function errorRequest() {
+  return (dispatch) => {
+    const url = 'https://www.thisweirdurlhopefullydoesntexist.com';
+
+    apiRequest(url)
+      .then(result => {
+        dispatch(setError(result.error));
+        dispatch(push('/error'));
+      });
+  }
+}
