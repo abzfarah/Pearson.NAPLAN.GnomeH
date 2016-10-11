@@ -19,6 +19,15 @@ const UserIsAuthenticated = UserAuthWrapper({
   wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
 })
 
+// Admin Authorisation
+const UserIsAdmin = UserAuthWrapper({
+  authSelector: state => state.user,
+  predicate: user => user.isAdmin,
+  redirectAction: routerActions.replace,
+  failureRedirectPath: '/login',
+  wrapperDisplayName: 'UserIsAdmin',
+  allowRedirectBack: false
+})
 
 
 export default function Routes(props) {

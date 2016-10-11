@@ -1,5 +1,5 @@
 import { STORAGE_KEY } from '../constants';
-import { userExpired, userFound, loadingUser } from '../actions';
+import { userExpired, userFound, loadingUser } from '../actions/authActions';
 
 // store the user here to prevent future promise calls to getUser()
 export let storedUser = null;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
-import { removeError } from '../../actions';
+import { removeError } from '../../actions/authActions';
 
 class ErrorPage extends React.Component {
 

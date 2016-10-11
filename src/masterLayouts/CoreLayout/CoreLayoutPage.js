@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import CoreLayout from './CoreLayout';
 import { bindActionCreators } from 'redux';
-import * as coreLayoutActions from '../../actions/coreLayoutActions';
+import * as coreLayoutActions from '../../actions/coreLayoutActions/authActions';
 import { connect } from 'react-redux';
 import userManager from '../../components/utils/oidc/userManager';
 import { loadTokenInfo } from '../../actions/oidcActions';
