@@ -1,5 +1,5 @@
 import LoginPage from '../components/layouts/LoginPage';
-import CallBackPage from '../components/Callback';
+import CallBackPage from '../components/layouts/Callback';
 
 const routes = [
   {

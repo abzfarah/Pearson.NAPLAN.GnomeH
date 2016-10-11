@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { CallbackComponent } from 'redux-oidc';
-import CoreLayout from '../../masterLayouts/CoreLayout/CoreLayout';
 import { bindActionCreators } from 'redux';
-import * as coreLayoutActions from '../../actions/coreLayoutActions';
-import userManager from '../../components/utils/oidc/userManager';
-
+import CoreLayout from '../../../masterLayouts/CoreLayout/CoreLayout';
+import * as coreLayoutActions from '../../../actions/coreLayoutActions';
+import userManager from '../../../components/utils/oidc/userManager';
+import { push } from 'react-router-redux';
 
 class CallbackPage extends React.Component {
 
@@ -16,7 +16,7 @@ class CallbackPage extends React.Component {
   }
 
   successCallback = () => {
-
+    this.props.dispatch(push('/callback'));
   }
 
   logoutUser(event) {
@@ -48,6 +48,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    dispatch,
     actions: bindActionCreators(coreLayoutActions, dispatch)
   };
 }
