@@ -6,8 +6,8 @@ const config = {
   response_type: 'id_token token',
   scope: 'openid profile email roles VICRegScope all_claims',
   authority: 'https://melbndevweb1.epenau.local:1301/ids',
-  post_logout_redirect_uri: 'http://localhost:8004/login',
-  silent_redirect_uri: 'http://localhost:8004/login',
+  post_logout_redirect_uri: 'http://localhost:8004/',
+  silent_redirect_uri: 'http://localhost:8004/home',
   automaticSilentRenew: true,
   filterProtocolClaims: true,
   loadUserInfo: true

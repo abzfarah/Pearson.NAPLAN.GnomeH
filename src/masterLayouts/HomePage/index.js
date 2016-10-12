@@ -22,7 +22,7 @@ class HomePage extends React.Component {
     if (!user || user.expired) {
       //console.log('User is null or invalid - redirecting to login page!');
       //dispatch(push('/login'));
-      return;
+
     }
 
     console.log("HomePage.componentWillMount - End");
@@ -62,7 +62,8 @@ class HomePage extends React.Component {
     const { user } = this.props;
 
     return (
-<CallbackComponent successCallback={this.successCallback.bind(this)} >
+      <div>
+
           <StickyContainer>
             <Sticky style={{zIndex: 5}}>
               <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="main-nav">
@@ -86,7 +87,8 @@ class HomePage extends React.Component {
               <MultiTab/>
             </Box>
 
-        </CallbackComponent>
+
+        </div>
     );
   }
 }
