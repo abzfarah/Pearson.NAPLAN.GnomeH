@@ -15,7 +15,6 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.oidc.user, // how to get the user state
-  authenticatingSelector: state => state.oidc.isLoadingUser, // wait for async loading of user to complete
   redirectAction: routerActions.replace, // the redux action to dispatch for redirect
   wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
 })
@@ -23,13 +22,15 @@ const UserIsAuthenticated = UserAuthWrapper({
 
 
 
+
 export default function Routes(props) {
   return (
     <Router history={history}>
-      <Route component={AppContainer}>
-        <Route path="/" component={PublicPage} />
-        <Route path="/callback" component={HomePage} />
-        <Route path="/home" component={UserIsAuthenticated(HomePage)} />
+      <Route path="/" component={AppContainer}>
+        <IndexRoute component={PublicPage}/>
+        <Route path="/callback" component={CallbackPage} />
+        <Route path="/home" component={HomePage} />
+
      </Route>
    </Router>
   );

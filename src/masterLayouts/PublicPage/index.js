@@ -10,7 +10,7 @@ import Carousel from '../../components/Carousel';
 import Section from '../../components/Section';
 import { StickyContainer, Sticky } from '../../components/Sticky';
 import CSSClassnames from '../../components/utils/CSSClassnames';
-
+import { connect } from 'react-redux';
 import userManager from '../../components/utils/oidc/userManager';
 import '../../styles/core.scss';
 
@@ -57,4 +57,17 @@ class PublicPage extends React.Component {
 }
 
 
-export default PublicPage;
+function mapStateToProps(state) {
+  return {
+    user: state.oidc.user,
+    error: state.error.error
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PublicPage);

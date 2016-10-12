@@ -5,8 +5,9 @@ import Box from '../Box';
 import Tab from '../Tab';
 import Tabs from '../Tabs';
 import HomePage from '../../masterLayouts/HomePage';
-import  CallbackComponent  from './CallbackComponent';
+import { CallbackComponent } from 'redux-oidc';
 import { push } from 'react-router-redux';
+
 
 class CallbackPage extends React.Component {
   successCallback = () => {
