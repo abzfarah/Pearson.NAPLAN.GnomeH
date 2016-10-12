@@ -4,14 +4,15 @@ import { UserAuthWrapper } from 'redux-auth-wrapper'
 
 import store from '../store';
 import { syncHistoryWithStore, routerActions } from 'react-router-redux';
-import CoreLayout from '../masterLayouts/CoreLayout/CoreLayoutPage';
+import AppContainer from '../masterLayouts/AppContainer';
+import PublicPage from '../masterLayouts/PublicPage';
+import HomePage from '../masterLayouts/HomePage';
 import LoginPage from '../components/layouts/LoginPage';
 import CallbackPage from '../components/callback';
 import ErrorPage from '../components/ErrorPage';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
-// Redirects to /login by default
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.oidc.user, // how to get the user state
   authenticatingSelector: state => state.oidc.isLoadingUser, // wait for async loading of user to complete
@@ -19,24 +20,17 @@ const UserIsAuthenticated = UserAuthWrapper({
   wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
 })
 
-// Admin Authorisation
-const UserIsAdmin = UserAuthWrapper({
-  authSelector: state => state.user,
-  predicate: user => user.isAdmin,
-  redirectAction: routerActions.replace,
-  failureRedirectPath: '/login',
-  wrapperDisplayName: 'UserIsAdmin',
-  allowRedirectBack: false
-})
+
 
 
 export default function Routes(props) {
   return (
     <Router history={history}>
-      <Route path="/login" component={LoginPage} />
-      <Route path="/callback" component={UserIsAuthenticated(CallbackPage)} />
-      <Route path="/home" component={CoreLayout} />
-      <Route path="/error" component={ErrorPage} />
-    </Router>
+      <Route component={AppContainer}>
+        <Route path="/" component={PublicPage} />
+        <Route path="/callback" component={HomePage} />
+        <Route path="/home" component={UserIsAuthenticated(HomePage)} />
+     </Route>
+   </Router>
   );
 }

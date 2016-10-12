@@ -7,52 +7,54 @@ import Button from '../../components/Button';
 import Menu from '../../components/Menu';
 import Paragraph from '../../components/Paragraph';
 import Carousel from '../../components/Carousel';
-import Tab from '../../components/Tab';
-import Tabs from '../../components/Tabs';
-import MultiTab from '../../components/MultiTab';
-
+import Section from '../../components/Section';
+import { StickyContainer, Sticky } from '../../components/Sticky';
 import CSSClassnames from '../../components/utils/CSSClassnames';
+
+import userManager from '../../components/utils/oidc/userManager';
 import '../../styles/core.scss';
 
-import { StickyContainer, Sticky } from '../../components/Sticky';
 
-const CLASS_ROOT = CSSClassnames.CALENDAR;
+class PublicPage extends React.Component {
+
+  onLoginButtonClick = (event) => {
+  event.preventDefault();
+  userManager.signinRedirect();
+};
 
 
-const CoreLayout = ({onLogoutClick, name}) => {
-  return(
-    <div>
+  render() {
+    return (
+        <div>
       <StickyContainer>
         <Sticky style={{zIndex: 5}}>
           <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="main-nav">
             <div className="under">
               <a href="http://imgur.com/OlNC7UY"><img  id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />  </a>
             </div>
-            <ul className="menu">
-               <li><a href="#" className="active">Home</a></li>
-               <li><a href="#">Tasks</a></li>
-               <li><a href="#">Search</a></li>
-               <li><a href="#">Reports</a></li>
-            </ul>
             <div className="button-groups">
               <Button label="Help" secondary={true} />
-              <Button label="Log Out" primary={true} onClick={onLogoutClick} />
-              {name}
+              <Button label="Log In" onClick={this.onLoginButtonClick} primary={true} />
             </div>
           </Box>
         </Sticky>
       </StickyContainer>
-      <Box className="mid">
-        <MultiTab/>
-      </Box>
-      <Footer fixed="true"></Footer>
-    </div>
-  );
+
+        <Box className="mid">
+          <Section>
+            <div>
+              <h3>Welcome to the VIC Registration Website</h3>
+              <h2>This is a demo public page</h2>
+              <p>Please log in to continue</p>
+              <button >Login</button>
+            </div>
+          </Section>
+
+        </Box>
+      </div>
+    );
+  }
 }
 
-CoreLayout.propTypes = {
-  onLogoutClick: PropTypes.func.isRequired,
-  name: PropTypes.string
-};
 
-export default CoreLayout
+export default PublicPage;
