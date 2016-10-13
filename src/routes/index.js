@@ -9,7 +9,6 @@ import PublicPage from '../masterLayouts/PublicPage';
 import HomePage from '../masterLayouts/HomePage';
 import LoginPage from '../components/layouts/LoginPage';
 import CallbackPage from '../components/callback';
-import ErrorPage from '../components/ErrorPage';
 
 const history = syncHistoryWithStore(browserHistory, store);
 

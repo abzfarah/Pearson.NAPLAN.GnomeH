@@ -5,7 +5,7 @@ import Box from '../Box';
 import Tab from '../Tab';
 import Tabs from '../Tabs';
 import HomePage from '../../masterLayouts/HomePage';
-import { CallbackComponent } from 'redux-oidc';
+import  CallbackComponent  from './CallbackComponent';
 import { push } from 'react-router-redux';
 
 
