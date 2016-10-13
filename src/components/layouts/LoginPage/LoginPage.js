@@ -14,7 +14,6 @@ class LoginPage extends React.Component {
     userManager.signoutRedirect();
   };
 
-
   render() {
 
     return (

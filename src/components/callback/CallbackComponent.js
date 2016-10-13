@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
-import { STORAGE_KEY } from '../constants';
-import { redirectSuccess } from '../actions/authActions';
+import { STORAGE_KEY } from '../../constants';
+import { redirectSuccess } from '../../actions';
 
 class CallbackComponent extends React.Component {
   static propTypes = {
     successCallback: PropTypes.func.isRequired,
     errorCallback: PropTypes.func,
+    route: PropTypes.string
   };
 
   static contextTypes = {
@@ -13,7 +14,7 @@ class CallbackComponent extends React.Component {
   };
 
   componentDidMount() {
-    this.context.userManager.signinRedirectCallback()
+    this.context.userManager.signinRedirectCallback(this.props.route)
       .then((user) => this.onRedirectSuccess(user))
       .catch((error) => this.onRedirectError(error));
   }

@@ -1,15 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Router from 'react-router/BrowserRouter';
-import Match from 'react-router/Match';
-import Miss from 'react-router/Miss';
-import Link from 'react-router/Link';
-import { syncHistoryWithStore } from 'react-router-redux';
+
+
 import createStore from './store';
 import AppContainer from './containers/AppContainer';
 import LoginPage from './components/layouts/LoginPage';
-import { NamedLink, matchRoutesToLocation, RoutesProvider, MatchWithRoutes } from 'react-router-addons-routes';
-import routes from './routes';
+import Routes from './routes';
 import {Provider} from 'react-redux';
 import { OidcProvider } from 'redux-oidc';
 import userManager from './components/utils/oidc/userManager';
@@ -36,22 +32,18 @@ let render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <OidcProvider store={store} userManager={userManager}>
-        <RoutesProvider routes={routes} store={store}>
+
           <MuiThemeProvider>
-            <Router>
-              <div>
-                {routes.map(route => <MatchWithRoutes {...route}/>)}
-              </div>
-            </Router>
+            <Routes />
           </MuiThemeProvider>
-        </RoutesProvider>
+
       </OidcProvider>
     </Provider>,
     MOUNT_NODE
   )
 }
 
-// This code is excluded from production bundle
+
 if (__DEV__) {
   if (module.hot) {
     // Development render functions
