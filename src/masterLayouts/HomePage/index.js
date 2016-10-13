@@ -48,7 +48,7 @@ class HomePage extends React.Component {
   onLogoutButtonClicked = (event) => {
     event.preventDefault();
     userManager.removeUser(); // removes the user data from sessionStorage
-    this.props.dispatch(push('/login'));
+    this.props.dispatch(push('/'));
   }
 
   onErrorButtonClicked = (event) => {
@@ -78,7 +78,7 @@ class HomePage extends React.Component {
                 </ul>
                 <div className="button-groups">
                   <Button label="Help" secondary={true} />
-                  <Button label="Log Out" primary={true} />
+                  <Button label="Log Out" onClick={this.onLogoutButtonClicked} primary={true} />
                 </div>
               </Box>
             </Sticky>
