@@ -48,6 +48,7 @@ class HomePage extends React.Component {
   onLogoutButtonClicked = (event) => {
     event.preventDefault();
     userManager.removeUser(); // removes the user data from sessionStorage
+    userManager.signoutRedirect();
     this.props.dispatch(push('/'));
   }
 
