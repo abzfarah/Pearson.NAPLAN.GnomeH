@@ -1,7 +1,7 @@
 module.exports = {
   'Demo test GitHub': function (browser) {
     browser
-      .url('http://www.github.com/dwyl')   // visit the url
+      .url('http://localhost:8004/')   // visit the url
       .waitForElementVisible('body'); // wait for the body to be rendered
       // check if we are seeing the Mobile Version of GitHub
       browser.element('css selector', '.switch-to-desktop', function(result) {
@@ -12,7 +12,7 @@ module.exports = {
       });
     // part two:
     browser
-      .assert.containsText('body', 'do what you love') // assert contains
+      .assert.containsText('body', 'Welcome to the VIC Registration Website') // assert contains
       .end();
   }
 };
