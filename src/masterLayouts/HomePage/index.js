@@ -8,7 +8,7 @@ import { StickyContainer, Sticky } from '../../components/Sticky';
 import { connect } from 'react-redux';
 import userManager from '../../components/utils/oidc/userManager';
 import { errorRequest } from '../../actions';
-import { CallbackComponent } from 'redux-oidc';
+import CallbackComponent from '../../components/callback/CallbackComponent';
 
 import { push } from 'react-router-redux';
 
@@ -63,7 +63,6 @@ class HomePage extends React.Component {
 
     return (
       <div>
-
           <StickyContainer>
             <Sticky style={{zIndex: 5}}>
               <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="main-nav">
@@ -86,8 +85,6 @@ class HomePage extends React.Component {
             <Box className="mid">
               <MultiTab/>
             </Box>
-
-
         </div>
     );
   }

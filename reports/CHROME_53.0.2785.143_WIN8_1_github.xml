@@ -5,10 +5,10 @@
 
   <testsuite name="github"
     errors="0" failures="0" hostname="" id="" package="github" skipped="0"
-    tests="1" time="13.72" timestamp="Wed, 12 Oct 2016 03:48:24 GMT">
+    tests="1" time="7.624" timestamp="Thu, 13 Oct 2016 23:53:45 GMT">
   
-    <testcase name="Demo test GitHub" time="13.72" assertions="2">
-<system-out>[[ATTACHMENT|C:\workspace\Pearson.NAPLAN.Gnome\screenshots\github\Demo-test-GitHub_ERROR_Oct-12-2016-144837-GMT+1100-(AUS-Eastern-Daylight.png]]</system-out>
+    <testcase name="Demo test GitHub" time="7.624" assertions="2">
+<system-out>[[ATTACHMENT|C:\workspace\Pearson.NAPLAN.Gnome\screenshots\github\Demo-test-GitHub_ERROR_Oct-14-2016-105352-GMT+1100-(AUS-Eastern-Daylight.png]]</system-out>
     
 
     
