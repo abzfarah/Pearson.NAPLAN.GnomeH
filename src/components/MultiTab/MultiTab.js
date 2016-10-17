@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Tab from '../Tab'
-import Tabs from '../Tabs'
+import Tab from '../common/Tab'
+import Tabs from '../common/Tabs'
 
 import Statement from './Statement'
 import SchoolDetails from './SchoolDetails'

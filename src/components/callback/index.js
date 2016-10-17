@@ -1,10 +1,9 @@
 import React from 'react';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { connect } from 'react-redux';
-import Box from '../Box';
-import Tab from '../Tab';
-import Tabs from '../Tabs';
-import HomePage from '../../masterLayouts/HomePage';
+import Box from '../common/Box';
+import Tab from '../common/Tab';
+import Tabs from '../common/Tabs';
 import  CallbackComponent  from './CallbackComponent';
 import { push } from 'react-router-redux';
 
