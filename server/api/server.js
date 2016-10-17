@@ -1,5 +1,6 @@
 var Hapi = require('hapi'),
-    Routes = require('./routes/UserRoute'),
+    Routesa = require('./routes/UserRoute'),
+    Routesb = require('./routes/SchoolRoute'),
     config = require('./config'),
     Db = require('./database');
 
@@ -12,7 +13,8 @@ server.connection({
 
 server.connection({ routes: { cors: true } })
 
-server.route(Routes.endpoints);
+server.route(Routesa.endpoints);
+server.route(Routesb.endpoints);
 server.start(function() {
     console.log('Server started ');
 });

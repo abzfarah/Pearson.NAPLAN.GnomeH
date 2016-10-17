@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import userManager from '../../utils/oidc/userManager';
 import { errorRequest } from '../../../actions';
 import CallbackComponent from '../../callback/CallbackComponent';
-
+import SchoolSearch from '../../../containers/SchoolSearch';
 import { push } from 'react-router-redux';
 
 class AdminPage extends React.Component {
@@ -22,7 +22,6 @@ class AdminPage extends React.Component {
     if (!user || user.expired) {
       //console.log('User is null or invalid - redirecting to login page!');
       //dispatch(push('/login'));
-
     }
 
     console.log("HomePage.componentWillMount - End");
@@ -70,12 +69,9 @@ class AdminPage extends React.Component {
                 <div className="under">
                   <a href="http://imgur.com/OlNC7UY"><img  id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />  </a>
                 </div>
-                <ul className="menu">
-                   <li><a href="#" className="active">Home</a></li>
-                   <li><a href="#">Tasks</a></li>
-                   <li><a href="#">Search</a></li>
-                   <li><a href="#">Reports</a></li>
-                </ul>
+                <ul className="menu"></ul>
+
+                <SchoolSearch size="small" className="searchbox"/>
                 <div className="button-groups">
                   <Button label="Help" secondary={true} />
                   <Button label="Log Out" onClick={this.onLogoutButtonClicked} primary={true} />
