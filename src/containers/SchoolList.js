@@ -5,6 +5,10 @@ import List from '../components/common/List';
 import Footer from '../components/common/Footer';
 import SchoolListItem from './SchoolListItem';
 import BusyListItem from './BusyListItem';
+import config from './config';
+
+const SCOPE_LIST_ITEMS = {};
+SCOPE_LIST_ITEMS[config.scopes.people.ou] =SchoolListItem;
 
 export default class SchoolList extends Component {
 
@@ -70,8 +74,6 @@ export default class SchoolList extends Component {
   })
   .catch(error => this.setState({results: [], error: error, busy: false}));
 
-
-
   }
 
   _queueSearch (searchText) {
@@ -83,8 +85,6 @@ export default class SchoolList extends Component {
       // debounce
       this._searchTimer = setTimeout(this._search, 500);
     }
-
-
   }
 
   _onSelect () {
@@ -96,17 +96,53 @@ export default class SchoolList extends Component {
   }
 
   render () {
+    const { searchText, scope } = this.props;
+      const { results, busy } = this.state;
+      let items, empty, first, error = false;
 
+      if (this.state.error) {
+        error = <div>{this.state.error}</div>;
+      }
 
-    return (
-      <div>
+      if (busy) {
+        items = <BusyListItem />;
+      } else if (searchText && results.length === 0) {
+        const noMatchingLabel = `No matching ${scope.label.toLowerCase()}`;
+        empty = (
+          <FormattedMessage id={noMatchingLabel}
+            defaultMessage={noMatchingLabel} />
+        );
+        first = true;
+      } else {
+        const ListItem = SCOPE_LIST_ITEMS[scope.ou];
+        items = results.map(item => (
+          <ListItem key={item.dn} item={item}
+            onClick={this._onSelect.bind(this, item)} />
+        ));
+      }
 
+      let more;
+      if (results.length >= 20 && ! busy) {
+        const moreLabel = 'Refine search to find more';
+        more = (
+          <Footer pad="medium">
+            <FormattedMessage id={moreLabel} defaultMessage={moreLabel} />
+          </Footer>
+        );
+      }
 
-      </div>
-    );
-  }
+      return (
+        <div>
+          {error}
+          <List key="results" emptyIndicator={empty}>
+            {items}
+          </List>
+        </div>
+      );
+    }
 
-};
+  };
 
-SchoolList.propTypes = {
-};
+  SchoolList.propTypes = {
+
+  };

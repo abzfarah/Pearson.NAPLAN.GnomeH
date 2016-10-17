@@ -71,7 +71,7 @@ class AdminPage extends React.Component {
                 </div>
                 <ul className="menu"></ul>
 
-                <SchoolSearch size="small" className="searchbox"/>
+                
                 <div className="button-groups">
                   <Button label="Help" secondary={true} />
                   <Button label="Log Out" onClick={this.onLogoutButtonClicked} primary={true} />

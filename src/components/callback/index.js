@@ -10,7 +10,8 @@ import { push } from 'react-router-redux';
 
 class CallbackPage extends React.Component {
   successCallback = (user) => {
-    this.props.dispatch(push('/home'));
+
+    this.props.dispatch(push('/admin'));
     this.userCallback = user;
   }
 

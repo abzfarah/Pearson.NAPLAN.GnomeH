@@ -11,7 +11,7 @@ import Heading from './Heading';
 import Paragraph from './Paragraph';
 import Box from './Box';
 
-import CSSClassnames from './utils/CSSClassnames';
+import CSSClassnames from '../utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.LOGIN_FORM;
 

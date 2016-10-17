@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import Box from '../components/common/Box';
 import Finder from './Finder';
 import SchoolList from './SchoolList';
-
-
+import config from './config';
 /*
  * The PeopleFinder module controls the browser location and interacts with the
  * back end. It uses the People and Person modules to handle all visualizations.
@@ -22,14 +21,14 @@ export default class SchoolSearch extends Component {
     this.state = {
       initial: true,
       searchText: '',
-      scope: ''
+      scope: config.scopes.people
     };
   }
 
   componentDidMount () {
     const params = this._paramsFromQuery(window.location.search);
     const searchText = params.search || '';
-    const scope = 'people';
+    const scope = config.scopes[params.scope || 'people'];
     const id = params.id || null;
 
     this.setState({
@@ -84,6 +83,7 @@ export default class SchoolSearch extends Component {
     if (event.state) {
       this.setState({
         id: event.state.id,
+        scope: config.scopes[event.state.ou],
         searchText: event.state.searchText,
         title: event.state.title
       });
