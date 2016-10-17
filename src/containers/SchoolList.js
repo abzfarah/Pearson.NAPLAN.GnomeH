@@ -74,7 +74,7 @@ export default class SchoolList extends Component {
 
   }
 
-  _queueSearch () {
+  _queueSearch (searchText) {
     clearTimeout(this._searchTimer);
     if (! searchText) {
       this.setState({results: [], summaries: {}, busy: false});
