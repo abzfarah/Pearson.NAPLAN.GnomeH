@@ -66,7 +66,7 @@ export default class SchoolList extends Component {
   };
   const options = { method: 'GET', headers: headers };
   const query = buildQuery(params);
-  fetch(`/schools`, options)
+  fetch(`/school`, options)
   .then(processStatus)
   .then(response => response.json())
   .then(response => {
