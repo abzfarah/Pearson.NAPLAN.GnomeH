@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import userManager from '../../utils/oidc/userManager';
 import { errorRequest } from '../../../actions';
 import CallbackComponent from '../../callback/CallbackComponent';
-import SchoolSearch from '../../../containers/SchoolSearch';
+
 import { push } from 'react-router-redux';
 
 class AdminPage extends React.Component {
@@ -71,7 +71,7 @@ class AdminPage extends React.Component {
                 </div>
                 <ul className="menu"></ul>
 
-        
+
                 <div className="button-groups">
                   <Button label="Help" secondary={true} />
                   <Button label="Log Out" onClick={this.onLogoutButtonClicked} primary={true} />
