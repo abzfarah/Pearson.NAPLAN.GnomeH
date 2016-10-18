@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="Label" timestamp="2016-10-18T15:35:23" hostname="localhost" time="0.007" errors="0" tests="3" skipped="0" disabled="0" failures="0">
+  <testcase classname="Label" name="has correct default options" time="0.004" />
+  <testcase classname="Label" name="has correct uppercase=true rendering" time="0.001" />
+  <testcase classname="Label" name="has correct size=&quot;small&quot; and margin=&quot;large&quot; rendering" time="0.001" />
+ </testsuite>
+</testsuites>
