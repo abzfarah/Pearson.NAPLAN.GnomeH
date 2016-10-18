@@ -4,11 +4,11 @@ import { UserAuthWrapper } from 'redux-auth-wrapper'
 
 import store from '../store';
 import { syncHistoryWithStore, routerActions } from 'react-router-redux';
-import AppContainer from '../masterLayouts/AppContainer';
-import PublicPage from '../masterLayouts/PublicPage';
-import HomePage from '../masterLayouts/HomePage';
-import LoginPage from '../components/layouts/LoginPage';
+import AppContainer from '../containers/AppContainer';
+import SchoolUserPage from '../components/layouts/SchoolUserPage';
+import AdminPage from '../components/layouts/AdminPage';
 import CallbackPage from '../components/callback';
+import PublicPage from '../components/layouts/PublicPage';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -26,13 +26,15 @@ const AdminIsAuthenticated = UserAuthWrapper({
 
 
 
+
 export default function Routes(props) {
   return (
     <Router history={history}>
       <Route path="/" component={AppContainer}>
         <IndexRoute component={PublicPage}/>
         <Route path="/callback" component={CallbackPage} />
-        <Route path="/home" component={HomePage} />
+        <Route path="/user" component={SchoolUserPage} />
+        <Route path="/admin" component={AdminPage} />
 
      </Route>
    </Router>

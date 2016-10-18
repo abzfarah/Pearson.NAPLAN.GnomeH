@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import Tab from '../Tab'
-import Tabs from '../Tabs'
-import Section from '../Section'
-import Heading from '../Heading'
-import Paragraph from '../Paragraph'
-import Box from '../Box'
-import CheckBox from '../CheckBox'
-import RadioButton from '../RadioButton'
-import Footer from '../Footer'
+import Tab from '../common/Tab'
+import Tabs from '../common/Tabs'
+import Section from '../common/Section'
+import Heading from '../common/Heading'
+import Paragraph from '../common/Paragraph'
+import Box from '../common/Box'
+import CheckBox from '../common/CheckBox'
+import RadioButton from '../common/RadioButton'
+import Footer from '../common/Footer'
 
-import Form from '../Form'
-import FormField from '../FormField'
-import TextField from '../TextField'
+import Form from '../common/Form'
+import FormField from '../common/FormField'
+import TextField from '../common/TextField'
 
 import {orange500, blue500, black} from '../utils/materialStyles/colors';
 

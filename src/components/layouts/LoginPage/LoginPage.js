@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../Button';
+import Button from '../../common/Button';
 import userManager from '../../utils/oidc/userManager';
 
 class LoginPage extends React.Component {

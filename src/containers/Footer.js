@@ -2,12 +2,12 @@
 
 import React, { Component } from 'react';
 
-import Anchor from '../components/Anchor';
-import Paragraph from '../components/Paragraph';
-import Box from '../components/Box';
-import Columns from '../components/Columns';
-import Footer from '../components/Footer';
-import Menu from '../components/Menu';
+import Anchor from '../components/common/Anchor';
+import Paragraph from '../components/common/Paragraph';
+import Box from '../components/common/Box';
+import Columns from '../components/common/Columns';
+import Footer from '../components/common/Footer';
+import Menu from '../components/common/Menu';
 import classnames from 'classnames';
 
 

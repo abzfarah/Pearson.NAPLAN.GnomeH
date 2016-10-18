@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import Tab from '../Tab'
-import Tabs from '../Tabs'
-import Section from '../Section'
-import Heading from '../Heading'
-import Paragraph from '../Paragraph'
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from '../Table';
+import Tab from '../common/Tab'
+import Tabs from '../common/Tabs'
+import Section from '../common/Section'
+import Heading from '../common/Heading'
+import Paragraph from '../common/Paragraph'
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from '../common/Table';
 import {orange500, blue500, black} from '../utils/materialStyles/colors';
 
 var statusIndex = [0, 0, 1, 2, 2];
