@@ -68,7 +68,7 @@
       }
     },
     "test": {
-      "command": "babel-node ./node_modules/karma/bin/karma start build/karma.conf",
+      "command": "jest --coverage",
       "env": {
         "NODE_ENV": "test",
         "DEBUG": "app:*"
@@ -127,6 +127,7 @@
     "inuit-shared": "~0.1.5",
     "ip": "^1.1.2",
     "jeet": "^6.1.4",
+    "jest": "^15.1.1",
     "joi": "^9.1.1",
     "json-loader": "^0.5.4",
     "jsrsasign": "^6.1.1",
@@ -233,6 +234,21 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.6.0"
   },
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "cobertura",
+      "lcov"
+],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react/",
+      "<rootDir>/node_modules/react-dom/",
+      "<rootDir>/node_modules/react-bootstrap/",
+      "<rootDir>/node_modules/react-addons-test-utils/",
+      "<rootDir>/node_modules/jasmine-reporters"
+    ]
+  },
+
   "bugs": {
     "url": "https://github.com/davezuko/react-redux-starter-kit/issues"
   },

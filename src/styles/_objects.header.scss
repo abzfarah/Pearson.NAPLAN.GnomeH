@@ -1,10 +1,10 @@
 // (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
 
 .#{$grommet-namespace}header {
-  min-height: $header-height;
   background-color: #fff;
   text-align: left;
   width: 100%;
+
 
 
   a:not(.#{$grommet-namespace}button) {
@@ -39,9 +39,42 @@ div[role=tablist] {
 
 }
 
+
+.header-bar{
+  position: relative;
+  overflow: hidden;
+  height: 10px;
+  background: #eee;
+}
+.header-bar > i{
+  position: absolute;
+  width: 45%;
+  border-top:  10px solid #0bf;          /* same as parent height */
+  border-right: 3px solid transparent;   /* diagonality :) */
+}
+
+
+.school-code {
+  font-size: 0.9rem;
+  color: #7b7676;
+}
+.school-name {
+    font-family:'AvantGardeGothicITCW01M_731087';
+    color: #1193d4;
+    font-size: 1.2rem;
+
+
+}
+
 .under {
   list-style-type: none;
+}
 
+.school-heading {
+  list-style-type: none;
+
+  padding-top: 7px;
+  min-height: 34px;
 }
 
 .numba2 {
@@ -98,7 +131,20 @@ img {
 .list-inline {
   }
 
-.main-nav {
+.first-header {
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-bottom: 18px;
+    padding-top: 20px;
+    height: 25px;
+
+}
+
+.second-header {
     background: #fff;
     display: flex;
     justify-content: space-around;
@@ -107,9 +153,10 @@ img {
     width: 100%;
     padding-bottom: 18px;
     border-bottom: 1px solid rgba(0,0,0,.1);
-    padding-top: 20px;
+
 
 }
+
 
 ul.menu {
     display: flex;
@@ -248,7 +295,7 @@ header  {
 }
 
 .#{$grommet-namespace}header--small {
-  min-height: $small-header-height;
+
 
   .#{$grommet-namespace}header__content {
     line-height: $small-header-height;
