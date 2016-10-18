@@ -21,7 +21,7 @@ const UserIsAuthenticated = UserAuthWrapper({
 const AdminIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.oidc.user, // how to get the user state
   redirectAction: routerActions.replace, // the redux action to dispatch for redirect
-  wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
+  wrapperDisplayName: 'AdminIsAuthenticated' // a nice name for this auth check
 })
 
 
@@ -34,7 +34,7 @@ export default function Routes(props) {
         <IndexRoute component={PublicPage}/>
         <Route path="/callback" component={CallbackPage} />
         <Route path="/user" component={SchoolUserPage} />
-        <Route path="/admin" component={AdminPage} />
+        <Route path="/admin" component={UserIsAuthenticated(AdminPage)} />
 
      </Route>
    </Router>

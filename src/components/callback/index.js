@@ -11,8 +11,18 @@ import { push } from 'react-router-redux';
 class CallbackPage extends React.Component {
   successCallback = (user) => {
 
-    this.props.dispatch(push('/admin'));
-    this.userCallback = user;
+    if (user.profile.role == "Idm_Admin") {
+        this.props.dispatch(push('/admin'));
+    }
+
+    else if (user.profile.schoolCode){
+       this.props.dispatch(push('/user'));
+    }
+
+    else {
+       this.props.dispatch(push('/'));
+    }
+
   }
 
   render() {

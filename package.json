@@ -108,6 +108,7 @@
     "fs-extra": "^0.30.0",
     "hapi": "^15.1.1",
     "history": "^2.0.0",
+    "hoist-non-react-statics": "^1.2.0",
     "html-webpack-plugin": "^2.7.1",
     "imports-loader": "^0.6.5",
     "inline-style-prefixer": "^2.0.4",
@@ -183,6 +184,7 @@
   "devDependencies": {
     "babel-eslint": "^6.0.0-beta.6",
     "babel-jest": "^15.0.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "chai": "^3.4.1",
@@ -202,6 +204,7 @@
     "fs": "0.0.1-security",
     "grommet": "^0.6.11",
     "hammerjs": "^2.0.8",
+    "install": "^0.8.1",
     "intuit": "0.0.22",
     "inuitcss": "^6.0.0-beta.3",
     "isparta-loader": "^2.0.0",
@@ -223,6 +226,7 @@
     "mkdirp": "^0.5.1",
     "mocha": "^3.0.1",
     "nodemon": "^1.8.1",
+    "npm": "^3.10.8",
     "phantomjs-prebuilt": "^2.1.3",
     "react": "^15.3.2",
     "react-addons-create-fragment": "^15.3.2",
@@ -239,7 +243,7 @@
       "text",
       "cobertura",
       "lcov"
-],
+    ],
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react/",
       "<rootDir>/node_modules/react-dom/",
@@ -248,7 +252,6 @@
       "<rootDir>/node_modules/jasmine-reporters"
     ]
   },
-
   "bugs": {
     "url": "https://github.com/davezuko/react-redux-starter-kit/issues"
   },
