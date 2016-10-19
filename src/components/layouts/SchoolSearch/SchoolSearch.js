@@ -35,30 +35,7 @@ class SchoolSearch extends React.Component {
 
                 this.props.schoolSearchAsync(input);
 
-
-
-                // this.props.schoolSearchAsync(input).then(
-
-                //   (result) => {
-                //      console.log(result)
-                //  let options = [];
-
-                //   result.map((x, i) => {
-
-                //      let option = {
-                //         value: x.schoolId,
-                //         label: x.schoolCode + "-" + x.schoolName + "-" + x.suburb
-                //     };
-
-                //     options.push(option);
-                // });
-
-                // this.setState({ options: options });
-                // callback(null, {
-                //     options: options
-                // });
-                // }
-                //  );
+              
             } else {
                 callback(null, {
                     options: this.state.options
