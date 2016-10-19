@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { schoolSearchAsync } from '../../../actions/schoolActions'
 import Select from 'react-select'
-// Be sure to include styles at some point, probably during your bootstrapping
 import 'react-select/dist/react-select.css'
 
 class SchoolSearch extends React.Component {
@@ -34,7 +33,6 @@ class SchoolSearch extends React.Component {
                 this.setState({ isLoaded: false })
 
                 this.props.schoolSearchAsync(input);
-
               
             } else {
                 callback(null, {
@@ -116,7 +114,6 @@ function mapStateToProps(globalState) {
         isLoading: globalState.school.isLoading,
         schoolData: globalState.school.schoolData
     }
-
 }
 
 export default connect(mapStateToProps, { schoolSearchAsync })(SchoolSearch)
