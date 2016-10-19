@@ -12,6 +12,7 @@ import CallbackComponent from '../../callback/CallbackComponent';
 import Header from 'grommet/components/Header';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
+import SchoolSearch from '../../SchoolSearch'
 
 import DownIcon from 'grommet/components/icons/base/Down';
 
@@ -79,6 +80,7 @@ class AdminPage extends React.Component {
                 <ul className="menu"></ul>
 
                 <div className="button-groups">
+                <SchoolSearch />
                   <Button label="Help" secondary={true} />
                   <Button label="Log Out" onClick={this.onLogoutButtonClicked} primary={true} />
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { UserAuthWrapper } from 'redux-auth-wrapper'
+import { UserAuthWrapper } from './auth-wrapper'
 
 import store from '../store';
 import { syncHistoryWithStore, routerActions } from 'react-router-redux';
@@ -34,7 +34,7 @@ export default function Routes(props) {
         <IndexRoute component={PublicPage}/>
         <Route path="/callback" component={CallbackPage} />
         <Route path="/user" component={SchoolUserPage} />
-        <Route path="/admin" component={UserIsAuthenticated(AdminPage)} />
+        <Route path="/admin" component={AdminPage} />
 
      </Route>
    </Router>
