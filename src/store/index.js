@@ -16,11 +16,9 @@ const createStoreWithMiddleware = compose(
 )(createStore);
 
 
-debugger;
 const store = createStoreWithMiddleware(reducer, initialState);
 
 
-debugger;
 if (__DEBUG__) {
   const devToolsExtension = window.devToolsExtension;
 

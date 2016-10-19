@@ -12,11 +12,13 @@ class SchoolSearch extends React.Component {
         super(props);
 
         this.state = {
+            isLoaded: false,
             options: [],
             selectedSchool: ''
         }
 
         this.getOptions = this.getOptions.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
         this.logChange = this.logChange.bind(this);
     }
 
@@ -29,38 +31,65 @@ class SchoolSearch extends React.Component {
 
             } else if (input.length === 3) {
 
-                debugger;
+                this.setState({ isLoaded: false })
 
                 this.props.schoolSearchAsync(input);
-                var result = this.props.schoolData;
-                console.log(result);
 
-                //   this.props.schoolSearchAsync(input).then(
-                //        (result) => {
-                let options = [];
 
-                result.map((x, i) => {
 
-                    let option = {
-                        value: x.schoolId,
-                        label: x.schoolCode + "-" + x.schoolName + "-" + x.suburb
-                    };
+                // this.props.schoolSearchAsync(input).then(
 
-                    options.push(option);
-                });
+                //   (result) => {
+                //      console.log(result)
+                //  let options = [];
 
-                this.setState({ options: options });
-                callback(null, {
-                    options: options
-                });
-                //  }
-                //   );
+                //   result.map((x, i) => {
+
+                //      let option = {
+                //         value: x.schoolId,
+                //         label: x.schoolCode + "-" + x.schoolName + "-" + x.suburb
+                //     };
+
+                //     options.push(option);
+                // });
+
+                // this.setState({ options: options });
+                // callback(null, {
+                //     options: options
+                // });
+                // }
+                //  );
             } else {
                 callback(null, {
                     options: this.state.options
                 });
             }
         }, 500);
+
+        console.log('ss----------------' + JSON.stringify(this.props))
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+
+        if (!nextProps.isLoading && nextProps.schoolData) {
+
+            var result = nextProps.schoolData;
+            let options = [];
+
+            result.map((x, i) => {
+
+                let option = {
+                    value: x.schoolId,
+                    label: x.schoolCode + "-" + x.schoolName + "-" + x.suburb
+                };
+
+                options.push(option);
+            });
+
+            this.setState({ options: options })
+        }
+
     }
 
     logChange(val) {
@@ -69,15 +98,34 @@ class SchoolSearch extends React.Component {
         this.context.router.transitionTo('/home/' + val.value);
     }
 
+    handleSearch(input) {
+
+        if (input.length < 3) {
+            if (this.state.options.length > 0) {
+                this.setState({ options: [] })
+            }
+            return;
+
+        } else if (input.length === 3) {
+
+            this.props.schoolSearchAsync(input);
+
+        }
+    }
+
     render() {
 
         return (
-            <div>
-                <Select.Async
+            <div style={{ width: '200px' }}>
+                {this.props.isLoading && <strong>Loading...</strong>}
+                <Select
                     name="keyword"
                     value={this.state.selectedSchool}
                     loadOptions={this.getOptions}
+                    isLoading={this.props.isLoading}
+                    options={this.state.options}
                     onChange={this.logChange}
+                    onInputChange={this.handleSearch}
                     autoload={false}
                     />
             </div>
@@ -92,9 +140,10 @@ SchoolSearch.contextTypes = {
 function mapStateToProps(globalState) {
 
     return {
-    //  isLoading: globalState.isLoading,
-      //schoolData: globalState.schoolReducers.schoolData
+        isLoading: globalState.school.isLoading,
+        schoolData: globalState.school.schoolData
     }
+
 }
 
 export default connect(mapStateToProps, { schoolSearchAsync })(SchoolSearch)

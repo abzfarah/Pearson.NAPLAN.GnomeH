@@ -2,7 +2,8 @@ import {
     SCHOOLSEARCH_FETCH,
     SCHOOLSEARCH_FETCH_SUCCESS,
     SCHOOLSEARCH_FETCH_FAILURE
-} from '../constants/index'
+} from '../constants'
+
 
 const initialState = {
     isLoading: false,
@@ -10,9 +11,8 @@ const initialState = {
     error: {}
 }
 
-export default function schoolSearch (state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
 
-debugger
     switch (action.type) {
 
         case SCHOOLSEARCH_FETCH_SUCCESS:
@@ -27,9 +27,7 @@ debugger
                 response: action.response
             })
 
-            default:
-        return state
     }
-
-      
+    
+    return state
 }
