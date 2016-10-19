@@ -28,33 +28,40 @@ class SchoolSearch extends React.Component {
                 return callback();
 
             } else if (input.length === 3) {
-                this.props.schoolSearchAsync(input).then(
-                    (result) => {
-                        let options = [];
 
-                        result.map((x, i) => {
+                debugger;
 
-                            let option = {
-                                value: x.schoolId,
-                                label: x.schoolCode + "-" + x.schoolName + "-" + x.suburb
-                            };
+                this.props.schoolSearchAsync(input);
+                var result = this.props.schoolData;
+                console.log(result);
 
-                            options.push(option);
-                        });
+                //   this.props.schoolSearchAsync(input).then(
+                //        (result) => {
+                let options = [];
 
-                        this.setState({ options: options });
-                        callback(null, {
-                            options: options
-                        });
-                    }
-                );
+                result.map((x, i) => {
+
+                    let option = {
+                        value: x.schoolId,
+                        label: x.schoolCode + "-" + x.schoolName + "-" + x.suburb
+                    };
+
+                    options.push(option);
+                });
+
+                this.setState({ options: options });
+                callback(null, {
+                    options: options
+                });
+                //  }
+                //   );
             } else {
                 callback(null, {
                     options: this.state.options
                 });
             }
         }, 500);
-   }
+    }
 
     logChange(val) {
 
@@ -66,15 +73,14 @@ class SchoolSearch extends React.Component {
 
         return (
             <div>
-            <h1>bbb</h1>
-            <Select.Async
-                name="keyword"
-                value={this.state.selectedSchool}
-                loadOptions={this.getOptions}
-                onChange={this.logChange}
-                autoload={false}
-                />
-                </div>
+                <Select.Async
+                    name="keyword"
+                    value={this.state.selectedSchool}
+                    loadOptions={this.getOptions}
+                    onChange={this.logChange}
+                    autoload={false}
+                    />
+            </div>
         )
     }
 }
@@ -83,5 +89,12 @@ SchoolSearch.contextTypes = {
     router: React.PropTypes.object.isRequired
 }
 
+function mapStateToProps(globalState) {
 
-export default connect(null, { schoolSearchAsync })(SchoolSearch)
+    return {
+    //  isLoading: globalState.isLoading,
+      //schoolData: globalState.schoolReducers.schoolData
+    }
+}
+
+export default connect(mapStateToProps, { schoolSearchAsync })(SchoolSearch)

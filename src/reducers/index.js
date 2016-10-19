@@ -1,18 +1,18 @@
 import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import { reducer as oidcReducer } from 'redux-oidc';
-import * as userReducers from './userReducer'
+import * as schoolReducers from './schoolReducer'
 
 import errorReducer from './error';
-
+debugger;
 const reducer = combineReducers(
   {
     routing: routerReducer,
     oidc: oidcReducer,
     error: errorReducer,
-    userReducers: userReducers
-
+    schoolReducers: schoolReducers
   }
 );
+debugger;
 
 export default reducer;

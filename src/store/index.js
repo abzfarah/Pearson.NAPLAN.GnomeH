@@ -15,8 +15,12 @@ const createStoreWithMiddleware = compose(
   applyMiddleware(oidcMiddleware, routerMiddleware(browserHistory), thunkMiddleware, logger())
 )(createStore);
 
+
+debugger;
 const store = createStoreWithMiddleware(reducer, initialState);
 
+
+debugger;
 if (__DEBUG__) {
   const devToolsExtension = window.devToolsExtension;
 
@@ -30,6 +34,8 @@ if (module.hot) {
     const reducers = require('../reducers').default;
     store.replaceReducer(reducers(store.asyncReducers));
   })
+
+  
 }
 
 export default store;

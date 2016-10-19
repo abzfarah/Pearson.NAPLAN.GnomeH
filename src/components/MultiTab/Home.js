@@ -7,6 +7,7 @@ import Paragraph from '../common/Paragraph'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from '../common/Table';
 import {orange500, blue500, black} from '../utils/materialStyles/colors';
 
+
 var statusIndex = [0, 0, 1, 2, 2];
 
 
