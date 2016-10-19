@@ -66,7 +66,6 @@ class SchoolSearch extends React.Component {
             }
         }, 500);
 
-        console.log('ss----------------' + JSON.stringify(this.props))
     }
 
 
@@ -89,11 +88,9 @@ class SchoolSearch extends React.Component {
 
             this.setState({ options: options })
         }
-
     }
 
     logChange(val) {
-
         //--TODO
         this.context.router.transitionTo('/home/' + val.value);
     }
@@ -109,7 +106,6 @@ class SchoolSearch extends React.Component {
         } else if (input.length === 3) {
 
             this.props.schoolSearchAsync(input);
-
         }
     }
 
