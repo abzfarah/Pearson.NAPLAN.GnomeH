@@ -130,6 +130,7 @@
     "jest": "^15.1.1",
     "joi": "^9.1.1",
     "json-loader": "^0.5.4",
+    "json-server": "^0.8.22",
     "jsrsasign": "^6.1.1",
     "karma-tap": "^3.1.0",
     "koa": "^2.0.0-alpha.3",
@@ -239,7 +240,7 @@
       "text",
       "cobertura",
       "lcov"
-],
+    ],
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react/",
       "<rootDir>/node_modules/react-dom/",
@@ -248,7 +249,6 @@
       "<rootDir>/node_modules/jasmine-reporters"
     ]
   },
-
   "bugs": {
     "url": "https://github.com/davezuko/react-redux-starter-kit/issues"
   },

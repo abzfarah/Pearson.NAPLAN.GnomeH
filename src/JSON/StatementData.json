@@ -1,0 +1,26 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "submitStatment": {
+    
+    "buttons": null
+  },
+  "getStatment": {
+    "complianceStatementId": 1,
+    "firstName": "Bahar",
+    "lastName": "Hosseini",
+    "email": "Bahar@gmail.com",
+    "contactNumber": "040500000",
+    "schoolId": 101,
+    "securityLevel": 1,
+    "securityLevelOther": "Test",
+    "isConfirmed": false,
+    "isCertified": true,
+    "isDeclared": true
+  }
+}

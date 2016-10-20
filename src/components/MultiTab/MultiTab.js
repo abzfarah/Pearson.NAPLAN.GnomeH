@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Tab from '../common/Tab'
 import Tabs from '../common/Tabs'
 
-import Statement from './Statement'
+import Statement from './Statement/StatementForm'
 import SchoolDetails from './SchoolDetails'
 import AuthorizedStaff from './AuthorizedStaff'
 import ActiveTestOrder from './ActiveTestOrder'
