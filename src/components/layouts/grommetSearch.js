@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { schoolSearchAsync } from '../../../actions/schoolActions'
 import Form from '../../common/Form';
-import FormField from '../../common/FormField';
-import Search from '../../common/Search';
-import Select from '../../common/Select';
+
 
 class SchoolSearch extends React.Component {
 
@@ -45,10 +43,12 @@ class SchoolSearch extends React.Component {
         }
     }
 
+    logChange(val) {
+        //--TODO
+        this.context.router.transitionTo('/home/' + val.value);
+    }
 
-    onSearch(event) {
-
-      let input = event.target.value
+    onSearch(input) {
 
         if (input.length < 3) {
             if (this.state.options.length > 0) {
@@ -67,17 +67,17 @@ class SchoolSearch extends React.Component {
         return (
 
 
+
+            <div>
             <Form>
               <FormField>
-                <Select
-                value="Search..."
+                <Select id="item1" name="item-1" value="one"
                 onSearch={this.onSearch}
                 onChange={this.onChange}
-                options={this.state.options}
-                placeHolder="Seach for school" />
+                options={this.state.options} />
               </FormField>
             </Form>
-
+            </div>
 
 
         )

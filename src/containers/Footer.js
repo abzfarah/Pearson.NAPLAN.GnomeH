@@ -16,7 +16,7 @@ export default class BlogFooter extends Component {
   render () {
 
     return (
-      <Footer size='small' appCentered={true} colorIndex='light-1'
+      <Footer size='small' appCentered={true} colorIndex='grey-4-a'
         direction='row' primary={true} justify='center'
         pad={{horizontal: 'medium', vertical: 'medium', between: 'medium'}} className="footy" wrap={true}>
         <Box  direction="row"  className="footerContainer"  wrap={true} align="center" >

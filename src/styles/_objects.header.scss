@@ -4,7 +4,7 @@
   background-color: #fff;
   text-align: left;
   width: 100%;
-
+  margin: 4px;
 
 
   a:not(.#{$grommet-namespace}button) {
@@ -136,27 +136,28 @@ img {
 .first-header {
     background: #fff;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    width: 100%;
+    width: 76%;
     padding-bottom: 18px;
-    padding-top: 20px;
+    padding-top: 25px;
     height: 25px;
+    margin: auto;
 
 }
 
 .second-header {
     background: #fff;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    width: 100%;
+    width: 76%;
     padding-bottom: 18px;
     border-bottom: 1px solid rgba(0,0,0,.1);
-
-
+    margin: auto;
+    padding-top: 13px;
 }
 
 
@@ -264,6 +265,7 @@ header  {
   display: flex;
   flex-direction: column;
   align-items: inherit;
+  font-size: 1.2rem;
 
 }
 
@@ -305,7 +307,7 @@ header  {
 }
 
 header.#{$grommet-namespace}header {
-  @include inuit-font-size($header-font-size, inherit);
+
   // @include transform(translate(0, 0));
   // transition: -webkit-transform 0.5s;
   // transition: transform 0.5s;
@@ -355,7 +357,7 @@ header.#{$grommet-namespace}header {
   order: 1;
 }
 .item > h6 {
-  color: #a5a9aa;
+  color: #ffffff;;
 }
 
 .item > a {

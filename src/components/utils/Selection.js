@@ -1,3 +1,8 @@
+// (C) Copyright 2015 Hewlett Packard Enterprise Development LP
+
+// Functions to manage selection via both child index and a specific class name.
+
+// Ensures it is an array.
 function normalizeIndexes (selectedIndexes) {
   let result;
   if (undefined === selectedIndexes || null === selectedIndexes) {
@@ -120,6 +125,10 @@ function onClick (event, options) {
           } else {
             i += 1;
           }
+        }
+
+        if (indexInPrior > -1) {
+          selectedIndexes.splice(indexInPrior, 1);
         }
 
         // Remove text selection. This often happens when shift multi-selecting
