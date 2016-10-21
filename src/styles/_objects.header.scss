@@ -1,5 +1,9 @@
 // (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
 
+.mainContainer {
+  background: #f9f9f9;
+}
+
 .#{$grommet-namespace}header {
   background-color: #fff;
   text-align: left;
@@ -27,7 +31,7 @@
   }
 }
 div[role=tablist] {
-  padding-top: 36px;
+  padding-top: 15px;
   width: 100%;
 }
 
@@ -36,7 +40,7 @@ div[role=tablist] {
   width: 76%;
   flex-direction: row;
   margin: auto;
-
+  
 }
 
 
@@ -45,6 +49,8 @@ div[role=tablist] {
   overflow: hidden;
   height: 10px;
   background: #eee;
+  width: 76%;
+  margin: auto;
 }
 .header-bar > i{
   position: absolute;
@@ -70,13 +76,16 @@ div[role=tablist] {
 }
 .under {
   list-style-type: none;
+  margin-left: 27px
 }
+
 
 .school-heading {
   list-style-type: none;
 
   padding-top: 7px;
   min-height: 34px;
+  margin-left: 27px
 }
 
 .numba2 {
@@ -223,6 +232,7 @@ ul.breadcrumb {
     padding: 0;
     box-sizing: border-box;
     outline: none;
+    margin-right: 27px
 }
 
 
