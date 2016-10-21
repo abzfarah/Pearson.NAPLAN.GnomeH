@@ -17,7 +17,7 @@
   position: relative;
   width: 76%;
   margin: auto;
-  @include inuit-font-size($menu-font-size);
+  font-size: 15px;
 
   &:focus {
     outline: none;
@@ -216,7 +216,7 @@
 
   &.#{$grommet-namespace}menu--row {
     line-height: double($inuit-base-spacing-unit);
-    background: #d4cdcd;
+    background: #9c9c9c;
 
     &.#{$grommet-namespace}box--justify-end {
       > *:not(.#{$grommet-namespace}control-icon) {

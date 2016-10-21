@@ -15,7 +15,7 @@ function getStyles(props, context) {
   return {
     root: {
       fontWeight: 'normal',
-      fontSize: 12,
+      fontSize: 16,
       paddingLeft: tableHeaderColumn.spacing,
       paddingRight: tableHeaderColumn.spacing,
       height: tableHeaderColumn.height,

@@ -22,7 +22,7 @@ const AuthorizedStaff = () => (
 
   <Section className="test">
 
-<SchoolSearch />
+
 
 
 

@@ -52,7 +52,7 @@ class AdminPage extends React.Component {
         event.preventDefault();
         userManager.removeUser(); // removes the user data from sessionStorage
         userManager.signoutRedirect();
-        this.props.dispatch(push('/'));
+
     }
 
     onErrorButtonClicked = (event) => {

@@ -70,7 +70,7 @@ class SchoolSearch extends React.Component {
             <Form>
               <FormField>
                 <Select
-                value="Search..."
+                value="Select school"
                 onSearch={this.onSearch}
                 onChange={this.onChange}
                 options={this.state.options}
