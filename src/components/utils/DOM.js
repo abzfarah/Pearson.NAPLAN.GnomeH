@@ -1,4 +1,6 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+const COLOR_RGB_REGEXP = /rgb\((\d+), (\d+), (\d+)\)/;
+const COLOR_RGBA_REGEXP = /rgba\((\d+), (\d+), (\d+), ([\d\.]+)\)/;
+
 function hash(input) {
   var hash = 0, i, chr, len;
   if (input.length === 0) return hash;
@@ -11,6 +13,7 @@ function hash(input) {
 };
 
 export default {
+
   findScrollParents (element, horizontal) {
     var result = [];
     var parent = element.parentNode;
@@ -112,5 +115,36 @@ export default {
       }
       return id;
     }
+  },
+
+  generateUUID () {
+    function S4() {
+      return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    }
+    const uuid = `${S4()}${S4()}` +
+      `-${S4()}-4${S4().substr(0, 3)}` +
+      `-${S4()}-${S4()}${S4()}${S4()}`.toLowerCase();
+    return uuid;
+  },
+
+  hasDarkBackground (element) {
+    // Measure the actual background color brightness to determine whether
+    // to set a dark or light context.
+    let result;
+    if (element && window.getComputedStyle) {
+      const color = window.getComputedStyle(element).backgroundColor;
+      const match = color.match(COLOR_RGB_REGEXP) ||
+        color.match(COLOR_RGBA_REGEXP);
+      if (match) {
+        const [red, green, blue] = match.slice(1).map(n => parseInt(n, 10));
+        // http://www.had2know.com/technology/
+        //  color-contrast-calculator-web-design.html
+        const brightness = (
+          (299 * red) + (587 * green) + (114 * blue)
+        ) / 1000;
+        result = brightness < 125;
+      }
+    }
+    return result;
   }
 };

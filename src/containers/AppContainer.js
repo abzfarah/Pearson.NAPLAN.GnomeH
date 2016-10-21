@@ -9,7 +9,7 @@ class AppContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="mainContainer">
 
     { this.props.children }
     <Footer fixed="true"></Footer>

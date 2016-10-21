@@ -48,13 +48,16 @@ export default class Tab extends Component {
     }
 
     return (
-      <li className={classes.join(' ')} id={this.props.id}>
+      <li className={classes.join(' ')} id={this.props.id} onClick={this._onClickTab}>
         <a ref={(ref) => this.tabRef = ref} role="tab"
-          href="#" onClick={this._onClickTab}
+          href="#"
           aria-expanded={this.props.active} aria-selected={this.props.active}
           className={CLASS_ROOT + "__link"} aria-labelledby={this.props.id}>
           <label className={CLASS_ROOT + '__label'} htmlFor={this.props.id}>
             {this.props.title}
+          </label>
+          <label className={CLASS_ROOT + '__subtitle'}  htmlFor={this.props.id}>
+            {this.props.subtitle}
           </label>
         </a>
       </li>
@@ -65,6 +68,7 @@ export default class Tab extends Component {
 
 Tab.propTypes = {
   title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
   active: PropTypes.bool,
   id: PropTypes.string
 };

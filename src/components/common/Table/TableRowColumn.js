@@ -9,7 +9,7 @@ function getStyles(props, context) {
       paddingRight: tableRowColumn.spacing,
       height: tableRowColumn.height,
       textAlign: 'left',
-      fontSize: 13,
+      fontSize: 15,
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
     },
