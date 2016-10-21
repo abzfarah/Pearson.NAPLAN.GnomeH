@@ -38,7 +38,7 @@ class AdminPage extends React.Component {
     }
 
     successCallback = () => {
-        this.props.dispatch(push('/admin'));
+        
     }
 
     // display the current user

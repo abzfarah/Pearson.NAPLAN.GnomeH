@@ -23,7 +23,7 @@ export default class BlogFooter extends Component {
           <Box direction="row"className="numberOne">
 
             <Columns className="logo_1" className="flexy1" align="center">
-            <div class="under"><img id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com"/></div>
+            <div className="under"><img id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com"/></div>
             </Columns>
 
             <Box direction="row" className="footer-grid" className="flexy2" >
