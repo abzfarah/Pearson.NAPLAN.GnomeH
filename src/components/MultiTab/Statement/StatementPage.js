@@ -35,7 +35,7 @@ class StatementPage extends Component {
 }
 
 function mapStateToProps(globalState) {
-    debugger
+
     return {
         isLoading: globalState.statement.isLoading,
         isLoaded: globalState.statement.isLoaded,

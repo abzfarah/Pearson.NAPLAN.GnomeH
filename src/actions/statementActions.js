@@ -3,7 +3,7 @@ import axios from 'axios'
 import thunk from 'redux-thunk'
 
 import {
-  //  LOAD_STATMENT_DETAIL,
+    //  LOAD_STATMENT_DETAIL,
 
     // ---------------
     // Fetch Actions
@@ -29,6 +29,7 @@ export function getStatement(schoolCode) {
         });
 
         return axios.get("http://localhost:3000/getStatment")
+            //return axios.put("http://audockerintstg01.epenau.local:12100/api/v1/StatementCompliance/schoolid/1")
             .then((response) => {
 
                 dispatch({
@@ -50,9 +51,6 @@ export function getStatement(schoolCode) {
     }
 }
 
-
-
-
 //-- Insert statement
 export function submitStatement(statement) {
 
@@ -63,10 +61,10 @@ export function submitStatement(statement) {
             isLoading: true,
             isLoaded: false
         });
-debugger
-        return axios.put("http://localhost:3000/submitStatment", statement)
-            .then((response) => {
-                    debugger
+        debugger
+         return axios.put("http://localhost:3000/submitStatment", statement)
+             .then((response) => {
+                 debugger
                 dispatch({
                     type: STATEMENT_SUBMIT_SUCCESS,
                     isLoading: false,

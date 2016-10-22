@@ -12,6 +12,24 @@ import CheckBox from '../../common/CheckBox'
 import RadioButton from '../../common/RadioButton'
 import Button from '../../common/Button'
 import Footer from '../../common/Footer'
+import TextField from '../../common/TextField'
+import { orange500, blue500, black } from '../../utils/materialStyles/colors';
+
+const styles = {
+    errorStyle: {
+        color: orange500,
+    },
+    underlineStyle: {
+        borderColor: orange500,
+    },
+    floatingLabelStyle: {
+        color: black,
+    },
+    floatingLabelFocusStyle: {
+        color: blue500,
+    },
+};
+
 
 class StatementForm extends React.Component {
 
@@ -33,9 +51,12 @@ class StatementForm extends React.Component {
         if (this.props.initialValues) {
 
             this.setState({
-
                 isConfirmed: this.props.initialValues.isConfirmed
             });
+
+            //--TODO
+
+            this.setState({ securityLevel: parseInt(this.props.initialValues.securityLevel) })
         }
     }
 
@@ -47,7 +68,7 @@ class StatementForm extends React.Component {
             <form onSubmit={handleSubmit(this.submitStatement)}>
                 <div className="statement">
                     <Section>
-                        <Heading tag="h2">
+                        <Heading tag="h2" colorIndex="accent-1">
                             <div className="numberCircle">1</div>
                             Statement of Compliance
                     </Heading>
@@ -83,37 +104,35 @@ class StatementForm extends React.Component {
                                 <Paragraph>Apart from when the tests are being administered, test materials are to be kept in a double secure area at all times.Please tick the option which best describes the double secure storage arrangement for NAPLAN test materials at your school.</Paragraph>
                                 <Paragraph>Fields marked with * are required.</Paragraph>
                                 <Box>
-                                    <FormField label="* Please tick the option which best describes the two levels of security at your school." >
-                                        <RadioButton name="securityLevel" id="optionCabinet" type="radio" value="1" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 1} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff." />
-                                        <RadioButton name="securityLevel" id="optionSafe" type="radio" value="2" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 2} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff." />
-                                        <RadioButton name="securityLevel" id="optionSealed" type="radio" value="3" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 3} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff." />
-                                        <RadioButton name="securityLevel" id="optionOther" type="radio" value="4" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 4} label="Other" />
-                                        {this.state.securityLevel === 4 &&
-                                            <Field name="otherText" type="text" component={renderField} />
-                                        }
-                                    </FormField>
+                                    <Paragraph> * Please tick the option which best describes the two levels of security at your school." </Paragraph>
+                                    <RadioButton name="securityLevel" id="optionCabinet" type="radio" value="1" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 1} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff." />
+                                    <RadioButton name="securityLevel" id="optionSafe" type="radio" value="2" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 2} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff." />
+                                    <RadioButton name="securityLevel" id="optionSealed" type="radio" value="3" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 3} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff." />
+                                    <RadioButton name="securityLevel" id="optionOther" type="radio" value="4" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 4} label="Other" />
+                                    {this.state.securityLevel === 4 &&
+                                        <Field name="otherText" type="text" component={renderField} label="Other Text" />
+                                    }
                                 </Box>
                             </Box>
                         </Section>
                     </fieldset>
                     <fieldset disabled={this.state.isDisabled} >
                         <Section colorIndex="light-1" pad="medium" >
-                            <Heading tag="h4">
+                            <Heading tag="h4" colorIndex="accent-1">
                                 Part C: Principal's Declaration
                         </Heading>
                             <FormFields >
-                                <h5>{this.state.firstName}</h5>
-                                <Field name="firstName" type="text" component={renderField} label="first Name" labelTitle="* Principal's first name:" />
+                                <Field name="firstName" type="text" component={renderField} label="first Name" labelTitle="* Principal's first name:"  />
                                 <Field name="lastName" type="text" component={renderField} label="last Name" labelTitle="* Principal's last name:" />
-                                <Field name="email" type="text" component={renderField} label="Email" labelTitle="* School/Principal's email:" />
-                                <Field name="isDeclared" type="checkBox" component={renderField} label="isDeclared" labelTitle="* I declare that I am the Principal of the school detailed above." disabled={this.state.isDisabled} />
-                                <Field name="isCertified" type="checkBox" component={renderField} label="isCertified" labelTitle="* I certify that the information provided in this form is correct." disabled={this.state.isDisabled} />
+                                <Field name="email" type="text" component={renderField} label="Email" labelTitle="* School/Principal's email:" /> <br />
+                                <Field name="isDeclared" type="checkbox" component={renderField} label="isDeclared" labelTitle="* I declare that I am the Principal of the school detailed above." disabled={this.state.isDisabled} /><br />
+                                <Field name="isCertified" type="checkbox" component={renderField} label="isCertified" labelTitle="* I certify that the information provided in this form is correct." disabled={this.state.isDisabled} /><br />
                             </FormFields>
+                            <Footer pad={{ "vertical": "small" }}>
+                                <Button label="submit" primary={true} align="end" disabled={submitting || pristine} onClick={this.submitStatement} />
+                            </Footer>
                         </Section>
                     </fieldset>
-                    <Footer pad={{ "vertical": "small" }}>
-                        <Button label="submit" primary={true}  align="end" disabled={true} onClick={this.submitStatement} />
-                    </Footer>
                 </div>
             </form>
         )
@@ -126,61 +145,42 @@ class StatementForm extends React.Component {
     }
 
     confirmed(evt) {
-        
+
         this.setState({ isDisabled: !evt.target.checked })
         this.setState({ isConfirmed: evt.target.checked })
     }
 
     handleInputChange(evt) {
-
-        //   if (evt.target.type === 'checkbox') {
-        //      this.setState({ [evt.target.id]: evt.target.checked })
-        //   } else 
+        console.log(evt.target.value)
+        //-- Handle Radio Button
         if (evt.target.type === 'radio') {
             this.setState({ [evt.target.name]: +evt.target.value })
         }
-        //else {
-        //       this.setState({ [evt.target.id]: evt.target.value })
 
-        //  }
     }
 }
 
-const renderRadioGroup = ({ input, ...rest }) => {
-    debugger
-    return (
-        <FormField>
-            <RadioButton name="securityLevel" id="optionCabinet" onChange={(event, value) => { ale } } value="1" label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff." />
-            <RadioButton name="securityLevel" id="optionSafe" onChange={(event, value) => input.onChange(value)} value="2" label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff." />
-            <RadioButton name="securityLevel" id="optionSealed" onChange={(event, value) => input.onChange(value)} value="3" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff." />
-            <RadioButton name="securityLevel" id="optionOther" onChange={(event, value) => input.onChange(value)} value="4" label="Other" />
-            {/*
-        <RadioButton id="optionCabinet" value="1" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 1} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff." />
-        <RadioButton id="optionSafe" value="2" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 2} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff." />
-        <RadioButton id="optionSealed" value="3" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 3} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff." />
-        <RadioButton id="optionOther" value="4" disabled={this.state.isDisabled} onChange={this.handleInputChange} checked={this.state.securityLevel === 4} label="Other" />
-        */}
-        </FormField>
-
-    )
-}
-
 const renderField =
-    ({ input, label, type, meta: { touched, error, warning } }) =>
+    ({ input, label, type, labelTitle, meta: { touched, error, warning } }) =>
         (
             <div>
                 {type == "text" &&
-                    <FormField label={label} htmlFor={label}>
-                        <input {...input} placeholder={label} type={type} />
-                        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
-                    </FormField>}
-                {type == "checkBox" &&
-                    <FormField htmlFor={label}>
-                        <CheckBox {...input} />
-                        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
-                    </FormField>
-                }
+                    <div >
+                        <TextField
+                            {...input}
+                            floatingLabelText={label}
+                            floatingLabelStyle={styles.floatingLabelStyle}
+                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                            />                     
+                    {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
+                    </div>}
 
+                {type == "checkbox" &&
+                    <div >
+                        <CheckBox {...input} type={type} label={labelTitle} />
+                        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
+                    </div>
+                }
             </div>
         )
 
@@ -202,7 +202,7 @@ const form = reduxForm({
         if (!model.isCertified) errors.isCertified = 'Please select';
         //--TODO
         if (!model.securityLevel) errors.securityLevel = 'Please select a security level';
-     
+        //--TODO
         if (model.securityLevel === 4 && !model.otherText) {
             errors.otherText = 'Please fill other security level ';
         }
