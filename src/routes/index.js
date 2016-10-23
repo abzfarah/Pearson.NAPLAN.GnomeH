@@ -1,10 +1,6 @@
 import React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { UserAuthWrapper } from 'redux-auth-wrapper'
-
-import createHashHistory from 'history/lib/createHashHistory'
-import { useRouterHistory } from 'react-router'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
 
 import store from '../store';
 import { syncHistoryWithStore, routerActions } from 'react-router-redux';
@@ -14,9 +10,8 @@ import AdminPage from '../components/layouts/AdminPage';
 import CallbackPage from '../components/callback';
 import PublicPage from '../components/layouts/PublicPage';
 
-const createAppHistory = useRouterHistory(createBrowserHistory)
+const history = syncHistoryWithStore(browserHistory, store);
 
-const history = useRouterHistory(createHashHistory)({ queryKey: false })
 
 
 const UserIsAuthenticated = UserAuthWrapper({
@@ -33,10 +28,9 @@ const AdminIsAuthenticated = UserAuthWrapper({
 
 
 
-
 export default function Routes(props) {
   return (
-    <Router history={createBrowserHistory()}>
+    <Router history={history}>
       <Route path="/" component={AppContainer}>
         <IndexRoute component={PublicPage}/>
         <Route path="/callback" component={CallbackPage} />
