@@ -28,8 +28,9 @@ export function getStatement(schoolCode) {
             isLoaded: false
         });
 
-        return axios.get("http://localhost:3000/getStatment")
-            //return axios.put("http://audockerintstg01.epenau.local:12100/api/v1/StatementCompliance/schoolid/1")
+       // return axios.get("http://localhost:3000/getStatment")
+            return axios.get("http://audockerintstg01.epenau.local:12100/api/v1/StatementCompliance/centrecode/01004")
+                       //     http://audockerintstg01.epenau.local:12000
             .then((response) => {
 
                 dispatch({

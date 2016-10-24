@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, Fields } from 'redux-form'
 import Tab from '../../common/Tab'
 import Tabs from '../../common/Tabs'
 import Section from '../../common/Section'
@@ -43,7 +43,7 @@ class StatementForm extends React.Component {
 
         this.confirmed = this.confirmed.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-      //  this.submitStatement = this.submitStatement.bind(this);
+        //  this.submitStatement = this.submitStatement.bind(this);
     }
 
     componentWillMount() {
@@ -63,7 +63,10 @@ class StatementForm extends React.Component {
     render() {
         console.log(this.props)
         const { handleSubmit, pristine, reset, submitting } = this.props
-
+        
+        //Bahar: grommet submit button doesn't submit the form!, so we submit it manually
+        //https://github.com/erikras/redux-form/issues/1304
+        const submitter = this.props.handleSubmit(this.submitStatement)
         return (
             <form onSubmit={handleSubmit(this.submitStatement)}>
                 <div className="statement">
@@ -110,9 +113,11 @@ class StatementForm extends React.Component {
                                     <Field name="securityLevel" component={renderField} id="optionSealed" type="radio" value="3" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff." />
                                     <Field name="securityLevel" component={renderField} id="optionOther" type="radio" value="4" label="Other" />
 
-                                    {this.state.securityLevel === 4 &&
-                                        <Field name="otherText" type="text" component={renderField} label="Other Text" />
+                                    {this.props.fields['securityLevel'] === 4 &&
+                                        <Field name="otherText" type="text" component={renderFieldOther} label="Other Text" />
                                     }
+
+                                    <Fields names={['securityLevel', 'otherText']} component={renderSecurityLevel} />
 
                                 </Box>
                             </Box>
@@ -131,7 +136,7 @@ class StatementForm extends React.Component {
                                 <Field name="isCertified" type="checkbox" component={renderField} label="isCertified" labelTitle="* I certify that the information provided in this form is correct." disabled={this.state.isDisabled} /><br />
                             </FormFields>
                             <Footer pad={{ "vertical": "small" }}>
-                                <Button label="submit" primary={true} align="end" disabled={submitting || pristine} type="submit" />
+                                <Button label="submit" primary={true} align="end" disabled={submitting || pristine} type="submit" onClick={() => { submitter() } } />
                             </Footer>
                         </Section>
                     </fieldset>
@@ -162,6 +167,25 @@ class StatementForm extends React.Component {
 
     }
 }
+
+const renderSecurityLevel = (fields) =>
+    (
+        <div>
+            <FormField label="* Please tick the option which best describes the two levels of security at your school." >
+                <RadioButton {...fields.securityLevel.input} id="optionCabinet" name="securityLevel" checked={true}  label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff." />
+
+                <RadioButton {...fields.securityLevel.input} id="fioptionSafeel02" name="securityLevel" label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff." />
+
+                <RadioButton {...fields.securityLevel.input} id="optionSealed" name="securityLevel" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff." />
+
+                <RadioButton {...fields.securityLevel.input} id="optionOther" name="securityLevel" label="Other" />
+            </FormField>
+            {fields.securityLevel === 4 &&
+                <input {...fields.otherText.input} type="text" />
+            }
+        </div>
+    )
+
 
 const renderField =
     ({ input, label, type, labelTitle, meta: { touched, error, warning } }) =>
@@ -200,6 +224,7 @@ const renderField =
 
 const form = reduxForm({
     form: 'statementForm',
+    fields: ['securityLevel'],
     validate(model) {
 
         console.log(model)
