@@ -9,6 +9,8 @@ import SchoolUserPage from '../components/layouts/SchoolUserPage';
 import AdminPage from '../components/layouts/AdminPage';
 import CallbackPage from '../components/callback';
 import PublicPage from '../components/layouts/PublicPage';
+import manageUsers from '../components/layouts/manageUsers';
+
 
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -35,7 +37,12 @@ export default function Routes(props) {
         <IndexRoute component={PublicPage}/>
         <Route path="/callback" component={CallbackPage} />
         <Route path="/user" component={SchoolUserPage} />
-        <Route path="/admin" component={AdminPage} />
+        <Route path="/admin" component={AdminPage} >
+            <Route path="/manageUsers" component={manageUsers} />
+        </Route>
+
+
+
 
      </Route>
    </Router>

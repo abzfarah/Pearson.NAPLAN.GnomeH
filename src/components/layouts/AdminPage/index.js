@@ -12,9 +12,11 @@ import CallbackComponent from '../../callback/CallbackComponent';
 import Header from 'grommet/components/Header';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
+import NavAnchor from '../../common/NavAnchor';
 import DownIcon from 'grommet/components/icons/base/Down';
 import { push } from 'react-router-redux';
 import SchoolSearch from '../SchoolSearch'
+
 
 class AdminPage extends React.Component {
     // load the subscriptions
@@ -108,6 +110,9 @@ class AdminPage extends React.Component {
                     <Anchor href="#">
                         2017 NAPLAN Online Pilot
                   </Anchor>
+                  <NavAnchor path="/manageUsers">
+                    Accordion
+                  </NavAnchor>
                     <Anchor href="#">
                         Bulk Download
                   </Anchor>
