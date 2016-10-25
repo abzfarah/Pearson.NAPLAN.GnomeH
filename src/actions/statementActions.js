@@ -28,9 +28,9 @@ export function getStatement(schoolCode) {
             isLoaded: false
         });
 
-       // return axios.get("http://localhost:3000/getStatment")
-            return axios.get("http://audockerintstg01.epenau.local:12100/api/v1/StatementCompliance/centrecode/01004")
-                       //     http://audockerintstg01.epenau.local:12000
+        return axios.get("http://localhost:3000/getStatment")
+     ///  return axios.get("http://audockerintstg01.epenau.local:12100/api/v1/StatementCompliance/centrecode/01006")
+
             .then((response) => {
 
                 dispatch({
@@ -63,9 +63,10 @@ export function submitStatement(statement) {
             isLoaded: false
         });
         debugger
-         return axios.put("http://localhost:3000/submitStatment", statement)
-             .then((response) => {
-                 debugger
+        // return axios.put("http://localhost:3000/submitStatment", statement)
+        return axios.post("http://audockerintstg01.epenau.local:12100/api/StatementCompliance", statement)
+            .then((response) => {
+                debugger
                 dispatch({
                     type: STATEMENT_SUBMIT_SUCCESS,
                     isLoading: false,

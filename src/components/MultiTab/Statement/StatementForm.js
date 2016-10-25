@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Field, reduxForm, Fields } from 'redux-form'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import Tab from '../../common/Tab'
 import Tabs from '../../common/Tabs'
 import Section from '../../common/Section'
@@ -30,7 +30,6 @@ const styles = {
     },
 };
 
-
 class StatementForm extends React.Component {
 
     constructor(props) {
@@ -56,19 +55,24 @@ class StatementForm extends React.Component {
 
             //--TODO
 
-            //       this.setState({ securityLevel: parseInt(this.props.initialValues.securityLevel) })
+            // this.setState({ securityLevel: parseInt(this.props.initialValues.securityLevel) })
         }
     }
 
     render() {
+
         console.log(this.props)
         const { handleSubmit, pristine, reset, submitting } = this.props
-        
+
         //Bahar: grommet submit button doesn't submit the form!, so we submit it manually
         //https://github.com/erikras/redux-form/issues/1304
         const submitter = this.props.handleSubmit(this.submitStatement)
+        
+        const { securityLevel, isOtherLevel } = this.props
+
         return (
-            <form onSubmit={handleSubmit(this.submitStatement)}>
+
+            <form onSubmit={handleSubmit((model)=>{this.submitStatement(model)})}>
                 <div className="statement">
                     <Section>
                         <Heading tag="h2" colorIndex="accent-1">
@@ -107,18 +111,17 @@ class StatementForm extends React.Component {
                                 <Paragraph>Apart from when the tests are being administered, test materials are to be kept in a double secure area at all times.Please tick the option which best describes the double secure storage arrangement for NAPLAN test materials at your school.</Paragraph>
                                 <Paragraph>Fields marked with * are required.</Paragraph>
                                 <Box>
-                                    <Paragraph> * Please tick the option which best describes the two levels of security at your school." </Paragraph>
-                                    <Field name="securityLevel" component={renderField} id="optionCabinet" type="radio" value="1" label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff." />
-                                    <Field name="securityLevel" component={renderField} id="optionSafe" type="radio" value="2" label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff." />
-                                    <Field name="securityLevel" component={renderField} id="optionSealed" type="radio" value="3" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff." />
-                                    <Field name="securityLevel" component={renderField} id="optionOther" type="radio" value="4" label="Other" />
 
-                                    {this.props.fields['securityLevel'] === 4 &&
+                                    <Paragraph> * Please tick the option which best describes the two levels of security at your school." </Paragraph>
+                                    <label> <Field name="securityLevel" component="input" type="radio" value="1" />A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff. </label>
+                                    <label> <Field name="securityLevel" component="input" type="radio" value="2" />A locked safe which is locked in a storeroom/office which is accessible only by authorised staff. </label>
+                                    <label> <Field name="securityLevel" component="input" type="radio" value="3" />A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff.</label>
+                                    <label> <Field name="securityLevel" component="input" type="radio" value="4" />Other </label>
+
+
+                                    {isOtherLevel &&
                                         <Field name="otherText" type="text" component={renderFieldOther} label="Other Text" />
                                     }
-
-                                    <Fields names={['securityLevel', 'otherText']} component={renderSecurityLevel} />
-
                                 </Box>
                             </Box>
                         </Section>
@@ -164,30 +167,30 @@ class StatementForm extends React.Component {
         if (evt.target.type === 'radio') {
             this.setState({ [evt.target.name]: +evt.target.value })
         }
-
     }
 }
 
-const renderSecurityLevel = (fields) =>
-    (
-        <div>
-            <FormField label="* Please tick the option which best describes the two levels of security at your school." >
-                <RadioButton {...fields.securityLevel.input} id="optionCabinet" name="securityLevel" checked={true}  label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff." />
+// const renderSecurityLevel = (fields) =>
+//     (
+//         <div>
+//             <FormField label="* Please tick the option which best describes the two levels of security at your school." >
+//                 <RadioButton {...fields.securityLevel.input} id="optionCabinet" name="securityLevel" checked={true}  label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff." />
 
-                <RadioButton {...fields.securityLevel.input} id="fioptionSafeel02" name="securityLevel" label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff." />
+//                 <RadioButton {...fields.securityLevel.input} id="fioptionSafeel02" name="securityLevel" label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff." />
 
-                <RadioButton {...fields.securityLevel.input} id="optionSealed" name="securityLevel" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff." />
+//                 <RadioButton {...fields.securityLevel.input} id="optionSealed" name="securityLevel" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff." />
 
-                <RadioButton {...fields.securityLevel.input} id="optionOther" name="securityLevel" label="Other" />
-            </FormField>
-            {fields.securityLevel === 4 &&
-                <input {...fields.otherText.input} type="text" />
-            }
-        </div>
-    )
+//                 <RadioButton {...fields.securityLevel.input} id="optionOther" name="securityLevel" label="Other" />
+//             </FormField>
+//             {fields.securityLevel === 4 &&
+//                 <input {...fields.otherText.input} type="text" />
+//             }
+//         </div>
+//     )
 
 
 const renderField =
+
     ({ input, label, type, labelTitle, meta: { touched, error, warning } }) =>
         (
             <div>
@@ -209,16 +212,12 @@ const renderField =
                     </div>
                 }
                 {type == "radio" &&
-
                     <div>
-                        <input {...input} type="radio" /> {label}
-
-
-
-
+                        <input {...input} type={type} /> {label}
                         {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
                     </div>
                 }
+
             </div>
         )
 
@@ -251,3 +250,8 @@ const form = reduxForm({
 });
 
 export default form(StatementForm)
+ //  <Fields names={['securityLevel', 'otherText']} component={renderSecurityLevel} />
+ //-- What to do :
+ //-- 
+ //-- add theme from Repo
+ //-- fix submit

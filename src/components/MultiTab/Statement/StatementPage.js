@@ -17,7 +17,9 @@ class StatementPage extends Component {
     }
 
     submitStatement(model) {
-
+debugger
+        model.isConfirmed = true;
+        model.securityLevel = 4; // +model.securityLevel ;
         this.props.submitStatement(model);
     }
 
@@ -36,10 +38,13 @@ class StatementPage extends Component {
 
 function mapStateToProps(globalState) {
 
+    var statementData = globalState.statement.statementData;
+    statementData.securityLevel = statementData.securityLevel + '';
+
     return {
         isLoading: globalState.statement.isLoading,
         isLoaded: globalState.statement.isLoaded,
-        statementData: globalState.statement.statementData
+        statementData: statementData
     }
 }
 
