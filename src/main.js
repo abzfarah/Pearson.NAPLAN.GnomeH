@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerActions } from 'react-router-redux';
 
 
 import createStore from './store';
 import AppContainer from './containers/AppContainer';
 import LoginPage from './components/layouts/LoginPage';
-import Routes from './routes';
+import routes from './routes';
 import {Provider} from 'react-redux';
 import { OidcProvider } from 'redux-oidc';
 import userManager from './components/utils/oidc/userManager';
 import MuiThemeProvider from './components/utils/materialStyles/MuiThemeProvider';
 const initialState = window.___INITIAL_STATE__;
 import store from './store';
+
+
+const history = syncHistoryWithStore(browserHistory, store);
 
 // ========================================================
 // Developer Tools Setup
@@ -34,7 +39,12 @@ let render = () => {
       <OidcProvider store={store} userManager={userManager}>
 
           <MuiThemeProvider>
-            <Routes />
+
+              <Router
+                history={history}
+                routes={routes}
+                />
+
           </MuiThemeProvider>
 
       </OidcProvider>

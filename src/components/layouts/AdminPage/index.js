@@ -16,40 +16,32 @@ import NavAnchor from '../../common/NavAnchor';
 import DownIcon from 'grommet/components/icons/base/Down';
 import { push } from 'react-router-redux';
 import SchoolSearch from '../SchoolSearch'
-
+import auth from '../../../routes/utils/auth'
 
 class AdminPage extends React.Component {
-    // load the subscriptions
+
     componentWillMount() {
         const { user, dispatch } = this.props;
-        console.log("HomePage.componentWillMount - Start");
-
-        // check the user here and redirect to /login if necessary
-        if (!user || user.expired) {
-            //console.log('User is null or invalid - redirecting to login page!');
-            //dispatch(push('/login'));
-        }
-
-        console.log("HomePage.componentWillMount - End");
+        auth.loggedIn()
     }
 
+
     componentDidMount() {
-        console.log("HomePage.componentDidMount - Start");
-        console.log("HomePage.componentDidMount - End");
+        auth.loggedIn()
 
     }
 
     successCallback = () => {
-        this.props.dispatch(push('/admin'));
+        this.props.dispatch(push('/home'));
     }
 
-    // display the current user
+
     showUserInfoButtonClick = (event) => {
         event.preventDefault();
         alert(JSON.stringify(this.props.user, null, 2));
     }
 
-    // log out
+
     onLogoutButtonClicked = (event) => {
         event.preventDefault();
         userManager.removeUser(); // removes the user data from sessionStorage
@@ -69,20 +61,6 @@ class AdminPage extends React.Component {
             <div>
                 <StickyContainer>
                     <Sticky style={{ zIndex: 5 }}>
-                        <div className="header-bar"><i></i> </div>
-
-                        <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="first-header">
-                            <div className="under">
-                                <a href="http://imgur.com/OlNC7UY"><img id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />  </a>
-                            </div>
-                            <ul className="menu"></ul>
-
-                            <div className="button-groups">
-                                <Button label="Help" secondary={true} />
-                                <Button label="Log Out" onClick={this.onLogoutButtonClicked} primary={true} />
-                            </div>
-                        </Box>
-
                         <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="second-header">
                             <div className="school-heading">
                                 <Header className="school-name"> St. Paul's Anglican Grammar School </Header>

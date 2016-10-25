@@ -26,20 +26,7 @@ class PublicPage extends React.Component {
   render() {
     return (
         <div>
-      <StickyContainer>
-        <Sticky style={{zIndex: 5}}>
-          <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="main-nav">
-            <div className="under">
-              <a href="http://imgur.com/OlNC7UY"><img  id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />  </a>
-            </div>
-              <ul className="menu"> </ul>
-            <div className="button-groups">
-              <Button label="Help" secondary={true} />
-              <Button label="Log In" onClick={this.onLoginButtonClick} primary={true} />
-            </div>
-          </Box>
-        </Sticky>
-      </StickyContainer>
+
 
         <Box className="mid">
           <Section>
