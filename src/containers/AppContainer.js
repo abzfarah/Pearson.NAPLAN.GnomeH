@@ -7,6 +7,8 @@ import { StickyContainer, Sticky } from '../components/common/Sticky';
 import Header from 'grommet/components/Header';
 import auth from '../routes/utils/auth'
 
+import { connect } from 'react-redux';
+
 
 class AppContainer extends React.Component {
 
@@ -15,6 +17,10 @@ class AppContainer extends React.Component {
       this.state = {
         loggedIn: auth.loggedIn(),
       };
+
+      const {store } = this.context;
+
+      var hello = store;
 
       this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
       this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
@@ -84,4 +90,20 @@ class AppContainer extends React.Component {
 }
 
 
-export default AppContainer;
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.oidc.user,
+        error: state.error.error,
+        ownProps: ownProps
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        dispatch
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
