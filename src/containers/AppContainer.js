@@ -18,9 +18,7 @@ class AppContainer extends React.Component {
         loggedIn: auth.loggedIn(),
       };
 
-      const {store } = this.context;
 
-      var hello = store;
 
       this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
       this.onLoginButtonClick = this.onLoginButtonClick.bind(this);

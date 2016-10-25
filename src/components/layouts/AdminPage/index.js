@@ -22,7 +22,13 @@ class AdminPage extends React.Component {
 
     componentWillMount() {
         const { user, dispatch } = this.props;
-        auth.loggedIn()
+
+        const loggedIn = auth.loggedIn();
+
+        dispatch({
+            type: 'USER_LOGGEDIN',
+            loggedIn
+        })
     }
 
 
