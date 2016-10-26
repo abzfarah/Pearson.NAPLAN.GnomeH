@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development Company, L.P.
+
 
 import React, { Component } from 'react';
 
@@ -9,21 +9,22 @@ import Columns from '../components/common/Columns';
 import Footer from '../components/common/Footer';
 import Menu from '../components/common/Menu';
 import classnames from 'classnames';
-
+import { StickyContainer, Sticky } from '../components/common/Sticky';
 
 
 export default class BlogFooter extends Component {
   render () {
 
     return (
-      <Footer size='small' appCentered={true} colorIndex='grey-4'
-        direction='row' primary={true} justify='center'
-        pad={{horizontal: 'medium', vertical: 'medium', between: 'medium'}} className="footy" wrap={true}>
+
+      <StickyContainer>
+      <Sticky position="bottom">  
+
         <Box  direction="row"  className="footerContainer"  wrap={true} align="center" >
           <Box direction="row"className="numberOne">
 
             <Columns className="logo_1" className="flexy1" align="center">
-            <div class="under"><img id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com"/></div>
+            <div className="under"><img id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com"/></div>
             </Columns>
 
             <Box direction="row" className="footer-grid" className="flexy2" >
@@ -66,9 +67,11 @@ export default class BlogFooter extends Component {
 
         </Box>
         </Box>
+        </Sticky>
 
+    </StickyContainer>
 
-      </Footer>
+   
     );
   }
 }

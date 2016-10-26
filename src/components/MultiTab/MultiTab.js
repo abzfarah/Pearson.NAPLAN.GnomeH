@@ -9,15 +9,16 @@ import ActiveTestOrder from './ActiveTestOrder'
 import StudentRegistration from './StudentRegistration'
 import Home from './Home'
 
-    const steps =
-    [
-      {name: 'Home', component: <Home />},
-      {name: 'Statement', component: <Statement />},
-      {name: 'AuthorizedStaff', component: <AuthorizedStaff />},
-      {name: 'School details', component: <SchoolDetails />},
-      {name: 'Test Format Order', component: <ActiveTestOrder />},
-      {name: 'Student Registration', component: <StudentRegistration />}
-    ]
+const steps =
+[
+  {name: 'Home', component: <Home />},
+  {name: 'Statement', component: <Statement />},
+  {name: 'AuthorizedStaff', component: <AuthorizedStaff />},
+  {name: 'School details', component: <SchoolDetails />},
+  {name: 'Test Format Order', component: <ActiveTestOrder />},
+  {name: 'Student Registration', component: <StudentRegistration />}
+]
+
 
 //  <Tabs initialIndex={1} justify="start" className="tablisty" steps={steps} />
 

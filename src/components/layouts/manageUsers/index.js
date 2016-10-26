@@ -8,19 +8,12 @@ import Menu from '../../common/Menu';
 import Paragraph from '../../common/Paragraph';
 import Carousel from '../../common/Carousel';
 import Section from '../../common/Section';
-import { StickyContainer, Sticky } from '../../common/Sticky';
+
 import CSSClassnames from '../../utils/CSSClassnames';
-import { connect } from 'react-redux';
-import userManager from '../../utils/oidc/userManager';
-import '../../../styles/core.scss';
 
 
-class PublicPage extends React.Component {
 
-  onLoginButtonClick = (event) => {
-  event.preventDefault();
-  userManager.signinRedirect();
-};
+class manageUsers extends React.Component {
 
 
   render() {
@@ -45,17 +38,5 @@ class PublicPage extends React.Component {
 }
 
 
-function mapStateToProps(state) {
-  return {
-    user: state.oidc.user,
-    error: state.error.error
-  };
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PublicPage);
+export default manageUsers;

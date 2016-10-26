@@ -12,10 +12,10 @@ import { StickyContainer, Sticky } from '../../common/Sticky';
 import CSSClassnames from '../../utils/CSSClassnames';
 import { connect } from 'react-redux';
 import userManager from '../../utils/oidc/userManager';
-import '../../../styles/core.scss';
 
 
-class PublicPage extends React.Component {
+
+class TasksPage extends React.Component {
 
   onLoginButtonClick = (event) => {
   event.preventDefault();
@@ -31,10 +31,8 @@ class PublicPage extends React.Component {
         <Box className="mid">
           <Section>
             <div>
-              <h3>Welcome to the VIC Registration Website</h3>
-              <h2>This is a demo public page</h2>
-              <p>Please log in to continue</p>
-              <button >Login</button>
+              <h3>Tasks Page</h3>
+
             </div>
           </Section>
 
@@ -58,4 +56,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PublicPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TasksPage);
