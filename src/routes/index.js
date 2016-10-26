@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import auth from './utils/auth.js'
+
 import store from '../store';
 import { syncHistoryWithStore, routerActions } from 'react-router-redux';
 import AppContainer from '../containers/AppContainer';
@@ -64,7 +65,7 @@ export default {
     },
 
      //Home route
-    { 
+    {
       childRoutes: [
         // Protected routes that don't share the dashboard UI
         { path: 'home',
@@ -91,8 +92,6 @@ export default {
         }
         // ...
       ]
-    },
-
-
+    }
   ]
 }

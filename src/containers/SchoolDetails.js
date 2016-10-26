@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as schoolDetailsActions from '../../actions/schoolDetailsActions';
-import userManager from '../utils/oidc/userManager';
-// import SchoolDetailsLayout from '../layouts/SchoolDetails'
-import SchoolDetailsForm from '../layouts/SchoolDetails/SchoolDetailsForm'
+import * as schoolDetailsActions from '../actions/schoolDetailsActions';
+import userManager from '../components/utils/oidc/userManager';
+import SchoolDetailsLayout from '../components/layouts/SchoolDetails'
+import SchoolDetailsForm from '../components/layouts/SchoolDetails/SchoolDetailsForm'
 
 // import { push } from 'react-router-redux';
 
@@ -21,12 +21,13 @@ class SchoolDetails extends React.Component {
     userManager.signoutRedirect();
   }
 
-  render () {
+  render (){
 
     const { user } = this.props;
 
     return (
       <div>
+          <SchoolDetailsLayout onLogoutClick={this.logoutUser} />
           <SchoolDetailsForm />
       </div>
     );

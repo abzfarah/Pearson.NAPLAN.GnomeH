@@ -4,6 +4,7 @@ import { reducer as oidcReducer } from 'redux-oidc';
 import { reducer as formReducer } from 'redux-form'
 import schoolReducer from './schoolReducer'
 
+
 import statementReducer from './statementReducer'
 import sessionReducer from './sessionReducer'
 
@@ -22,7 +23,8 @@ const reducer = combineReducers(
     error: errorReducer,
     school: schoolReducer,
     statement : statementReducer,
-    session: sessionReducer
+    session: sessionReducer,
+    form: formReducer
   }
 );
 
