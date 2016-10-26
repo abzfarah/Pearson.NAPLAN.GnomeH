@@ -14,7 +14,7 @@ class StatementPage extends Component {
     componentDidMount() {
 
 //--TODO 
-        var schoolCode ='01004';
+        var schoolCode ='01006';
         this.props.getStatement(schoolCode);
     }
 
