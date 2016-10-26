@@ -2,8 +2,8 @@
 
 .#{$grommet-namespace}form {
   position: relative;
-  width: 405px;
-  max-width: 79%;
+  width: 321px;
+  max-width: 85%;
 
   @include media-query(lap-and-up) {
     // For some reason, Tiles inside FormField doesn't determine its

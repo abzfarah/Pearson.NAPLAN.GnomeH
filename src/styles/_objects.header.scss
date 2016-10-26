@@ -112,8 +112,9 @@ line-height: 56px;
 }
 .numberOne {
   order: 1;
-  padding-bottom: 25px;
+  padding-bottom: 53px;
   width: 79%;
+ 
 }
 .numberInner {
   width: 100%;
@@ -125,8 +126,10 @@ line-height: 56px;
 
 .listy {
 
+
   > a {
         text-decoration: none;
+        color: hsla(0,0%,100%,.85);
   }
 
   padding-left: 5px;
@@ -135,6 +138,9 @@ line-height: 56px;
 
 .footerContainer {
   justify-content: center;
+  background-color: #666;
+  padding-top: 34px;
+  padding-bottom: 34px;
 }
 img {
     max-width: 273px;
@@ -371,8 +377,9 @@ header.#{$grommet-namespace}header {
 }
 .flexy3 {
   order: 3;
-    border-top: 1px solid #eceded;
-    padding-top: 10px;
+  border-top: 1px solid #eceded;
+  padding-top: 10px;
+  color: hsla(0,0%,100%,.85)
 }
 
 .footy::before, .footy::after {
@@ -385,8 +392,11 @@ header.#{$grommet-namespace}header {
 }
 
 .item > a {
-  color: #515557;
+  color: hsla(0,0%,100%,.85);
 }
+
+
+
 .contacts {
   background-color: inherit;
 

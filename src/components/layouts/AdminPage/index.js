@@ -66,7 +66,7 @@ class AdminPage extends React.Component {
         return (
             <div>
 
-                <Menu inline={true} direction="row">
+                <Menu responsive="true" inline={true} direction="row">
                     <Anchor href="#" className="active">
                         Home
                   </Anchor>
