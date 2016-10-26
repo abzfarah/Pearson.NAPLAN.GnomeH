@@ -14,9 +14,11 @@ export default (state = initialState, action = {}) => {
         case USER_LOGGEDIN:
             return Object.assign({}, state, {
                 loggedIn: true,
+                claims: action.payload
+
             })
 
     }
-    
+
     return state
 }

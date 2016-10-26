@@ -240,8 +240,8 @@
     }
 
     > *:not(.#{$grommet-namespace}control-icon):not(.#{$grommet-namespace}button) {
-      margin-left: 40px;
-      margin-right: 40px;
+      margin-left: 20px;
+      margin-right: 20px;
 
       &:last-child {
         margin-right: 0;

@@ -9,6 +9,7 @@ import SchoolUserPage from '../components/layouts/SchoolUserPage';
 import AdminPage from '../components/layouts/AdminPage';
 import CallbackPage from '../components/callback';
 import PublicPage from '../components/layouts/PublicPage';
+import TasksPage from '../components/layouts/TasksPage';
 import manageUsers from '../components/layouts/manageUsers';
 
 
@@ -62,6 +63,7 @@ export default {
       ]
     },
 
+     //Home route
     { onEnter: redirectToLogin,
       childRoutes: [
         // Protected routes that don't share the dashboard UI
@@ -69,6 +71,21 @@ export default {
           getComponent: (nextState, cb) => {
             require.ensure([], (require) => {
               cb(null, AdminPage)
+            })
+          }
+        }
+        // ...
+      ]
+    },
+
+
+    { onEnter: redirectToLogin,
+      childRoutes: [
+        // Protected routes that don't share the dashboard UI
+        { path: 'Tasks',
+          getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+              cb(null, TasksPage)
             })
           }
         }

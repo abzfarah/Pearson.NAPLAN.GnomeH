@@ -4,7 +4,20 @@ import userManager from '../components/utils/oidc/userManager';
 import Button from '../components/common/Button';
 import Box from '../components/common/Box';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
+
+
+//import SchoolSearch from '../components/layouts/SchoolSearch';
+import SchoolSearchContainer from './SchoolSearchContainer';
+
 import Header from 'grommet/components/Header';
+import { push } from 'react-router-redux';
+import HeaderContainer from './HeaderContainer'
+import _ from 'lodash';
+
+
+
+import  SchoolName  from '../components/SchoolName';
+
 import auth from '../routes/utils/auth'
 
 import { connect } from 'react-redux';
@@ -14,14 +27,13 @@ class AppContainer extends React.Component {
 
   constructor(props) {
       super(props);
-      this.state = {
-        loggedIn: auth.loggedIn(),
-      };
+      var isloggedIn = auth.loggedIn()
 
-
+      var retrieveClaims = sessionStorage.getItem("userSession");
+      this.sessionClaims = JSON.parse(retrieveClaims);
 
       this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
-      this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
+
   }
 
   onLoginButtonClick = (event) => {
@@ -37,49 +49,59 @@ class AppContainer extends React.Component {
   }
 
   updateAuth(loggedIn) {
-    this.setState({
-      loggedIn: !!loggedIn
-    })
+
   }
 
-  componentWillMount() {
-    auth.loggedIn()
+  componentDidMount(props, state) {
+
+
+  }
+
+  componentWillMount(props) {
+    var isloggedIn = auth.loggedIn()
+    debugger;
+
+
     auth.onChange = this.updateAuth
 
   }
 
 
   render() {
+
+    const { loggedIn, claims }  = this.props;
+
+
+
+
     return (
+
+
     <div className="mainContainer">
 
-    <StickyContainer>
-        <Sticky style={{ zIndex: 5 }}>
-            <div className="header-bar"><i></i> </div>
-            <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="first-header">
-                <div className="under">
-                    <a href="http://imgur.com/OlNC7UY"><img id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />  </a>
-                </div>
-                <ul className="menu"></ul>
-                <div className="button-groups">
-                {this.state.loggedIn ? (<div>
-                    <Button label="Help" secondary={true} />
-                    <Button label="Log Out" onClick={this.onLogoutButtonClick} primary={true} />
-                    </div>
-                    ) : (
-                      <div>
-                    <Button label="Help" secondary={true} />
-                    <Button label="Log In" onClick={this.onLoginButtonClick} primary={true} />
-                    </div>
-                    )}
-                </div>
-            </Box>
+      <StickyContainer>
+          <Sticky style={{ zIndex: 5 }}>
+           <div className="header-bar"><i></i> </div>
+
+            <HeaderContainer loggedIn={loggedIn} claims={claims}
+            onLogout={this.onLogoutButtonClick}
+            onLogin={this.onLoginButtonClick}
+            />
+
+          {loggedIn}<Box direction="row"  wrap={true} align="center" className="second-header">
+
+            <SchoolName />
+
+
+
+            <ul className="menu"></ul>
+            <SchoolSearchContainer />
+          </Box>
 
 
         </Sticky>
+
     </StickyContainer>
-
-
     { this.props.children }
     <Footer fixed="true"></Footer>
   </div>
@@ -87,14 +109,16 @@ class AppContainer extends React.Component {
 }
 }
 
-
+  //{ <SchoolSearch/> }
 
 
 function mapStateToProps(state, ownProps) {
     return {
         user: state.oidc.user,
         error: state.error.error,
-        ownProps: ownProps
+        ownProps: ownProps,
+        loggedIn: state.session.loggedIn,
+        claims: state.session.claims,
     };
 }
 

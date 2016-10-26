@@ -9,13 +9,13 @@ export function schoolSearchAsync(keyword) {
 
         dispatch({
             type: SCHOOLSEARCH_FETCH,
-            isLoading: true            
+            isLoading: true
         });
 
-        return axios.get("http://melbndocker01.epenau.local:12000/api/centresearch/" + keyword)
+        return axios.get("http://audockerintstg01.epenau.local:12000/api/v1/centresearch/" + keyword)
             .then((response) => {
                 console.log('response')
-                
+
                 return dispatch({
                     type: SCHOOLSEARCH_FETCH_SUCCESS,
                     isLoading: false,
@@ -33,8 +33,3 @@ export function schoolSearchAsync(keyword) {
             });
     }
 }
-
-
-
-
-

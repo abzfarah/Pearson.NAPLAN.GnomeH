@@ -25,10 +25,6 @@ class AdminPage extends React.Component {
 
         const loggedIn = auth.loggedIn();
 
-        dispatch({
-            type: 'USER_LOGGEDIN',
-            loggedIn
-        })
     }
 
 
@@ -51,6 +47,9 @@ class AdminPage extends React.Component {
     onLogoutButtonClicked = (event) => {
         event.preventDefault();
         userManager.removeUser(); // removes the user data from sessionStorage
+        sessionStorage.removeItem('userSession');
+
+
         userManager.signoutRedirect();
 
     }
@@ -61,28 +60,11 @@ class AdminPage extends React.Component {
     }
 
     render() {
-        const { user } = this.props;
+        const { user, session } = this.props;
+
 
         return (
             <div>
-                <StickyContainer>
-                    <Sticky style={{ zIndex: 5 }}>
-                        <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="second-header">
-                            <div className="school-heading">
-                                <Header className="school-name"> St. Paul's Anglican Grammar School </Header>
-                                <Header size="small" className="school-code"> School Code: 01678 </Header>
-                            </div>
-
-                            <ul className="menu"></ul>
-                            <div className="search-box">
-
-                              <SchoolSearch />
-
-                            </div>
-                        </Box>
-
-                    </Sticky>
-                </StickyContainer>
 
                 <Menu inline={true} direction="row">
                     <Anchor href="#" className="active">
@@ -120,10 +102,12 @@ class AdminPage extends React.Component {
 
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
     return {
         user: state.oidc.user,
-        error: state.error.error
+        error: state.error.error,
+        ownProps: ownProps,
+        session: state.session
     };
 }
 
