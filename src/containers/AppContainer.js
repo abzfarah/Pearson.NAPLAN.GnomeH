@@ -103,7 +103,7 @@ class AppContainer extends React.Component {
 
     </StickyContainer>
     { this.props.children }
-    <Footer fixed="true"></Footer>
+    <Footer ></Footer>
   </div>
   )
 }

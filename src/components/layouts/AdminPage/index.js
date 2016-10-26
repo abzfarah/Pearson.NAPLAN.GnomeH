@@ -77,7 +77,7 @@ class AdminPage extends React.Component {
                         2017 NAPLAN Online Pilot
                   </Anchor>
                   <NavAnchor path="/manageUsers">
-                    Accordion
+                    Manage Schools
                   </NavAnchor>
                     <Anchor href="#">
                         Bulk Download
@@ -85,8 +85,11 @@ class AdminPage extends React.Component {
                     <Anchor href="#">
                         Contact Us
                   </Anchor>
+                 <NavAnchor path="/manageUsers">
+                    Manage Schools
+                  </NavAnchor>
                     <Anchor href="#">
-                        Manage Users
+                    Manage Users
                   </Anchor>
                     <Anchor href="#">
                         Reports

@@ -9,16 +9,17 @@ import Columns from '../components/common/Columns';
 import Footer from '../components/common/Footer';
 import Menu from '../components/common/Menu';
 import classnames from 'classnames';
-
+import { StickyContainer, Sticky } from '../components/common/Sticky';
 
 
 export default class BlogFooter extends Component {
   render () {
 
     return (
-      <Footer size='small' appCentered={true} colorIndex='grey-4'
-        direction='row' primary={true} justify='center'
-        pad={{horizontal: 'medium', vertical: 'medium', between: 'medium'}} className="footy" wrap={true}>
+
+      <StickyContainer>
+      <Sticky position="bottom">  
+
         <Box  direction="row"  className="footerContainer"  wrap={true} align="center" >
           <Box direction="row"className="numberOne">
 
@@ -66,9 +67,11 @@ export default class BlogFooter extends Component {
 
         </Box>
         </Box>
+        </Sticky>
 
+    </StickyContainer>
 
-      </Footer>
+   
     );
   }
 }

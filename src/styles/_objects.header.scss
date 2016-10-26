@@ -3,7 +3,9 @@
 .mainContainer {
   background: #f9f9f9;
 }
-
+.root-container {
+  min-height: 100%
+}
 .#{$grommet-namespace}header {
   background-color: #fff;
   text-align: left;
@@ -31,7 +33,7 @@
   }
 }
 div[role=tablist] {
-  padding-top: 15px;
+  padding-top: 19px;
   width: 100%;
 }
 
@@ -150,8 +152,8 @@ img {
     align-items: center;
     flex-wrap: wrap;
     width: 79%;
-    padding-bottom: 18px;
-    padding-top: 25px;
+    padding-bottom: 19px;
+    padding-top: 36px;
     height: 25px;
     margin: auto;
 
@@ -164,7 +166,7 @@ img {
     align-items: center;
     flex-wrap: wrap;
     width: 79%;
-    padding-bottom: 18px;
+    padding-bottom: 20px;
     border-bottom: 1px solid rgba(0,0,0,.1);
     margin: auto;
     padding-top: 13px;

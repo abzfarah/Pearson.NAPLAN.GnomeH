@@ -64,7 +64,7 @@ export default {
     },
 
      //Home route
-    { onEnter: redirectToLogin,
+    { 
       childRoutes: [
         // Protected routes that don't share the dashboard UI
         { path: 'home',
