@@ -38,7 +38,7 @@
     "email": "Bahar@gmail.com",
     "contactNumber": "040500000",
     "schoolId": 101,
-    "securityLevel": 3,
+    "securityLevel": 0,
     "securityLevelOther": "Test",
     "isConfirmed": false,
     "isCertified": true,

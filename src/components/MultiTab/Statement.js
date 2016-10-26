@@ -60,7 +60,6 @@ const Statement = () => (
              <Heading tag="h4">
                Part A: Principal's Responsibilities
              </Heading>
-
              <Paragraph> Please read Principal's responsibilities</Paragraph>
            </Box>
 

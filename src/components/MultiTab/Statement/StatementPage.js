@@ -13,13 +13,15 @@ class StatementPage extends Component {
 
     componentDidMount() {
 
-        this.props.getStatement(101);
+//--TODO 
+        var schoolCode ='01004';
+        this.props.getStatement(schoolCode);
     }
 
     submitStatement(model) {
-debugger
+
         model.isConfirmed = true;
-        model.securityLevel = 4; // +model.securityLevel ;
+        model.securityLevel = +model.securityLevel ;
         this.props.submitStatement(model);
     }
 
