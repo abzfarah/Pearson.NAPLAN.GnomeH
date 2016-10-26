@@ -1,6 +1,6 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { UserAuthWrapper } from 'redux-auth-wrapper'
+import { UserAuthWrapper } from 'redux-auth-wrapper';
 
 import store from '../store';
 import { syncHistoryWithStore, routerActions } from 'react-router-redux';
@@ -9,6 +9,7 @@ import SchoolUserPage from '../components/layouts/SchoolUserPage';
 import AdminPage from '../components/layouts/AdminPage';
 import CallbackPage from '../components/callback';
 import PublicPage from '../components/layouts/PublicPage';
+import SchoolDetails from '../containers/SchoolDetails';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -35,6 +36,7 @@ export default function Routes(props) {
         <Route path="/callback" component={CallbackPage} />
         <Route path="/user" component={SchoolUserPage} />
         <Route path="/admin" component={AdminPage} />
+        <Route path="/schooldetails" component={SchoolDetails} />
 
      </Route>
    </Router>

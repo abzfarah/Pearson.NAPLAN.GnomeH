@@ -84,6 +84,7 @@
   "dependencies": {
     "auth0-web-header": "^1.2.3",
     "autoprefixer": "^6.4.0",
+    "axios": "^0.15.2",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.3.17",
     "babel-loader": "^6.2.0",
@@ -164,7 +165,7 @@
     "redux-logger": "^2.7.0",
     "redux-oidc": "^2.2.1",
     "redux-saga": "^0.10.4",
-    "redux-thunk": "^2.0.0",
+    "redux-thunk": "^2.1.0",
     "rimraf": "^2.5.1",
     "rucksack-css": "^0.8.6",
     "rupture": "^0.6.1",
@@ -239,7 +240,7 @@
       "text",
       "cobertura",
       "lcov"
-],
+    ],
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react/",
       "<rootDir>/node_modules/react-dom/",
@@ -248,7 +249,6 @@
       "<rootDir>/node_modules/jasmine-reporters"
     ]
   },
-
   "bugs": {
     "url": "https://github.com/davezuko/react-redux-starter-kit/issues"
   },
