@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-import { schoolSearchAsync } from '../../../actions/schoolActions'
-import Form from '../../common/Form';
-import FormField from '../../common/FormField';
-import Search from '../../common/Search';
-import Select from '../../common/Select';
+import { schoolSearchAsync } from '../actions/schoolActions'
 
-class SchoolSearch extends React.Component {
+import SchoolSearch from './SchoolSearch'
+
+
+
+class SchoolSearchContainer extends React.Component {
 
     constructor(props) {
         super(props);
@@ -49,7 +49,6 @@ class SchoolSearch extends React.Component {
     onSearch(event) {
 
       let input = event.target.value
-
         if (input.length < 3) {
             if (this.state.options.length > 0) {
                 this.setState({ options: [] })
@@ -66,25 +65,17 @@ class SchoolSearch extends React.Component {
 
         return (
 
-          <div className="school-search">
-            <Form>
-              <FormField>
-                <Select
-                value="Select school"
-                onSearch={this.onSearch}
-                onChange={this.onChange}
-                options={this.state.options}
-                placeHolder="Seach for school" />
-              </FormField>
-            </Form>
-            </div>
-
+          <SchoolSearch
+              onSearch={this.onSearch}
+              onChange={this.onChange}
+              options={this.state.options}
+          />
 
         )
     }
 }
 
-SchoolSearch.contextTypes = {
+SchoolSearchContainer.contextTypes = {
     router: React.PropTypes.object.isRequired
 }
 
@@ -96,4 +87,4 @@ function mapStateToProps(globalState) {
     }
 }
 
-export default connect(mapStateToProps, { schoolSearchAsync })(SchoolSearch)
+export default connect(mapStateToProps, { schoolSearchAsync })(SchoolSearchContainer)

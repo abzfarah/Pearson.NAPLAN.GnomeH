@@ -9,16 +9,13 @@ export function schoolSearchAsync(keyword) {
 
         dispatch({
             type: SCHOOLSEARCH_FETCH,
-            isLoading: true            
+            isLoading: true
         });
 
-//http://audockerintstg01.epenau.local:12000/api/v1/centresearch/1003
-       // return axios.get("http://melbndocker01.epenau.local:12000/api/centresearch/" + keyword)
-         return axios.get("http://audockerintstg01.epenau.local:12100/api/v1/StatementCompliance/schoolid/" + keyword)
-       
+        return axios.get("http://audockerintstg01.epenau.local:12000/api/v1/centresearch/" + keyword)
             .then((response) => {
                 console.log('response')
-                
+
                 return dispatch({
                     type: SCHOOLSEARCH_FETCH_SUCCESS,
                     isLoading: false,
@@ -36,8 +33,3 @@ export function schoolSearchAsync(keyword) {
             });
     }
 }
-
-
-
-
-
