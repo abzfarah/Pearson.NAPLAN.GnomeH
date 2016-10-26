@@ -106,3 +106,6 @@ $dark-background-context:
   ':not([class*="background-color-index-warning"])' +
   ':not([class*="background-color-index-disabled"])' +
   ':not([class*="background-color-index-unknown"])' !default;
+
+  $light-background-context:
+    '.#{$grommet-namespace}background-color-index--light &, .#{$grommet-namespace}background-color-index--dark .#{$grommet-namespace}background-color-index--light &',  !default;

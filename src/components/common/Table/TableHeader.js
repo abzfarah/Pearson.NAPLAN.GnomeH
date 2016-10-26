@@ -164,7 +164,7 @@ class TableHeader extends Component {
           cursor: disabled ? 'not-allowed' : 'inherit',
         }}
       >
-  
+
       </TableHeaderColumn>
     );
   }

@@ -52,7 +52,7 @@ class AdminPage extends React.Component {
         event.preventDefault();
         userManager.removeUser(); // removes the user data from sessionStorage
         userManager.signoutRedirect();
-        this.props.dispatch(push('/'));
+
     }
 
     onErrorButtonClicked = (event) => {
@@ -86,11 +86,12 @@ class AdminPage extends React.Component {
                                 <Header className="school-name"> St. Paul's Anglican Grammar School </Header>
                                 <Header size="small" className="school-code"> School Code: 01678 </Header>
                             </div>
+
                             <ul className="menu"></ul>
-                            <div className="button-groups">
-                            <div className="schoolSearch-header">
-                                <SchoolSearch />
-                                </div>
+                            <div className="search-box">
+
+                              <SchoolSearch />
+
                             </div>
                         </Box>
 

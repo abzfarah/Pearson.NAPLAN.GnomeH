@@ -1,8 +1,4 @@
-.searchbox {
-  width: 70%;
-  width: 15vw;
-  height: 50px;
-}
+// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
 
 .#{$grommet-namespace}search {
   display: inline-block;
@@ -20,12 +16,14 @@
 }
 
 .#{$grommet-namespace}search__input {
+  @include inuit-font-size($header-font-size);
   margin-right: 0px;
+  @include input();
 
-  .#{$grommet-namespace}header & {
-    font-size: inherit;
-    line-height: inherit;
-  }
+  // .#{$grommet-namespace}header & {
+  //   font-size: inherit;
+  //   line-height: inherit;
+  // }
 
   // Disable IE's clear icon
   &::-ms-clear {
@@ -100,16 +98,6 @@
     padding-bottom: halve($inuit-base-spacing-unit);
     border-radius: 0;
     -webkit-appearance: none;
-    margin-right: 0px;
-    padding: 11px 23px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    outline: none;
-    background-color: transparent;
-    color: inherit;
-    font: inherit;
-    margin: 0;
-
 
     &:focus {
       padding-left: (halve($inuit-base-spacing-unit) - ($input-border-width + 1));
@@ -160,11 +148,6 @@
       padding-right: ($inuit-base-spacing-unit - $input-focus-border-width);
     }
   }
-
-  // .#{$grommet-namespace}control-icon-search {
-  //   height: halve($inuit-base-spacing-unit);
-  //   width: halve($inuit-base-spacing-unit);
-  // }
 }
 
 .#{$grommet-namespace}search--large {
@@ -259,4 +242,15 @@
   max-width: none;
   //used to add full height for button inside a flex container
   flex-grow: 1;
+}
+
+.#{$grommet-namespace}search--pad-medium.#{$grommet-namespace}search--inline {
+  .#{$grommet-namespace}search__input {
+    padding-left: ($inuit-base-spacing-unit - $input-border-width);
+    padding-right: ($inuit-base-spacing-unit - $input-border-width);
+  }
+
+  .#{$grommet-namespace}control-icon-search {
+    right: $inuit-base-spacing-unit;
+  }
 }

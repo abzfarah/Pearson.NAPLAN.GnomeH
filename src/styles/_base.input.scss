@@ -9,7 +9,7 @@
     // top and bottom padding by an extra 2px.
     padding: (halve($inuit-base-spacing-unit) - $input-border-width)
       ($inuit-base-spacing-unit - $input-border-width);
-    border: $input-border-width solid $border-color;
+    border: $input-border-width solid rgb(100, 181, 246);;
     border-radius: $border-radius;
     outline: none;
     // margin-right: halve($inuit-base-spacing-unit);
@@ -22,7 +22,7 @@
 
     &:focus {
       border-width: $input-focus-border-width;
-      border-color: $focus-border-color;
+      border-color: rgb(100, 181, 246);
       padding: (halve($inuit-base-spacing-unit) - ($input-border-width + 1))
         ($inuit-base-spacing-unit - ($input-border-width + 1));
     }

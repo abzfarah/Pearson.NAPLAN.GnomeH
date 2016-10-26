@@ -410,6 +410,7 @@ export default class Search extends Component {
       CLASS_ROOT,
       {
         [`${CLASS_ROOT}--controlled`]: !(inline),
+        [`${CLASS_ROOT}--fill`]: fill,
         [`${CLASS_ROOT}--icon-align-${iconAlign}`]: iconAlign,
         [`${CLASS_ROOT}--pad-${pad}`]: pad,
         [`${CLASS_ROOT}--inline`]: inline,

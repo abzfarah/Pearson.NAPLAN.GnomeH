@@ -1,9 +1,11 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
-
+.footerColor {
+  background: hsla(0, 4%, 17%, 0.8);
+}
 .#{$grommet-namespace}footer {
   min-height: $footer-height;
   line-height: $footer-height;
   width: 100%;
+  margin-top: 37px;
 
   &.#{$grommet-namespace}--direction-row {
     > h1,
