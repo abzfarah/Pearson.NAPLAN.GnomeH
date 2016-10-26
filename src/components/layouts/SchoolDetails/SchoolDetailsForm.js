@@ -83,7 +83,7 @@ class SchoolDetailsForm extends React.Component {
             </Box>
 
             <Box direction="row" className="boxA">
-              <Box className="sd_boxLeft" size="medium" align="left" pad="medium" colorIndex="light-2">
+              <Box className="sd_boxLeft" align="left" pad="medium" colorIndex="light-2">
                 <Heading tag="h3">Part A: Review School Details</Heading>
                 <Paragraph>Fields marked with <span className="colorRed">*</span> in the forms below are required</Paragraph>
                 <div>
@@ -107,15 +107,16 @@ class SchoolDetailsForm extends React.Component {
                 <CheckBox id="chkReviewed" name="chkReviewed" label="Details have been reviewed and are correct." />
               </Box>
 
-              <Box className="sd_boxRight" size="medium" align="left" pad="medium" colorIndex="light-2">
+              <Box className="sd_boxRight" align="left" pad="medium" colorIndex="light-2">
                 <Heading tag="h3">Part B: Booklet Packing Order</Heading>
                 <Paragraph>By default, test booklets will be packed in order of year level, home group and surname as per the data provided by each school, or supplied by their jurisdictional authority. For schools who wish to receive their test materials in another order, please briefly describe your request below. If you do not require a special test packing arrangement no action needs to be taken.
                 </Paragraph>
+                <CheckBox id="chkCustomPaching" name="chkCustomPaching" label="I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group)." />
                 <Box direction="row">
                   <Box pad="small">Requested by:</Box>
                   <Form>
                     <FormField>
-                      <Select id="item1" name="item-1" options={["one", "two", "three", "four", "five", "six", "seven", "eight"]} value="one" />
+                      <Select id="selRequestedBy" name="selRequestedBy" options={["person one", "person two", "person three", "person four", "person five", "person six", "person seven", "person eight"]} value="person one" />
                     </FormField>
                   </Form>
                 </Box>
