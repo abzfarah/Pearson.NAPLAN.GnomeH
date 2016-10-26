@@ -111,7 +111,13 @@ class SchoolDetailsForm extends React.Component {
                 <Heading tag="h3">Part B: Booklet Packing Order</Heading>
                 <Paragraph>By default, test booklets will be packed in order of year level, home group and surname as per the data provided by each school, or supplied by their jurisdictional authority. For schools who wish to receive their test materials in another order, please briefly describe your request below. If you do not require a special test packing arrangement no action needs to be taken.
                 </Paragraph>
-                <CheckBox id="chkCustomPaching" name="chkCustomPaching" label="I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group)." />
+                <Box direction="row">
+                  <CheckBox id="chkCustomPaching" name="chkCustomPaching" label="" />
+                  <Paragraph>
+                    I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group).
+                  </Paragraph>
+                </Box>
+
                 <Box direction="row">
                   <Box pad="small">Requested by:</Box>
                   <Form>

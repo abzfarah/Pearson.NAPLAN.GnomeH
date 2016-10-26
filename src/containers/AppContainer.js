@@ -59,9 +59,6 @@ class AppContainer extends React.Component {
 
   componentWillMount(props) {
     var isloggedIn = auth.loggedIn()
-    debugger;
-
-
     auth.onChange = this.updateAuth
 
   }
