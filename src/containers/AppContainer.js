@@ -70,10 +70,6 @@ class AppContainer extends React.Component {
   render() {
 
     const { loggedIn, claims }  = this.props;
-
-
-
-
     return (
 
 
@@ -88,14 +84,10 @@ class AppContainer extends React.Component {
             onLogin={this.onLoginButtonClick}
             />
 
-          {loggedIn}<Box direction="row"  wrap={true} align="center" className="second-header">
+          <Box direction="row"  wrap={true} align="center" className="second-header">
 
-            <SchoolName />
-
-
-
-            <ul className="menu"></ul>
-            <SchoolSearchContainer />
+             {loggedIn && <SchoolName /> }
+             {loggedIn && <SchoolSearchContainer /> }
           </Box>
 
 
