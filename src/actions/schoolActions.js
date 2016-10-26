@@ -12,7 +12,10 @@ export function schoolSearchAsync(keyword) {
             isLoading: true            
         });
 
-        return axios.get("http://melbndocker01.epenau.local:12000/api/centresearch/" + keyword)
+//http://audockerintstg01.epenau.local:12000/api/v1/centresearch/1003
+       // return axios.get("http://melbndocker01.epenau.local:12000/api/centresearch/" + keyword)
+         return axios.get("http://audockerintstg01.epenau.local:12100/api/v1/StatementCompliance/schoolid/" + keyword)
+       
             .then((response) => {
                 console.log('response')
                 

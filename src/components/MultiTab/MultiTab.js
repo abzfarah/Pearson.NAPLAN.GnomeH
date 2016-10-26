@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Tab from '../common/Tab'
 import Tabs from '../common/Tabs'
 
-import Statement from './Statement'
+import Statement from './Statement/StatementPage'
 import SchoolDetails from './SchoolDetails'
 import AuthorizedStaff from './AuthorizedStaff'
 import ActiveTestOrder from './ActiveTestOrder'
@@ -17,11 +17,7 @@ import Home from './Home'
       {name: 'School details', component: <SchoolDetails />},
       {name: 'Test Format Order', component: <ActiveTestOrder />},
       {name: 'Student Registration', component: <StudentRegistration />}
-
-
     ]
-
-
 
 //  <Tabs initialIndex={1} justify="start" className="tablisty" steps={steps} />
 
