@@ -119,13 +119,21 @@ class SchoolDetailsForm extends React.Component {
                 </Box>
 
                 <Box direction="row">
-                  <Box pad="small">Requested by:</Box>
+                  <Box pad="small"><Paragraph><span className="colorRed">*</span>{` Requested by:`}</Paragraph></Box>
                   <Form>
                     <FormField>
                       <Select id="selRequestedBy" name="selRequestedBy" options={["person one", "person two", "person three", "person four", "person five", "person six", "person seven", "person eight"]} value="person one" />
                     </FormField>
                   </Form>
                 </Box>
+                <TextField
+                  floatingLabelText="Details of request"
+                  floatingLabelStyle={styles.floatingLabelStyle}
+                  floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                  multiLine={true}
+                  rows={3}
+                  errorStyle={styles.errorStyle}
+                />
               </Box>
             </Box>
           </Box>
