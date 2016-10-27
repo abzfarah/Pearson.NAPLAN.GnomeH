@@ -7,7 +7,7 @@ import Section from '../../common/Section'
 import Heading from '../../common/Heading'
 import Box from '../../common/Box'
 import Paragraph from '../../common/Paragraph'
-
+import Header from 'grommet/components/Header';
 import CheckBox from '../../common/CheckBox'
 import Label from '../../common/Label'
 import Tiles from '../../common/Tiles'
@@ -63,8 +63,9 @@ class SchoolDetailsForm extends React.Component {
     render() {
 
         return (
-          <Box className="sd_MainBox">
-            <Box>
+
+        <div>
+          <Box className="school-details-header">
               <Heading tag="h2">
                 <div className="numberCircle">3</div>
                 School Details
@@ -82,54 +83,97 @@ class SchoolDetailsForm extends React.Component {
               </Paragraph>
             </Box>
 
-            <Box direction="row" className="boxA">
-              <Box className="sd_boxLeft" align="left" pad="medium" colorIndex="light-2">
-                <Heading tag="h3">Part A: Review School Details</Heading>
+            <Tiles fill={true}  >
+              <Tile align="start" basis="small" flex={true} wide="true">
+                <Header size="small" pad={{"horizontal": "medium"}}>
+                  <Heading tag="h3"> Part A: Review School Details </Heading>
+                </Header>
+
+
+                <Box pad="small">
                 <Paragraph>Fields marked with <span className="colorRed">*</span> in the forms below are required</Paragraph>
-                <div>
-                  <TextField
-                    floatingLabelText="Phone"
-                    floatingLabelStyle={styles.floatingLabelStyle}
-                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                    errorText="This field is required."
-                    errorStyle={styles.errorStyle}
-                  /><br />
+                  <div>
+                    <TextField
+                      floatingLabelText="Phone"
+                      floatingLabelStyle={styles.floatingLabelStyle}
+                      floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                      errorText="This field is required."
+                      errorStyle={styles.errorStyle}
+                    /><br />
 
-                  <TextField
-                    floatingLabelText="Fax"
-                    floatingLabelStyle={styles.floatingLabelStyle}
-                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                    errorText="This field is required."
-                    errorStyle={styles.errorStyle}
-                  /><br />
-                </div>
-                <br/>
-                <CheckBox id="chkReviewed" name="chkReviewed" label="Details have been reviewed and are correct." />
-              </Box>
-
-              <Box className="sd_boxRight" align="left" pad="medium" colorIndex="light-2">
-                <Heading tag="h3">Part B: Booklet Packing Order</Heading>
-                <Paragraph>By default, test booklets will be packed in order of year level, home group and surname as per the data provided by each school, or supplied by their jurisdictional authority. For schools who wish to receive their test materials in another order, please briefly describe your request below. If you do not require a special test packing arrangement no action needs to be taken.
-                </Paragraph>
-                <Box direction="row">
-                  <CheckBox id="chkCustomPaching" name="chkCustomPaching" label="" />
-                  <Paragraph>
-                    I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group).
-                  </Paragraph>
+                    <TextField
+                      floatingLabelText="Fax"
+                      floatingLabelStyle={styles.floatingLabelStyle}
+                      floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                      errorText="This field is required."
+                      errorStyle={styles.errorStyle}
+                    /><br />
+                  </div>
+                  <br/>
+                  <CheckBox id="chkReviewed" name="chkReviewed" label="Details have been reviewed and are correct." />
                 </Box>
+              </Tile>
 
-                <Box direction="row">
-                  <Box pad="small">Requested by:</Box>
-                  <Form>
-                    <FormField>
-                      <Select id="selRequestedBy" name="selRequestedBy" options={["person one", "person two", "person three", "person four", "person five", "person six", "person seven", "person eight"]} value="person one" />
-                    </FormField>
-                  </Form>
+
+              <Tile align="start" basis="small" flex={false}>
+                <Header size="small" pad={{"horizontal": "small"}}>
+                  <Heading tag="h4">
+                    <strong>
+                      Tile 2
+                    </strong>
+                  </Heading>
+                </Header>
+                <Box pad="small">
+                  <p>
+                    Tile summary content. One or two lines. Tile summary content.	            One or two lines.
+                  </p>
                 </Box>
-              </Box>
-            </Box>
-          </Box>
+              </Tile>
+              <Tile align="start" basis="small" flex={false}>
+                <Header size="small" pad={{"horizontal": "small"}}>
+                  <Heading tag="h4">
+                    <strong>
+                      Tile 3
+                    </strong>
+                  </Heading>
+                </Header>
+                <Box pad="small">
+                  <p>
+                    Tile summary content. One or two lines. Tile summary content.	            One or two lines.
+                  </p>
+                </Box>
+              </Tile>
+              <Tile align="start" basis="small" flex={false}>
+                <Header size="small" pad={{"horizontal": "small"}}>
+                  <Heading tag="h4">
+                    <strong>
+                      Tile 4
+                    </strong>
+                  </Heading>
+                </Header>
+                <Box pad="small">
+                  <p>
+                    Tile summary content. One or two lines. Tile summary content.	            One or two lines.
+                  </p>
+                </Box>
+              </Tile>
+              <Tile align="start" basis="small" flex={false}>
+                <Header size="small" pad={{"horizontal": "small"}}>
+                  <Heading tag="h4">
+                    <strong>
+                      Tile 5
+                    </strong>
+                  </Heading>
+                </Header>
+                <Box pad="small">
+                  <p>
+                    Tile summary content. One or two lines. Tile summary content.	            One or two lines.
+                  </p>
+                </Box>
+              </Tile>
+          </Tiles>
 
+          </div>
         )
     }
 
@@ -147,27 +191,6 @@ class SchoolDetailsForm extends React.Component {
 
 
 }
-
-const renderField =
-    ({ input, label, type, meta: { touched, error, warning } }) =>
-        (
-            <div>
-                {type == "text" &&
-                    <FormField label={label} htmlFor={label}>
-                        <input {...input} placeholder={label} type={type} />
-                        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
-                    </FormField>}
-                {type == "checkBox" &&
-                    <FormField htmlFor={label}>
-                        <CheckBox {...input} label={label}/>
-                        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
-                    </FormField>
-                }
-
-
-            </div>
-        )
-
 
 
 
