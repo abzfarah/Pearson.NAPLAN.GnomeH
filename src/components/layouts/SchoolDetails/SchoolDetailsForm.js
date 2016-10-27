@@ -82,7 +82,14 @@ class SchoolDetailsForm extends React.Component {
               </Paragraph>
             </Box>
             <Paragraph>Fields marked with <span className="colorRed">*</span> or <span className="sd_fieldRequired">This field is required</span>{` in the forms below are required`}</Paragraph>
-            <Box direction="row" className="boxA">
+
+            <Box direction="row" className="boxRow">
+              <Box className="sd_boxLeft" align="left" pad="medium" colorIndex="light-2">
+                <Heading tag="h3">Part D: Review School Details</Heading>
+
+              </Box>
+            </Box>
+            <Box direction="row" className="boxRow">
               <Box className="sd_boxLeft" align="left" pad="medium" colorIndex="light-2">
                 <Heading tag="h3">Part D: Review School Details</Heading>
                 <div>
