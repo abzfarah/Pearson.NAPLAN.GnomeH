@@ -81,17 +81,16 @@ class SchoolDetailsForm extends React.Component {
                 Fields marked with * in the form below are required.
               </Paragraph>
             </Box>
-
+            <Paragraph>Fields marked with <span className="colorRed">*</span> or <span className="sd_fieldRequired">This field is required</span>{` in the forms below are required`}</Paragraph>
             <Box direction="row" className="boxA">
               <Box className="sd_boxLeft" align="left" pad="medium" colorIndex="light-2">
-                <Heading tag="h3">Part A: Review School Details</Heading>
-                <Paragraph>Fields marked with <span className="colorRed">*</span> in the forms below are required</Paragraph>
+                <Heading tag="h3">Part D: Review School Details</Heading>
                 <div>
                   <TextField
                     floatingLabelText="Phone"
                     floatingLabelStyle={styles.floatingLabelStyle}
                     floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                    errorText="This field is required."
+                    errorText="This field is required"
                     errorStyle={styles.errorStyle}
                   /><br />
 
@@ -99,16 +98,21 @@ class SchoolDetailsForm extends React.Component {
                     floatingLabelText="Fax"
                     floatingLabelStyle={styles.floatingLabelStyle}
                     floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                    errorText="This field is required."
+                    errorText="This field is required"
                     errorStyle={styles.errorStyle}
                   /><br />
                 </div>
                 <br/>
-                <CheckBox id="chkReviewed" name="chkReviewed" label="Details have been reviewed and are correct." />
+                <Box direction="row">
+                  <CheckBox id="chkReviewed" name="chkReviewed" />
+                  <Paragraph>
+                    <span className="colorRed">*</span>{` Details have been reviewed and are correct.`}
+                  </Paragraph>
+                </Box>
               </Box>
 
               <Box className="sd_boxRight" align="left" pad="medium" colorIndex="light-2">
-                <Heading tag="h3">Part B: Booklet Packing Order</Heading>
+                <Heading tag="h3">Part E: Booklet Packing Order</Heading>
                 <Paragraph>By default, test booklets will be packed in order of year level, home group and surname as per the data provided by each school, or supplied by their jurisdictional authority. For schools who wish to receive their test materials in another order, please briefly describe your request below. If you do not require a special test packing arrangement no action needs to be taken.
                 </Paragraph>
                 <Box direction="row">
