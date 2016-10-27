@@ -1,4 +1,8 @@
 import React, { Component, PropTypes } from 'react'
+
+import { schoolDetailsAsync } from '../../../actions/schoolDetailsActions'
+
+
 import Form from '../../common/Form'
 
 import FormField from '../../common/FormField'
@@ -21,6 +25,18 @@ import Select from 'react-select';
 
 import {orange500, blue500, black} from '../../utils/materialStyles/colors';
 var options = [
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' },
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' },
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' },
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' },
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' },
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' },
     { value: 'one', label: 'One' },
     { value: 'two', label: 'Two' }
 ];
@@ -50,13 +66,21 @@ class SchoolDetailsForm extends React.Component {
         super(props);
 
         this.state = {
-            // isDisabled: false,
-            // isConfirmed: true
         }
 
         this.confirmed = this.confirmed.bind(this);
         // this.handleInputChange = this.handleInputChange.bind(this);
         this.submitStatement = this.submitStatement.bind(this);
+        this.returnStatement = this.returnStatement.bind(this);
+    }
+
+    returnStatement() {
+
+debugger;
+
+      this.props.schoolDetailsAsync();
+
+
     }
 
     componentWillMount() {
@@ -93,7 +117,7 @@ class SchoolDetailsForm extends React.Component {
 
             <Tiles fill={true}  >
 
-            <Tile align="start" basis="small" flex={false}>
+            <Tile align="start" flex={false}>
               <Header size="small" pad={{"horizontal": "small"}}>
                 <Heading tag="h4"> Part A: Test Material Delivery (Site Address) </Heading>
               </Header>
@@ -112,9 +136,7 @@ class SchoolDetailsForm extends React.Component {
                     <span>
                       School Name
                     </span>
-                    <span className="secondary">
-                      ST PAUL'S ANGLICAN GRAMMAR SCHOOL
-                    </span>
+                    <span className="secondary">ST PAUL'S ANGLICAN GRAMMAR SCHOOL</span>
                   </ListItem>
                   <ListItem justify="between">
                     <span>
@@ -152,7 +174,7 @@ class SchoolDetailsForm extends React.Component {
                 </Box>
               </Box>
             </Tile>
-            <Tile align="start" basis="small" flex={false}>
+            <Tile align="start"  flex={false}>
               <Header size="small" pad={{"horizontal": "small"}}>
                 <Heading tag="h4"> Part B: Reporting Material Delivery (Site Address) </Heading>
               </Header>
@@ -170,14 +192,12 @@ class SchoolDetailsForm extends React.Component {
                   <span>
                     School Name
                   </span>
-                  <span className="secondary">
-                    ST PAUL'S ANGLICAN GRAMMAR SCHOOL
-                  </span>
+                  <span className="secondary">ST PAUL'S ANGLICAN GRAMMAR SCHOOL</span>
                 </ListItem>
               </List>
               </Box>
             </Tile>
-            <Tile align="start" basis="small" flex={false}>
+            <Tile align="start"  flex={false}>
               <Header size="small" pad={{"horizontal": "small"}}>
                 <Heading tag="h4"> Part C: Data Service </Heading>
               </Header>
@@ -196,9 +216,7 @@ class SchoolDetailsForm extends React.Component {
                       <span>
                         School Name
                       </span>
-                      <span className="secondary">
-                        ST PAUL'S ANGLICAN GRAMMAR SCHOOL
-                      </span>
+                      <span className="secondary">ST PAUL'S ANGLICAN GRAMMAR SCHOOL</span>
                     </ListItem>
                     <ListItem justify="between">
                       <span>
@@ -236,7 +254,7 @@ class SchoolDetailsForm extends React.Component {
                   </Box>
               </Box>
             </Tile>
-              <Tile align="start" basis="small" flex={true} wide="true">
+              <Tile align="start" flex={true} wide={true}>
                 <Header size="small" pad={{"horizontal": "small"}}>
                   <Heading tag="h4"> Part D: Review School Details </Heading>
                 </Header>
@@ -267,7 +285,7 @@ class SchoolDetailsForm extends React.Component {
               </Tile>
 
 
-              <Tile align="start" basis="small" flex={true} wide="true">
+              <Tile align="start"  flex={true}  wide={true}>
               <Header size="small" pad={{"horizontal": "small"}}>
                 <Heading tag="h4"> Part E: Booklet Packing Order </Heading>
               </Header>
@@ -298,8 +316,8 @@ class SchoolDetailsForm extends React.Component {
                 <Box direction="row">
                     <Box pad="small"><Paragraph><span className="colorRed">*</span>{` Requested by:`}</Paragraph></Box>
                     <Form>
-                      <FormField>
-                        <Select  name="form-field-name" simpleValue
+                      <FormField className="detailsSelect">
+                        <Select   name="form-field-name" simpleValue
                           value="one"
                           options={options}
                           onChange={logChange} />
@@ -309,9 +327,15 @@ class SchoolDetailsForm extends React.Component {
 
 
                 </Box>
+                  <div className="button-groups">
+                <Button  label="Save" accent={true} />
+                <Button label="Return" onClick={this.props.onClick} secondary={true} />
+                </div>
               </Tile>
 
           </Tiles>
+
+
 
           </div>
         )

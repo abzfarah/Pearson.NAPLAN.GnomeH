@@ -18,7 +18,7 @@ export default class BlogFooter extends Component {
     return (
 
       <StickyContainer>
-      <Sticky position="bottom">  
+      <Sticky>  
 
         <Box  direction="row"  className="footerContainer"  wrap={true} align="center" >
           <Box direction="row"className="numberOne">
@@ -71,7 +71,7 @@ export default class BlogFooter extends Component {
 
     </StickyContainer>
 
-   
+
     );
   }
 }

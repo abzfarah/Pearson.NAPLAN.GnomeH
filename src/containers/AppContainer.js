@@ -65,8 +65,11 @@ class AppContainer extends React.Component {
 
 
   render() {
+debugger;
+    const loggedIn = auth.loggedIn();
 
-    const { loggedIn, claims }  = this.props;
+
+
     return (
 
 
@@ -76,14 +79,14 @@ class AppContainer extends React.Component {
           <Sticky style={{ zIndex: 5 }}>
            <div className="header-bar"><i></i> </div>
 
-            <HeaderContainer loggedIn={loggedIn} claims={claims}
+            <HeaderContainer loggedIn={loggedIn} claims={this.sessionClaims}
             onLogout={this.onLogoutButtonClick}
             onLogin={this.onLoginButtonClick}
             />
 
           <Box direction="row"  wrap={true} align="center" className="second-header">
 
-             {loggedIn && <SchoolName /> }
+             {loggedIn && <SchoolName schoolName="gey" schoolCode="sdff"/> }
              {loggedIn && <SchoolSearchContainer /> }
           </Box>
 

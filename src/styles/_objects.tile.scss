@@ -128,6 +128,7 @@
 .#{$grommet-namespace}tiles--flush {
   padding: 0px;
   width: 98%;
+  margin: auto;
 
   .#{$grommet-namespace}tiles__masonry-column > .#{$grommet-namespace}tile,
   > .#{$grommet-namespace}tile {

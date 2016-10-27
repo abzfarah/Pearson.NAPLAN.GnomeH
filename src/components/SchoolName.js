@@ -10,7 +10,9 @@ import classnames from 'classnames';
 import Header from 'grommet/components/Header';
 
 
-const  SchoolName = () => {
+const  SchoolName = ({schoolName, schoolCode}) => {
+
+  debugger;
 
     return (
           <div className="school-heading">

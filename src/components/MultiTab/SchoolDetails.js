@@ -14,7 +14,16 @@ class SchoolDetails extends React.Component {
   constructor (props, context) {
     super(props, context);
     this.logoutUser = this.logoutUser.bind(this);
+    this.returnStatement = this.returnStatement.bind(this);
   }
+
+  returnStatement(props) {
+    debugger
+  this.props.actions.schoolDetailsAsync();
+
+
+  }
+
 
   logoutUser (event) {
     event.preventDefault();
@@ -27,7 +36,7 @@ class SchoolDetails extends React.Component {
 
     return (
       <div>
-          <SchoolDetailsForm />
+          <SchoolDetailsForm onClick={this.returnStatement}/>
       </div>
     );
   }
