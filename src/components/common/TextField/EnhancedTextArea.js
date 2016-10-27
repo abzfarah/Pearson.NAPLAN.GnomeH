@@ -140,7 +140,7 @@ class EnhancedTextArea extends Component {
       style,
       textareaStyle,
       valueLink, // eslint-disable-line no-unused-vars
-      ...other
+      ...other,
     } = this.props;
 
     const {prepareStyles} = this.context.muiTheme;

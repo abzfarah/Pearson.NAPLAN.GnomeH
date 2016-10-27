@@ -444,7 +444,7 @@ class TextField extends Component {
         });
     } else {
       inputElement = multiLine ? (
-        <EnhancedTextArea
+        <EnhancedTextarea
           {...other}
           {...inputProps}
           style={inputStyleMerged}
