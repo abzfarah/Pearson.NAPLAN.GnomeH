@@ -12,10 +12,15 @@ class StatementPage extends Component {
     }
 
     componentDidMount() {
+       
+        var userSession =  JSON.parse(sessionStorage.getItem('userSession'));
 
-//--TODO 
-        var schoolCode ='01006';
+      if(userSession){
+        var schoolCode = userSession.schoolCode;
+      } 
+       if(schoolCode){
         this.props.getStatement(schoolCode);
+       }
     }
 
     submitStatement(model) {
@@ -23,6 +28,7 @@ class StatementPage extends Component {
         model.isConfirmed = true;
         model.securityLevel = +model.securityLevel ;
         this.props.submitStatement(model);
+        
     }
 
     render() {

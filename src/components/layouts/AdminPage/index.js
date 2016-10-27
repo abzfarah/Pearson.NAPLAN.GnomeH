@@ -47,6 +47,7 @@ class AdminPage extends React.Component {
     onLogoutButtonClicked = (event) => {
         event.preventDefault();
         userManager.removeUser(); // removes the user data from sessionStorage
+       
         sessionStorage.removeItem('userSession');
 
 
