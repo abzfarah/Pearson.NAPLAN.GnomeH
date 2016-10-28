@@ -77,7 +77,6 @@ class SchoolDetailsForm extends React.Component {
               <Paragraph>
                 While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
                 Security Log. The Test Materials Security Log should be kept by the school for 12 months after the test and may be subject to audit by the VCAA.
-                Fields marked with * in the form below are required.
               </Paragraph>
               <Paragraph>
                 <span className="sd_note">NOTE: Fields marked with <span className="colorRed">*</span> or <span className="sd_fieldRequired">This field is required</span>{` in the forms below are required`}</span>
@@ -289,31 +288,7 @@ class SchoolDetailsForm extends React.Component {
         // this.setState({ isConfirmed: evt.target.checked })
     }
 
-
 }
-
-const renderField =
-    ({ input, label, type, meta: { touched, error, warning } }) =>
-        (
-            <div>
-                {type == "text" &&
-                    <FormField label={label} htmlFor={label}>
-                        <input {...input} placeholder={label} type={type} />
-                        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
-                    </FormField>}
-                {type == "checkBox" &&
-                    <FormField htmlFor={label}>
-                        <CheckBox {...input} label={label}/>
-                        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
-                    </FormField>
-                }
-
-
-            </div>
-        )
-
-
-
 
 
 // export default SchoolDetailsForm
