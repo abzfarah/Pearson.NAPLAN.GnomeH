@@ -1,43 +1,61 @@
 import React from 'react';
-import Footer from '../containers/Footer';
-import userManager from '../components/utils/oidc/userManager';
-import Button from '../components/common/Button';
-import Box from '../components/common/Box';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
 import Header from 'grommet/components/Header';
-import { push } from 'react-router-redux';
-import _ from 'lodash';
-
-
-
+import Footer from '../containers/Footer';
+import Box from '../components/common/Box';
+import Button from '../components/common/Button';
 import  SchoolName  from '../components/SchoolName';
-
 import auth from '../routes/utils/auth'
-
-import { connect } from 'react-redux';
+import userManager from '../components/utils/oidc/userManager';
+import _ from 'lodash';
 
 
 class HeaderContainer extends React.Component {
   constructor() {
     super()
-  }
-
-
-
-  componentDidMount(props, state) {
-    var x =3;
-
-
+    this.state = {loggedIn: false}
   }
 
   componentWillMount(props) {
-    var isloggedIn = auth.loggedIn()
+
+  }
+
+  componentDidMount(props, state) {
+    debugger;
+
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+
+    if ( nextState.loggedIn == true) {
+      this.state.loggedIn = true
+    }
+
+    if ( nextProps.loggedIn != undefined ) {
+      if ( nextProps.loggedIn == true) {
+        this.state.loggedIn = true
+      }
+    }
+
+
+
+
+    var nextState = nextState;
+    var nextProps = nextProps;
+    return true;
+
+
   }
 
 
   render(props) {
 
-    var loggedIn = this.props.ownProps.loggedIn;
+
+    var loggedIn = this.props.ownProps.loggedIn || this.props.loggedIn;
+
+    debugger;
 
     return (
               <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="first-header">

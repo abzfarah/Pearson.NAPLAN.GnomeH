@@ -40,7 +40,7 @@ class CallbackPage extends React.Component {
 
     dispatch({
         type: 'USER_LOGGEDIN',
-        loggedIn,
+        loggedIn: true,
         payload: claims
     })
     this.props.dispatch(push('/home'));

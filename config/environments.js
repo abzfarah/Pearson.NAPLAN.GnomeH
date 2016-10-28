@@ -10,11 +10,11 @@ export default {
   // are served webpack by to fix this issue:
   // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
   development: (config) => ({
-    compiler_public_path: `http://${config.server_host}:${config.server_port}/`,
+    compiler_public_path: `http://melbnstgweb1.epenau.local:2016/`,
     proxy: {
       enabled: false,
       options: {
-        host: 'http://localhost:8000',
+        host: 'http://melbnstgweb1.epenau.local:2016/',
         match: /^\/api\/.*/
       }
     }

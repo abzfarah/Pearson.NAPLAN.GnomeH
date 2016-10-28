@@ -15,7 +15,6 @@ import Anchor from 'grommet/components/Anchor';
 import NavAnchor from '../../common/NavAnchor';
 import DownIcon from 'grommet/components/icons/base/Down';
 import { push } from 'react-router-redux';
-import SchoolSearch from '../SchoolSearch'
 import auth from '../../../routes/utils/auth'
 
 class AdminPage extends React.Component {
@@ -34,6 +33,7 @@ class AdminPage extends React.Component {
     }
 
     successCallback = () => {
+      debugger;
         this.props.dispatch(push('/home'));
     }
 
@@ -76,9 +76,6 @@ class AdminPage extends React.Component {
                     <Anchor href="#">
                         2017 NAPLAN Online Pilot
                   </Anchor>
-                  <NavAnchor path="/manageUsers">
-                    Manage Schools
-                  </NavAnchor>
                     <Anchor href="#">
                         Bulk Download
                   </Anchor>

@@ -1,6 +1,6 @@
 
 import {
-    SCHOOL_DETAILS_SUBMIT_SUCCESS, SCHOOL_DETAILS_FETCH_SUCCESS,SCHOOL_DETAILS_FETCH_FAILURE
+    SCHOOL_DETAILS_SUBMIT_SUCCESS, SCHOOL_DETAILS_SELECT, SCHOOL_DETAILS_FETCH_SUCCESS,SCHOOL_DETAILS_FETCH_FAILURE
 } from '../constants'
 
 const initialState = {
@@ -26,6 +26,13 @@ export default (state = initialState, action = {}) => {
             return Object.assign({}, state, {
                 schoolDetails: false
             });
+
+      case SCHOOL_DETAILS_SELECT:
+          return Object.assign({}, state, {
+              code: action.code,
+              schoolName: action.schoolName,
+              suburb: action.suburb
+          });
 
     }
     return state;

@@ -174,29 +174,7 @@ debugger;
                 </Box>
               </Box>
             </Tile>
-            <Tile align="start"  flex={false}>
-              <Header size="small" pad={{"horizontal": "small"}}>
-                <Heading tag="h4"> Part B: Reporting Material Delivery (Site Address) </Heading>
-              </Header>
-              <Box pad="small">
-              <List>
-                <ListItem justify="between">
-                  <span>
-                    School Code
-                  </span>
-                  <span className="secondary">
-                    01678
-                  </span>
-                </ListItem>
-                <ListItem justify="between">
-                  <span>
-                    School Name
-                  </span>
-                  <span className="secondary">ST PAUL'S ANGLICAN GRAMMAR SCHOOL</span>
-                </ListItem>
-              </List>
-              </Box>
-            </Tile>
+
             <Tile align="start"  flex={false}>
               <Header size="small" pad={{"horizontal": "small"}}>
                 <Heading tag="h4"> Part C: Data Service </Heading>

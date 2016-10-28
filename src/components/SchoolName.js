@@ -12,12 +12,18 @@ import Header from 'grommet/components/Header';
 
 const  SchoolName = ({schoolName, schoolCode}) => {
 
+  let code = schoolCode;
+  let name = schoolName;
+  let string = 'School Code: '
+
+  let full = string + code;
+
   debugger;
 
     return (
           <div className="school-heading">
-            <Header className="school-name"> St. Paul's Anglican Grammar School </Header>
-            <Header size="small" className="school-code"> School Code: 01678 </Header>
+            <Header className="school-name"> {schoolName} </Header>
+            <Header size="small" className="school-code">  {schoolCode && full }   </Header>
           </div>
       )
 }

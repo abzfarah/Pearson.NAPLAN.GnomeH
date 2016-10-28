@@ -13,7 +13,6 @@ import Form from '../common/Form'
 import FormField from '../common/FormField'
 import TextField from '../common/TextField'
 
-import SchoolSearch from '../layouts/SchoolSearch'
 import {orange500, blue500, black} from '../utils/materialStyles/colors';
 
 

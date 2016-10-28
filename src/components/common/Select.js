@@ -453,7 +453,8 @@ Select.propTypes = {
   inline: PropTypes.bool,
   multiple: PropTypes.bool,
   onSearch: PropTypes.func,
-  onChange: PropTypes.func, // (value(s))
+  onChange: PropTypes.any,
+  really: PropTypes.any, // (value(s))
   placeHolder: PropTypes.string,
   options: PropTypes.arrayOf(valueType).isRequired,
   value: PropTypes.oneOfType([valueType, PropTypes.arrayOf(valueType)])
