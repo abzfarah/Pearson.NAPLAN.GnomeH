@@ -399,7 +399,7 @@ class TextField extends Component {
       rows,
       rowsMax,
       textareaStyle,
-      ...other,
+      ...other
     } = this.props;
 
     const {prepareStyles} = this.context.muiTheme;
@@ -444,7 +444,7 @@ class TextField extends Component {
         });
     } else {
       inputElement = multiLine ? (
-        <EnhancedTextarea
+        <EnhancedTextArea
           {...other}
           {...inputProps}
           style={inputStyleMerged}

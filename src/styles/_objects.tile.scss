@@ -87,12 +87,6 @@
 
     > .#{$grommet-namespace}tile {
       flex-grow: 1;
-      padding: 36px;
-      background: #f9f9f9;
-      margin-left: 5px;
-      margin-right: 5px;
-      margin-bottom: 5px;
-      margin-top: 5px;
     }
   }
 
@@ -127,15 +121,13 @@
 
 .#{$grommet-namespace}tiles--flush {
   padding: 0px;
-  width: 98%;
-  margin: auto;
 
   .#{$grommet-namespace}tiles__masonry-column > .#{$grommet-namespace}tile,
   > .#{$grommet-namespace}tile {
     margin: 0px;
 
     &--wide {
-      flex-basis: 43%;
+      flex-basis: 100%;
     }
   }
 }

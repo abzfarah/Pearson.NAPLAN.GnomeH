@@ -1,31 +1,43 @@
 import React, { Component } from 'react';
 
-import Anchor from './common/Anchor';
-import Paragraph from './common/Paragraph';
-import Box from './common/Box';
-import Columns from './common/Columns';
-import Footer from './common/Footer';
-import Menu from './common/Menu';
+import Anchor from '../components/common/Anchor';
+import Paragraph from '../components/common/Paragraph';
+import Box from '../components/common/Box';
+import Columns from '../components/common/Columns';
+import Footer from '../components/common/Footer';
+import Menu from '../components/common/Menu';
+import Label from '../components/common/Label';
 import classnames from 'classnames';
 import Header from 'grommet/components/Header';
 
 
-const  SchoolName = ({schoolName, schoolCode}) => {
+class SchoolName extends React.Component {
 
-  let code = schoolCode;
-  let name = schoolName;
-  let string = 'School Code: '
 
-  let full = string + code;
 
-  debugger;
+
+  render() {
+    debugger;
+    const { schoolName, schoolCode } = this.props;
+    let string = 'School Code: ';
+    var full;
+    if (schoolCode != undefined) {
+         full = string + schoolCode;
+    }
+    else full = ""
 
     return (
-          <div className="school-heading">
-            <Header className="school-name"> {schoolName} </Header>
-            <Header size="small" className="school-code">  {schoolCode && full }   </Header>
-          </div>
-      )
-}
+      <div className="school-heading">
+          <Header className="school-name">
+            { schoolName}
+          </Header>
+
+          <Header size="small" className="school-code">
+            {full}
+          </Header>
+      </div>
+        )
+    }
+  }
 
 export default SchoolName;
