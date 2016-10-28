@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { schoolSearchAsync } from '../actions/schoolActions'
 
-import SchoolSearch from './SchoolSearch'
+import SchoolSearch from '../components/SchoolSearch'
 
 
 
