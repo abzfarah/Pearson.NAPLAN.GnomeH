@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import Tab from '../../common/Tab'
 import Tabs from '../../common/Tabs'
@@ -28,14 +29,14 @@ const styles = {
     floatingLabelFocusStyle: {
         color: blue500,
     },
-  
+
 };
 
 class StatementForm extends React.Component {
 
     constructor(props) {
         super(props);
-
+        console.log('stgFoooorm')
         this.state = {
             isDisabled: true,
             isConfirmed: false
@@ -55,7 +56,6 @@ class StatementForm extends React.Component {
             });
 
             //--TODO
-
             // this.setState({ securityLevel: parseInt(this.props.initialValues.securityLevel) })
         }
     }
@@ -71,11 +71,12 @@ class StatementForm extends React.Component {
 
         const { securityLevel, isOtherLevel } = this.props
 
+
         return (
 
             <form onSubmit={handleSubmit((model) => { this.submitStatement(model) })}>
                 <Section className="test">
-          
+
                     <Box className="PartA">
                         <Heading tag="h2">
                             <div className="numberCircle">1</div>
@@ -112,19 +113,19 @@ class StatementForm extends React.Component {
                                 <Box className="han">
                                     <Heading tag="h4">
                                         Part B: Security Storage Arrangement
-                             </Heading>
+                                    </Heading>
                                     <Paragraph> The VCAA will be conducting visits to schools to audit the storage facilities for the NAPLAN 2016 test materials.</Paragraph>
                                     <Paragraph> Apart from when the tests are being administered, test materials are to be kept in a double secure area at all times. Please tick the option which best describes the
                                  double secure storage arrangement for NAPLAN test materials at your school.
                                 </Paragraph>
                                     <Paragraph>Please select the option which best describes the two levels of security at your school </Paragraph>
-                                    <label> <Field name="securityLevel" component="input" type="radio" value="1" />A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff. </label>
-                                    <label> <Field name="securityLevel" component="input" type="radio" value="2" />A locked safe which is locked in a storeroom/office which is accessible only by authorised staff. </label>
-                                    <label> <Field name="securityLevel" component="input" type="radio" value="3" />A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff.</label>
-                                    <label> <Field name="securityLevel" component="input" type="radio" value="4" id="securityLevel" />Other </label>
+                                    <Field name="securityLevel" component={renderSecurityLevel} type="radio" />
+
                                     {isOtherLevel &&
-                                        <Field name="otherText" type="text" component={renderFieldOther} label="Other Text" />
+                                        <Field name="otherText" type="text" component={renderField} label="Other Text" />
                                     }
+                                    <br/>
+                                    <br/>
                                     <Paragraph>
                                         Please note:
                                     While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
@@ -134,37 +135,37 @@ class StatementForm extends React.Component {
                             </fieldset>
                         </Box>
                     </Box>
-                   
-                     <Box className="PartA1">
+
+                    <Box className="PartA1">
                         <Box colorIndex='light-1' className="inside1">
-                         <fieldset disabled={this.state.isDisabled} >
-                            <Box className="han">
-                                <Heading tag="h4">
-                                    Part C: Principal's Declaration
+                            <fieldset disabled={this.state.isDisabled} >
+                                <Box className="han">
+                                    <Heading tag="h4">
+                                        Part C: Principal's Declaration
                                 </Heading>
-                                <FormFields >
-                                    <Field name="firstName" type="text" component={renderField} label="first Name" labelTitle="* Principal's first name:" />
-                                    <Field name="lastName" type="text" component={renderField} label="last Name" labelTitle="* Principal's last name:" />
-                                    <Field name="email" type="text" component={renderField} label="Email" labelTitle="* School/Principal's email:" /> <br />
-                                </FormFields>
+                                    <FormFields >
+                                        <Field name="firstName" type="text" component={renderField} label="first Name" labelTitle="* Principal's first name:" />
+                                        <Field name="lastName" type="text" component={renderField} label="last Name" labelTitle="* Principal's last name:" />
+                                        <Field name="email" type="text" component={renderField} label="Email" labelTitle="* School/Principal's email:" /> <br />
+                                    </FormFields>
                                 </Box>
                                 <Box className="declaration" >
-                                 <Field name="isDeclared" type="checkbox" component={renderField} label="isDeclared" labelTitle="* I declare that I am the Principal of the school detailed above." disabled={this.state.isDisabled} /><br />
-                                 <Field name="isCertified" type="checkbox" component={renderField} label="isCertified" labelTitle="* I certify that the information provided in this form is correct." disabled={this.state.isDisabled} /><br />                           
+                                    <Field name="isDeclared" type="checkbox" component={renderField} label="isDeclared" labelTitle="* I declare that I am the Principal of the school detailed above." disabled={this.state.isDisabled} /><br />
+                                    <Field name="isCertified" type="checkbox" component={renderField} label="isCertified" labelTitle="* I certify that the information provided in this form is correct." disabled={this.state.isDisabled} /><br />
                                 </Box>
                                 <Box>  <Footer pad={{ "vertical": "small" }}>
-                                <Button label="submit" primary={true} align="end" disabled={submitting || pristine || this.state.isDisabled} type="submit" onClick={() => { submitter() } } />
-                            </Footer></Box>
-                         </fieldset>               
-                     </Box>
-                  </Box>
-             </Section>
+                                    <Button label="submit" primary={true} align="end" disabled={submitting || pristine || this.state.isDisabled} type="submit" onClick={() => { submitter() } } />
+                                </Footer></Box>
+                            </fieldset>
+                        </Box>
+                    </Box>
+                </Section>
             </form>
         )
     }
 
     submitStatement(model) {
- 
+
         this.props.submitStatement(model);
     }
 
@@ -175,7 +176,7 @@ class StatementForm extends React.Component {
     }
 
     handleInputChange(evt) {
-        
+
         console.log(evt.target.value)
         //-- Handle Radio Button
         if (evt.target.type === 'radio') {
@@ -202,6 +203,17 @@ class StatementForm extends React.Component {
 //         </div>
 //     )
 
+const renderSecurityLevel = ({input, meta: {touched, error, warning }}) => (
+    <div>
+        <Box>
+            <label> <Field name="securityLevel" component="input" type="radio" value="1" />A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff. </label>
+            <label> <Field name="securityLevel" component="input" type="radio" value="2" />A locked safe which is locked in a storeroom/office which is accessible only by authorised staff. </label>
+            <label> <Field name="securityLevel" component="input" type="radio" value="3" />A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff.</label>
+            <label> <Field name="securityLevel" component="input" type="radio" value="4" id="securityLevel" />Other </label>
+        </Box>
+        {touched && ((error && <div style={{ color: 'red' }}>{error}</div>))}
+    </div>
+)
 
 const renderField =
 
@@ -214,20 +226,20 @@ const renderField =
                             {...input}
                             floatingLabelText={label}
                             floatingLabelStyle={styles.floatingLabelStyle}
-                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}/><br/>
+                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle} /><br />
                         {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
                     </div>}
 
                 {type == "checkbox" &&
                     <div >
-                        <CheckBox {...input} type={type} label={labelTitle} /><br/>
+                        <CheckBox {...input} type={type} label={labelTitle} /><br />
                         {touched && ((error && <span style={{ color: 'red' }}>{error}</span>))}
                     </div>
                 }
                 {type == "radio" &&
-                    <div>                
-                        <input {...input} type={type} /> {label}<br/>
-                        { ((error && <span style={{ color: 'red' }}>{error}</span>))}
+                    <div>
+                        <input {...input} type={type} /> {label}<br />
+                        {((error && <span style={{ color: 'red' }}>{error}</span>))}
                     </div>
                 }
             </div>
@@ -246,27 +258,27 @@ const form = reduxForm({
         else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(model.email)) {
             errors.email = 'Invalid email address'
         }
-         else if(model.email.length >80 ) {
+        else if (model.email.length > 80) {
             errors.email = 'email should be less than 80 characters.'
         }
 
-        if (!model.firstName) { errors.firstName = 'Please enter Principal \'s  first Name.';}
-        else if(model.firstName.length >80 ) {
+        if (!model.firstName) { errors.firstName = 'Please enter Principal \'s  first Name.'; }
+        else if (model.firstName.length > 80) {
             errors.firstName = 'first Name should be less than 80 characters.'
         }
-        
-        if (!model.lastName)  { errors.lastName = 'Please enter Principal \'s Last Name.';} 
-           else if(model.lastName.length >30 ) {
+
+        if (!model.lastName) { errors.lastName = 'Please enter Principal \'s Last Name.'; }
+        else if (model.lastName.length > 30) {
             errors.firstName = 'Last Name should be less than 80 characters.'
         }
 
         if (model.isDeclared == false) errors.isDeclared = 'Please declare that you are Principal.';
         if (!model.isCertified) errors.isCertified = 'Please certify the provided information';
         //--TODO
-   
+
         if (model.securityLevel == "0") errors.securityLevel = 'Please select a security level';
         //--TODO
-        if (model.securityLevel === 4 && !model.otherText) {
+        if (model.securityLevel === '4' && !model.otherText) {
             errors.otherText = 'Please fill other security level ';
         }
 
@@ -274,7 +286,18 @@ const form = reduxForm({
     }
 });
 
-export default form(StatementForm)
+const selector = formValueSelector('statementForm')
+
+export default connect(state => {
+
+    const securityLevel = selector(state, 'securityLevel')
+
+    return {
+        securityLevel,
+        isOtherLevel: securityLevel == '4' ? true : false
+    }
+
+})(form(StatementForm))
  //  <Fields names={['securityLevel', 'otherText']} component={renderSecurityLevel} />
  //-- What to do :
  //-- 

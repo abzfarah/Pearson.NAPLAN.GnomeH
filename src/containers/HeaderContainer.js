@@ -36,10 +36,7 @@ class HeaderContainer extends React.Component {
 
 
   render(props) {
-debugger;
     var loggedIn = this.props.loggedIn;
-
-
 
     return (
               <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="first-header">
