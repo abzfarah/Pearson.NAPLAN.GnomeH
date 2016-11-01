@@ -105,7 +105,6 @@ class AdminPage extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         user: state.oidc.user,
-        error: state.error.error,
         ownProps: ownProps,
         session: state.session
     };

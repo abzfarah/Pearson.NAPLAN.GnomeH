@@ -11,23 +11,24 @@ const initialState = {
     error: {}
 }
 
+const SELECT_SCHOOL = 'SELECT_SCHOOL';
+const LOAD_SCHOOLS = 'LOAD_SCHOOLS';
+const LOAD_SCHOOLS_SUCCESS = 'LOAD_SCHOOLS_SUCCESS';
+const LOAD_SCHOOLS_FAILURE = 'LOAD_SCHOOLS_FAILURE';
+
+
 export default (state = initialState, action = {}) => {
 
     switch (action.type) {
 
-        case SCHOOLSEARCH_FETCH_SUCCESS:
+
+        case SELECT_SCHOOL:
             return Object.assign({}, state, {
-                isLoading: false,
-                schoolData: action.schoolData
+                currentSchoolname: action.schoolName,
+                currentSchoolcode: action.schoolCode
             });
 
-        case SCHOOLSEARCH_FETCH_FAILURE:
-            return Object.assign({}, state, {
-                isLoading: false,
-                response: action.response
-            })
-
     }
-    
+
     return state
 }

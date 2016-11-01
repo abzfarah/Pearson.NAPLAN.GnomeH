@@ -70,8 +70,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(globalState) {
 
     return {
-        isLoading: globalState.school.isLoading,
-        schoolData: globalState.school.schoolData
+
     }
 }
 

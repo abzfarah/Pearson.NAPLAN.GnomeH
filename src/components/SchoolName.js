@@ -17,7 +17,6 @@ class SchoolName extends React.Component {
 
 
   render() {
-    debugger;
     const { schoolName, schoolCode } = this.props;
     let string = 'School Code: ';
     var full;

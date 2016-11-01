@@ -1,7 +1,4 @@
 import {
-  OIDC_LOGOUT_SUCCESS,
-  OIDC_LOAD_TOKEN_SUCCESS,
-  OIDC_LOAD_TOKEN_ERROR,
   USER_EXPIRED,
   REDIRECT_SUCCESS,
   USER_FOUND,
@@ -10,10 +7,6 @@ import {
   SESSION_TERMINATED,
   LOADING_USER
 } from '../constants'
-
-
-
-
 
 // dispatched when the existing user expired
 export function userExpired() {
@@ -66,44 +59,4 @@ export function loadingUser() {
   return {
     type: LOADING_USER
   };
-}
-
-export function loadSubscriptionsStart() {
-  return {
-    type: LOAD_SUBSCRIPTIONS_START
-  };
-}
-
-export function loadSubscriptionsSuccess(channels) {
-  return {
-    type: LOAD_SUBSCRIPTIONS_SUCCESS,
-    payload: channels
-  };
-}
-
-
-export function setError(error) {
-  return {
-    type: SET_ERROR,
-    payload: error
-  }
-}
-
-export function removeError(error) {
-  return {
-    type: REMOVE_ERROR
-  }
-}
-
-// this will generate an error
-export function errorRequest() {
-  return (dispatch) => {
-    const url = 'https://www.thisweirdurlhopefullydoesntexist.com';
-
-    apiRequest(url)
-      .then(result => {
-        dispatch(setError(result.error));
-        dispatch(push('/error'));
-      });
-  }
 }

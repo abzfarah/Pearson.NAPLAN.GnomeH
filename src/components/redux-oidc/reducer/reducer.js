@@ -13,7 +13,6 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  debugger
   switch (action.type) {
     case USER_EXPIRED:
         return Object.assign({}, { ...state }, { isLoadingUser: false });

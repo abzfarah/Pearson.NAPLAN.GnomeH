@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import userManager from '../components/utils/oidc/userManager';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
-
 import Footer from '../containers/Footer';
 import Button from '../components/common/Button';
 import Box from '../components/common/Box';
@@ -10,129 +9,112 @@ import Header from 'grommet/components/Header';
 import { push } from 'react-router-redux';
 import HeaderContainer from './HeaderContainer'
 import _ from 'lodash';
-import  SchoolNameContainer  from './SchoolNameContainer';
-import  SchoolSearchContainer  from './SchoolSearchContainer';
-import auth from '../routes/utils/auth'
+import session from '../routes/utils/session'
+import {storedUser} from '../components/redux-oidc/oidcMiddleware';
+import schools from '../data/schools.json';
+
+debugger;
+
+import { loadSchools } from '../actions/searchActions'
 
 class AppContainer extends React.Component {
 
   constructor(props) {
-      super(props);
-      this.state = {
-        loggedIn: false,
-        user: false,
-        claims: null
-      }
+    super(props);
 
-      this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
+    this.state = {
+      loggedIn: false,
+      user: false,
+      currentSchool: false,
+      schools: schools
+   }
+
+    this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
   }
 
-  componentWillMount(props) {
-    var self = this
-    let user = userManager.getUser().then(function(user) {
-      if (user.profile) {
-        self.props.dispatch({
-            type: 'USER_LOGGEDIN',
-            loggedIn: true,
-            payload: user.profile
-        })
-
-        self.state = {
-          loggedIn: true,
-          user: user,
-          claims: user.profile
-        }
-
-      }
-      return user
-    })
-
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if ( nextState.loggedIn == true | nextProps.loggedIn == true) {
-      this.state.loggedIn = true
-    }
-
-    var nextState = nextState;
-    var nextProps = nextProps;
-    return true;
-  }
-
-  componentWillUpdate(props, state) {
-    var d =9;
-  }
-
-  componentDidMount(props, state) {
-    this.forceUpdate()
-  }
-
-  onLoginButtonClick = (event) => {
+   onLoginButtonClick = (event) => {
       event.preventDefault();
       userManager.signinRedirect();
   };
 
-  onLogoutButtonClick = (event) => {
+    onLogoutButtonClick = (event) => {
       event.preventDefault();
-      userManager.removeUser(); // removes the user data from sessionStorage
+      userManager.removeUser();
       userManager.signoutRedirect();
       this.setState({loggedIn: false});
       this.forceUpdate()
   }
 
+  componentWillMount(props) {
+
+    const { dispatch } = this.props;
+
+    if ( session.exists ) {
+      let user = session.user
+      session.login = true;
+      this.setState({loggedIn: true, user: user})
+    }
+  }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    if (this.state.currentSchool != nextProps.currentSchool) {
+      this.setState({currentSchool: nextProps.currentSchool})
+    }
+
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+
+    if ( !this.props.user && nextProps.user) return true
+
+    else if (this.props.currentSchool != nextProps.currentSchool) return true
+
+    else if ( !this.state.loggedIn && nextState.loggedIn ) return true
+
+    else false;
+  }
+
+  componentWillUpdate(props, state) {
+
+    if ( !this.state.loggedIn && session.exists ) {
+      const user = session.user
+      session.login = true;
+      this.setState({loggedIn: true, user: user})
+    }
+
+  }
+
+  componentDidMount(props, state) {
+
+  }
+
   render() {
+    const { user, loggedIn, schools, currentSchool } = this.state
 
-    var schoolDetails = this.props.schoolDetails
-    var code = schoolDetails.code;
-    var suburb = schoolDetails.suburb;
-    var schoolName = schoolDetails.schoolName;
-
-    let adminClaim = _.includes(this.state.claims, 'VIC_Client');
-
-    debugger;
-    let loggedIn = this.state.loggedIn;
+    var x = schools
 
     return (
+      <div>
+        <HeaderContainer
+           loggedIn={loggedIn}
+           user={user}
+           schools={schools}
+           currentSchool={currentSchool}
+           onLogout={this.onLogoutButtonClick}
+           onLogin={this.onLoginButtonClick} />
 
-    <div className="mainContainer">
+        { this.props.children }
 
-      <StickyContainer>
-          <Sticky style={{ zIndex: 5 }}>
-           <div className="header-bar"><i></i> </div>
-
-            <HeaderContainer loggedIn={this.state.loggedIn} claims={this.state.claims}
-            onLogout={this.onLogoutButtonClick}
-            onLogin={this.onLoginButtonClick}
-            />
-
-          <Box direction="row"  wrap={true} align="center" className="second-header">
-
-            <SchoolNameContainer schoolName={schoolName} schoolCode={code} claims={this.state.claims}/>
-            { adminClaim && <SchoolSearchContainer  claims={this.state.claims}/> }
-
-          </Box>
-
-
-        </Sticky>
-
-    </StickyContainer>
-    { this.props.children }
-    <Footer ></Footer>
-  </div>
-  )
+        <Footer/>
+      </div>
+     )
+    }
   }
-  }
-
-  //{ <SchoolSearch/> }
-
 
   function mapStateToProps(state, ownProps) {
     return {
         user: state.oidc.user,
-        error: state.error.error,
-        ownProps: ownProps,
-        loggedIn: state.loggedIn,
-        schoolDetails: state.schoolDetails
+        loggedIn: state.loggedIn
     };
   }
 
