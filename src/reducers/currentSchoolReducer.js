@@ -6,9 +6,8 @@ import {
 
 
 const initialState = {
-    isLoading: false,
-    schoolData: [],
-    error: {}
+  currentSchoolname: "",
+  currentSchoolcode: ""
 }
 
 const SELECT_SCHOOL = 'SELECT_SCHOOL';

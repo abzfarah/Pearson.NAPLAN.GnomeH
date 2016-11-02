@@ -56,17 +56,23 @@ class SchoolName extends React.Component {
     super()
   }
   render() {
+    const { name, code } = this.props;
+    let string = 'School Code: ';
+    var full;
+    if (code != undefined) {
+         full = string + code;
+    }
+    else full = ""
     debugger;
 
-    var x =67;
     return (
       <div className="school-heading">
           <Header className="school-name">
-
+            { name}
           </Header>
 
           <Header size="small" className="school-code">
-
+            {full}
           </Header>
       </div>
       )
@@ -101,11 +107,6 @@ class HeaderContainer extends React.Component {
     debugger;
   }
 
-  selectSchool() {
-
-
-  }
-
   componentDidMount() {
     debugger;
   }
@@ -120,7 +121,7 @@ class HeaderContainer extends React.Component {
   }
 
   render(props) {
-    const { loggedIn } = this.props
+    const { loggedIn, currentSchoolname, currentSchoolcode } = this.props
     debugger;
     return (
       <StickyContainer>
@@ -128,7 +129,7 @@ class HeaderContainer extends React.Component {
             <Login status={this.props}/>
             <Box direction="row"  wrap={true} align="center" className="second-header">
 
-              <SchoolName school={this.props.school} />
+              <SchoolName name={this.props.currentSchoolname} code={this.props.currentSchoolcode} />
               <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool} />
 
             </Box>
@@ -140,7 +141,8 @@ class HeaderContainer extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-
+      currentSchoolname: state.currentSchool.currentSchoolname,
+      currentSchoolcode: state.currentSchool.currentSchoolcode
     };
 }
 
