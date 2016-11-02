@@ -10,7 +10,6 @@ class SchoolSearch extends React.Component {
 
     return (
       <div>
-        <div className="school-search">
           <Form>
             <FormField>
               <Select
@@ -21,7 +20,6 @@ class SchoolSearch extends React.Component {
               placeHolder="Seach for school" />
             </FormField>
           </Form>
-          </div>
       </div>
     )
   }

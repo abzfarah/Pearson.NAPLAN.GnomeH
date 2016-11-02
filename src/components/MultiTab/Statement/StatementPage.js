@@ -13,8 +13,8 @@ class StatementPage extends Component {
 
     componentDidMount() {
 
-//--TODO 
-        var schoolCode ='01006';
+//--TODO
+        var schoolCode ='01407';
         this.props.getStatement(schoolCode);
     }
 

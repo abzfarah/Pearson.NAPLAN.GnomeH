@@ -6,6 +6,7 @@ import Form from '../components/common/Form';
 import FormField from '../components/common/FormField';
 import Search from '../components/common/Search';
 import Select from '../components/common/Select';
+import Box from '../components/common/Box';
 
 class SchoolSearch extends React.Component {
 
@@ -76,8 +77,10 @@ class SchoolSearch extends React.Component {
 
       this.props.dispatch({
           type: 'SELECT_SCHOOL',
-          schoolName: name,
-          schoolCode: code
+          currentSchool: {
+            name,
+            code
+          }
       })
       debugger;
     }
@@ -85,8 +88,8 @@ class SchoolSearch extends React.Component {
     render() {
 
         return (
-            <div>
-              <div className="school-search">
+
+              <Box direction="row" className="search-box">
                 <Form>
                   <FormField>
                     <Select
@@ -97,8 +100,8 @@ class SchoolSearch extends React.Component {
                     placeHolder="Seach for school" />
                   </FormField>
                 </Form>
-                </div>
-            </div>
+              </Box>
+
         )
     }
 }

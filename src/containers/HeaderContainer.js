@@ -52,7 +52,7 @@ class SchoolName extends React.Component {
     super()
   }
   render() {
-    const { name, code } = this.props;
+    const { name, code } = this.props.school;
     let string = 'School Code: ';
     var full;
     if (code != undefined) {
@@ -62,7 +62,7 @@ class SchoolName extends React.Component {
     debugger;
 
     return (
-      <div className="school-heading">
+      <Box direction="row" className="school-info">
           <Header className="school-name">
             { name}
           </Header>
@@ -70,7 +70,8 @@ class SchoolName extends React.Component {
           <Header size="small" className="school-code">
             {full}
           </Header>
-      </div>
+      </Box>
+
       )
   }
 }
@@ -81,24 +82,19 @@ class HeaderContainer extends React.Component {
   constructor() {
     super()
     this.state = {
-      schools: null,
-      loggedIn: null,
       currentSchool: []
    }
   }
 
   componentWillMount(props) {
-     this.state = {
-      schools: this.props.schools,
-      loggedIn: this.props.loggedIn
-   }
+
     debugger;
   }
 
   componentWillReceiveProps(nextProps) {
 
-    if (nextProps.currentSchool) {
-
+    if (this.state.currentSchool != nextProps.currentSchool) {
+      this.setState({currentSchool: nextProps.currentSchool})
     }
     debugger;
   }
@@ -117,7 +113,7 @@ class HeaderContainer extends React.Component {
   }
 
   render(props) {
-    const { loggedIn, currentSchoolname, currentSchoolcode } = this.props
+    const { loggedIn, currentSchool, currentSchoolname, currentSchoolcode } = this.props
     let user = this.props.user;
 
     let searchClaim = user.hasOwnProperty('centreSearch')
@@ -128,9 +124,12 @@ class HeaderContainer extends React.Component {
           <Sticky style={{ zIndex: 5 }}>
             <Login status={this.props}/>
             <Box direction="row"  wrap={true} align="center" className="second-header">
-
-              { loggedIn && <SchoolName name={this.props.currentSchoolname} code={this.props.currentSchoolcode} /> }
-              { searchClaim && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool} /> }
+              <Box direction="row" className="school-info">
+                { currentSchool && <SchoolName school={this.state.currentSchool} /> }
+              </Box>
+              <Box direction="row" className="school-search">
+                { searchClaim && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool} /> }
+              </Box>
 
             </Box>
           </Sticky>
@@ -141,9 +140,8 @@ class HeaderContainer extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-      currentSchoolname: state.currentSchool.currentSchoolname,
-      currentSchoolcode: state.currentSchool.currentSchoolcode,
-      loggedIn: state.oidc.user
+      currentSchool: state.currentSchool.school,
+      loggedIn: ownProps.loggedIn
     };
 }
 

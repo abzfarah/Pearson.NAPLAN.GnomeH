@@ -6,8 +6,7 @@ import {
 
 
 const initialState = {
-  currentSchoolname: "",
-  currentSchoolcode: ""
+  currentSchool: ""
 }
 
 const SELECT_SCHOOL = 'SELECT_SCHOOL';
@@ -23,8 +22,7 @@ export default (state = initialState, action = {}) => {
 
         case SELECT_SCHOOL:
             return Object.assign({}, state, {
-                currentSchoolname: action.schoolName,
-                currentSchoolcode: action.schoolCode
+                school: action.currentSchool,
             });
 
     }

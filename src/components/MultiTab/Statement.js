@@ -131,12 +131,6 @@ const Statement = () => (
                  </Box>
 
               </Box>
-
-
-
-
-
-
              </Box>
 
           </Box>

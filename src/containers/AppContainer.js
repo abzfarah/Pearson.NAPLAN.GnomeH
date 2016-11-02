@@ -40,6 +40,7 @@ class AppContainer extends React.Component {
     onLogoutButtonClick = (event) => {
       event.preventDefault();
       userManager.removeUser();
+      sessionStorage.clear();
       userManager.signoutRedirect();
       this.setState({loggedIn: false});
       this.forceUpdate()
@@ -97,7 +98,7 @@ class AppContainer extends React.Component {
     return (
       <div>
         <HeaderContainer
-           loggedIn={loggedIn}
+           loggedIn={this.state.loggedIn}
            user={user}
            schools={schools}
            currentSchool={currentSchool}
