@@ -12,30 +12,11 @@ const oidcMiddleware = createOidcMiddleware(userManager, null, false, '/callback
 const enhancers = [];
 const initialState = {};
 
-const enhancer = 
-  reduxSearch({
-    // Configure redux-search by telling it which resources to index for searching
-    resourceIndexes: {
-      // In this example Books will be searchable by :title and :author
-      schools: ['name', 'code']
-    },
-    // This selector is responsible for returning each collection of searchable resources
-    resourceSelector: (resourceName, state) => {
-      // In our example, all resources are stored in the state under a :resources Map
-      // For example "books" are stored under state.resources.books
-      return state.resources.get(resourceName)
-    }
-  })
+const enhancer = []
 
 
-  const store = compose(  
-	  applyMiddleware(oidcMiddleware, routerMiddleware(browserHistory), thunkMiddleware, logger()),
-	  reduxSearch({
-	    resourceIndexes: {
-	     
-	      books: ['author', 'title']
-	    }
-	  })
+  const store = compose(
+	  applyMiddleware(oidcMiddleware, routerMiddleware(browserHistory), thunkMiddleware, logger())
 	)(createStore)(reducer)
 
 
@@ -54,7 +35,7 @@ if (module.hot) {
     store.replaceReducer(reducers(store.asyncReducers));
   })
 
-  
+
 }
 
 export default store;

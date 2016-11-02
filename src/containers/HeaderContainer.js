@@ -6,15 +6,11 @@ import Header from 'grommet/components/Header';
 import Footer from '../containers/Footer';
 import Box from '../components/common/Box';
 import Button from '../components/common/Button';
-
-import  SchoolNameContainer  from './SchoolNameContainer';
 import  SchoolSearch  from './SchoolSearch';
 import userManager from '../components/utils/oidc/userManager';
-import _ from 'lodash';
 import {storedUser} from '../components/redux-oidc/oidcMiddleware';
-
 import {selectSchool} from "../actions"
-
+import _ from 'lodash';
 
 class Login extends React.Component {
 
@@ -122,6 +118,10 @@ class HeaderContainer extends React.Component {
 
   render(props) {
     const { loggedIn, currentSchoolname, currentSchoolcode } = this.props
+    let user = this.props.user;
+
+    let searchClaim = user.hasOwnProperty('centreSearch')
+
     debugger;
     return (
       <StickyContainer>
@@ -130,7 +130,7 @@ class HeaderContainer extends React.Component {
             <Box direction="row"  wrap={true} align="center" className="second-header">
 
               { loggedIn && <SchoolName name={this.props.currentSchoolname} code={this.props.currentSchoolcode} /> }
-              { loggedIn && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool} /> }
+              { searchClaim && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool} /> }
 
             </Box>
           </Sticky>

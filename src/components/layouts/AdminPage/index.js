@@ -48,8 +48,6 @@ class AdminPage extends React.Component {
         event.preventDefault();
         userManager.removeUser(); // removes the user data from sessionStorage
         sessionStorage.removeItem('userSession');
-
-
         userManager.signoutRedirect();
 
     }
