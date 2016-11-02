@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import userManager from '../components/utils/oidc/userManager';
+import userManager from '../utils/userManager';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
 import Footer from '../containers/Footer';
 import Button from '../components/common/Button';
@@ -9,7 +9,6 @@ import Header from 'grommet/components/Header';
 import { push } from 'react-router-redux';
 import HeaderContainer from './HeaderContainer'
 import session from '../routes/utils/session'
-import {storedUser} from '../components/redux-oidc/oidcMiddleware';
 import schools from '../data/schools.json';
 import { loadSchools } from '../actions/searchActions'
 import _ from 'lodash';

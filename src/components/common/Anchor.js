@@ -2,7 +2,7 @@ import React, { Children, Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import LinkNextIcon from './icons/base/LinkNext';
 
-import CSSClassnames from '../utils/CSSClassnames';
+import CSSClassnames from './utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.ANCHOR;
 

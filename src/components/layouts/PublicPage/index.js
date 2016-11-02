@@ -9,7 +9,7 @@ import Paragraph from '../../common/Paragraph';
 import Carousel from '../../common/Carousel';
 import Section from '../../common/Section';
 import { StickyContainer, Sticky } from '../../common/Sticky';
-import CSSClassnames from '../../utils/CSSClassnames';
+import CSSClassnames from '../../common/utils/CSSClassnames';
 import { connect } from 'react-redux';
 import userManager from '../../utils/oidc/userManager';
 import '../../../styles/core.scss';

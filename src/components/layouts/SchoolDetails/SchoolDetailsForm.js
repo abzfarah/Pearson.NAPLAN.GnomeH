@@ -17,7 +17,7 @@ import Button from '../../common/Button'
 import Anchor from '../../common/Anchor'
 import Select from '../../common/Select'
 
-import {orange500, blue500, black} from '../../utils/materialStyles/colors';
+import {orange500, blue500, black} from '../../common/utils/materialStyles/colors';
 
 
 const styles = {

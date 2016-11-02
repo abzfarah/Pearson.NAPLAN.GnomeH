@@ -2,18 +2,18 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
-import CSSClassnames from '../utils/CSSClassnames';
-import Props from '../utils/Props';
-import KeyboardAccelerators from '../utils/KeyboardAccelerators';
-import Drop from '../utils/Drop';
+import CSSClassnames from './utils/CSSClassnames';
+import Props from './utils/Props';
+import KeyboardAccelerators from './utils/KeyboardAccelerators';
+import Drop from './utils/Drop';
 
 import Button from './Button';
 import CheckBox from './CheckBox';
 import RadioButton from './RadioButton';
 import Search from './Search';
 import CaretDownIcon from './icons/base/CaretDown';
-import Intl from '../utils/Intl';
-import { announce } from '../utils/Announcer';
+import Intl from './utils/Intl';
+import { announce } from './utils/Announcer';
 
 function findAncestor (element, className) {
   var node = element.parentNode;

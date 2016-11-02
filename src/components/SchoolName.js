@@ -13,9 +13,6 @@ import Header from 'grommet/components/Header';
 
 class SchoolName extends React.Component {
 
-
-
-
   render() {
     const { schoolName, schoolCode } = this.props;
     let string = 'School Code: ';

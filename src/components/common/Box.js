@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import KeyboardAccelerators from '../utils/KeyboardAccelerators';
-import Intl from '../utils/Intl';
-import Props from '../utils/Props';
+import KeyboardAccelerators from './utils/KeyboardAccelerators';
+import Intl from './utils/Intl';
+import Props from './utils/Props';
 import SkipLinkAnchor from './SkipLinkAnchor';
-import CSSClassnames from '../utils/CSSClassnames';
-import { announce } from '../utils/Announcer';
+import CSSClassnames from './utils/CSSClassnames';
+import { announce } from './utils/Announcer';
 
 const CLASS_ROOT = CSSClassnames.BOX;
 const BACKGROUND_COLOR_INDEX = CSSClassnames.BACKGROUND_COLOR_INDEX;

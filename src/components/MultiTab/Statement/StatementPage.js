@@ -23,7 +23,6 @@ class StatementPage extends Component {
         }
 
         if (schoolCode) {
-
             this.props.getStatement(schoolCode);
         }
 
@@ -44,7 +43,9 @@ class StatementPage extends Component {
         return (
             <div>
                 {isLoading && <span> Loading ...</span>}
-                {isLoaded && <StatementForm statement={statementData} initialValues={statementData} submitStatement={this.submitStatement} />}
+                {isLoaded && <StatementForm statement={statementData}
+                initialValues={statementData}
+                submitStatement={this.submitStatement} />}
             </div>
         )
     }

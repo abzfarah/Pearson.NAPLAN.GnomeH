@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import Box from './Box';
 import SkipLinkAnchor from './SkipLinkAnchor';
-import Props from '../utils/Props';
-import CSSClassnames from '../utils/CSSClassnames';
+import Props from './utils/Props';
+import CSSClassnames from './utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.FOOTER;
 

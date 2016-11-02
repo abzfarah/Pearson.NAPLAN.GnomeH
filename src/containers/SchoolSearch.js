@@ -1,31 +1,27 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-import _ from 'lodash';
 import Form from '../components/common/Form';
 import FormField from '../components/common/FormField';
 import Search from '../components/common/Search';
 import Select from '../components/common/Select';
 import Box from '../components/common/Box';
+import _ from 'lodash';
 
 class SchoolSearch extends React.Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
             isLoaded: false,
             schools: [],
             options: [],
             selectedSchool: ''
         }
-
         this.onChange = this.onChange.bind(this);
         this.onSearch = this.onSearch.bind(this);
     }
 
     componentWillMount() {
-
       let school_raw = this.props.schools;
       let schools = [];   // Formatted for select box
 
@@ -40,26 +36,17 @@ class SchoolSearch extends React.Component {
       this.setState({
         schools: schools
       })
-
-
     }
 
-
     componentWillReceiveProps(nextProps) {
-
         if (!nextProps.isLoading && nextProps.schoolList) {
-
-
         }
     }
 
-
     onSearch(event) {
-
       let input = _.toUpper(event.target.value);
       let schools = this.state.schools;
       let filtered_school = "";
-
       if (input.length >= 3) {
          filtered_school = _.filter(schools, function (school) {
              return _.startsWith(school.label, input);
@@ -70,11 +57,8 @@ class SchoolSearch extends React.Component {
     }
 
     onChange(event) {
-
-
       let name = event.option.label
       let code = event.option.value
-
       this.props.dispatch({
           type: 'SELECT_SCHOOL',
           currentSchool: {
@@ -82,13 +66,10 @@ class SchoolSearch extends React.Component {
             code
           }
       })
-      debugger;
     }
 
     render() {
-
         return (
-
               <Box direction="row" className="search-box">
                 <Form>
                   <FormField>
@@ -101,12 +82,9 @@ class SchoolSearch extends React.Component {
                   </FormField>
                 </Form>
               </Box>
-
         )
     }
 }
-
-
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -115,9 +93,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(globalState) {
-
     return {
-
     }
 }
 

@@ -4,8 +4,8 @@ import TransitionGroup from 'react-addons-transition-group';
 import classnames from 'classnames';
 import Box from './Box';
 
-import CSSClassnames from '../utils/CSSClassnames';
-import Props from '../utils/Props';
+import CSSClassnames from './utils/CSSClassnames';
+import Props from './utils/Props';
 
 const CLASS_ROOT = CSSClassnames.COLLAPSIBLE;
 

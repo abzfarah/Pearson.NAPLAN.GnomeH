@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
-import CSSClassnames from '../utils/CSSClassnames';
-import Props from '../utils/Props';
+import CSSClassnames from './utils/CSSClassnames';
+import Props from './utils/Props';
 import Box from './Box';
 
 const CLASS_ROOT = CSSClassnames.HEADER;

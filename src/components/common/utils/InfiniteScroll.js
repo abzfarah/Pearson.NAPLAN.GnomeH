@@ -1,6 +1,6 @@
 // (C) Copyright 2014 Hewlett Packard Enterprise Development LP
 
-import DOM from '../utils/DOM';
+import DOM from './DOM';
 
 const SCROLL_MORE_DELAY = 500; // when the user scrolls
 const SCROLL_MORE_INITIAL_DELAY = 50; // when we start out at the bottom already

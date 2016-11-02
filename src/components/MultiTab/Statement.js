@@ -13,7 +13,7 @@ import Form from '../common/Form'
 import FormField from '../common/FormField'
 import TextField from '../common/TextField'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from '../common/Table';
-import {orange500, blue500, black} from '../utils/materialStyles/colors';
+import {orange500, blue500, black} from './utils/materialStyles/colors';
 
 
 const styles = {

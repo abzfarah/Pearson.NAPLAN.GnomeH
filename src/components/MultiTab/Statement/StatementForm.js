@@ -14,7 +14,7 @@ import RadioButton from '../../common/RadioButton'
 import Button from '../../common/Button'
 import Footer from '../../common/Footer'
 import TextField from '../../common/TextField'
-import { orange500, blue500, black } from '../../utils/materialStyles/colors';
+import { orange500, blue500, black } from '../../common/utils/materialStyles/colors';
 
 const styles = {
     errorStyle: {
@@ -50,13 +50,9 @@ class StatementForm extends React.Component {
     componentWillMount() {
 
         if (this.props.initialValues) {
-
             this.setState({
                 isConfirmed: this.props.initialValues.isConfirmed
             });
-
-            //--TODO
-            // this.setState({ securityLevel: parseInt(this.props.initialValues.securityLevel) })
         }
     }
 
@@ -185,23 +181,7 @@ class StatementForm extends React.Component {
     }
 }
 
-// const renderSecurityLevel = (fields) =>
-//     (
-//         <div>
-//             <FormField label="* Please tick the option which best describes the two levels of security at your school." >
-//                 <RadioButton {...fields.securityLevel.input} id="optionCabinet" name="securityLevel" checked={true}  label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff." />
 
-//                 <RadioButton {...fields.securityLevel.input} id="fioptionSafeel02" name="securityLevel" label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff." />
-
-//                 <RadioButton {...fields.securityLevel.input} id="optionSealed" name="securityLevel" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff." />
-
-//                 <RadioButton {...fields.securityLevel.input} id="optionOther" name="securityLevel" label="Other" />
-//             </FormField>
-//             {fields.securityLevel === 4 &&
-//                 <input {...fields.otherText.input} type="text" />
-//             }
-//         </div>
-//     )
 
 const renderSecurityLevel = ({input, meta: {touched, error, warning }}) => (
     <div>
@@ -300,6 +280,6 @@ export default connect(state => {
 })(form(StatementForm))
  //  <Fields names={['securityLevel', 'otherText']} component={renderSecurityLevel} />
  //-- What to do :
- //-- 
+ //--
  //-- add theme from Repo
  //-- fix submit

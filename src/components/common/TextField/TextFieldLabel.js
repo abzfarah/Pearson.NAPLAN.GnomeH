@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import transitions from '../../utils/materialStyles/transitions';
+import transitions from '../utils/materialStyles/transitions';
 
 function getStyles(props) {
   const defaultStyles = {

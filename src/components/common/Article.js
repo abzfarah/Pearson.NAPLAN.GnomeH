@@ -1,11 +1,11 @@
 import React, { Component, PropTypes, Children } from 'react';
 import {findDOMNode} from 'react-dom';
 import Box from './Box';
-import KeyboardAccelerators from '../utils/KeyboardAccelerators';
-import DOMUtils from '../utils/DOM';
-import Props from '../utils/Props';
-import Scroll from '../utils/Scroll';
-import Responsive from '../utils/Responsive';
+import KeyboardAccelerators from './utils/KeyboardAccelerators';
+import DOMUtils from './utils/DOM';
+import Props from './utils/Props';
+import Scroll from ../utilsScroll';
+import Responsive from './utils/Responsive';
 // import CarouselControls from './CarouselControls';
 import Button from './Button';
 import NextIcon from './icons/base/LinkNext';
@@ -13,7 +13,7 @@ import PreviousIcon from './icons/base/LinkPrevious';
 import UpIcon from './icons/base/Up';
 import DownIcon from './icons/base/Down';
 
-import CSSClassnames from '../utils/CSSClassnames';
+import CSSClassnames from './utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.ARTICLE;
 const DEFAULT_PLAY_INTERVAL = 10000; // 10s

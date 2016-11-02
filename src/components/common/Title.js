@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import Box from './Box';
-import Intl from '../utils/Intl';
-import CSSClassnames from '../utils/CSSClassnames';
+import Intl from './utils/Intl';
+import CSSClassnames from './utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.TITLE;
 

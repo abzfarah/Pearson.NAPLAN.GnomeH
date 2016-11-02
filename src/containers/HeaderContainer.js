@@ -7,20 +7,18 @@ import Footer from '../containers/Footer';
 import Box from '../components/common/Box';
 import Button from '../components/common/Button';
 import  SchoolSearch  from './SchoolSearch';
-import userManager from '../components/utils/oidc/userManager';
-import {storedUser} from '../components/redux-oidc/oidcMiddleware';
-import {selectSchool} from "../actions"
+import { selectSchool } from "../actions"
 import _ from 'lodash';
 
 class Login extends React.Component {
-
   constructor() {
     super()
   }
+
   render() {
-    debugger;
 
     let { loggedIn, onLogout, onLogin } = this.props.status;
+
     return (
     <div>
       <div className="header-bar"><i></i> </div>
@@ -47,11 +45,12 @@ class Login extends React.Component {
 }
 
 class SchoolName extends React.Component {
-
   constructor() {
     super()
   }
+
   render() {
+
     const { name, code } = this.props.school;
     let string = 'School Code: ';
     var full;
@@ -87,7 +86,6 @@ class HeaderContainer extends React.Component {
   }
 
   componentWillMount(props) {
-
     debugger;
   }
 

@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
-import KeyboardAccelerators from '../utils/KeyboardAccelerators';
-import Drop from '../utils/Drop';
-import Props from '../utils/Props';
-import Responsive from '../utils/Responsive';
+import KeyboardAccelerators from './utils/KeyboardAccelerators';
+import Drop from './utils/Drop';
+import Props from './utils/Props';
+import Responsive from './utils/Responsive';
 import Button from './Button';
 import SearchIcon from './icons/base/Search';
-import CSSClassnames from '../utils/CSSClassnames';
-import Intl from '../utils/Intl';
-import { announce } from '../utils/Announcer';
+import CSSClassnames from './utils/CSSClassnames';
+import Intl from './utils/Intl';
+import { announce } from './utils/Announcer';
 
 const CLASS_ROOT = CSSClassnames.SEARCH;
 const INPUT = CSSClassnames.INPUT;
