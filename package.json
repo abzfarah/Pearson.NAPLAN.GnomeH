@@ -62,7 +62,7 @@
       }
     },
     "start": {
-      "command": "babel-node bin/server",
+      "command": "node bin/server",
       "env": {
         "DEBUG": "app:*"
       }

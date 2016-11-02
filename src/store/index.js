@@ -21,7 +21,7 @@ const enhancer = []
 
 
 
-if (__DEBUG__) {
+if (__DEV__) {
   const devToolsExtension = window.devToolsExtension;
 
   if (typeof devToolsExtension === 'function') {
