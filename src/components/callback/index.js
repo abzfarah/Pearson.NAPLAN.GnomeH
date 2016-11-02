@@ -34,9 +34,7 @@ class CallbackPage extends React.Component {
     var userSession = JSON.stringify(user.profile)
     sessionStorage.setItem('userSession', userSession);
 
-    var x = userSession;
-    debugger;
-
+    var x = userSession; 
 
     dispatch({
         type: 'USER_LOGGEDIN',

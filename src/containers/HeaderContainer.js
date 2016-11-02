@@ -113,12 +113,11 @@ class HeaderContainer extends React.Component {
   }
 
   render(props) {
+
     const { loggedIn, currentSchool, currentSchoolname, currentSchoolcode } = this.props
     let user = this.props.user;
-
     let searchClaim = user.hasOwnProperty('centreSearch')
 
-    debugger;
     return (
       <StickyContainer>
           <Sticky style={{ zIndex: 5 }}>
