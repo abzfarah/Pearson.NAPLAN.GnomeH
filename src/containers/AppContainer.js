@@ -58,18 +58,17 @@ class AppContainer extends React.Component {
   }
 
   componentWillMount(props) {
+
     var isloggedIn = auth.loggedIn()
-    debugger;
-
-
     auth.onChange = this.updateAuth
-
   }
 
 
   render() {
 
-    const { loggedIn, claims }  = this.props;
+    const  loggedIn = auth.loggedIn();
+    //--TODO
+  let showSchoolSearch = loggedIn && this.sessionClaims.centreSearch;
     return (
 
 
@@ -79,7 +78,7 @@ class AppContainer extends React.Component {
           <Sticky style={{ zIndex: 5 }}>
            <div className="header-bar"><i></i> </div>
 
-            <HeaderContainer loggedIn={loggedIn} claims={claims}
+            <HeaderContainer loggedIn={loggedIn} claims={this.sessionClaims}
             onLogout={this.onLogoutButtonClick}
             onLogin={this.onLoginButtonClick}
             />
@@ -87,7 +86,7 @@ class AppContainer extends React.Component {
           <Box direction="row"  wrap={true} align="center" className="second-header">
 
              {loggedIn && <SchoolName /> }
-             {loggedIn && <SchoolSearchContainer /> }
+             {!showSchoolSearch && <SchoolSearchContainer /> }
           </Box>
 
 
