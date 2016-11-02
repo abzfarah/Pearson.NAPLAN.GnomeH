@@ -1,11 +1,11 @@
 import  createUserManager  from '../../../helpers/createUserManager';
 
 const config = {
-  client_id: 'VICRegWeb',
+  client_id: '411289226499-83otrjgl89k4oa3ku6l4b5e0qqkehjb6.apps.googleusercontent.com',
   redirect_uri: 'http://localhost:8004/callback',
   response_type: 'id_token token',
-  scope: 'openid profile email roles VICRegScope all_claims',
-  authority: 'https://melbndevweb1.epenau.local:1301/ids',
+  scope: 'openid profile',
+  authority: 'https://accounts.google.com',
   post_logout_redirect_uri: 'http://localhost:8004/',
   silent_redirect_uri: 'http://localhost:8004/home',
   automaticSilentRenew: true,

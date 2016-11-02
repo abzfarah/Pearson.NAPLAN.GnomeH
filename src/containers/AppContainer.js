@@ -61,6 +61,7 @@ class AppContainer extends React.Component {
       this.setState({currentSchool: nextProps.currentSchool})
     }
 
+
   }
 
   shouldComponentUpdate(nextProps, nextState) {

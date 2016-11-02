@@ -48,7 +48,6 @@ class PublicPage extends React.Component {
 function mapStateToProps(state) {
   return {
     user: state.oidc.user,
-    error: state.error.error
   };
 }
 
