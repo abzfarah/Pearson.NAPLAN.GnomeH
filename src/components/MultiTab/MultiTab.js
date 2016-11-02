@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Tab from '../common/Tab'
 import Tabs from '../common/Tabs'
 
-import Statement from './Statement/StatementPage'
+import StatementContainer from './StatementContainer'
 import SchoolDetails from './SchoolDetails'
 import AuthorizedStaff from './AuthorizedStaff'
 import ActiveTestOrder from './ActiveTestOrder'
@@ -12,7 +12,7 @@ import Home from './Home'
 const steps =
 [
   {name: 'Home', component: <Home />},
-  {name: 'Statement', component: <Statement />},
+  {name: 'Statement', component: <StatementContainer />},
   {name: 'AuthorizedStaff', component: <AuthorizedStaff />},
   {name: 'School details', component: <SchoolDetails />},
   {name: 'Test Format Order', component: <ActiveTestOrder />},

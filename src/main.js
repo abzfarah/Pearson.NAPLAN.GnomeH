@@ -7,7 +7,8 @@ import { OidcProvider } from 'redux-oidc';
 import createStore from './store';
 import AppContainer from './containers/AppContainer';
 import userManager from './components/utils/oidc/userManager';
-import MuiThemeProvider from './components/common/utils/materialStyles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import routes from './routes';
 import store from './store';
 
@@ -24,11 +25,10 @@ let render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <OidcProvider store={store} userManager={userManager}>
-          <MuiThemeProvider>
+          <MuiThemeProvider  muiTheme={getMuiTheme()}>
               <Router
                 history={history}
-                routes={routes}
-                />
+                routes={routes} />
           </MuiThemeProvider>
       </OidcProvider>
     </Provider>,
