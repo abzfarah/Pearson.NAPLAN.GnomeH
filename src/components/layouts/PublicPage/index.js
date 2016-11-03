@@ -11,7 +11,7 @@ import Section from '../../common/Section';
 import { StickyContainer, Sticky } from '../../common/Sticky';
 import CSSClassnames from '../../common/utils/CSSClassnames';
 import { connect } from 'react-redux';
-import userManager from '../../utils/oidc/userManager';
+import userManager from '../../../utils/userManager';
 import '../../../styles/core.scss';
 
 

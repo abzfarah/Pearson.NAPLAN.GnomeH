@@ -1,11 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import Statement from './Statement'
+import { getStatement, submitStatement } from '../../actions/statementActions'
 
 class StatementContainer extends React.Component {
 
   constructor() {
-    super()
+    super();
 
+
+  }
+
+  handleSubmit() {
+    var x =9;
+    debugger;
   }
 
   componentWillMount() {
@@ -13,8 +20,7 @@ class StatementContainer extends React.Component {
 
   render() {
     return (
-      <Statement/>
-
+      <Statement handleSubmit={this.handleSubmit}/>
     )
   }
 }

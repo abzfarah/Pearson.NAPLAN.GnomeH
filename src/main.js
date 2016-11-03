@@ -6,7 +6,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { OidcProvider } from 'redux-oidc';
 import createStore from './store';
 import AppContainer from './containers/AppContainer';
-import userManager from './components/utils/oidc/userManager';
+import userManager from './utils/userManager';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import routes from './routes';

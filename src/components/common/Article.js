@@ -4,7 +4,7 @@ import Box from './Box';
 import KeyboardAccelerators from './utils/KeyboardAccelerators';
 import DOMUtils from './utils/DOM';
 import Props from './utils/Props';
-import Scroll from ../utilsScroll';
+import Scroll from './utils/Scroll';
 import Responsive from './utils/Responsive';
 // import CarouselControls from './CarouselControls';
 import Button from './Button';

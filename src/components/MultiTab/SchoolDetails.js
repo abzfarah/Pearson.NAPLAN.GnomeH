@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import * as schoolDetailsActions from '../../actions/schoolDetailsActions';
-import userManager from '../utils/oidc/userManager';
+
 // import SchoolDetailsLayout from '../layouts/SchoolDetails'
 import SchoolDetailsForm from '../layouts/SchoolDetails/SchoolDetailsForm'
 
@@ -24,11 +23,6 @@ class SchoolDetails extends React.Component {
 
   }
 
-
-  logoutUser (event) {
-    event.preventDefault();
-    userManager.signoutRedirect();
-  }
 
   render () {
 

@@ -6,6 +6,7 @@ import currentSchool from './currentSchoolReducer'
 import schoolDetailsReducer from './schoolDetailsReducer'
 
 import statementReducer from './statementReducer'
+import claimsReducer from './claimsReducer'
 
 
 export const USER_LOGGEDIN = 'USER_LOGGEDIN';
@@ -16,6 +17,7 @@ const reducer = combineReducers(
   {
     routing: routerReducer,
     oidc: oidcReducer,
+    claims: claimsReducer,
     form : formReducer,
     currentSchool: currentSchool,
     statement : statementReducer,

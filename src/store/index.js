@@ -1,16 +1,11 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
-import createOidcMiddleware, { createUserManager } from 'redux-oidc';
-import thunkMiddleware from 'redux-thunk'
 import logger from "redux-logger";
-import userManager from '../utils/userManager';
+import thunkMiddleware from 'redux-thunk'
 import reducer from '../reducers';
-
-
-
-
-
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import createOidcMiddleware, { createUserManager } from 'redux-oidc';
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import userManager from '../utils/userManager';
 
 
 const oidcMiddleware = createOidcMiddleware(userManager, null, false, '/callback', null);

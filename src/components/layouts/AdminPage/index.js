@@ -6,7 +6,7 @@ import MultiTab from '../../MultiTab';
 import Button from '../../common/Button';
 import { StickyContainer, Sticky } from '../../common/Sticky';
 import { connect } from 'react-redux';
-import userManager from '../../utils/oidc/userManager';
+import userManager from '../../../utils/userManager';
 import { errorRequest } from '../../../actions';
 import CallbackComponent from '../../callback/CallbackComponent';
 import Header from 'grommet/components/Header';
@@ -32,6 +32,18 @@ class AdminPage extends React.Component {
 
     }
 
+    componentWillUpdate() {
+      debugger;
+        return true
+
+    }
+
+    componentWillReceiveProps() {
+      debugger;
+        return true
+
+    }
+
     successCallback = () => {
       debugger;
         this.props.dispatch(push('/home'));
@@ -47,7 +59,7 @@ class AdminPage extends React.Component {
     onLogoutButtonClicked = (event) => {
         event.preventDefault();
         userManager.removeUser(); // removes the user data from sessionStorage
-       
+
         sessionStorage.removeItem('userSession');
         userManager.signoutRedirect();
 
@@ -64,33 +76,6 @@ class AdminPage extends React.Component {
 
         return (
             <div>
-
-                <Menu  inline={true} direction="row">
-                    <Anchor href="#" className="active">
-                        Home
-                  </Anchor>
-                    <Anchor href="#">
-                        Tasks
-                  </Anchor>
-                    <Anchor href="#">
-                        2017 NAPLAN Online Pilot
-                  </Anchor>
-                    <Anchor href="#">
-                        Bulk Download
-                  </Anchor>
-                    <Anchor href="#">
-                        Contact Us
-                  </Anchor>
-                 <NavAnchor path="/manageUsers">
-                    Manage Schools
-                  </NavAnchor>
-                    <Anchor href="#">
-                    Manage Users
-                  </Anchor>
-                    <Anchor href="#">
-                        Reports
-                  </Anchor>
-                </Menu>
                 <Box className="mid">
                     <MultiTab />
                 </Box>

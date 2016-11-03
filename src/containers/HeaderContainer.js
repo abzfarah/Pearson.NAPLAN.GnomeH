@@ -81,7 +81,9 @@ class HeaderContainer extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentSchool: []
+      currentSchool: [],
+      loggedIn: false,
+      claims: {}
    }
   }
 
@@ -94,6 +96,12 @@ class HeaderContainer extends React.Component {
     if (this.state.currentSchool != nextProps.currentSchool) {
       this.setState({currentSchool: nextProps.currentSchool})
     }
+    else if (this.props.user != nextProps.user) {
+      this.setState({loggedIn: true})
+    }
+
+    else return true
+
     debugger;
   }
 
@@ -107,14 +115,15 @@ class HeaderContainer extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
+
+    return true
     debugger;
   }
 
   render(props) {
 
-    const { loggedIn, currentSchool, currentSchoolname, currentSchoolcode } = this.props
-    let user = this.props.user;
-    let searchClaim = user.hasOwnProperty('centreSearch')
+    const { loggedIn, currentSchool, currentSchoolname, currentSchoolcode, claims } = this.props
+    const { centreSearch } = claims
 
     return (
       <StickyContainer>
@@ -122,12 +131,11 @@ class HeaderContainer extends React.Component {
             <Login status={this.props}/>
             <Box direction="row"  wrap={true} align="center" className="second-header">
               <Box direction="row" className="school-info">
-                { currentSchool && <SchoolName school={this.state.currentSchool} /> }
+                { currentSchool && <SchoolName school={this.state.currentSchool}/> }
               </Box>
               <Box direction="row" className="school-search">
-                { searchClaim && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool} /> }
+                { centreSearch && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool}/> }
               </Box>
-
             </Box>
           </Sticky>
       </StickyContainer>
@@ -138,7 +146,8 @@ class HeaderContainer extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
       currentSchool: state.currentSchool.school,
-      loggedIn: ownProps.loggedIn
+      loggedIn: ownProps.loggedIn,
+      claims: state.claims.claims
     };
 }
 

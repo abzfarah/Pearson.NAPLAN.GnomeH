@@ -1,71 +1,20 @@
 import React, { Component, PropTypes } from 'react';
+import { Field, reduxForm } from 'redux-form'
+import { RadioButton, MenuItem } from 'material-ui'
+import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../common/Table';
+import { validate } from "../utils/validation"
 import Tab from '../common/Tab'
 import Tabs from '../common/Tabs'
 import Section from '../common/Section'
 import Heading from '../common/Heading'
 import Paragraph from '../common/Paragraph'
 import Box from '../common/Box'
-
 import Footer from '../common/Footer'
 import Form from '../common/Form'
+import Button from '../common/Button'
 import FormField from '../common/FormField'
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from '../common/Table';
 
-
-import { Field, reduxForm } from 'redux-form'
-
-import { RadioButton} from 'material-ui/RadioButton'
-import MenuItem from 'material-ui/MenuItem'
-
-import { AutoComplete as MUIAutoComplete } from 'material-ui'
-import {
-  AutoComplete,
-  Checkbox,
-  DatePicker,
-  RadioButtonGroup,
-  SelectField,
-  Slider,
-  TextField,
-  Toggle
-} from 'redux-form-material-ui'
-
-const validate = values => {
-  const errors = {}
-  const requiredFields = [ 'firstName', 'lastName', 'email', 'favoriteColor', 'notes' ]
-  requiredFields.forEach(field => {
-    if (!values[ field ]) {
-      errors[ field ] = 'Required'
-    }
-  })
-  if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-  return errors
-}
-
-
-const renderTextField = field => (
-  <TextField hintText={field.input.label}
-    floatingLabelText={field.input.label}
-    errorText={field.touched && field.error}
-    {...field.input}
-  />
-)
-
-const renderCheckbox = field => (
-  <Checkbox label={field.input.label}
-    checked={field.input.value ? true : false}
-    onCheck={field.input.onChange}/>
-)
-
-const renderSelectField = field => (
-  <SelectField
-    floatingLabelText={field.input.label}
-    errorText={field.touched && field.error}
-    {...field.input}
-    onChange={(event, index, value) => field.input.onChange(value)}>
-  </SelectField>
-)
 
 class Statement extends Component {
 
@@ -74,98 +23,103 @@ class Statement extends Component {
     .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
     .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
     .focus()                // on TextField
-}
-
+ }
 
   render() {
 
   const { handleSubmit, pristine, reset, submitting } = this.props
 
     return (
+      <Section className="test">
+        <form onSubmit={handleSubmit}>
+        <Box className="PartA">
+           <Heading tag="h2">
+           <div className="numberCircle">1</div>
+             Statement of Compliance
+           </Heading>
+           <Paragraph>
+               Principals are responsible for the security of the NAPLAN test materials and for the administration of the tests. Principals are required to submit an annual Statement of Compliance,
+               indicating their understanding of the VCAA’s requirements in relation to test security and administration.
+           </Paragraph>
+           <Paragraph>
+               While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
+               Security Log. The Test Materials Security Log should be kept by the school for 12 months after the test and may be subject to audit by the VCAA.
+               Fields marked with * in the form below are required.
+           </Paragraph>
+        </Box>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <Field name="name" component={TextField} hintText="Name" floatingLabelText="Name"
-            ref="name" withRef/>
-        </div>
-        <div>
-          <Field name="email" component={TextField} hintText="Email" floatingLabelText="Email"/>
-        </div>
-        <div>
-          <Field name="delivery" component={RadioButtonGroup}>
-            <RadioButton value="pickup" label="Pickup"/>
-            <RadioButton value="delivery" label="Delivery"/>
-          </Field>
-        </div>
-        <div>
-          <Field
-            name="pizzas"
-            component={Slider}
-            description="How many pizzas do you want?"
-            defaultValue={0}
-            min={0}
-            max={20}
-            step={1}/>
-        </div>
-        <div>
-          <Field
-            name="driver"
-            component={SelectField}
-            hintText="Driver"
-            floatingLabelText="Driver">
-            <MenuItem value="alice@redux-pizza.com" primaryText="Alice"/>
-            <MenuItem value="bob@redux-pizza.com" primaryText="Bob"/>
-            <MenuItem value="carl@redux-pizza.com" primaryText="Carl"/>
-          </Field>
-        </div>
-        <div>
-          <Field name="thinCrust" component={Toggle} label="Thin Crust" labelPosition="right"/>
-        </div>
-        <div>
-          <Field name="pepperoni" component={Checkbox} label="Pepperoni"/>
-        </div>
-        <div>
-          <Field name="mushrooms" component={Checkbox} label="Mushrooms"/>
-        </div>
-        <div>
-          <Field name="peppers" component={Checkbox} label="Peppers"/>
-        </div>
-        <div>
-          <Field name="when"
-            component={DatePicker}
-            defaultValue={null} // DatePicker requires an object,
-                                // and redux-form defaults to ''
-            hintText="Day of delivery?"/>
-        </div>
-        <div>
-          <Field
-            name="notes"
-            component={TextField}
-            hintText="Notes"
-            floatingLabelText="Notes"
-            multiLine={true}
-            rows={2}/>
-        </div>
-        <div>
-          <Field
-            name="cheese"
-            component={AutoComplete}
-            floatingLabelText="Cheese"
-            openOnFocus={true}
-            filter={MUIAutoComplete.fuzzyFilter}
-            dataSource={[ 'Cheddar', 'Mozzarella', 'Parmesan', 'Provolone' ]}
-            />
-        </div>
-        <div>
-          <button type="submit" disabled={pristine || submitting}>Submit</button>
-          <button type="button" disabled={pristine || submitting} onClick={reset}>Clear</button>
-        </div>
-      </form>
+        <Box colorIndex='light-1'>
+          <Box className="form-box">
+            <Heading tag="h4">
+              Part A: Principal's Responsibilities
+            </Heading>
+            <Paragraph> Please read Principal's responsibilities</Paragraph>
+          </Box>
+          <Box className="man">
+             <Field name="agree" component={Checkbox} label="I have read and accept the Principal responsibilities" withRef/>
+          </Box>
+        </Box>
 
+        <Box className="PartA1">
+          <Box colorIndex='light-1'>
+            <Box className="form-box">
+              <Heading tag="h4"> Part B: Security Storage Arrangement</Heading>
+              <Paragraph> The VCAA will be conducting visits to schools to audit the storage facilities for the NAPLAN 2016 test materials.</Paragraph>
+              <Paragraph> Apart from when the tests are being administered, test materials are to be kept in a double secure area at all times. Please tick the option which best describes the
+                         double secure storage arrangement for NAPLAN test materials at your school.
+              </Paragraph>
+              <Paragraph>Please select the option which best describes the two levels of security at your school </Paragraph>
+              <Field name="delivery" component={RadioButtonGroup}>
+                <RadioButton value="cabinet"   label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                <RadioButton value="safe" label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                <RadioButton value="container" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
+                <RadioButton value="other" label="Other" />
+              </Field><br/>
+              <Paragraph>
+                Please note:
+                While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
+                Security Log. The Test Materials Security Log should be kept by the school for 12 months after the test and may be subject to audit by the VCAA.
+               </Paragraph>
+            </Box>
+          </Box>
+
+          <Box className="PartA1">
+              <Box colorIndex='light-1'>
+                <Box className="form-box">
+                  <Heading tag="h4">
+                   Part C: Principal's Declaration
+                  </Heading>
+                  <Box>
+                    <div>
+                      <Field name="name" component={TextField} hintText="First" floatingLabelText="First Name"
+                        ref="name"/> <br/>
+                      <Field name="name" component={TextField} hintText="Last" floatingLabelText="Last Name"
+                        ref="name"/><br/>
+                      <Field name="email" component={TextField} hintText="Email" floatingLabelText="Email"/>
+                    </div>
+                   <Box className="declaration" >
+                      <Field name="declare" component={Checkbox} label="I declare that I am the Principal of the school detailed above."/>
+                      <Field name="certify" component={Checkbox} label="I certify that the information provided on this form is correct."/>
+                    </Box>
+                 </Box>
+                </Box>
+
+                <div className="statement-button-groups">
+                    <div>
+                      <button className="submit-button" type="button">Return</button>
+                      <button className="submit-button" type="submit">Submit</button>
+                    </div>
+
+                </div>
+             </Box>
+
+
+          </Box>
+        </Box>
+        </form>
+      </Section>
     )
   }
 }
-export default reduxForm({
-  form: 'example',
-  validate
-})(Statement)
+
+export default reduxForm({form: 'example', validate })(Statement)
