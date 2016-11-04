@@ -7,7 +7,9 @@ import Footer from '../containers/Footer';
 import Box from '../components/common/Box';
 import Button from '../components/common/Button';
 import  SchoolSearch  from './SchoolSearch';
-import { getClaims } from '../components/utils/getClaims'
+
+
+
 import { selectSchool } from "../actions"
 
 import _ from 'lodash';
@@ -99,10 +101,9 @@ class HeaderContainer extends React.Component {
       this.setState({currentSchool: nextProps.currentSchool})
     }
     if (this.props.user != nextProps.user) {
-      let user_claims = getClaims(session.user)
+
       this.setState({
-        loggedIn: true,
-        claims: user_claims
+        loggedIn: true
       })
     }
 
@@ -153,7 +154,7 @@ function mapStateToProps(state, ownProps) {
     return {
       currentSchool: state.currentSchool.school,
       loggedIn: ownProps.loggedIn,
-      claims: state.claims.claims
+      claims: ownProps.claims
     };
 }
 
