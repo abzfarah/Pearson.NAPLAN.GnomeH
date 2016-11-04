@@ -113,6 +113,7 @@ class AppContainer extends React.Component {
         <HeaderContainer
            loggedIn={loggedIn}
            user={user}
+           claims={claims}
            schools={schools}
            currentSchool={currentSchool}
            onLogout={this.onLogoutButtonClick}
