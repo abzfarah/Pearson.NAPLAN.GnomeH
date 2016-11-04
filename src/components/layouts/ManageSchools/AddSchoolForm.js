@@ -26,8 +26,8 @@ class AddSchool extends React.Component {
 
     submitForm(model) {
 
-        console.log(model)
-        //  this.props.submitStatement(model);
+        console.log('ssssssssss')
+          this.props.submitForm(model);
 
     }
     render() {
@@ -96,7 +96,7 @@ class AddSchool extends React.Component {
                     </Box>
                     <Box><div>
                         <RaisedButton label="Submit" primary={true} disabled={submitting} type="submit" style={style} />
-                        <RaisedButton label="Clear Values" stype="button" disabled={pristine || submitting} onClick={reset} style={style} />
+                        <RaisedButton label="Clear Values" disabled={pristine || submitting} onClick={reset} style={style} />
                     </div></Box>
                 </form>
             </Box>

@@ -7,13 +7,19 @@ class AddSchoolPage extends Component {
 
     constructor(props) {
         super(props)
+        this.submitForm = this.submitForm.bind(this);
     }
 
     ComponentDidMaount() {
 
-        //--TODO
-        //GETCURRENTSCHOOL
-        var currentSchool = '01003'
+        //--TODO    
+        //   Get current SchoolCode
+    }
+
+    submitForm(model) {
+        console.log('dddddddddd')
+     
+
     }
 
     render() {
@@ -22,7 +28,7 @@ class AddSchoolPage extends Component {
 
         return (
             <div>
-                <AddSchoolForm schoolData={schoolData} initialValues={schoolData} />
+                <AddSchoolForm schoolData={schoolData} initialValues={schoolData} submitForm={this.submitForm} />
             </div>
         )
     }
@@ -33,9 +39,9 @@ function mapStateToProps(globalState) {
     var schoolData = {};
     schoolData.centreCode = '01003';
     return {
-    //    isLoading: globalState.AddSchool.isLoading,
-     //   isLoaded: globalState.AddSchool.isLoaded,
+        //    isLoading: globalState.AddSchool.isLoading,
+        //   isLoaded: globalState.AddSchool.isLoaded,
         schoolData: schoolData
     }
 }
-export default connect(mapStateToProps, null)(AddSchoolPage)
+export default connect(mapStateToProps, {submitSchool }})(AddSchoolPage)
