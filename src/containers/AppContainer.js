@@ -22,6 +22,7 @@ class AppContainer extends React.Component {
     this.state = {
       loggedIn: false,
       user: false,
+      claims: false,
       currentSchool: false,
       schools: schools
    }
@@ -73,13 +74,21 @@ class AppContainer extends React.Component {
       this.setState({user: nextProps.user})
     }
 
-    else return true
+    if (nextProps.user && !this.state.claims) {
+        let user_claims = getClaims(session.user)
+        this.setState({claims: user_claims})
+
+
+    }
+
+    else return false
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     if ( !this.props.user && nextProps.user) return true
     if (this.props.currentSchool != nextProps.currentSchool) return true
     if ( !this.state.loggedIn && nextState.loggedIn ) return true
+
     else return true
   }
 
@@ -109,7 +118,7 @@ class AppContainer extends React.Component {
            onLogout={this.onLogoutButtonClick}
            onLogin={this.onLoginButtonClick} />
 
-        <NavContainer claims={claims}/>
+        { loggedIn && <NavContainer claims={claims}/> }
 
         { this.props.children }
 

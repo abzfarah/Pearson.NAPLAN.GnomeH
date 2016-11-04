@@ -24,28 +24,27 @@ class NavContainer extends React.Component {
     this.state = {
       claims: ""
    }
-
   }
 
   componentWillMount() {
 
-
-    var f =5;
+   let { claims } = this.props
+   this.setState({claims: claims})
 
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.claims != nextProps.claims) {
-      this.setState({claims: nextProps.claims})
-    }
+
+  }
+
+  componentWillUpdate(props, state) {
 
   }
 
 
   render() {
 
-   let { claims } = this.props
-   let { centreSearch } = claims
+   let { centreSearch } = this.state.claims
 
     return (
                                 <Menu  inline={true} direction="row">
@@ -64,7 +63,7 @@ class NavContainer extends React.Component {
 
   function mapStateToProps(state, ownProps) {
     return {
-        claims: state.claims.claims
+        claims: ownProps.claims
     };
   }
 
