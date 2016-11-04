@@ -11,6 +11,13 @@ import {
 } from '../constants'
 
 
+export function selectSchool(school) {
+  return {
+    type: SELECT_SCHOOL,
+    payload: school
+  };
+}
+
 // dispatched when the existing user expired
 export function userExpired() {
   return {

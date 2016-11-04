@@ -5,8 +5,8 @@ import Tile from './Tile';
 import Button from './Button';
 import Previous from './icons/base/Previous';
 import Next from './icons/base/Next';
-import DOM from '../utils/DOM';
-import CSSClassnames from '../utils/CSSClassnames';
+import DOM from './utils/DOM';
+import CSSClassnames from './utils/CSSClassnames';
 
 // define window obj for react tests to run properly
 let Hammer = function() {};

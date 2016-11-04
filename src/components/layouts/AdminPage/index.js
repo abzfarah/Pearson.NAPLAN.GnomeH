@@ -6,7 +6,7 @@ import MultiTab from '../../MultiTab';
 import Button from '../../common/Button';
 import { StickyContainer, Sticky } from '../../common/Sticky';
 import { connect } from 'react-redux';
-import userManager from '../../utils/oidc/userManager';
+import userManager from '../../../utils/userManager';
 import { errorRequest } from '../../../actions';
 import CallbackComponent from '../../callback/CallbackComponent';
 import Header from 'grommet/components/Header';
@@ -15,7 +15,6 @@ import Anchor from 'grommet/components/Anchor';
 import NavAnchor from '../../common/NavAnchor';
 import DownIcon from 'grommet/components/icons/base/Down';
 import { push } from 'react-router-redux';
-import SchoolSearch from '../SchoolSearch'
 import auth from '../../../routes/utils/auth'
 
 class AdminPage extends React.Component {
@@ -33,7 +32,20 @@ class AdminPage extends React.Component {
 
     }
 
+    componentWillUpdate() {
+      debugger;
+        return true
+
+    }
+
+    componentWillReceiveProps() {
+      debugger;
+        return true
+
+    }
+
     successCallback = () => {
+      debugger;
         this.props.dispatch(push('/home'));
     }
 
@@ -47,10 +59,8 @@ class AdminPage extends React.Component {
     onLogoutButtonClicked = (event) => {
         event.preventDefault();
         userManager.removeUser(); // removes the user data from sessionStorage
-       
+
         sessionStorage.removeItem('userSession');
-
-
         userManager.signoutRedirect();
 
     }
@@ -66,36 +76,6 @@ class AdminPage extends React.Component {
 
         return (
             <div>
-
-                <Menu responsive="true" inline={true} direction="row">
-                    <Anchor href="#" className="active">
-                        Home
-                  </Anchor>
-                    <Anchor href="#">
-                        Tasks
-                  </Anchor>
-                    <Anchor href="#">
-                        2017 NAPLAN Online Pilot
-                  </Anchor>
-                  <NavAnchor path="/manageUsers">
-                    Manage Schools
-                  </NavAnchor>
-                    <Anchor href="#">
-                        Bulk Download
-                  </Anchor>
-                    <Anchor href="#">
-                        Contact Us
-                  </Anchor>
-                 <NavAnchor path="/manageUsers">
-                    Manage Schools
-                  </NavAnchor>
-                    <Anchor href="#">
-                    Manage Users
-                  </Anchor>
-                    <Anchor href="#">
-                        Reports
-                  </Anchor>
-                </Menu>
                 <Box className="mid">
                     <MultiTab />
                 </Box>
@@ -109,7 +89,6 @@ class AdminPage extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         user: state.oidc.user,
-        error: state.error.error,
         ownProps: ownProps,
         session: state.session
     };

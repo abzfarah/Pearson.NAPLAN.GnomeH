@@ -6,6 +6,114 @@
 .root-container {
   min-height: 100%
 }
+
+input[type=button] {
+    color:#08233e;
+    font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
+    font-size:70%;
+    /* ... other rules ... */
+    cursor:pointer;
+}
+
+input[type=button]:hover {
+    background-color:rgba(255,204,0,0.8);
+}
+
+input[type=submit] {
+    color:#08233e;
+    font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
+    font-size:70%;
+    /* ... other rules ... */
+    cursor:pointer;
+}
+
+.return-button {
+    flex: 0 0 auto;
+    -webkit-appearance: button;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
+    transition: .1s ease-in-out;
+    display: inline-block;
+    color: rgba(0,0,0,.86);
+    text-align: center;
+    font-weight: 500;
+    height: 44px;
+    padding: 0 30px;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid rgba(0,0,0,.2);
+    background-clip: padding-box;
+    font-size: 16px;
+    padding: 10px 22px;
+    font: inherit;
+    margin: 0;
+    overflow: visible;
+    margin-left: 20px;
+}
+
+.submit-button {
+    border-color: #0bb5ff;
+    background-color: #0bb5ff;
+    color: #fff;
+    flex: 0 0 auto;
+    -webkit-appearance: button;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
+    transition: .1s ease-in-out;
+    display: inline-block;
+    color: rgba(0,0,0,.86);
+    text-align: center;
+    font-weight: 500;
+    height: 44px;
+    padding: 0 30px;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid rgba(0,0,0,.2);
+    background-clip: padding-box;
+    font-size: 16px;
+    padding: 10px 22px;
+    font: inherit;
+    margin: 0;
+    overflow: visible;
+    margin-left: 20px;
+}
+
+
+.statement-button-groups {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    margin-right: 27px;
+    padding: 17px;
+}
+
+input[type=submit]:hover {
+    background-color:rgba(255,204,0,0.8);
+}
+
 .#{$grommet-namespace}header {
   background-color: #fff;
   text-align: left;
@@ -114,7 +222,7 @@ line-height: 56px;
   order: 1;
   padding-bottom: 53px;
   width: 79%;
- 
+
 }
 .numberInner {
   width: 100%;
@@ -176,6 +284,7 @@ img {
     border-bottom: 1px solid rgba(0,0,0,.1);
     margin: auto;
     padding-top: 13px;
+    text-decoration: none;
 }
 
 

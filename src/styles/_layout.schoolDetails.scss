@@ -1,0 +1,67 @@
+.sd_MainBox {
+  background-color: #F9F9F9;
+  padding-top: 20px;
+}
+
+.boxRow {
+  width: 100%;
+  text-decoration: none;
+}
+
+.sd_readBgColor {
+  background-color: rgb(238,238,238);
+}
+
+.sd_readName {
+  color: rgb(20,74,120);
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.sd_editBgColor {
+  background-color: #FFFFFF;
+}
+
+.sd_boxLeft {
+  margin-right: 10px;
+  width: 43%;
+  margin-bottom: 10px;
+}
+
+.sd_boxRight {
+  margin-bottom: 10px;
+  width: 43%;
+}
+
+.sd_boxList {
+  width: 100%;
+}
+
+.colorRed {
+  color: Red;
+}
+.sd_fullWidth {
+  width: 100%;
+}
+
+.sd_fieldRequired {
+  color: rgb(255, 152, 0);
+  font-family: Roboto, sans-serif;
+  font-size: 9pt;
+  font-weight: 400;
+}
+
+.sd_hColor {
+  color: rgb(36,168,232);
+}
+
+.sd_note {
+  color: rgb(20,74,120);
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.sd_testBgColor {
+  background-color: red;
+
+}

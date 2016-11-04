@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
-import CSSClassnames from '../utils/CSSClassnames';
+import CSSClassnames from './utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.FORM_FIELD;
 

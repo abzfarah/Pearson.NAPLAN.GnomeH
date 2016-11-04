@@ -1,31 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import {Provider} from 'react-redux';
 import { syncHistoryWithStore, routerActions } from 'react-router-redux';
-
-
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { OidcProvider } from 'redux-oidc';
 import createStore from './store';
 import AppContainer from './containers/AppContainer';
-import LoginPage from './components/layouts/LoginPage';
+import userManager from './utils/userManager';
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import routes from './routes';
-import {Provider} from 'react-redux';
-import { OidcProvider } from 'redux-oidc';
-import userManager from './components/utils/oidc/userManager';
-import MuiThemeProvider from './components/utils/materialStyles/MuiThemeProvider';
-const initialState = window.___INITIAL_STATE__;
 import store from './store';
 
-
+const initialState = window.___INITIAL_STATE__;
 const history = syncHistoryWithStore(browserHistory, store);
-
-// ========================================================
-// Developer Tools Setup
-// ========================================================
-if (__DEBUG__) {
-  if (window.devToolsExtension) {
-    window.devToolsExtension.open();
-  }
-}
 
 // ========================================================
 // Render Setup
@@ -37,22 +25,30 @@ let render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <OidcProvider store={store} userManager={userManager}>
-
-          <MuiThemeProvider>
-
+          <MuiThemeProvider  muiTheme={getMuiTheme()}>
               <Router
                 history={history}
-                routes={routes}
-                />
-
+                routes={routes} />
           </MuiThemeProvider>
-
       </OidcProvider>
     </Provider>,
     MOUNT_NODE
   )
 }
 
+
+
+
+
+
+// ========================================================
+// Developer Tools Setup, only used in __DEV__ mode
+// ========================================================
+if (__DEV__) {
+  if (window.devToolsExtension) {
+    window.devToolsExtension.open();
+  }
+}
 
 if (__DEV__) {
   if (module.hot) {

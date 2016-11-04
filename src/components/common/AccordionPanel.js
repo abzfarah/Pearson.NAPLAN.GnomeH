@@ -6,8 +6,8 @@ import ListItem from './ListItem';
 import CaretNextIcon from './icons/base/CaretNext';
 import Collapsible from './Collapsible';
 
-import CSSClassnames from '../utils/CSSClassnames';
-import Intl from '../utils/Intl';
+import CSSClassnames from './utils/CSSClassnames';
+import Intl from './utils/Intl';
 
 const CLASS_ROOT = CSSClassnames.ACCORDION_PANEL;
 

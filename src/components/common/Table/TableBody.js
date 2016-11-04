@@ -1,15 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import CheckBox from '../CheckBox';
-
 import TableRowColumn from './TableRowColumn';
-import ClickAwayListener from '../../utils/internal/ClickAwayListener';
-
-
+import ClickAwayListener from '../utils/internal/ClickAwayListener';
 import ActionCheckCircle from '../svg-icons/action/check-circle';
 import AlertWarning from '../svg-icons/alert/warning.js';
 import AlertErrorOutline from '../svg-icons/alert/error-outline.js';
-
-import {blue500, grey200, greenA200, green500, orange500, orange600, orange700, orange800} from '../../utils/materialStyles/colors';
+import {blue500, grey200, greenA200, green500, orange500, orange600, orange700, orange800}
+from '../utils/materialStyles/colors';
 
 
 class TableBody extends Component {

@@ -5,21 +5,23 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createOidcMiddleware, { createUserManager } from 'redux-oidc';
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import userManager from '../components/utils/oidc/userManager';
+import userManager from '../utils/userManager';
+
 
 const oidcMiddleware = createOidcMiddleware(userManager, null, false, '/callback', null);
 const enhancers = [];
 const initialState = {};
 
-const createStoreWithMiddleware = compose(
-  applyMiddleware(oidcMiddleware, routerMiddleware(browserHistory), thunkMiddleware, logger())
-)(createStore);
+const enhancer = []
 
 
-const store = createStoreWithMiddleware(reducer, initialState);
+  const store = compose(
+	  applyMiddleware(oidcMiddleware, routerMiddleware(browserHistory), thunkMiddleware, logger())
+	)(createStore)(reducer)
 
 
-if (__DEBUG__) {
+
+if (__DEV__) {
   const devToolsExtension = window.devToolsExtension;
 
   if (typeof devToolsExtension === 'function') {
@@ -33,7 +35,7 @@ if (module.hot) {
     store.replaceReducer(reducers(store.asyncReducers));
   })
 
-  
+
 }
 
 export default store;

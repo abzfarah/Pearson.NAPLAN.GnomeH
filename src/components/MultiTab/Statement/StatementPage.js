@@ -13,18 +13,19 @@ class StatementPage extends Component {
 
     componentDidMount() {
 
+
         var userSession = JSON.parse(sessionStorage.getItem('userSession'));
 
         if (userSession) {
             var schoolCode = userSession.schoolCode;
-            //-- For Test 
+            //-- For Test
             //  schoolCode="01008"
         }
 
         if (schoolCode) {
-
             this.props.getStatement(schoolCode);
         }
+
     }
 
     submitStatement(model) {
@@ -40,10 +41,12 @@ class StatementPage extends Component {
         const { isLoading, isLoaded, statementData } = this.props;
 
         return (
-            <div >
+            <div>
                 {isLoading && <span> Loading ...</span>}
-                {isLoaded && <StatementForm statement={statementData} initialValues={statementData} submitStatement={this.submitStatement} />}
-            </div >
+                {isLoaded && <StatementForm statement={statementData}
+                initialValues={statementData}
+                submitStatement={this.submitStatement} />}
+            </div>
         )
     }
 }

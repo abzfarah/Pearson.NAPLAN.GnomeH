@@ -1,17 +1,17 @@
 import React, { Component, PropTypes, Children } from 'react';
 import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
-import Props from '../utils/Props';
+import Props from './utils/Props';
 import Box from './Box';
 import Button from './Button';
 import SpinningIcon from './icons/Spinning';
-import Scroll from '../utils/Scroll';
-import InfiniteScroll from '../utils/InfiniteScroll';
-import Selection from '../utils/Selection';
+import Scroll from './utils/Scroll';
+import InfiniteScroll from './utils/InfiniteScroll';
+import Selection from './utils/Selection';
 
 import LinkPreviousIcon from './icons/base/LinkPrevious';
 import LinkNextIcon from './icons/base/LinkNext';
-import CSSClassnames from '../utils/CSSClassnames';
+import CSSClassnames from './utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.TILES;
 const TILE = CSSClassnames.TILE;

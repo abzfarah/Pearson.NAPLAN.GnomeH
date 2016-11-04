@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import CSSClassnames from '../utils/CSSClassnames';
+import CSSClassnames from './utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.SKIP_LINK_ANCHOR;
 
