@@ -13,9 +13,7 @@ export function schoolSearchAsync(keyword) {
         });
 
         return axios.get("http://audockerintstg01.epenau.local:12000/api/v1/centresearch/" + keyword)
-            .then((response) => {
-                console.log('response')
-
+            .then((response) => {    
                 return dispatch({
                     type: SCHOOLSEARCH_FETCH_SUCCESS,
                     isLoading: false,
@@ -33,3 +31,33 @@ export function schoolSearchAsync(keyword) {
             });
     }
 }
+
+//-- manageSchoolComponent
+export function manageSchoolSearch(keyword) {
+    debugger
+
+    return dispatch => {
+
+        dispatch({
+            type: MANAGESCHOOLSEARCH_FETCH,
+            isLoading: true
+        });
+
+        return axios.get("http://melbndocker01.epenau.local:12000/api/centresearch/")
+            .then((response) => {
+
+                return dispatch({
+                    type: MANAGESCHOOLSEARCH_FETCH_SUCCESS,
+                    isLoading: false,
+                    schoolData: response.data
+                });
+            })
+            .catch((err) => {
+                dispatch({
+                    type: SCHOOLSEARCH_FETCH_FAILURE,
+                    isLoading: false
+                })
+            });
+    }
+}
+
