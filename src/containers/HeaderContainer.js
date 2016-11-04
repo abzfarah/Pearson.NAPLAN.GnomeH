@@ -7,7 +7,9 @@ import Footer from '../containers/Footer';
 import Box from '../components/common/Box';
 import Button from '../components/common/Button';
 import  SchoolSearch  from './SchoolSearch';
+import { getClaims } from '../components/utils/getClaims'
 import { selectSchool } from "../actions"
+
 import _ from 'lodash';
 
 class Login extends React.Component {
@@ -83,7 +85,7 @@ class HeaderContainer extends React.Component {
     this.state = {
       currentSchool: [],
       loggedIn: false,
-      claims: {}
+      claims: ""
    }
   }
 
@@ -96,8 +98,12 @@ class HeaderContainer extends React.Component {
     if (this.state.currentSchool != nextProps.currentSchool) {
       this.setState({currentSchool: nextProps.currentSchool})
     }
-    else if (this.props.user != nextProps.user) {
-      this.setState({loggedIn: true})
+    if (this.props.user != nextProps.user) {
+      let user_claims = getClaims(session.user)
+      this.setState({
+        loggedIn: true,
+        claims: user_claims
+      })
     }
 
     else return true
