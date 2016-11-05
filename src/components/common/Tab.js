@@ -10,27 +10,7 @@ export default class Tab extends Component {
 
   constructor(props, context) {
     super(props, context);
-
-    this._processSpace = this._processSpace.bind(this);
     this._onClickTab = this._onClickTab.bind(this);
-  }
-
-  componentDidMount () {
-    KeyboardAccelerators.startListeningToKeyboard(this, {
-      space: this._processSpace
-    });
-  }
-
-  componentWillUnmount () {
-    KeyboardAccelerators.stopListeningToKeyboard(this, {
-      space: this._processSpace
-    });
-  }
-
-  _processSpace (event) {
-    if (event.target === this.tabRef) {
-      this._onClickTab(event);
-    }
   }
 
   _onClickTab (event) {

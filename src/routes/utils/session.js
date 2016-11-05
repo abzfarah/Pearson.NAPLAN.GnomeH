@@ -1,7 +1,7 @@
 class Session {
 
   constructor() {
-    this._loggedIn = false;
+    this._loggedIn = this.exists;
   }
 
   set login(status) {

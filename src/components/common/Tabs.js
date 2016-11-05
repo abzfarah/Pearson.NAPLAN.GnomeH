@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import Intl from './utils/Intl';
 import Box from './Box';
 import CSSClassnames from './utils/CSSClassnames';
+import { push } from 'react-router-redux';
 
 const CLASS_ROOT = CSSClassnames.TABS;
 
@@ -10,7 +11,6 @@ export default class Tabs extends Component {
 
   constructor(props, context) {
     super(props, context);
-
     this._activateTab = this._activateTab.bind(this);
 
     this.state = {
@@ -19,15 +19,18 @@ export default class Tabs extends Component {
     };
   }
 
+  _activateTab (index) {
+    this.setState({ activeIndex: index });
+    if (this.props.onActive) {
+      this.props.onActive(index);
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if ((nextProps.activeIndex || 0 === nextProps.activeIndex) &&
       this.state.activeIndex !== nextProps.activeIndex) {
       this.setState({activeIndex: nextProps.activeIndex});
     }
-  }
-
-  _activateTab (index) {
-    this.setState({activeIndex: index});
   }
 
   render () {
@@ -63,10 +66,6 @@ export default class Tabs extends Component {
       });
     }.bind(this));
 
-    var tabContentTitle = Intl.getMessage(this.context.intl, 'Tab Contents', {
-      activeTitle: activeTitle
-    });
-
     var i = this.state.activeIndex;
     i = i.toString();
 
@@ -77,13 +76,7 @@ export default class Tabs extends Component {
         <ul className={classes}>
           {tabs}
         </ul>
-        <div tabIndex={i}
-          aria-label={tabContentTitle} role="tabpanel">
-          <Box className={CLASS_ROOT + '__content'}
-            aria-label={tabContentTitle}>
-            {activeContainer}
-          </Box>
-        </div>
+
       </div>
     );
   }

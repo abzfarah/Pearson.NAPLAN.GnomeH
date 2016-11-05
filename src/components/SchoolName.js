@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
-
-import Anchor from '../components/common/Anchor';
-import Paragraph from '../components/common/Paragraph';
-import Box from '../components/common/Box';
-import Columns from '../components/common/Columns';
-import Footer from '../components/common/Footer';
-import Menu from '../components/common/Menu';
-import Label from '../components/common/Label';
+import { Anchor, Box, Columns, Footer, Menu, Label, Header, Paragraph } from '../components/common';
 import classnames from 'classnames';
-import Header from 'grommet/components/Header';
-
 
 class SchoolName extends React.Component {
 

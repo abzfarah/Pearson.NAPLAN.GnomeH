@@ -1,17 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { Box, Button, Header} from '../components/common';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
-import Header from 'grommet/components/Header';
 import Footer from '../containers/Footer';
-import Box from '../components/common/Box';
-import Button from '../components/common/Button';
 import  SchoolSearch  from './SchoolSearch';
-
-
-
 import { selectSchool } from "../actions"
-
 import _ from 'lodash';
 
 class Login extends React.Component {
@@ -79,8 +73,6 @@ class SchoolName extends React.Component {
   }
 }
 
-
-
 class HeaderContainer extends React.Component {
   constructor() {
     super()
@@ -92,7 +84,6 @@ class HeaderContainer extends React.Component {
   }
 
   componentWillMount(props) {
-    debugger;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -106,25 +97,18 @@ class HeaderContainer extends React.Component {
         loggedIn: true
       })
     }
-
     else return true
-
-    debugger;
   }
 
   componentDidMount() {
-    debugger;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    debugger;
     return true;
   }
 
   componentWillUpdate(nextProps, nextState) {
-
     return true
-    debugger;
   }
 
   render(props) {

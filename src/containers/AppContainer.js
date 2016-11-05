@@ -1,18 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import userManager from '../components/utils/userManager';
-import { StickyContainer, Sticky } from '../components/common/Sticky';
-import Footer from '../containers/Footer';
-import Button from '../components/common/Button';
-import Box from '../components/common/Box';
-import Header from 'grommet/components/Header';
 import { push } from 'react-router-redux';
+import { StickyContainer, Sticky } from '../components/common/Sticky';
+import { Box, Button, Header } from '../components/common';
+import { loadSchools } from '../actions/searchActions'
+import { getClaims } from '../components/utils/getClaims'
+import Footer from '../containers/Footer';
 import HeaderContainer from './HeaderContainer'
 import NavContainer from './NavContainer'
+import userManager from '../components/utils/userManager';
 import session from '../routes/utils/session'
-import { getClaims } from '../components/utils/getClaims'
 import schools from '../data/schools.json';
-import { loadSchools } from '../actions/searchActions'
 import _ from 'lodash';
 
 class AppContainer extends React.Component {
@@ -48,14 +46,12 @@ class AppContainer extends React.Component {
     if (session.exists) {
 
       let user_claims = getClaims(session.user)
-
       this.props.dispatch({
           type: 'RETRIEVE_CLAIMS',
           payload: {
             claims: user_claims
           }
       })
-
 
       this.setState({
         loggedIn: true,
@@ -77,8 +73,6 @@ class AppContainer extends React.Component {
     if (nextProps.user && !this.state.claims) {
         let user_claims = getClaims(session.user)
         this.setState({claims: user_claims})
-
-
     }
 
     else return false
@@ -88,7 +82,6 @@ class AppContainer extends React.Component {
     if ( !this.props.user && nextProps.user) return true
     if (this.props.currentSchool != nextProps.currentSchool) return true
     if ( !this.state.loggedIn && nextState.loggedIn ) return true
-
     else return true
   }
 

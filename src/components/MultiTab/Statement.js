@@ -19,10 +19,7 @@ import FormField from '../common/FormField'
 class Statement extends Component {
 
   componentDidMount() {
-  this.refs.name            // the Field
-    .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
-    .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
-    .focus()                // on TextField
+             
  }
 
   render() {
@@ -56,7 +53,7 @@ class Statement extends Component {
             <Paragraph> Please read Principal's responsibilities</Paragraph>
           </Box>
           <Box className="man">
-             <Field name="agree" component={Checkbox} label="I have read and accept the Principal responsibilities" withRef/>
+             <Field name="agree" component={Checkbox} label="I have read and accept the Principal responsibilities"/>
           </Box>
         </Box>
 
@@ -91,11 +88,11 @@ class Statement extends Component {
                   </Heading>
                   <Box>
                     <div>
-                      <Field name="name" component={TextField} hintText="First" floatingLabelText="First Name"
+                      <Field name="name" component={TextField} disabled={true} hintText="First" floatingLabelText="First Name"
                         ref="name"/> <br/>
-                      <Field name="name" component={TextField} hintText="Last" floatingLabelText="Last Name"
+                      <Field name="name" component={TextField} disabled={true} hintText="Last" floatingLabelText="Last Name"
                         ref="name"/><br/>
-                      <Field name="email" component={TextField} hintText="Email" floatingLabelText="Email"/>
+                      <Field name="email" component={TextField} disabled={true} hintText="Email" floatingLabelText="Email"/>
                     </div>
                    <Box className="declaration" >
                       <Field name="declare" component={Checkbox} label="I declare that I am the Principal of the school detailed above."/>
