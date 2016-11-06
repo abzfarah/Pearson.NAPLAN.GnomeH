@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
 import { Anchor, Button, Box, Header, Menu, NavAnchor, Tab, Tabs } from '../components/common';
-import { steps } from './Steps'
 import userManager from '../utils/userManager';
 
 class FormContainer extends React.Component {
@@ -20,18 +19,20 @@ class FormContainer extends React.Component {
 
     onActive(index) {
 
+        this.setState({ activeIndex: index })
+
         switch(index) {
             case 0:
-                 this.props.dispatch(push('/home/summary'));
+                 this.props.dispatch(push('/summary'));
                 break;
             case 1:
-                 this.props.dispatch(push('/home/statement'));
+                 this.props.dispatch(push('/statement'));
                 break;
             case 2:
-                 this.props.dispatch(push('/home/authorisedstaff'));
+                 this.props.dispatch(push('/authorisedstaff'));
                 break;
             case 3:
-                this.props.dispatch(push('/home/schooldetails'));
+                this.props.dispatch(push('/schooldetails'));
                 break;
             default:    
         }
@@ -65,19 +66,19 @@ class FormContainer extends React.Component {
         const { user, session } = this.props;
         return (
             <div>
-                <Box className="mid">      
-                    <Tabs initialIndex={1} justify="start" onActive={this.onActive}>
+                <Box className="tab-container">      
+                    <Tabs justify="start" onActive={this.onActive}>
                         <Tab title="Home" subtitle="" className="home"/>
                         <Tab title="Statement of Compliance" subtitle="required" className="check" />
                         <Tab title="Authorised Staff" subtitle="required" className="staff"/>
-                        <Tab title="School Details" subtitle="required" className="sd_testBgColor"/>
+                        <Tab title="School Details" subtitle="required" className=""/>
                         <Tab title="Test Format Order" subtitle="optional" className="staff"/>
                         <Tab title="Student Registration Data" subtitle="independant schools only"/>
-                    </Tabs>               
+                    </Tabs>              
                 </Box>
-                <Box className="mid">     
+                  
                     {this.props.children}     
-                </Box>        
+                     
             </div>
         );
     }

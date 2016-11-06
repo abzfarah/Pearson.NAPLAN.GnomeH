@@ -2,31 +2,46 @@ import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { RadioButton, MenuItem } from 'material-ui'
 import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
+import {Button, Box, Heading, Paragraph, Footer, Form, FormField, Section, Tab, Tabs} from '../common'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../common/Table';
 import { validate } from "../utils/validation"
-import Tab from '../common/Tab'
-import Tabs from '../common/Tabs'
-import Section from '../common/Section'
-import Heading from '../common/Heading'
-import Paragraph from '../common/Paragraph'
-import Box from '../common/Box'
-import Footer from '../common/Footer'
-import Form from '../common/Form'
-import Button from '../common/Button'
-import FormField from '../common/FormField'
-
 
 class Statement extends Component {
 
+    constructor() {
+    super();
+
+    this.state = {
+      currentSchool: "",
+      statementData: {}
+    }
+  }
+  
+
   componentDidMount() {
-             
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    if ( !_.isEqual(this.state.statementData , nextProps.statementData) ) {
+        this.setState({ statementData: nextProps.statementData  })
+        this.props.initialize(nextProps.statementData);  
+    }
+  }
+
+  componentWillMount() {
+             var y=9
  }
 
   render() {
 
   const { handleSubmit, pristine, reset, submitting } = this.props
 
+  debugger;
+
     return (
+
+   <Box className="form-container">     
       <Section className="test">
         <form onSubmit={handleSubmit}>
         <Box className="PartA">
@@ -53,7 +68,7 @@ class Statement extends Component {
             <Paragraph> Please read Principal's responsibilities</Paragraph>
           </Box>
           <Box className="man">
-             <Field name="agree" component={Checkbox} label="I have read and accept the Principal responsibilities"/>
+             <Field name="isConfirmed"  component={Checkbox} label="I have read and accept the Principal responsibilities"/>
           </Box>
         </Box>
 
@@ -66,11 +81,11 @@ class Statement extends Component {
                          double secure storage arrangement for NAPLAN test materials at your school.
               </Paragraph>
               <Paragraph>Please select the option which best describes the two levels of security at your school </Paragraph>
-              <Field name="delivery" component={RadioButtonGroup}>
-                <RadioButton value="cabinet"   label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                <RadioButton value="safe" label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                <RadioButton value="container" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
-                <RadioButton value="other" label="Other" />
+              <Field name="securityLevel" component={RadioButtonGroup}>
+                <RadioButton value="0"   label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                <RadioButton value="1" label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                <RadioButton value="2" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
+                <RadioButton value="3" label="Other" />
               </Field><br/>
               <Paragraph>
                 Please note:
@@ -88,35 +103,44 @@ class Statement extends Component {
                   </Heading>
                   <Box>
                     <div>
-                      <Field name="name" component={TextField} disabled={true} hintText="First" floatingLabelText="First Name"
-                        ref="name"/> <br/>
-                      <Field name="name" component={TextField} disabled={true} hintText="Last" floatingLabelText="Last Name"
-                        ref="name"/><br/>
-                      <Field name="email" component={TextField} disabled={true} hintText="Email" floatingLabelText="Email"/>
+                      <Field name="firstName" component={TextField} hintText="First" floatingLabelText="First Name"
+                        ref="firstName"/> <br/>
+                      <Field name="lastName" component={TextField}  hintText="Last" floatingLabelText="Last Name"
+                        ref="lastName"/><br/>
+                      <Field name="email" component={TextField} hintText="Email" floatingLabelText="Email"/>
                     </div>
                    <Box className="declaration" >
-                      <Field name="declare" component={Checkbox} label="I declare that I am the Principal of the school detailed above."/>
-                      <Field name="certify" component={Checkbox} label="I certify that the information provided on this form is correct."/>
+                      <Field name="isDeclared" component={Checkbox} label="I declare that I am the Principal of the school detailed above."/>
+                      <Field name="isCertified" component={Checkbox} label="I certify that the information provided on this form is correct."/>
                     </Box>
                  </Box>
                 </Box>
-
-                <div className="statement-button-groups">
-                    <div>
-                      <button className="submit-button" type="button">Return</button>
-                      <button className="submit-button" type="submit">Submit</button>
-                    </div>
-
-                </div>
              </Box>
 
-
+             <Box className="statement-button">
+                <div className="button-groups">
+                      <button className="submit-button grommetux-button grommetux-button--secondary" type="button">Return</button>
+                      <button className="submit-button grommetux-button grommetux-button--primary" type="submit">Submit</button>
+                </div>
+              </Box>
           </Box>
         </Box>
         </form>
       </Section>
+    </Box>  
     )
   }
 }
 
-export default reduxForm({form: 'example', validate })(Statement)
+
+// Decorate with reduxForm(). It will read the initialValues prop provided by connect()
+Statement = reduxForm({
+  form: 'Statement',
+  validate,
+  fields: ['email']
+  
+})(Statement)
+
+
+
+export default Statement

@@ -6,7 +6,7 @@ import {
 
 
 const initialState = {
-  currentSchool: ""
+  currentSchool: {}
 }
 
 const SELECT_SCHOOL = 'SELECT_SCHOOL';
@@ -19,12 +19,10 @@ export default (state = initialState, action = {}) => {
 
     switch (action.type) {
 
-
         case SELECT_SCHOOL:
             return Object.assign({}, state, {
-                school: action.currentSchool,
+                currentSchool: action.currentSchool,
             });
-
     }
 
     return state

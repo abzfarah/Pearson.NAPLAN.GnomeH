@@ -17,7 +17,6 @@ import DownIcon from 'grommet/components/icons/base/Down';
 import { push } from 'react-router-redux';
 import auth from '../../../routes/utils/auth'
 
-import { steps } from '../../../containers/Steps'
 
 class AdminPage extends React.Component {
 

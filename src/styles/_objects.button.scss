@@ -36,7 +36,10 @@ $button-horizontal-padding: round($inuit-base-spacing-unit) - $button-border-wid
   }
 }
 
-
+.statement-button {
+  text-decoration: none;
+  padding-top: 35px;
+}
 
 .grommet {
   input[type="button"],

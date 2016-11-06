@@ -7,7 +7,7 @@ import CallbackPage from '../components/callback';
 import PublicPage from '../components/layouts/PublicPage';
 import StatementContainer from  '../components/MultiTab/StatementContainer';
 import Home from  '../components/MultiTab/Home';
-import SchoolDetails from  '../components/layouts/SchoolDetails/SchoolDetailsForm';
+import SchoolDetails from  '../components/MultiTab/SchoolDetailsContainer';
 import AuthorizedStaff from  '../components/MultiTab/AuthorizedStaff';
 import FormContainer from '../containers/FormContainer';
 import session from './utils/session'
@@ -27,22 +27,27 @@ function redirectToHome(nextState, replace) {
   }
 }
 
+function renderRoot(nextState, replace) {
+  if (session.login) {
+      replace('/summary')
+  }
+}
+
+
+
+
+
 export default {
   path: '/',
+  indexRoute: { onEnter: renderRoot },
   component: AppContainer,
-  childRoutes: [
-    {
-      onEnter: redirectToLogin,
-      path: '/home',
-      component: FormContainer,
+ 
       childRoutes: [
-          { path: 'summary',  component: Home },
-          { path: 'statement',  component: StatementContainer },
-          { path: 'schooldetails',  component: SchoolDetails },
-          { path: 'authorisedstaff',  component: AuthorizedStaff }       
-      ],
-    },
-    { path: 'callback',  component: CallbackPage }
-  ]
+          { path: '/summary',  component: Home },
+          { path: '/statement',  component: StatementContainer },
+          { path: '/schooldetails',  component: SchoolDetails },
+          { path: '/authorisedstaff',  component: AuthorizedStaff },
+          { path: '/callback',  component: CallbackPage }       
+      ]
 }
 

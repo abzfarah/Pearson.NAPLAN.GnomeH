@@ -19,6 +19,7 @@ export function schoolDetailsAsync(keyword) {
                 return dispatch({
                     type: SCHOOL_DETAILS_FETCH_SUCCESS,
                     success: true,
+                    schoolData: response.data
 
                 });
 

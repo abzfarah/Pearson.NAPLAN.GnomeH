@@ -70,11 +70,11 @@ class SchoolSearch extends React.Component {
                 <Form>
                   <FormField>
                     <Select
-                    value="Select school"
-                    onSearch={this.onSearch}
-                    onChange={this.onChange}
-                    options={this.state.options}
-                    placeHolder="Seach for school" />
+                      value="Select school"
+                      onSearch={this.onSearch}
+                      onChange={this.onChange}
+                      options={this.state.options}
+                      placeHolder="Seach for school" />
                   </FormField>
                 </Form>
               </Box>

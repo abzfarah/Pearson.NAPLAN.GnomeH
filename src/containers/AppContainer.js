@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
 import { Box, Button, Header } from '../components/common';
+import * as schoolActions from '../actions'
 import { loadSchools } from '../actions/searchActions'
 import { getClaims } from '../components/utils/getClaims'
 import Footer from '../containers/Footer';
+import FormContainer from './FormContainer'
 import HeaderContainer from './HeaderContainer'
 import NavContainer from './NavContainer'
 import userManager from '../components/utils/userManager';
@@ -21,7 +24,7 @@ class AppContainer extends React.Component {
       loggedIn: false,
       user: false,
       claims: false,
-      currentSchool: false,
+      currentSchool: [],
       schools: schools
    }
     this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
@@ -46,12 +49,9 @@ class AppContainer extends React.Component {
     if (session.exists) {
 
       let user_claims = getClaims(session.user)
-      this.props.dispatch({
-          type: 'RETRIEVE_CLAIMS',
-          payload: {
-            claims: user_claims
-          }
-      })
+      debugger
+
+      this.props.actions.retrieveClaims(user_claims)
 
       this.setState({
         loggedIn: true,
@@ -71,7 +71,7 @@ class AppContainer extends React.Component {
     }
 
     if (nextProps.user && !this.state.claims) {
-        let user_claims = getClaims(session.user)
+        let user_claims = getClaims(nextProps.user.profile)
         this.setState({claims: user_claims})
     }
 
@@ -94,6 +94,8 @@ class AppContainer extends React.Component {
   }
 
   componentDidMount(props, state) {
+
+    debugger
   }
 
   render() {
@@ -114,8 +116,10 @@ class AppContainer extends React.Component {
 
         { loggedIn && <NavContainer claims={claims}/> }
 
-        { this.props.children }
-
+        { loggedIn && <FormContainer claims={claims}/>}
+    
+          {this.props.children}     
+       
         <Footer/>
       </div>
      )
@@ -132,7 +136,7 @@ class AppContainer extends React.Component {
 
   function mapDispatchToProps(dispatch) {
     return {
-        dispatch
+        actions: bindActionCreators(schoolActions, dispatch)
     };
   }
 

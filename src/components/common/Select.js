@@ -456,7 +456,7 @@ Select.propTypes = {
   onChange: PropTypes.any,
   really: PropTypes.any, // (value(s))
   placeHolder: PropTypes.string,
-  options: PropTypes.arrayOf(valueType).isRequired,
+  options: PropTypes.any,
   value: PropTypes.oneOfType([valueType, PropTypes.arrayOf(valueType)])
 };
 

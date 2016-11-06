@@ -1,29 +1,27 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
-import Intl from './utils/Intl';
-import Box from './Box';
 import CSSClassnames from './utils/CSSClassnames';
-import { push } from 'react-router-redux';
 
 const CLASS_ROOT = CSSClassnames.TABS;
+
+var mapTabs = {
+  summary: 0,
+  statement: 1,
+  authorisedstaff: 2,
+  schooldetails: 3
+}
 
 export default class Tabs extends Component {
 
   constructor(props, context) {
     super(props, context);
+
     this._activateTab = this._activateTab.bind(this);
 
     this.state = {
-      activeIndex: 0,
+      activeIndex: props.activeIndex,
       justify: props.justify
     };
-  }
-
-  _activateTab (index) {
-    this.setState({ activeIndex: index });
-    if (this.props.onActive) {
-      this.props.onActive(index);
-    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,47 +31,55 @@ export default class Tabs extends Component {
     }
   }
 
+  _activateTab (index) {
+    this.setState({ activeIndex: index });
+    if (this.props.onActive) {
+      this.props.onActive(index);
+    }
+  }
+
   render () {
-    let classes = classnames(
+    const { children, className, justify, responsive, ...props } = this.props
+    delete props.activeIndex;
+    delete props.onActive;
+    const path = window.location.pathname.replace(/^\/|\/$/g, '');
+    const activeIndex  = mapTabs[path];
+
+    const classes = classnames(
       CLASS_ROOT,
-      this.props.className,
       {
-        [`${CLASS_ROOT}--justify-${this.props.justify}`]: this.props.justify,
-        [`${CLASS_ROOT}--responsive`]: this.props.responsive
-      }
+        [`${CLASS_ROOT}--justify-${justify}`]: justify,
+        [`${CLASS_ROOT}--responsive`]: responsive
+      },
+      className
     );
 
-    var activeContainer;
-    var activeTitle;
+    let activeContainer;
+    let activeTitle;
+    const tabs = React.Children.map(children, (tab, index) => {
 
-    var tabs = React.Children.map(this.props.children, function(tab, index) {
+      const tabProps = tab.props || tab._store.props || {};
 
-      var tabProps = tab.props || tab._store.props || {};
-
-      var isTabActive = index === this.state.activeIndex;
+      const isTabActive = index === activeIndex;
 
       if (isTabActive) {
-        activeContainer = tabProps.inner;
+        activeContainer = tabProps.children;
         activeTitle = tabProps.title;
       }
 
       return React.cloneElement(tab, {
         active: isTabActive,
-        id: 'tab-' + index,
-        onRequestForActive: function () {
+        id: `tab-${index}`,
+        onRequestForActive: () => {
           this._activateTab(index);
-        }.bind(this)
+        }
       });
-    }.bind(this));
+    }, this);
 
-    var i = this.state.activeIndex;
-    i = i.toString();
 
-    //TODO: Since there could be multiple Tabs on the page, we need a more
-    //robust means of identifying the association between title and aria label.
     return (
-      <div role="tablist">
-        <ul className={classes}>
+      <div role='tablist'>
+        <ul {...props} className={classes}>
           {tabs}
         </ul>
 
@@ -85,7 +91,9 @@ export default class Tabs extends Component {
 Tabs.propTypes = {
   activeIndex: PropTypes.number,
   justify: PropTypes.oneOf(['start', 'center', 'end']),
-  responsive: PropTypes.bool
+  responsive: PropTypes.bool,
+  onActive: PropTypes.func,
+  subtitle: PropTypes.func
 };
 
 Tabs.contextTypes = {
@@ -93,7 +101,7 @@ Tabs.contextTypes = {
 };
 
 Tabs.defaultProps = {
-  initialIndex: 0,
+  activeIndex: 0,
   justify: 'center',
   responsive: true
 };
