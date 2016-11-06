@@ -20,7 +20,7 @@ class CallbackPage extends React.Component {
     const claims = user.profile;
     var userSession = JSON.stringify(user.profile)
     sessionStorage.setItem('userSession', userSession);
-    this.props.dispatch(push('/home'));
+    this.props.dispatch(push('/'));
   }
 
   render() {

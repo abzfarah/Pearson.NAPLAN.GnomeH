@@ -22,7 +22,7 @@ function getStyles(props, context) {
       textAlign: 'left',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      color: tableHeaderColumn.textColor,
+      color: "white",
       position: 'relative',
     },
     tooltip: {

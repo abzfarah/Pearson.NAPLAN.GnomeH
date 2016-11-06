@@ -1,18 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import userManager from '../components/utils/userManager';
-import { StickyContainer, Sticky } from '../components/common/Sticky';
-import Footer from '../containers/Footer';
-import Button from '../components/common/Button';
-import Box from '../components/common/Box';
-import Header from 'grommet/components/Header';
+import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
+import { StickyContainer, Sticky } from '../components/common/Sticky';
+import { Box, Button, Header } from '../components/common';
+import * as schoolActions from '../actions'
+import { loadSchools } from '../actions/searchActions'
+import { getClaims } from '../components/utils/getClaims'
+import Footer from '../containers/Footer';
+import FormContainer from './FormContainer'
 import HeaderContainer from './HeaderContainer'
 import NavContainer from './NavContainer'
+import userManager from '../components/utils/userManager';
 import session from '../routes/utils/session'
-import { getClaims } from '../components/utils/getClaims'
 import schools from '../data/schools.json';
-import { loadSchools } from '../actions/searchActions'
 import _ from 'lodash';
 
 class AppContainer extends React.Component {
@@ -23,7 +24,7 @@ class AppContainer extends React.Component {
       loggedIn: false,
       user: false,
       claims: false,
-      currentSchool: false,
+      currentSchool: [],
       schools: schools
    }
     this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
@@ -48,14 +49,9 @@ class AppContainer extends React.Component {
     if (session.exists) {
 
       let user_claims = getClaims(session.user)
+      debugger
 
-      this.props.dispatch({
-          type: 'RETRIEVE_CLAIMS',
-          payload: {
-            claims: user_claims
-          }
-      })
-
+      this.props.actions.retrieveClaims(user_claims)
 
       this.setState({
         loggedIn: true,
@@ -75,10 +71,8 @@ class AppContainer extends React.Component {
     }
 
     if (nextProps.user && !this.state.claims) {
-        let user_claims = getClaims(session.user)
+        let user_claims = getClaims(nextProps.user.profile)
         this.setState({claims: user_claims})
-
-
     }
 
     else return false
@@ -88,7 +82,6 @@ class AppContainer extends React.Component {
     if ( !this.props.user && nextProps.user) return true
     if (this.props.currentSchool != nextProps.currentSchool) return true
     if ( !this.state.loggedIn && nextState.loggedIn ) return true
-
     else return true
   }
 
@@ -101,6 +94,8 @@ class AppContainer extends React.Component {
   }
 
   componentDidMount(props, state) {
+
+    debugger
   }
 
   render() {
@@ -121,8 +116,10 @@ class AppContainer extends React.Component {
 
         { loggedIn && <NavContainer claims={claims}/> }
 
-        { this.props.children }
-
+        { loggedIn && <FormContainer claims={claims}/>}
+    
+          {this.props.children}     
+       
         <Footer/>
       </div>
      )
@@ -139,7 +136,7 @@ class AppContainer extends React.Component {
 
   function mapDispatchToProps(dispatch) {
     return {
-        dispatch
+        actions: bindActionCreators(schoolActions, dispatch)
     };
   }
 

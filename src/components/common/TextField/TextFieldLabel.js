@@ -47,29 +47,6 @@ const TextFieldLabel = (props) => {
   );
 };
 
-// const TextFieldLabel = (props) => {
-//   const {
-//     muiTheme,
-//     className,
-//     children,
-//     htmlFor,
-//     onTouchTap
-//   } = props;
-//
-//   const {prepareStyles} = muiTheme;
-//   const styles = getStyles(props);
-//
-//   return (
-//     <label
-//       className={className}
-//       style={prepareStyles(styles.root)}
-//       htmlFor={htmlFor}
-//       onTouchTap={onTouchTap}
-//     >
-//       {children}
-//     </label>
-//   );
-// };
 
 TextFieldLabel.propTypes = {
   /**

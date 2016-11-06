@@ -1,47 +1,52 @@
 import React, { Component, PropTypes } from 'react'
-import { Field, reduxForm } from 'redux-form'
-import { Button, Box, Heading, Paragraph, Form, FormField, List, ListItem, Select, Section } from '../common'
-import { RadioButton, MenuItem } from 'material-ui'
-import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
-import { validate } from "../utils/validation"
+import {Anchor, Button, Box, Heading, Paragraph, Footer, Form, FormField, Label } from '../common'
+import {Tiles, Tile, List, ListItem, Select, Section, TextField, Tab, Tabs} from '../common'
+import {orange500, blue500, black} from '../common/utils/materialStyles/colors';
 
 
-class SchoolDetails extends React.Component {
+const styles = {
+  errorStyle: {
+    color: orange500,
+  },
+  underlineStyle: {
+    borderColor: orange500,
+  },
+  floatingLabelStyle: {
+    color:black,
+  },
+  floatingLabelFocusStyle: {
+    color: blue500,
+  },
+};
 
-  constructor() {
-      super();
+class SchoolDetailsForm extends React.Component {
 
-      this.state = {
-        currentSchool: {},
-        schoolData: {}
-      }
-  }
-    
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            // isDisabled: false,
+            // isConfirmed: true
+        }
+
+        this.confirmed = this.confirmed.bind(this);
+        // this.handleInputChange = this.handleInputChange.bind(this);
+        this.submitStatement = this.submitStatement.bind(this);
+    }
 
     componentWillMount() {
 
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-      if ( !_.isEqual(this.state.schoolData , nextProps.schoolData) ) {
-          this.setState({ schoolData: nextProps.schoolData  })
-          this.props.initialize(nextProps.schoolData);  
-      }
+        if (this.props.initialValues) {
+            this.setState({
+                isConfirmed: this.props.initialValues.isConfirmed
+            });
+        }
     }
 
     render() {
 
-      const { handleSubmit, pristine, reset, submitting, schoolData } = this.props
-
-      const { centreCode, cenreName, deliveryAddress1, deliveryAddress2, deliveryPostcode, deliverySchoolName,
-              deliveryState, deliverySuburb, dsFax, dsPhone, email, fax, phone, post_address_line1, reportState,
-              reportSuburb, requestPackingOrder, sector } = schoolData 
-       
         return (
-        <Box className="form-container">  
-          <Section className="test">
-            <form onSubmit={handleSubmit}>
+          <Box className="sd_MainBox">
             <Box>
               <Heading tag="h2">
                 <div className="numberCircle">3</div>
@@ -192,23 +197,28 @@ class SchoolDetails extends React.Component {
               <Box className="sd_boxLeft sd_editBgColor" align="start" pad="small" colorIndex="light-2">
                 <Heading tag="h5" className="sd_hColor">Part D: Review School Details</Heading>
                 <div>
+                  <TextField
+                    floatingLabelText="Phone"
+                    floatingLabelStyle={styles.floatingLabelStyle}
+                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                    errorText="This field is required"
+                    errorStyle={styles.errorStyle}
+                  /><br />
 
-                  <Box>
-                    <div>
-                      <Field name="phone" component={TextField} hintText="Phone" floatingLabelText="Phone"
-                        ref="firstName"/> <br/>
-                      <Field name="fax" component={TextField}  hintText="Fax" floatingLabelText="Fax"
-                        ref="fax"/><br/>
-                    </div>
-
-                 </Box>
-
+                  <TextField
+                    floatingLabelText="Fax"
+                    floatingLabelStyle={styles.floatingLabelStyle}
+                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                    errorText="This field is required"
+                    errorStyle={styles.errorStyle}
+                  /><br />
                 </div>
                 <br/>
                 <Box direction="row">
-                   <Box className="declaration" >
-                      <Field name="details" component={Checkbox} label="Detaisl have been reviewed and are correct."/>
-                    </Box>
+                  <CheckBox id="chkReviewed" name="chkReviewed" />
+                  <Paragraph>
+                    <span className="colorRed">*</span>{` Details have been reviewed and are correct.`}
+                  </Paragraph>
                 </Box>
               </Box>
 
@@ -221,41 +231,49 @@ class SchoolDetails extends React.Component {
                   require a special test packing arrangement no action needs to be taken.
                 </Paragraph>
                 <Box direction="row">
-                  <Field name="isConfirmed"  component={Checkbox} label=" I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group)."/>
+                  <CheckBox id="chkCustomPaching" name="chkCustomPaching" label="" />
+                  <Paragraph>
+                    I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group).
+                  </Paragraph>
                 </Box>
-                <Field name="requestDetails" component={TextField} hintText="Details" floatingLabelText="Details of request"/>              
 
+                <Box direction="row">
+                  <Box pad="small"><Paragraph><span className="colorRed">*</span>{` Requested by:`}</Paragraph></Box>
+                  <Form>
+                    <FormField>
+                      <Select id="selRequestedBy" name="selRequestedBy" options={["person one", "person two", "person three", "person four", "person five", "person six", "person seven", "person eight"]} value="person one" />
+                    </FormField>
+                  </Form>
+                </Box>
+                <TextField
+                  floatingLabelText="Details of request"
+                  floatingLabelStyle={styles.floatingLabelStyle}
+                  floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                  multiLine={true}
+                  rows={3}
+                  errorStyle={styles.errorStyle}
+                />
               </Box>
-
-
             </Box>
-
-            </form>  
-
-                 <div className="button-groups">
-                    <div>
-                       <button className="submit-button" type="button">Return</button>
-                      <button className="submit-button" type="submit">Submit</button>
-                    </div>
-                </div>
-          </Section>
-
-          
-        </Box>
+          </Box>
 
         )
     }
+
+    submitStatement(model) {
+
+        console.log(model)
+        this.props.submitStatement(model);
+    }
+
+    confirmed(evt) {
+
+        // this.setState({ isDisabled: !evt.target.checked })
+        // this.setState({ isConfirmed: evt.target.checked })
+    }
+
 }
 
 
-// Decorate with reduxForm(). It will read the initialValues prop provided by connect()
-SchoolDetails = reduxForm({
-  form: 'SchoolDetails',
-  validate,
-  fields: ['email']
-  
-})(SchoolDetails)
-
-
-
-export default SchoolDetails
+// export default SchoolDetailsForm
+export default SchoolDetailsForm

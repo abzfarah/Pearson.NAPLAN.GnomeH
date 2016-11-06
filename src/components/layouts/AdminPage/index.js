@@ -17,18 +17,17 @@ import DownIcon from 'grommet/components/icons/base/Down';
 import { push } from 'react-router-redux';
 import auth from '../../../routes/utils/auth'
 
+
 class AdminPage extends React.Component {
 
     componentWillMount() {
         const { user, dispatch } = this.props;
-
-        const loggedIn = auth.loggedIn();
-
+    
     }
 
 
     componentDidMount() {
-        auth.loggedIn()
+
 
     }
 
@@ -41,49 +40,29 @@ class AdminPage extends React.Component {
     componentWillReceiveProps() {
       debugger;
         return true
-
-    }
-
-    successCallback = () => {
-      debugger;
-        this.props.dispatch(push('/home'));
-    }
-
-
-    showUserInfoButtonClick = (event) => {
-        event.preventDefault();
-        alert(JSON.stringify(this.props.user, null, 2));
     }
 
 
     onLogoutButtonClicked = (event) => {
         event.preventDefault();
         userManager.removeUser(); // removes the user data from sessionStorage
-
         sessionStorage.removeItem('userSession');
         userManager.signoutRedirect();
 
     }
 
-    onErrorButtonClicked = (event) => {
-        event.preventDefault();
-        this.props.dispatch(errorRequest());
-    }
-
     render() {
         const { user, session } = this.props;
-
 
         return (
             <div>
                 <Box className="mid">
-                    <MultiTab />
+                    
                 </Box>
             </div>
         );
     }
 }
-
 
 
 function mapStateToProps(state, ownProps) {

@@ -1,11 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-import Form from '../components/common/Form';
-import FormField from '../components/common/FormField';
-import Search from '../components/common/Search';
-import Select from '../components/common/Select';
-import Box from '../components/common/Box';
+import { Box, Form, FormField , Search, Select } from '../components/common';
 import _ from 'lodash';
 
 class SchoolSearch extends React.Component {
@@ -74,11 +70,11 @@ class SchoolSearch extends React.Component {
                 <Form>
                   <FormField>
                     <Select
-                    value="Select school"
-                    onSearch={this.onSearch}
-                    onChange={this.onChange}
-                    options={this.state.options}
-                    placeHolder="Seach for school" />
+                      value="Select school"
+                      onSearch={this.onSearch}
+                      onChange={this.onChange}
+                      options={this.state.options}
+                      placeHolder="Seach for school" />
                   </FormField>
                 </Form>
               </Box>

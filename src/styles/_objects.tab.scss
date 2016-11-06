@@ -27,6 +27,13 @@ div[role=tabpanel] {
     width: 100%;
 }
 
+.tab-container {
+  text-decoration: none;
+  width: 79%;
+  flex-direction: row;
+  margin: auto;
+}
+
 .test {
 
   padding-top: 31px;
