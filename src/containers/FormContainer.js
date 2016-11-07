@@ -13,7 +13,8 @@ class FormContainer extends React.Component {
 
         this.state = {
         activeIndex: 0,
-        justify: props.justify
+        justify: props.justify,
+        claims: {}
         };
     }
 
@@ -40,7 +41,10 @@ class FormContainer extends React.Component {
      }
 
     componentWillMount() {
-        const { user, dispatch } = this.props;
+
+
+   
+
     }
 
     componentDidMount() {
@@ -63,17 +67,17 @@ class FormContainer extends React.Component {
     }
 
     render() {
-        const { user, session } = this.props;
+
         return (
             <div>
                 <Box className="tab-container">      
-                    <Tabs justify="start" onActive={this.onActive}>
-                        <Tab title="Home" subtitle="" className="home"/>
-                        <Tab title="Statement of Compliance" subtitle="required" className="check" />
-                        <Tab title="Authorised Staff" subtitle="required" className="staff"/>
-                        <Tab title="School Details" subtitle="required" className=""/>
-                        <Tab title="Test Format Order" subtitle="optional" className="staff"/>
-                        <Tab title="Student Registration Data" subtitle="independant schools only"/>
+                    <Tabs justify="start" onActive={this.onActive} claims={this.props.claims}>
+                       <Tab title="Home" subtitle="" className="home"/>                                  
+                       <Tab title="Statement of Compliance" subtitle="required" className="check" />      
+                        <Tab title="Authorised Staff" subtitle="required" className="staff"/>               
+                        <Tab title="School Details" subtitle="required" className=""/>                     
+                        <Tab title="Test Format Order" subtitle="optional" className="staff"/>               
+                        <Tab title="Student Registration Data" subtitle="independant schools only"/>          
                     </Tabs>              
                 </Box>
                   
@@ -87,7 +91,7 @@ class FormContainer extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         user: state.oidc.user,
-        ownProps: ownProps,
+        claims: ownProps.claims,
         session: state.session
     };
 }

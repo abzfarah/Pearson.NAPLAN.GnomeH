@@ -8,19 +8,37 @@ var mapTabs = {
   summary: 0,
   statement: 1,
   authorisedstaff: 2,
-  schooldetails: 3
+  schooldetails: 3,
+  alternativeTestFormatOrder: 4,
+  studentRegistrationData: 5
 }
+
+var mapTabtoClaim = {
+  "0": "soc",
+  "1": "authorizedStaff",
+  "2": "schooldetails",
+  "3": "alternativeTestFormatOrder",
+  "5": "studentRegistrationData"
+}
+
+var mapClaims = {
+  soc: mapTabs["statement"],
+  authorisedstaff: mapTabs["authorizedStaff"],
+  schooldetails: mapTabs["schooldetails"],
+  alternativeTestFormatOrder: mapTabs["alternativeTest"],
+  studentRegistrationData: mapTabs["studentRegistration"]
+}
+
 
 export default class Tabs extends Component {
 
   constructor(props, context) {
     super(props, context);
-
     this._activateTab = this._activateTab.bind(this);
-
     this.state = {
       activeIndex: props.activeIndex,
-      justify: props.justify
+      justify: props.justify,
+      claims: {}
     };
   }
 
@@ -29,6 +47,8 @@ export default class Tabs extends Component {
       this.state.activeIndex !== nextProps.activeIndex) {
       this.setState({activeIndex: nextProps.activeIndex});
     }
+
+
   }
 
   _activateTab (index) {
@@ -39,11 +59,12 @@ export default class Tabs extends Component {
   }
 
   render () {
-    const { children, className, justify, responsive, ...props } = this.props
+    const { children, className, claims, justify, responsive, ...props } = this.props
     delete props.activeIndex;
     delete props.onActive;
     const path = window.location.pathname.replace(/^\/|\/$/g, '');
     const activeIndex  = mapTabs[path];
+    const menu = []
 
     const classes = classnames(
       CLASS_ROOT,
@@ -58,31 +79,41 @@ export default class Tabs extends Component {
     let activeTitle;
     const tabs = React.Children.map(children, (tab, index) => {
 
-      const tabProps = tab.props || tab._store.props || {};
+    const tabProps = tab.props || tab._store.props || {};
+    const isTabActive = index === activeIndex;
+    const hasClaim = claims[mapTabtoClaim[index]];
 
-      const isTabActive = index === activeIndex;
 
-      if (isTabActive) {
-        activeContainer = tabProps.children;
-        activeTitle = tabProps.title;
+    if (isTabActive) {
+      activeContainer = tabProps.children;
+      activeTitle = tabProps.title;
+    }
+
+    return React.cloneElement(tab, {
+      hasClaim: hasClaim,
+      active: isTabActive,
+      id: `tab-${index}`,
+      onRequestForActive: () => {
+        this._activateTab(index);
       }
+    });
+  }, this);
 
-      return React.cloneElement(tab, {
-        active: isTabActive,
-        id: `tab-${index}`,
-        onRequestForActive: () => {
-          this._activateTab(index);
-        }
+    _.forEach(tabs, function(tab, index) {
+          if (tab.props.hasClaim == true ) {
+              menu.push(tab)
+          }
+          else if (tab.props.id == "tab-2") {
+             menu.push(tab)
+          }
       });
-    }, this);
 
 
     return (
       <div role='tablist'>
         <ul {...props} className={classes}>
-          {tabs}
+          {menu}
         </ul>
-
       </div>
     );
   }

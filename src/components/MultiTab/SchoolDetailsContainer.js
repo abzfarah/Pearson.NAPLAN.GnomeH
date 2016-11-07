@@ -13,6 +13,7 @@ class SchoolDetailsContainer extends React.Component {
     this.state = {
       currentSchool: {},
       schoolData: {},
+      schoolDetails: {},
       form: {}
     }
 
@@ -28,11 +29,10 @@ class SchoolDetailsContainer extends React.Component {
     if (!_.isEqual(this.state.currentSchool, nextProps.currentSchool))  {
          this.setState({currentSchool: nextProps.currentSchool})
          this.props.actions.schoolDetailsAsync(nextProps.currentSchool.code)
-
     }
 
-    if (!_.isEqual(this.state.schoolData, nextProps.schoolData)) {
-         this.setState({schoolData: nextProps.schoolData})
+    if (!_.isEqual(this.state.schoolDetails, nextProps.schoolDetails)) {
+         this.setState({schoolDetails: nextProps.schoolDetails})
       }
 
     if (!_.isEqual(this.state.form.values,nextProps.form.values)) {
@@ -41,10 +41,9 @@ class SchoolDetailsContainer extends React.Component {
   }
 
   render() {
-
-    let { currentSchool, schoolData } = this.state
+    let { currentSchool, schoolDetails } = this.state
     return (
-      <SchoolDetails onSubmit={this.handleSubmit} schoolData={schoolData}/>
+      <SchoolDetails onSubmit={this.handleSubmit} schoolDetails={schoolDetails}/>
     )
   }
 }
@@ -52,7 +51,7 @@ class SchoolDetailsContainer extends React.Component {
 function mapStateToProps (state) {
   return {
     currentSchool: state.currentSchool.currentSchool,
-    schoolData: state.schoolDetails.schoolDetails,
+    schoolDetails: state.schoolDetails.schoolDetails,
     form: state.form.SchoolDetails
   }
 }

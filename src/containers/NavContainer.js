@@ -9,25 +9,20 @@ class NavContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      claims: ""
+      claims: {}
    }
   }
 
   componentWillMount() {
-
    let { claims } = this.props
    this.setState({claims: claims})
-
   }
 
   componentWillReceiveProps(nextProps) {
-
   }
 
   componentWillUpdate(props, state) {
-
   }
-
 
   render() {
 

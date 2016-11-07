@@ -13,33 +13,50 @@ class SchoolDetails extends React.Component {
 
       this.state = {
         currentSchool: {},
-        schoolData: {}
+        schoolDetails: {
+          centreCode: "",
+          centreName: "",
+          deliveryAddress1: "",
+          deliveryAddress2: "",
+          deliveryPostcode: "",  
+          deliverySchoolName: "",
+          deliveryState: "",
+          deliverySuburb: "",
+          dsFax: "",
+          dsPhone: "",
+          emai: "",
+          fax: "",
+          phone: "",
+          post_address_line1: "",
+          reportState: "",
+          reportSuburb: "",
+          requestPackingOrder: ""
+        }
       }
   }
     
-
     componentWillMount() {
 
     }
 
     componentWillReceiveProps(nextProps) {
 
-      if ( !_.isEqual(this.state.schoolData , nextProps.schoolData) ) {
-          this.setState({ schoolData: nextProps.schoolData  })
-          this.props.initialize(nextProps.schoolData);  
+      if ( !_.isEqual(this.state. schoolDetails , nextProps. schoolDetails) ) {
+          this.setState({  schoolDetails: nextProps. schoolDetails  })
+          this.props.initialize(nextProps. schoolDetails);  
       }
     }
 
     render() {
 
-      const { handleSubmit, pristine, reset, submitting, schoolData } = this.props
+      const { handleSubmit, pristine, reset, submitting} = this.props
 
-      const { centreCode, cenreName, deliveryAddress1, deliveryAddress2, deliveryPostcode, deliverySchoolName,
-              deliveryState, deliverySuburb, dsFax, dsPhone, email, fax, phone, post_address_line1, reportState,
-              reportSuburb, requestPackingOrder, sector } = schoolData 
-       
+      const { centreCode, centreName, deliveryAddress1, deliveryAddress2, deliveryPostcode, deliverySchoolName,
+        deliveryState, deliverySuburb, dsFax, dsPhone, email, fax, phone, post_address_line1, reportState,
+        reportSuburb, requestPackingOrder } = this.state.schoolDetails 
+
         return (
-        <Box className="form-container">  
+   <Box className="form-container">  
           <Section className="test">
             <form onSubmit={handleSubmit}>
             <Box>
@@ -71,43 +88,43 @@ class SchoolDetails extends React.Component {
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Code</span>
-                        <span className="secondary">01678</span>
+                        <span className="secondary">{centreCode}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Name</span>
-                        <span className="secondary">ST PAUL'S ANGLICAN GRAMMAR SCHOOL</span>
+                        <span className="secondary">{centreName}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Address 1</span>
-                        <span className="secondary">150 Bowen Street</span>
+                        <span className="secondary">{deliveryAddress1}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Address 2</span>
-                        <span className="secondary">152 Lower Street</span>
+                        <span className="secondary">{deliveryAddress2}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Suburb</span>
-                        <span className="secondary">WARRAGUL</span>
+                        <span className="secondary">{deliverySuburb}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Postcode</span>
-                        <span className="secondary">3820</span>
+                        <span className="secondary">{deliveryPostcode}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">State</span>
-                        <span className="secondary">VIC</span>
+                        <span className="secondary">{deliveryState}</span>
                       </Box>
                     </ListItem>
                   </List>
@@ -121,43 +138,43 @@ class SchoolDetails extends React.Component {
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Code</span>
-                        <span className="secondary">01678</span>
+                        <span className="secondary">{centreCode}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Name</span>
-                        <span className="secondary">ST PAUL'S ANGLICAN GRAMMAR SCHOOL</span>
+                        <span className="secondary">{centreName}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Address 1</span>
-                        <span className="secondary">150 Bowen Street</span>
+                        <span className="secondary">{deliveryAddress1}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Address 2</span>
-                        <span className="secondary">152 Lower Street</span>
+                        <span className="secondary">{deliveryAddress2}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Suburb</span>
-                        <span className="secondary">WARRAGUL</span>
+                        <span className="secondary">{reportSuburb}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Postcode</span>
-                        <span className="secondary">3820</span>
+                        <span className="secondary">{deliveryPostcode}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">State</span>
-                        <span className="secondary">VIC</span>
+                        <span className="secondary">{deliveryState}</span>
                       </Box>
                     </ListItem>
                   </List>
@@ -173,13 +190,13 @@ class SchoolDetails extends React.Component {
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Code</span>
-                        <span className="secondary">01678</span>
+                        <span className="secondary">{centreCode}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Name</span>
-                        <span className="secondary">ST PAUL'S ANGLICAN GRAMMAR SCHOOL</span>
+                        <span className="secondary">{centreName}</span>
                       </Box>
                     </ListItem>
                   </List>
@@ -192,7 +209,6 @@ class SchoolDetails extends React.Component {
               <Box className="sd_boxLeft sd_editBgColor" align="start" pad="small" colorIndex="light-2">
                 <Heading tag="h5" className="sd_hColor">Part D: Review School Details</Heading>
                 <div>
-
                   <Box>
                     <div>
                       <Field name="phone" component={TextField} hintText="Phone" floatingLabelText="Phone"
@@ -200,14 +216,13 @@ class SchoolDetails extends React.Component {
                       <Field name="fax" component={TextField}  hintText="Fax" floatingLabelText="Fax"
                         ref="fax"/><br/>
                     </div>
-
                  </Box>
 
                 </div>
                 <br/>
                 <Box direction="row">
                    <Box className="declaration" >
-                      <Field name="details" component={Checkbox} label="Detaisl have been reviewed and are correct."/>
+                      <Field name="details" component={Checkbox} label="Details have been reviewed and are correct."/>
                     </Box>
                 </Box>
               </Box>
@@ -224,14 +239,10 @@ class SchoolDetails extends React.Component {
                   <Field name="isConfirmed"  component={Checkbox} label=" I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group)."/>
                 </Box>
                 <Field name="requestDetails" component={TextField} hintText="Details" floatingLabelText="Details of request"/>              
-
               </Box>
-
-
             </Box>
 
             </form>  
-
                  <div className="button-groups">
                     <div>
                        <button className="submit-button" type="button">Return</button>

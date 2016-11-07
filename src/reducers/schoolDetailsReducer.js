@@ -4,8 +4,9 @@ import {
 } from '../constants'
 
 const initialState = {
-
+    schoolDetails: {},
 };
+
 
 export default (state = initialState, action = {}) => {
 
@@ -14,12 +15,12 @@ export default (state = initialState, action = {}) => {
         //-- Fetch
         case SCHOOL_DETAILS_SUBMIT_SUCCESS:
             return Object.assign({}, state, {
-                schoolDetails: action.schoolData
+                schoolDetails: action.schoolDetails
             });
 
         case SCHOOL_DETAILS_FETCH_SUCCESS:
             return Object.assign({}, state, {
-                schoolDetails: action.schoolData
+                schoolDetails: action.schoolDetails
             });
 
         case SCHOOL_DETAILS_FETCH_FAILURE:

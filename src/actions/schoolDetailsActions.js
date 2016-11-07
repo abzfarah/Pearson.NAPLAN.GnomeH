@@ -7,23 +7,16 @@ export function schoolDetailsAsync(keyword) {
 
     return dispatch => {
 
-        dispatch({
-            type: SCHOOL_DETAILS_SUBMIT_SUCCESS,
-            submit: true
-        });
-
-        return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/GetCentreDetails/centreCode/01003")
+        return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/GetCentreDetails/centreCode/" + keyword)
             .then((response) => {
                 console.log('response')
 
                 return dispatch({
                     type: SCHOOL_DETAILS_FETCH_SUCCESS,
                     success: true,
-                    schoolData: response.data
+                    schoolDetails: response.data
 
                 });
-
-                //   return response.data;
             })
             .catch((err) => {
                 //--TODO Handle Error
