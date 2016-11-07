@@ -9,6 +9,7 @@ import Heading from '../../common/Heading'
 import Box from '../../common/Box'
 import Paragraph from '../../common/Paragraph'
 
+
 const style = {
     margin: 12,
 };

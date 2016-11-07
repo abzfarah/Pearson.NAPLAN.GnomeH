@@ -7,9 +7,6 @@ import SchoolDetails from './SchoolDetails'
 import AuthorizedStaff from './AuthorizedStaff'
 import ActiveTestOrder from './ActiveTestOrder'
 import StudentRegistration from './StudentRegistration'
-import SchoolList  from '../layouts/ManageSchools'
-import SchoolModal  from '../layouts/ManageSchools/SchoolModal'
-import AddSchool  from '../layouts/ManageSchools/AddSchoolPage'
 import Home from './Home'
 
 const steps =
@@ -17,12 +14,10 @@ const steps =
   {name: 'Home', component: <Home />},
   {name: 'Statement', component: <Statement />},
   {name: 'AuthorizedStaff', component: <AuthorizedStaff />},
-// {name: 'School details', component: <SchoolDetails />},
- // {name: 'Test Format Order', component: <ActiveTestOrder />},
- // {name: 'Student Registration', component: <StudentRegistration />}
-   {name: 'AddSchool', component: <AddSchool />},
-  {name: 'SchoolModal', component: <SchoolModal />},
- {name: 'SchoolList', component: <SchoolList />}
+  {name: 'School details', component: <SchoolDetails />},
+  {name: 'Test Format Order', component: <ActiveTestOrder />},
+  {name: 'Student Registration', component: <StudentRegistration />}
+ 
 ]
 
 
