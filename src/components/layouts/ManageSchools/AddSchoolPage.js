@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import AddSchoolForm from './AddSchoolForm'
-import { getSchool, submitSchool } from '../../../actions/schoolActions'
+import SchoolModal from './SchoolModal'
+import { getSchoolAsync, submitSchoolAsync } from '../../../actions/manageSchoolActions'
 
 class AddSchoolPage extends Component {
 
@@ -18,8 +18,8 @@ class AddSchoolPage extends Component {
 
     submitForm(model) {
         console.log('dddddddddd')
-     
 
+        this.props.submitSchoolAsync(model)
     }
 
     render() {
@@ -28,7 +28,7 @@ class AddSchoolPage extends Component {
 
         return (
             <div>
-                <AddSchoolForm schoolData={schoolData} initialValues={schoolData} submitForm={this.submitForm} />
+                <SchoolModal schoolData={schoolData} initialValues={schoolData} submitForm={this.submitForm} />
             </div>
         )
     }
@@ -44,4 +44,4 @@ function mapStateToProps(globalState) {
         schoolData: schoolData
     }
 }
-export default connect(mapStateToProps, {submitSchool }})(AddSchoolPage)
+export default connect(mapStateToProps, { submitSchoolAsync })(AddSchoolPage)

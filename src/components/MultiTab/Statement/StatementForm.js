@@ -71,7 +71,6 @@ class StatementForm extends React.Component {
 
         const { securityLevel, isOtherLevel } = this.props
 
-
         return (
 
             <form onSubmit={handleSubmit((model) => { this.submitStatement(model) })}>

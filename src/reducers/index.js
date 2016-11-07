@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { reducer as oidcReducer } from 'redux-oidc';
 import { reducer as formReducer } from 'redux-form'
 import schoolReducer from './schoolReducer'
+import manageSchoolReducer from './manageSchoolsReducer'
 
 import statementReducer from './statementReducer'
 import sessionReducer from './sessionReducer'
@@ -18,11 +19,12 @@ const reducer = combineReducers(
   {
     routing: routerReducer,
     oidc: oidcReducer,
-    form : formReducer,
+    form: formReducer,
     error: errorReducer,
     school: schoolReducer,
-    statement : statementReducer,
-    session: sessionReducer
+    statement: statementReducer,
+    session: sessionReducer,
+    manageSchool: manageSchoolReducer
   }
 );
 
