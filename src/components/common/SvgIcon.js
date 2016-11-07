@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import transitions from '../utils/materialStyles/transitions';
+import transitions from './utils/materialStyles/transitions';
 
 class SvgIcon extends Component {
   static muiName = 'SvgIcon';

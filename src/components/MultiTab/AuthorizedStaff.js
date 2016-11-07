@@ -8,26 +8,20 @@ import Box from '../common/Box'
 import CheckBox from '../common/CheckBox'
 import RadioButton from '../common/RadioButton'
 import Footer from '../common/Footer'
-
 import Form from '../common/Form'
 import FormField from '../common/FormField'
 import TextField from '../common/TextField'
-
-import SchoolSearch from '../layouts/SchoolSearch'
-import {orange500, blue500, black} from '../utils/materialStyles/colors';
-
+import {orange500, blue500, black} from '../common/utils/materialStyles/colors';
 
 
 const AuthorizedStaff = () => (
 
-  <Section className="test">
-
-<h3>AuthorizedStaff</h3>
-
-
-
-
-  </Section>
+  <Box className="form-container">  
+    <Section className="test">
+        <h3>AuthorizedStaff</h3>
+    </Section>
+  </Box>
+  
 )
 
 export default AuthorizedStaff

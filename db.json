@@ -1,0 +1,65 @@
+{
+  "posts": [
+    { "id": 1, "title": "json-server", "author": "typicode" }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" },
+
+  "schools": [
+	{
+	"schoolId": 776,
+	"schoolCode": "10360",
+	"schoolName": "ABBOTSFORD PRIMARY SCHOOL",
+	"suburb": "ABBOTSFORD"
+	},
+	{
+	"schoolId": 1121,
+	"schoolCode": "10755",
+	"schoolName": "ABERFELDIE PRIMARY SCHOOL",
+	"suburb": "ESSENDON"
+	},
+	{
+	"schoolId": 134,
+	"schoolCode": "01216",
+	"schoolName": "KENSINGTON PRIMARY",
+	"suburb": "FITZROY"
+	},
+	{
+	"schoolId": 2082,
+	"schoolCode": "13459",
+	"schoolName": "HOPPERS CROSSING",
+	"suburb": "ELSTERNWICK"
+	},
+	{
+	"schoolId": 2264,
+	"schoolCode": "15337",
+	"schoolName": "ADASS ISRAEL SCHOOL - GLEN EIRA ROAD CAMPUS",
+	"suburb": "ELSTERNWICK"
+	},
+    {
+	"schoolId": 2264,
+	"schoolCode": "15337",
+	"schoolName": "XAVIER COLLEGE",
+	"suburb": "ELSTERNWICK"
+	},
+   {
+	"schoolId": 2264,
+	"schoolCode": "15337",
+	"schoolName": "WESTBOURNE",
+	"suburb": "ELSTERNWICK"
+	},
+
+	   {
+	"schoolId": 2264,
+	"schoolCode": "15337",
+	"schoolName": "BANANA",
+	"suburb": "ELSTERNWICK"
+	}
+ ]
+}
+
+
+
+

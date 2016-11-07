@@ -1,122 +1,143 @@
 import React from 'react';
-import Footer from '../containers/Footer';
-import userManager from '../components/utils/oidc/userManager';
-import Button from '../components/common/Button';
-import Box from '../components/common/Box';
-import { StickyContainer, Sticky } from '../components/common/Sticky';
-
-
-//import SchoolSearch from '../components/layouts/SchoolSearch';
-import SchoolSearchContainer from './SchoolSearchContainer';
-
-import Header from 'grommet/components/Header';
-import { push } from 'react-router-redux';
-import HeaderContainer from './HeaderContainer'
-import _ from 'lodash';
-
-
-
-import  SchoolName  from '../components/SchoolName';
-
-import auth from '../routes/utils/auth'
-
 import { connect } from 'react-redux';
-
+import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
+import { StickyContainer, Sticky } from '../components/common/Sticky';
+import { Box, Button, Header } from '../components/common';
+import * as schoolActions from '../actions'
+import { loadSchools } from '../actions/searchActions'
+import { getClaims } from '../components/utils/getClaims'
+import Footer from '../containers/Footer';
+import FormContainer from './FormContainer'
+import HeaderContainer from './HeaderContainer'
+import NavContainer from './NavContainer'
+import userManager from '../components/utils/userManager';
+import session from '../routes/utils/session'
+import schools from '../data/schools.json';
+import _ from 'lodash';
 
 class AppContainer extends React.Component {
 
   constructor(props) {
-      super(props);
-      var isloggedIn = auth.loggedIn()
-
-      var retrieveClaims = sessionStorage.getItem("userSession");
-      this.sessionClaims = JSON.parse(retrieveClaims);
-
-      this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
-
+    super(props);
+    this.state = {
+      loggedIn: false,
+      user: false,
+      claims: false,
+      currentSchool: [],
+      schools: schools
+   }
+    this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
   }
 
-  onLoginButtonClick = (event) => {
+   onLoginButtonClick = (event) => {
       event.preventDefault();
       userManager.signinRedirect();
   };
 
-  onLogoutButtonClick = (event) => {
+    onLogoutButtonClick = (event) => {
       event.preventDefault();
-      userManager.removeUser(); // removes the user data from sessionStorage
+      userManager.removeUser();
+      sessionStorage.clear();
       userManager.signoutRedirect();
-
+      this.setState({loggedIn: false});
+      this.forceUpdate()
   }
 
-  updateAuth(loggedIn) {
+  componentWillMount(props) {
+    const { dispatch } = this.props;
+    if (session.exists) {
 
+      let user_claims = getClaims(session.user)
+      debugger
+
+      this.props.actions.retrieveClaims(user_claims)
+
+      this.setState({
+        loggedIn: true,
+        user: session.user,
+        claims: user_claims
+      })
+    }
+  }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    if (this.state.currentSchool != nextProps.currentSchool) {
+      this.setState({currentSchool: nextProps.currentSchool})
+    }
+
+    if (this.props.user != nextProps.user) {
+      this.setState({user: nextProps.user})
+    }
+
+    if (nextProps.user && !this.state.claims) {
+        let user_claims = getClaims(nextProps.user.profile)
+        this.setState({claims: user_claims})
+    }
+
+    else return false
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if ( !this.props.user && nextProps.user) return true
+    if (this.props.currentSchool != nextProps.currentSchool) return true
+    if ( !this.state.loggedIn && nextState.loggedIn ) return true
+    else return true
+  }
+
+  componentWillUpdate(props, state) {
+    if (!this.state.loggedIn && session.exists) {
+      const user = session.user
+      session.login = true;
+      this.setState({loggedIn: true, user: user})
+    }
   }
 
   componentDidMount(props, state) {
 
-
+    debugger
   }
-
-  componentWillMount(props) {
-
-    var isloggedIn = auth.loggedIn()
-    auth.onChange = this.updateAuth
-  }
-
 
   render() {
+    const { schools, currentSchool, claims } = this.state;
+    let loggedIn = (this.props.user || this.state.loggedIn) ? true : false;
+    let user = (this.props.user || this.state.user);
 
-    const  loggedIn = auth.loggedIn();
-    //--TODO
-  let showSchoolSearch = loggedIn && this.sessionClaims.centreSearch;
     return (
+      <div>
+        <HeaderContainer
+           loggedIn={loggedIn}
+           user={user}
+           claims={claims}
+           schools={schools}
+           currentSchool={currentSchool}
+           onLogout={this.onLogoutButtonClick}
+           onLogin={this.onLoginButtonClick} />
 
+        { loggedIn && <NavContainer claims={claims}/> }
 
-    <div className="mainContainer">
+        { loggedIn && <FormContainer claims={claims}/>}
+    
+          {this.props.children}     
+       
+        <Footer/>
+      </div>
+     )
+    }
+  }
 
-      <StickyContainer>
-          <Sticky style={{ zIndex: 5 }}>
-           <div className="header-bar"><i></i> </div>
-
-            <HeaderContainer loggedIn={loggedIn} claims={this.sessionClaims}
-            onLogout={this.onLogoutButtonClick}
-            onLogin={this.onLoginButtonClick}
-            />
-
-          <Box direction="row"  wrap={true} align="center" className="second-header">
-
-             {loggedIn && <SchoolName /> }
-             {!showSchoolSearch && <SchoolSearchContainer /> }
-          </Box>
-
-
-        </Sticky>
-
-    </StickyContainer>
-    { this.props.children }
-    <Footer ></Footer>
-  </div>
-  )
-}
-}
-
-  //{ <SchoolSearch/> }
-
-
-function mapStateToProps(state, ownProps) {
+  function mapStateToProps(state, ownProps) {
     return {
         user: state.oidc.user,
-        error: state.error.error,
-        ownProps: ownProps,
-        loggedIn: state.session.loggedIn,
-        claims: state.session.claims,
+        loggedIn: state.loggedIn,
+        claims: state.claims.claims
     };
-}
+  }
 
-function mapDispatchToProps(dispatch) {
+  function mapDispatchToProps(dispatch) {
     return {
-        dispatch
+        actions: bindActionCreators(schoolActions, dispatch)
     };
-}
+  }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+  export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

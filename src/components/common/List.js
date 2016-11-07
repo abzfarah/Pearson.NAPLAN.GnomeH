@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import SpinningIcon from './icons/Spinning';
-import InfiniteScroll from '../utils/InfiniteScroll';
-import Selection from '../utils/Selection';
-import CSSClassnames from '../utils/CSSClassnames';
-import KeyboardAccelerators from '../utils/KeyboardAccelerators';
-import Intl from '../utils/Intl';
-import { announce } from '../utils/Announcer';
+import InfiniteScroll from './utils/InfiniteScroll';
+import Selection from './utils/Selection';
+import CSSClassnames from './utils/CSSClassnames';
+import KeyboardAccelerators from './utils/KeyboardAccelerators';
+import Intl from './utils/Intl';
+import { announce } from './utils/Announcer';
 
 const CLASS_ROOT = CSSClassnames.LIST;
 const LIST_ITEM = CSSClassnames.LIST_ITEM;

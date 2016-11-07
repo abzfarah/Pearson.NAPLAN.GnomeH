@@ -6,43 +6,21 @@ import Tab from '../common/Tab';
 import Tabs from '../common/Tabs';
 import  CallbackComponent  from './CallbackComponent';
 import { push } from 'react-router-redux';
-import auth from '../../routes/utils/auth'
 
 class CallbackPage extends React.Component {
 
   componentWillMount() {
-
-
-      var hey = this.props
-
   }
 
   componentDidlMount() {
-
-
-      var hewy = this.props
-
   }
 
   successCallback = (user) => {
     const { dispatch } = this.props;
-    const loggedIn = auth.loggedIn();
-
-
     const claims = user.profile;
-
     var userSession = JSON.stringify(user.profile)
     sessionStorage.setItem('userSession', userSession);
-
-    var x = userSession; 
-
-    dispatch({
-        type: 'USER_LOGGEDIN',
-        loggedIn,
-        payload: claims
-    })
-    this.props.dispatch(push('/home'));
-    this.userCallback = user;
+    this.props.dispatch(push('/'));
   }
 
   render() {

@@ -9,7 +9,7 @@ import Paragraph from '../../common/Paragraph';
 import Carousel from '../../common/Carousel';
 import Section from '../../common/Section';
 
-import CSSClassnames from '../../utils/CSSClassnames';
+import CSSClassnames from '../../common/utils/CSSClassnames';
 
 
 

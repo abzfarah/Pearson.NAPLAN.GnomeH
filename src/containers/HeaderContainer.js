@@ -1,78 +1,144 @@
 import React from 'react';
-import Footer from '../containers/Footer';
-import userManager from '../components/utils/oidc/userManager';
-import Button from '../components/common/Button';
-import Box from '../components/common/Box';
-import { StickyContainer, Sticky } from '../components/common/Sticky';
-import Header from 'grommet/components/Header';
+import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { Box, Button, Header} from '../components/common';
+import { StickyContainer, Sticky } from '../components/common/Sticky';
+import Footer from '../containers/Footer';
+import  SchoolSearch  from './SchoolSearch';
+import { selectSchool } from "../actions"
 import _ from 'lodash';
 
-
-
-import  SchoolName  from '../components/SchoolName';
-
-import auth from '../routes/utils/auth'
-
-import { connect } from 'react-redux';
-
-
-class HeaderContainer extends React.Component {
+class Login extends React.Component {
   constructor() {
     super()
   }
 
+  render() {
 
+    let { loggedIn, onLogout, onLogin } = this.props.status;
 
-  componentDidMount(props, state) {
-    var x =3;
+    return (
+    <div>
+      <div className="header-bar"><i></i> </div>
+      <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="first-header">
+          <div className="under">
+              <a href="http://imgur.com/OlNC7UY"><img id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />  </a>
+          </div>
+          <ul className="menu"></ul>
+          <div className="button-groups">
+            { loggedIn ?
+              <div>
+                <Button label="Help" secondary={true} />
+                <Button label="Log Out" onClick={onLogout} primary={true} />
+              </div> :
+              <div>
+                <Button label="Help" secondary={true} />
+                <Button label="Log In" onClick={onLogin} primary={true} />
+              </div> }
+          </div>
+        </Box>
+      </div>
+      )
+  }
+}
 
+class SchoolName extends React.Component {
+  constructor() {
+    super()
+  }
 
+  render() {
+
+    const { name, code } = this.props.school;
+    let string = 'School Code: ';
+    var full;
+    if (code != undefined) {
+         full = string + code;
+    }
+    else full = ""
+    debugger;
+
+    return (
+      <Box direction="row" className="school-info">
+          <Header className="school-name">
+            { name}
+          </Header>
+
+          <Header size="small" className="school-code">
+            {full}
+          </Header>
+      </Box>
+
+      )
+  }
+}
+
+class HeaderContainer extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      currentSchool: [],
+      loggedIn: false,
+      claims: ""
+   }
   }
 
   componentWillMount(props) {
-    var isloggedIn = auth.loggedIn()
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    if (this.state.currentSchool != nextProps.currentSchool) {
+      this.setState({currentSchool: nextProps.currentSchool})
+    }
+    if (this.props.user != nextProps.user) {
+
+      this.setState({
+        loggedIn: true
+      })
+    }
+    else return true
+  }
+
+  componentDidMount() {
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    return true
+  }
 
   render(props) {
-    var loggedIn = this.props.loggedIn;
+
+    const { loggedIn, currentSchool, currentSchoolname, currentSchoolcode, claims } = this.props
+    const { centreSearch } = claims
 
     return (
-              <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="first-header">
-                  <div className="under">
-                      <a href="http://imgur.com/OlNC7UY"><img id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />  </a>
-                  </div>
-                  <ul className="menu"></ul>
-                  <div className="button-groups">
-
-                  { loggedIn ? (<div>
-                      <Button label="Help" secondary={true} />
-                      <Button label="Log Out" onClick={this.props.onLogout} primary={true} />
-                      </div>
-                      ) : (
-                        <div>
-                      <Button label="Help" secondary={true} />
-                      <Button label="Log In" onClick={this.props.onLogin} primary={true} />
-                      </div>
-                      )}
-                  </div>
-
+      <StickyContainer>
+          <Sticky style={{ zIndex: 5 }}>
+            <Login status={this.props}/>
+            <Box direction="row"  wrap={true} align="center" className="second-header">
+              <Box direction="row" className="school-info">
+                { currentSchool && <SchoolName school={this.state.currentSchool}/> }
               </Box>
+              <Box direction="row" className="school-search">
+                { centreSearch && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool}/> }
+              </Box>
+            </Box>
+          </Sticky>
+      </StickyContainer>
   )
+  }
 }
-}
-
-
-
 
 function mapStateToProps(state, ownProps) {
     return {
-        user: state.oidc.user,
-        error: state.error.error,
-        ownProps: ownProps,
-        loggedIn: state.session.loggedIn,
-        claims: state.session.claims,
+      currentSchool: state.currentSchool.school,
+      loggedIn: ownProps.loggedIn,
+      claims: ownProps.claims
     };
 }
 

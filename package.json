@@ -62,7 +62,7 @@
       }
     },
     "start": {
-      "command": "babel-node bin/server",
+      "command": "node bin/server",
       "env": {
         "DEBUG": "app:*"
       }
@@ -84,6 +84,7 @@
   "dependencies": {
     "auth0-web-header": "^1.2.3",
     "autoprefixer": "^6.4.0",
+    "axios": "^0.15.2",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.3.17",
     "babel-loader": "^6.2.0",
@@ -169,7 +170,7 @@
     "redux-logger": "^2.7.0",
     "redux-oidc": "^2.2.1",
     "redux-saga": "^0.10.4",
-    "redux-thunk": "^2.0.0",
+    "redux-thunk": "^2.1.0",
     "rimraf": "^2.5.1",
     "rucksack-css": "^0.8.6",
     "rupture": "^0.6.1",
@@ -218,6 +219,7 @@
     "jest-cli": "^15.1.1",
     "jest-mock": "^15.0.0",
     "jest-snapshot": "^15.1.1",
+    "json-loader": "^0.5.4",
     "karma": "^1.0.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-coverage": "^1.0.0",
@@ -237,6 +239,8 @@
     "react-addons-test-utils": "^15.0.0",
     "react-test-renderer": "^15.3.2",
     "redbox-react": "^1.2.10",
+    "redux-search": "^2.3.2",
+    "reselect": "^2.5.4",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "webpack-dev-middleware": "^1.6.1",

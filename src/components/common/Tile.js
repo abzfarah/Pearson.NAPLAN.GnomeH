@@ -1,9 +1,9 @@
 
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
-import Props from '../utils/Props';
+import Props from './utils/Props';
 import Box from './Box';
-import CSSClassnames from '../utils/CSSClassnames';
+import CSSClassnames from './utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.TILE;
 const NAMESPACE = CSSClassnames.NAMESPACE;

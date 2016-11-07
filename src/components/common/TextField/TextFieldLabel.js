@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import transitions from '../../utils/materialStyles/transitions';
+import transitions from '../utils/materialStyles/transitions';
 
 function getStyles(props) {
   const defaultStyles = {
@@ -30,8 +30,7 @@ const TextFieldLabel = (props) => {
     muiTheme,
     className,
     children,
-    htmlFor,
-    onTouchTap,
+    htmlFor
   } = props;
 
   const {prepareStyles} = muiTheme;
@@ -42,12 +41,12 @@ const TextFieldLabel = (props) => {
       className={className}
       style={prepareStyles(styles.root)}
       htmlFor={htmlFor}
-      onTouchTap={onTouchTap}
     >
       {children}
     </label>
   );
 };
+
 
 TextFieldLabel.propTypes = {
   /**
@@ -74,7 +73,7 @@ TextFieldLabel.propTypes = {
   /**
    * Callback function for when the label is selected via a touch tap.
    */
-  onTouchTap: PropTypes.func,
+  // onTouchTap: PropTypes.func,
   /**
    * True if the floating label should shrink.
    */

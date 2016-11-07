@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
-import KeyboardAccelerators from '../utils/KeyboardAccelerators';
-import DOMUtils from '../utils/DOM';
-import Drop from '../utils/Drop';
-import Intl from '../utils/Intl';
-import Props from '../utils/Props';
-import Responsive from '../utils/Responsive';
+import KeyboardAccelerators from './utils/KeyboardAccelerators';
+import DOMUtils from './utils/DOM';
+import Drop from './utils/Drop';
+import Intl from './utils/Intl';
+import Props from './utils/Props';
+import Responsive from './utils/Responsive';
 import Box from './Box';
 import Button from './Button';
 import DropCaretIcon from './icons/base/Down';
 import MoreIcon from './icons/base/More';
-import CSSClassnames from '../utils/CSSClassnames';
+import CSSClassnames from './utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.MENU;
 

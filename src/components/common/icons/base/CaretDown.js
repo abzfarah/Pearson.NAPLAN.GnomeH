@@ -40,7 +40,7 @@ var _FormattedMessage = require('../../../common/FormattedMessage');
 
 var _FormattedMessage2 = _interopRequireDefault(_FormattedMessage);
 
-var _CSSClassnames = require('../../../utils/CSSClassnames');
+var _CSSClassnames = require('../../utils/CSSClassnames');
 
 var _CSSClassnames2 = _interopRequireDefault(_CSSClassnames);
 
