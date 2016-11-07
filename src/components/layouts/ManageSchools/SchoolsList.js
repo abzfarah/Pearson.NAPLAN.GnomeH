@@ -71,8 +71,8 @@ class SchoolList extends React.Component {
 function mapStateToProps(globalState) {
 
     return {
-        isLoading: globalState.school.isLoading,
-        schoolData: globalState.school.schoolData
+        isLoading: globalState.manageSchool.isLoading,
+        schoolData: globalState.manageSchool.schoolDataList
 
     }
 }

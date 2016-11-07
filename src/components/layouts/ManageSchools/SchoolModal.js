@@ -109,7 +109,7 @@ const validate = values => {
     const requiredFields = ['centreName', 'sector', 'deecD_CODE',
         "deliveryCode", "deliverySchoolName", "deliveryAddress1", "deliveryAddress2", "deliverySuburb", "deliveryPostcode", "deliveryState",
         "reportCODE", "reportSchoolName", "reportAddress1", "reportAddress2", "reportSuburb", "reportPostcode", "reportState",
-        "dscode", "dsName", "dsPhone", "dsFax", "dsEmail"]
+        "dscode", "dsName", "dsPhone", "dsFax", "email"]
 
     requiredFields.forEach(field => {
         if (!values[field]) {
@@ -119,17 +119,21 @@ const validate = values => {
     // if (values.deliveryCode.length > 15) {
     //  errors.deliveryCode = 'Code is not correct'
     // }
-    if (values.dsEmail && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.dsEmail)) {
-        errors.dsEmail = 'Invalid email address'
+    if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address'
     }
-    if(values.phone){
-          console.log(values.phone.length)
-    }
-  
-    //if(values.phone.value.length > 15 )
-    // {
-    //     errors.phone='Invalid Phone Number'
-    //  }
+    //-- if need different message for length
+    if (values.emaui && Values.email.length) {
+        errors.email = 'Invalid email address'
+    }  
+    if(values.phone && values.phone.value.length > 15 )
+     {
+         errors.phone='Invalid Phone Number'
+     }
+       if(values.fax && values.fax.value.length > 15 )
+     {
+         errors.fax='Invalid Fax Number'
+     }
     return errors
 }
 

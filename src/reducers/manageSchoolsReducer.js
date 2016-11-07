@@ -8,7 +8,6 @@ const initialState = {
     isLoading: false,
     isLoaded: false,
     schoolDataList: [],
-    schoolData: [],
     error: {}
 }
 
@@ -16,10 +15,10 @@ export default (state = initialState, action = {}) => {
 
     switch (action.type) {
 
-        // case MANAGESCHOOLSEARCH_FETCH:
-        //     return Object.assign({}, state,{
-        //         isLoading:true
-        //     })
+        case MANAGESCHOOLSEARCH_FETCH:
+            return Object.assign({}, state,{
+                isLoading:true
+            })
 
         case MANAGESCHOOLSEARCH_FETCH_SUCCESS:
             return Object.assign({}, state, {

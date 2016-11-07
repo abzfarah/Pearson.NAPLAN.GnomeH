@@ -19,7 +19,6 @@ export function manageSchoolsAsync() {
 
         return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails")
             .then((response) => {
-
                 return dispatch({
                     type: MANAGESCHOOLSEARCH_FETCH_SUCCESS,
                     isLoading: false,
@@ -70,7 +69,7 @@ export function getSchoolAsync(schoolCode) {
 }
 
 export function submitSchoolAsync(schoolData) {
-    debugger
+ 
     return dispatch => {
 
         // dispatch({
@@ -80,7 +79,7 @@ export function submitSchoolAsync(schoolData) {
         // });
         return axios.post("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails", schoolData)
             .then((response) => {
-                debugger
+              
                 dispatch({
                     type: SCHOOL_SUBMIT_SUCCESS,
                     isLoading: false,
@@ -90,7 +89,7 @@ export function submitSchoolAsync(schoolData) {
                 //return response.data
             })
             .catch((error) => {
-                debugger
+            
                 dispatch({
                     type: SCHOOL_SUBMIT_FAILURE,
                     isLoading: false,
