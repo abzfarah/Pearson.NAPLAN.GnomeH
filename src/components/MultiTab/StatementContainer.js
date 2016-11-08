@@ -33,6 +33,8 @@ class StatementContainer extends React.Component {
     }
 
     if (!_.isEqual(this.state.statementData, nextProps.statementData)) {
+         let level = nextProps.statementData["securityLevel"].toString() 
+         nextProps.statementData["securityLevel"] = level
          this.setState({statementData: nextProps.statementData})
       }
 

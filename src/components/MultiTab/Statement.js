@@ -6,6 +6,8 @@ import {Button, Box, Heading, Paragraph, Footer, Form, FormField, Section, Tab, 
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../common/Table';
 import { validate } from "../utils/validation"
 
+
+
 class Statement extends Component {
 
     constructor() {
@@ -30,7 +32,7 @@ class Statement extends Component {
   }
 
   componentWillMount() {
-             var y=9
+    
  }
 
   render() {

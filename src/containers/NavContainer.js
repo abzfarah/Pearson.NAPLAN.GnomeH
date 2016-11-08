@@ -9,25 +9,20 @@ class NavContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      claims: ""
+      claims: {}
    }
   }
 
   componentWillMount() {
-
    let { claims } = this.props
    this.setState({claims: claims})
-
   }
 
   componentWillReceiveProps(nextProps) {
-
   }
 
   componentWillUpdate(props, state) {
-
   }
-
 
   render() {
 
@@ -40,8 +35,8 @@ class NavContainer extends React.Component {
                 {                 <Anchor href="#">2017 NAPLAN Online Pilot</Anchor> }
                 { centreSearch && <Anchor href="#">Bulk Download</Anchor>            }
                 {                 <Anchor href="#">Contact Us</Anchor>               }
-                { centreSearch && <Anchor path="$">Manage Schools</Anchor>           }
-                { centreSearch && <Anchor href="#">Manage Users</Anchor>             }
+                { centreSearch && <Anchor  path="/manageschools">Manage Schools</Anchor>           }
+                { centreSearch && <Anchor  path="/manageusers">Manage Users</Anchor>             }
                 { centreSearch && <Anchor href="#">Reports</Anchor>                  }
                                 </Menu>
       )

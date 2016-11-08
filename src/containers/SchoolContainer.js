@@ -5,7 +5,7 @@ import { StickyContainer, Sticky } from '../components/common/Sticky';
 import { Anchor, Button, Box, Header, Menu, NavAnchor, Tab, Tabs } from '../components/common';
 import userManager from '../utils/userManager';
 
-class FormContainer extends React.Component {
+class SchoolContainer extends React.Component {
 
     constructor(props, context) {
         super(props, context);
@@ -43,7 +43,6 @@ class FormContainer extends React.Component {
     componentWillMount() {
 
 
-   
 
     }
 
@@ -81,6 +80,8 @@ class FormContainer extends React.Component {
                     </Tabs>              
                 </Box> 
 
+                {this.props.children}
+
                 
             </div>
 
@@ -102,4 +103,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SchoolContainer);

@@ -19,7 +19,7 @@ export function schoolSearchAsync(keyword) {
                 return dispatch({
                     type: SCHOOLSEARCH_FETCH_SUCCESS,
                     isLoading: false,
-                    schoolData: response.data
+                    schoolDetails: response.data
                 });
 
                 //   return response.data;

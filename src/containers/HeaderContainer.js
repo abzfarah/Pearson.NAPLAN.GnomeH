@@ -15,6 +15,7 @@ class Login extends React.Component {
 
   render() {
 
+    let { dispatch } = this.props
     let { loggedIn, onLogout, onLogin } = this.props.status;
 
     return (
@@ -29,7 +30,7 @@ class Login extends React.Component {
             { loggedIn ?
               <div>
                 <Button label="Help" secondary={true} />
-                <Button label="Log Out" onClick={onLogout} primary={true} />
+                <Button label="Log Out" onClick={() => onLogout(event, dispatch)}  primary={true} />
               </div> :
               <div>
                 <Button label="Help" secondary={true} />
@@ -48,7 +49,6 @@ class SchoolName extends React.Component {
   }
 
   render() {
-
     const { name, code } = this.props.school;
     let string = 'School Code: ';
     var full;
@@ -56,7 +56,6 @@ class SchoolName extends React.Component {
          full = string + code;
     }
     else full = ""
-    debugger;
 
     return (
       <Box direction="row" className="school-info">
@@ -89,13 +88,12 @@ class HeaderContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
 
     if (this.state.currentSchool != nextProps.currentSchool) {
-      this.setState({currentSchool: nextProps.currentSchool})
+        this.setState({currentSchool: nextProps.currentSchool})
     }
     if (this.props.user != nextProps.user) {
-
-      this.setState({
-        loggedIn: true
-      })
+        this.setState({
+          loggedIn: true
+        })
     }
     else return true
   }
@@ -119,7 +117,7 @@ class HeaderContainer extends React.Component {
     return (
       <StickyContainer>
           <Sticky style={{ zIndex: 5 }}>
-            <Login status={this.props}/>
+            <Login status={this.props} dispatch={this.props.dispatch} />
             <Box direction="row"  wrap={true} align="center" className="second-header">
               <Box direction="row" className="school-info">
                 { currentSchool && <SchoolName school={this.state.currentSchool}/> }
@@ -136,7 +134,7 @@ class HeaderContainer extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-      currentSchool: state.currentSchool.school,
+      currentSchool: state.currentSchool.currentSchool,
       loggedIn: ownProps.loggedIn,
       claims: ownProps.claims
     };
