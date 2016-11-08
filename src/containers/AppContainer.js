@@ -15,7 +15,11 @@ import userManager from '../components/utils/userManager';
 import session from '../routes/utils/session'
 import schools from '../data/schools.json';
 import _ from 'lodash';
+import injectTapEventPlugin from 'react-tap-event-plugin'
 
+//--TODO remove after new release
+//--http://www.material-ui.com/#/get-started/installation
+injectTapEventPlugin()
 class AppContainer extends React.Component {
 
   constructor(props) {
@@ -26,22 +30,23 @@ class AppContainer extends React.Component {
       claims: false,
       currentSchool: [],
       schools: schools
-   }
+    }
     this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
+
   }
 
-   onLoginButtonClick = (event) => {
-      event.preventDefault();
-      userManager.signinRedirect();
+  onLoginButtonClick = (event) => {
+    event.preventDefault();
+    userManager.signinRedirect();
   };
 
-    onLogoutButtonClick = (event) => {
-      event.preventDefault();
-      userManager.removeUser();
-      sessionStorage.clear();
-      userManager.signoutRedirect();
-      this.setState({loggedIn: false});
-      this.forceUpdate()
+  onLogoutButtonClick = (event) => {
+    event.preventDefault();
+    userManager.removeUser();
+    sessionStorage.clear();
+    userManager.signoutRedirect();
+    this.setState({ loggedIn: false });
+    this.forceUpdate()
   }
 
   componentWillMount(props) {
@@ -49,7 +54,6 @@ class AppContainer extends React.Component {
     if (session.exists) {
 
       let user_claims = getClaims(session.user)
-      debugger
 
       this.props.actions.retrieveClaims(user_claims)
 
@@ -63,25 +67,25 @@ class AppContainer extends React.Component {
 
   componentWillReceiveProps(nextProps, nextState) {
     if (this.state.currentSchool != nextProps.currentSchool) {
-      this.setState({currentSchool: nextProps.currentSchool})
+      this.setState({ currentSchool: nextProps.currentSchool })
     }
 
     if (this.props.user != nextProps.user) {
-      this.setState({user: nextProps.user})
+      this.setState({ user: nextProps.user })
     }
 
     if (nextProps.user && !this.state.claims) {
-        let user_claims = getClaims(nextProps.user.profile)
-        this.setState({claims: user_claims})
+      let user_claims = getClaims(nextProps.user.profile)
+      this.setState({ claims: user_claims })
     }
 
     else return false
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if ( !this.props.user && nextProps.user) return true
+    if (!this.props.user && nextProps.user) return true
     if (this.props.currentSchool != nextProps.currentSchool) return true
-    if ( !this.state.loggedIn && nextState.loggedIn ) return true
+    if (!this.state.loggedIn && nextState.loggedIn) return true
     else return true
   }
 
@@ -89,13 +93,13 @@ class AppContainer extends React.Component {
     if (!this.state.loggedIn && session.exists) {
       const user = session.user
       session.login = true;
-      this.setState({loggedIn: true, user: user})
+      this.setState({ loggedIn: true, user: user })
     }
   }
 
   componentDidMount(props, state) {
 
-    debugger
+
   }
 
   render() {
@@ -106,38 +110,38 @@ class AppContainer extends React.Component {
     return (
       <div>
         <HeaderContainer
-           loggedIn={loggedIn}
-           user={user}
-           claims={claims}
-           schools={schools}
-           currentSchool={currentSchool}
-           onLogout={this.onLogoutButtonClick}
-           onLogin={this.onLoginButtonClick} />
+          loggedIn={loggedIn}
+          user={user}
+          claims={claims}
+          schools={schools}
+          currentSchool={currentSchool}
+          onLogout={this.onLogoutButtonClick}
+          onLogin={this.onLoginButtonClick} />
 
-        { loggedIn && <NavContainer claims={claims}/> }
+        {loggedIn && <NavContainer claims={claims} />}
 
-        { loggedIn && <FormContainer claims={claims}/>}
-    
-          {this.props.children}     
-       
-        <Footer/>
+        {loggedIn && <FormContainer claims={claims} />}
+
+        {this.props.children}
+
+        <Footer />
       </div>
-     )
-    }
+    )
   }
+}
 
-  function mapStateToProps(state, ownProps) {
-    return {
-        user: state.oidc.user,
-        loggedIn: state.loggedIn,
-        claims: state.claims.claims
-    };
-  }
+function mapStateToProps(state, ownProps) {
+  return {
+    user: state.oidc.user,
+    loggedIn: state.loggedIn,
+    claims: state.claims.claims
+  };
+}
 
-  function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(schoolActions, dispatch)
-    };
-  }
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(schoolActions, dispatch)
+  };
+}
 
-  export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

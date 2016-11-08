@@ -7,6 +7,7 @@ class AddSchoolContainer extends Component {
 
     constructor(props) {
         super(props)
+
         this.submitForm = this.submitForm.bind(this);
     }
 
@@ -17,7 +18,22 @@ class AddSchoolContainer extends Component {
     }
 
     submitForm(model) {
-        this.props.submitSchoolAsync(model)       
+
+        return this.props.submitSchoolAsync(model)
+
+    }
+
+    doSubmit() {
+        
+        return new Promise((resolve, reject) => {
+            let form = this.refs.schoolForm.getWrappedInstance();
+            let result = form.submit();
+            if (form.valid) {
+               resolve()
+            }
+
+            reject('Invalid form');
+        })
 
     }
 
@@ -27,13 +43,12 @@ class AddSchoolContainer extends Component {
 
         return (
             <div>
-                <SchoolModal schoolData={schoolData} initialValues={schoolData} sectors={sectors} submitForm={this.submitForm} />
+                <SchoolModal schoolData={schoolData} initialValues={schoolData} sectors={sectors} onSubmit={this.submitForm} ref={'schoolForm'} />
             </div>
         )
     }
 }
 
-//-- nothijg to do with AddSchool Get
 function mapStateToProps(globalState) {
     console.log(globalState.manageSchool.sectors)
     var schoolData = {};
@@ -45,4 +60,5 @@ function mapStateToProps(globalState) {
         sectors: globalState.manageSchool.sectors,
     }
 }
-export default connect(mapStateToProps, { getSectorsAsync, submitSchoolAsync })(AddSchoolContainer)
+
+export default connect(mapStateToProps, { getSectorsAsync, submitSchoolAsync }, null, { withRef: true })(AddSchoolContainer)

@@ -58,7 +58,7 @@ class SchoolModal extends React.Component {
 
                         </Heading>
                     </Box>
-                    <form onSubmit={handleSubmit((model) => { this.submitForm(model) })}>
+                    <form onSubmit={handleSubmit}>
                         <Box direction="row" className="boxRow">
                             <Box className="sd_boxLeft sd_editBgColor" align="start" pad="small" colorIndex="light-2">
 
@@ -71,8 +71,8 @@ class SchoolModal extends React.Component {
                                     hintText="Select Sector"
                                     floatingLabelText="Select Sector">
 
-                                    {this.props.sectors && this.props.sectors.map((item) => {
-                                        return <MenuItem value={item.sectorId} primaryText={item.description} />
+                                    {this.props.sectors && this.props.sectors.map((item, i) => {
+                                        return <MenuItem key={i} value={item.sectorId} primaryText={item.description} />
                                     })}
 
                                 </Field>
@@ -111,12 +111,7 @@ class SchoolModal extends React.Component {
                                 <Field name="reportPostcode" type="text" component={TextField} floatingLabelText="Post Code" />
                                 <Field name="reportState" type="text" component={TextField} floatingLabelText="State" />
                             </Box>
-
                         </Box>
-                        <Box><div>
-                            <RaisedButton label="Submit" primary={true} disabled={submitting} type="submit" style={style} />
-                            <RaisedButton label="Clear Values" disabled={pristine || submitting} onClick={reset} style={style} />
-                        </div></Box>
                     </form>
                 </Section>
             </Box>
@@ -128,16 +123,9 @@ const validate = values => {
     const errors = {}
     const requiredFields = ['centreName', 'centreCode', 'sector', 'deecD_CODE']
 
-    requiredFields.forEach(field => {
-        if (!values[field]) {
-            errors[field] = 'Required'
-        }
-    })
+    requiredFields.forEach(field => { if (!values[field]) { errors[field] = 'Required' } })
 
-    if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address'
-    }
-
+    if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) { errors.email = 'Invalid email address' }
     if (values.email && values.email.length > 100) { errors.email = 'Invalid email address' }
     if (values.phone && values.phone.length > 15) { errors.phone = 'Invalid Phone Number' }
     if (values.fax && values.fax.length > 15) { errors.fax = 'Invalid Fax Number' }
@@ -166,13 +154,14 @@ const validate = values => {
     return errors
 }
 
-export default connect(null, null)(reduxForm({
+export default connect(null, null, null, { withRef: true })(reduxForm({
     form: 'SchoolForm',
     validate
 })(SchoolModal))
 //-- TODO
 //--1- er-injectTapEventPlugin
 //-- 2- Modal submit form
+//---3 - suburb loading
 //-- 2- SchoolCode shuld be uniq
 //--3 design
 

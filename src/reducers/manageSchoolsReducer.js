@@ -43,7 +43,7 @@ export default (state = initialState, action = {}) => {
 
         case GETSCHOOL_FETCH_FAILURE:
             return Object.assign({}, state, {
-                isLoading: fasle,
+                isLoading: false,
                 isLoaded: true,
                 error: action.response
             });
@@ -56,14 +56,14 @@ export default (state = initialState, action = {}) => {
 
         case SCHOOL_SUBMIT_SUCCESS:
             return Object.assign({}, state, {
-                isLoading: fasle,
+                isLoading: false,
                 isLoaded: true,
                 response: action.response
             });
 
         case SCHOOL_SUBMIT_FAILUR:
             return Object.assign({}, state, {
-                isLoading: fasle,
+                isLoading: false,
                 isLoaded: true,
                 error: action.response
             });
@@ -82,7 +82,7 @@ export default (state = initialState, action = {}) => {
 
         case GETSECTORS_FETCH_FAILURE:
             return Object.assign({}, state, {
-                isLoading: fasle,
+                isLoading: false,
                 isLoaded: true,
                 error: action.response
             });

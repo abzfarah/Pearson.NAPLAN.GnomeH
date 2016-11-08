@@ -9,6 +9,10 @@ import StatementContainer from  '../components/MultiTab/StatementContainer';
 import Home from  '../components/MultiTab/Home';
 import SchoolDetails from  '../components/MultiTab/SchoolDetailsContainer';
 import AuthorizedStaff from  '../components/MultiTab/AuthorizedStaff';
+//--TOD _TEMPRORY
+import AddSchool  from '../components/layouts/ManageSchools/AddSchoolContainer'
+import UpdateSchool  from '../components/layouts/ManageSchools/UpdateSchoolContainer'
+import SchoolList  from '../components/layouts/ManageSchools/schoolsList'
 import FormContainer from '../containers/FormContainer';
 import session from './utils/session'
 
@@ -46,7 +50,9 @@ export default {
           { path: '/summary',  component: Home },
           { path: '/statement',  component: StatementContainer },
           { path: '/schooldetails',  component: SchoolDetails },
-          { path: '/authorisedstaff',  component: AuthorizedStaff },
+          { path: '/authorisedstaff',  component: AddSchool },
+          { path: '/testformat',  component: UpdateSchool },
+          { path: '/schools',  component: SchoolList },
           { path: '/callback',  component: CallbackPage }       
       ]
 }

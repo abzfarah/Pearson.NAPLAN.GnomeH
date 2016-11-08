@@ -1,9 +1,4 @@
-import {
-    MANAGESCHOOLSEARCH_FETCH, MANAGESCHOOLSEARCH_FETCH_SUCCESS, MANAGESCHOOLSEARCH_FETCH_FAILURE,
-    GETSCHOOL_FETCH, GETSCHOOL_FETCH_SUCCESS, GETSCHOOL_FETCH_FAILURE,
-    SCHOOL_SUBMIT, SCHOOL_SUBMIT_SUCCESS, SCHOOL_SUBMIT_FAILURE,
-    GETSECTORS_FETCH, GETSECTORS_FETCH_SUCCESS, GETSECTORS_FETCH_FAILURE,
-} from '../constants'
+import * as types from '../constants'
 import logger from 'redux-logger';
 import axios from 'axios';
 import thunk from "redux-thunk"
@@ -14,25 +9,31 @@ export function manageSchoolsAsync() {
     return dispatch => {
 
         dispatch({
-            type: MANAGESCHOOLSEARCH_FETCH,
+            type: types.MANAGESCHOOLSEARCH_FETCH,
             isLoading: true
         });
 
-        return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails")
-            .then((response) => {
-             
-                return dispatch({
-                    type: MANAGESCHOOLSEARCH_FETCH_SUCCESS,
-                    isLoading: false,
-                    response: response.data
-                });
-            })
-            .catch((err) => {
-                dispatch({
-                    type: MANAGESCHOOLSEARCH_FETCH_FAILURE,
-                    isLoading: false
+        return new Promise((resolve, reject) => {
+
+            axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails")
+                .then((response) => {
+
+                    dispatch({
+                        type: types.MANAGESCHOOLSEARCH_FETCH_SUCCESS,
+                        isLoading: false,
+                        response: response.data
+                    });
+
+                    resolve(response)
                 })
-            });
+                .catch((err) => {
+                    dispatch({
+                        type: types.MANAGESCHOOLSEARCH_FETCH_FAILURE,
+                        isLoading: false
+                    })
+                    reject(err)
+                });
+        })
     }
 }
 
@@ -41,18 +42,18 @@ export function getSchoolAsync(schoolCode) {
 
     return dispatch => {
 
-     //   dispatch({
-       //     type: GETSCHOOL_FETCH,
-     //       isLoading: true,
-     //       isLoaded: false
-    //    });
+        //   dispatch({
+        //     type: GETSCHOOL_FETCH,
+        //       isLoading: true,
+        //       isLoaded: false
+        //    });
 
         return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/GetCentreDetails/centreCode/" + schoolCode)
 
             .then((response) => {
 
                 dispatch({
-                    type: GETSCHOOL_FETCH_SUCCESS,
+                    type: types.GETSCHOOL_FETCH_SUCCESS,
                     isLoading: false,
                     isLoaded: true,
                     response: response.data
@@ -71,7 +72,7 @@ export function getSchoolAsync(schoolCode) {
 }
 
 export function submitSchoolAsync(schoolData) {
- 
+
     return dispatch => {
 
         // dispatch({
@@ -81,9 +82,9 @@ export function submitSchoolAsync(schoolData) {
         // });
         return axios.post("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails", schoolData)
             .then((response) => {
-              
+
                 dispatch({
-                    type: SCHOOL_SUBMIT_SUCCESS,
+                    type: types.SCHOOL_SUBMIT_SUCCESS,
                     isLoading: false,
                     isLoaded: true,
                     response: response
@@ -91,9 +92,9 @@ export function submitSchoolAsync(schoolData) {
                 //return response.data
             })
             .catch((error) => {
-            
+
                 dispatch({
-                    type: SCHOOL_SUBMIT_FAILURE,
+                    type: types.SCHOOL_SUBMIT_FAILURE,
                     isLoading: false,
                     isLoaded: false,
                     error: error
@@ -104,29 +105,29 @@ export function submitSchoolAsync(schoolData) {
 
 //--TODO 
 //----Move to a shared action
-export function getSectorsAsync(){
+export function getSectorsAsync() {
 
-    return dispatch =>{
+    return dispatch => {
 
         //--TODO
         //----Handle loading !
         return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/GetSectors")
-        .then((response) => {
+            .then((response) => {
 
-            dispatch({
-                type: GETSECTORS_FETCH_SUCCESS,
-                isLoading: false,
-                isLoaded: true,
-                response: response.data
+                dispatch({
+                    type: types.GETSECTORS_FETCH_SUCCESS,
+                    isLoading: false,
+                    isLoaded: true,
+                    response: response.data
+                })
             })
-        })
-        .catch((error) => {
+            .catch((error) => {
 
-            dispatch({
-                type:GETSECTORS_FETCH_FAILURE_SUBMIT_FAILURE,
-                isLoading: false,
-                isLoaded: true
+                dispatch({
+                    type: types.GETSECTORS_FETCH_FAILURE_SUBMIT_FAILURE,
+                    isLoading: false,
+                    isLoaded: true
+                })
             })
-        })
     }
 }
