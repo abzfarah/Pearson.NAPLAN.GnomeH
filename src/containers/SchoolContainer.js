@@ -1,75 +1,106 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { bindActionCreators } from 'redux';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
-import { Box, Button, Header } from '../components/common';
-import { loadSchools } from '../actions/searchActions'
-import { getClaims } from '../components/utils/getClaims'
-import FormContainer from './FormContainer'
+import { Anchor, Button, Box, Header, Menu, NavAnchor, Tab, Tabs } from '../components/common';
 import userManager from '../utils/userManager';
-import session from '../routes/utils/session'
-import _ from 'lodash';
 
 class SchoolContainer extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
-  }
+    constructor(props, context) {
+        super(props, context);
+        this.onActive= this.onActive.bind(this);
 
-   onLoginButtonClick = (event) => {
-
-  };
-
-    onLogoutButtonClick = (event, dispatch) => {
-
-  }
-
-  componentWillMount(props) {
-
-  }
-
-  componentWillReceiveProps(nextProps, nextState) {
-
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-
-  }
-
-  componentWillUpdate(props, state) {
-
-  }
-
-  componentDidMount(props, state) {
-
-  }
-
-  render() {
-
-    return (
-      <div>
-        <FormContainer claims={this.props.claims} />
-
-        { this.props.children }
-
-      </div>
-     )
+        this.state = {
+        activeIndex: 0,
+        justify: props.justify,
+        claims: {}
+        };
     }
-  }
 
-  function mapStateToProps(state, ownProps) {
+    onActive(index) {
+
+        this.setState({ activeIndex: index })
+
+        switch(index) {
+            case 0:
+                 this.props.dispatch(push('/school/summary'));
+                break;
+            case 1:
+                 this.props.dispatch(push('/school/statement'));
+                break;
+            case 2:
+                 this.props.dispatch(push('/school/authorisedstaff'));
+                break;
+            case 3:
+                this.props.dispatch(push('/school/schooldetails'));
+                break;
+            default:    
+        }
+       
+     }
+
+    componentWillMount() {
+
+
+
+    }
+
+    componentDidMount() {
+    }
+
+    componentWillUpdate() {
+        return true
+    }
+
+    componentWillReceiveProps() {
+        return true
+    }
+
+    onLogoutButtonClicked = (event) => {
+        event.preventDefault();
+        userManager.removeUser(); // removes the user data from sessionStorage
+        sessionStorage.removeItem('userSession');
+        userManager.signoutRedirect();
+
+    }
+
+    render() {
+
+        return (
+            <div>
+                <Box className="tab-container">      
+                    <Tabs justify="start" onActive={this.onActive} claims={this.props.claims}>
+                       <Tab title="Home" subtitle="" className="home"/>                                  
+                       <Tab title="Statement of Compliance" subtitle="required" className="check" />      
+                        <Tab title="Authorised Staff" subtitle="required" className="staff"/>               
+                        <Tab title="School Details" subtitle="required" className=""/>                     
+                        <Tab title="Test Format Order" subtitle="optional" className="staff"/>               
+                        <Tab title="Student Registration Data" subtitle="independant schools only"/>          
+                    </Tabs>              
+                </Box> 
+
+                {this.props.children}
+
+                
+            </div>
+
+        );
+    }
+}
+
+function mapStateToProps(state, ownProps) {
     return {
         user: state.oidc.user,
-        loggedIn: state.loggedIn,
-        claims: state.claims.claims
+        claims: ownProps.claims,
+        session: state.session
     };
-  }
+}
 
-  function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
+        dispatch
     };
-  }
+}
 
-  export default connect(mapStateToProps, mapDispatchToProps)(SchoolContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SchoolContainer);
