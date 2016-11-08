@@ -37,6 +37,8 @@ class AppContainer extends React.Component {
 
     onLogoutButtonClick = (event, dispatch) => {
       event.preventDefault();
+      sessionStorage.clear();
+      localStorage.clear();
       userManager.removeUser();
       userManager.signoutRedirect();
       this.setState({loggedIn: false});
@@ -89,13 +91,21 @@ class AppContainer extends React.Component {
   }
 
   componentDidMount(props, state) {
-    debugger
+
   }
 
   render() {
     const { schools, currentSchool, claims } = this.state;
     let loggedIn = (this.props.user || this.state.loggedIn) ? true : false;
     let user = (this.props.user || this.state.user);
+    let that = this;
+
+      var children = React.Children.map(this.props.children, function (child) {
+         return React.cloneElement(child, {
+             claims: that.state.claims
+    })
+  })
+
 
     return (
       <div>
@@ -108,14 +118,12 @@ class AppContainer extends React.Component {
            onLogout={this.onLogoutButtonClick}
            onLogin={this.onLoginButtonClick} />
 
-        { loggedIn && <NavContainer claims={claims}/> }
-
-        { loggedIn && <FormContainer claims={claims}/>}
-    
-          {this.props.children}     
+        {loggedIn && <NavContainer claims={claims}/>}
+      
+        { children }     
        
-        <Footer/>
-      </div>
+      <Footer/>
+    </div>
      )
     }
   }

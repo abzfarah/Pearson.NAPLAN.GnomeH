@@ -49,7 +49,6 @@ class SchoolName extends React.Component {
   }
 
   render() {
-
     const { name, code } = this.props.school;
     let string = 'School Code: ';
     var full;
@@ -89,13 +88,12 @@ class HeaderContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
 
     if (this.state.currentSchool != nextProps.currentSchool) {
-      this.setState({currentSchool: nextProps.currentSchool})
+        this.setState({currentSchool: nextProps.currentSchool})
     }
     if (this.props.user != nextProps.user) {
-
-      this.setState({
-        loggedIn: true
-      })
+        this.setState({
+          loggedIn: true
+        })
     }
     else return true
   }

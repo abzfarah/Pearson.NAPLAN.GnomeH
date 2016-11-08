@@ -24,16 +24,16 @@ class FormContainer extends React.Component {
 
         switch(index) {
             case 0:
-                 this.props.dispatch(push('/summary'));
+                 this.props.dispatch(push('/school/summary'));
                 break;
             case 1:
-                 this.props.dispatch(push('/statement'));
+                 this.props.dispatch(push('/school/statement'));
                 break;
             case 2:
-                 this.props.dispatch(push('/authorisedstaff'));
+                 this.props.dispatch(push('/school/authorisedstaff'));
                 break;
             case 3:
-                this.props.dispatch(push('/schooldetails'));
+                this.props.dispatch(push('/school/schooldetails'));
                 break;
             default:    
         }
@@ -79,11 +79,11 @@ class FormContainer extends React.Component {
                         <Tab title="Test Format Order" subtitle="optional" className="staff"/>               
                         <Tab title="Student Registration Data" subtitle="independant schools only"/>          
                     </Tabs>              
-                </Box>
-                  
-                    {this.props.children}     
-                     
+                </Box> 
+
+                
             </div>
+
         );
     }
 }
