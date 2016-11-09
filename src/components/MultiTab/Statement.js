@@ -40,8 +40,6 @@ const validate = values => {
     errors.isCertified = 'Must certify'
   }
 
-
-
   return errors
 }
 
@@ -64,12 +62,6 @@ class Statement extends Component {
       this.props.initialize(nextProps.statementData);  
     }
   }
-
-  componentWillUpdate() {
-
-    var i=0;
-    
- }
 
   render() {
 
@@ -172,7 +164,7 @@ class Statement extends Component {
 Statement = reduxForm({
   form: 'Statement',
   validate,
-  
+
 })(Statement)
 
 

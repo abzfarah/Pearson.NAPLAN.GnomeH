@@ -3,14 +3,36 @@ import { Field, reduxForm } from 'redux-form'
 import { Button, Box, Heading, Paragraph, Form, FormField, List, ListItem, Select, Section } from '../common'
 import { RadioButton, MenuItem } from 'material-ui'
 import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
-import { validate } from "../utils/validation"
 
+const validate = values => {
+  const errors = {}
+  function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+
+  if (!values.details) {
+    errors.details = 'Must declare'
+  }
+
+  if (!values.phone) {
+    errors.phone = 'Required'
+  } else if(!isNumeric(values.phone)) {
+    errors.phone = 'Must ne a number'
+  }
+
+  if (!values.fax) {
+    errors.fax = 'Required'
+  } else if(!isNumeric(values.fax)) {
+    errors.fax = 'Must ne a number'
+  }
+
+  return errors
+}
 
 class SchoolDetails extends React.Component {
 
   constructor() {
       super();
-
       this.state = {
         currentSchool: {},
         schoolDetails: {
@@ -35,10 +57,6 @@ class SchoolDetails extends React.Component {
       }
   }
     
-    componentWillMount() {
-
-    }
-
     componentWillReceiveProps(nextProps) {
 
       if ( !_.isEqual(this.state. schoolDetails , nextProps. schoolDetails) ) {
@@ -49,16 +67,16 @@ class SchoolDetails extends React.Component {
 
     render() {
 
-      const { handleSubmit, pristine, reset, submitting} = this.props
+      const { handleSubmits, pristine, reset, submitting, validated} = this.props
 
       const { centreCode, centreName, deliveryAddress1, deliveryAddress2, deliveryPostcode, deliverySchoolName,
         deliveryState, deliverySuburb, dsFax, dsPhone, email, fax, phone, post_address_line1, reportState,
         reportSuburb, requestPackingOrder } = this.state.schoolDetails 
 
         return (
-   <Box className="form-container">  
+       <Box className="form-container">  
           <Section className="test">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmits}>
             <Box>
               <Heading tag="h2">
                 <div className="numberCircle">3</div>
@@ -243,15 +261,13 @@ class SchoolDetails extends React.Component {
             </Box>
 
             </form>  
-                 <div className="button-groups">
-                    <div>
-                       <button className="submit-button" type="button">Return</button>
-                      <button className="submit-button" type="submit">Submit</button>
-                    </div>
-                </div>
+              <Box className="button-group-padding">
+                  <div className="button-groups">
+                    <Button className="separate-button" type="button" secondary={true} label="Return" />  
+                    <Button className="separate-button" type="submit" disabled={!validated} primary={true } label="Submit"  />
+                  </div>
+            </Box>
           </Section>
-
-          
         </Box>
 
         )
@@ -263,8 +279,6 @@ class SchoolDetails extends React.Component {
 SchoolDetails = reduxForm({
   form: 'SchoolDetails',
   validate,
-  fields: ['email']
-  
 })(SchoolDetails)
 
 

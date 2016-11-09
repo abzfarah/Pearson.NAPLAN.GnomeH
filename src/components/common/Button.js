@@ -97,7 +97,7 @@ export default class Button extends Component {
       buttonLabel = <span className={`${CLASS_ROOT}__label`}>{label}</span>;
     }
 
-    let isDisabled = disabled
+    let isDisabled = disabled || false
 
     let adjustedHref = (path && router) ? router.createPath(path) : href;
 

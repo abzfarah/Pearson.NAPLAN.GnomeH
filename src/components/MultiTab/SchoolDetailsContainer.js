@@ -13,12 +13,13 @@ class SchoolDetailsContainer extends React.Component {
       currentSchool: {},
       schoolData: {},
       schoolDetails: {},
-      form: {}
+      form: {},
+      validated: false
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmits = this.handleSubmits.bind(this)
   }
 
-  handleSubmit(data) {
+  handleSubmits(data) {
     debugger
     this.props.actions.submitDetails(data)
   }
@@ -35,12 +36,16 @@ class SchoolDetailsContainer extends React.Component {
     if (!_.isEqual(this.state.form.values,nextProps.form.values)) {
          this.setState({form: nextProps.form})
       }
+
+    if (!nextProps.form.syncErrors &&  !_.isEmpty(nextProps.form.values) ) {
+        this.setState({validated: true})
+    }  
   }
 
   render() {
-    let { currentSchool, schoolDetails } = this.state
+    let { currentSchool, schoolDetails, validated } = this.state
     return (
-      <SchoolDetails onSubmit={this.handleSubmit} schoolDetails={schoolDetails}/>
+      <SchoolDetails onSubmit={this.handleSubmits} schoolDetails={schoolDetails} validated={validated}/>
     )
   }
 }
