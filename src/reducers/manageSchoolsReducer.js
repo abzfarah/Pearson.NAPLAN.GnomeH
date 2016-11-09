@@ -3,6 +3,7 @@ import {
     GETSCHOOL_FETCH, GETSCHOOL_FETCH_SUCCESS, GETSCHOOL_FETCH_FAILURE,
     SCHOOL_SUBMIT, SCHOOL_SUBMIT_SUCCESS, SCHOOL_SUBMIT_FAILUR,
     GETSECTORS_FETCH, GETSECTORS_FETCH_SUCCESS, GETSECTORS_FETCH_FAILURE,
+    GETSUBURBS_FETCH, GETSUBURBS_FETCH_SUCCESS, GETSUBURBS_FETCH_FAILURE
 } from '../constants'
 
 const initialState = {
@@ -18,8 +19,8 @@ export default (state = initialState, action = {}) => {
     switch (action.type) {
 
         case MANAGESCHOOLSEARCH_FETCH:
-            return Object.assign({}, state,{
-                isLoading:true
+            return Object.assign({}, state, {
+                isLoading: true
             })
 
         case MANAGESCHOOLSEARCH_FETCH_SUCCESS:
@@ -28,26 +29,28 @@ export default (state = initialState, action = {}) => {
                 schoolDataList: action.response
             });
 
-//-- GETSCHOOL
-  //   case GETSCHOOL_FETCH:
-     //       return Object.assign({}, state,{
-     //           isLoading:true
-     //       })
+        //-- GETSCHOOL
+        case GETSCHOOL_FETCH:
+            return Object.assign({}, state, {
+                isLoading: true,
+                isLoaded: false
+            })
 
         case GETSCHOOL_FETCH_SUCCESS:
-  
+
             return Object.assign({}, state, {
                 isLoading: false,
+                isLoaded: true,
                 schoolData: action.response
             });
 
         case GETSCHOOL_FETCH_FAILURE:
             return Object.assign({}, state, {
                 isLoading: false,
-                isLoaded: true,
+                isLoaded: false,
                 error: action.response
             });
-//--SUBMIT
+        //--SUBMIT
         case SCHOOL_SUBMIT:
             return Object.assign({}, state, {
                 isLoading: false,
@@ -67,14 +70,14 @@ export default (state = initialState, action = {}) => {
                 isLoaded: true,
                 error: action.response
             });
-///--GETSECTORS
-  //   case GETSECTORS_FETCH:
-     //       return Object.assign({}, state,{
-     //           isLoading:true
-     //       })
+        ///--GETSECTORS
+        //   case GETSECTORS_FETCH:
+        //       return Object.assign({}, state,{
+        //           isLoading:true
+        //       })
 
         case GETSECTORS_FETCH_SUCCESS:
-  
+
             return Object.assign({}, state, {
                 isLoading: false,
                 sectors: action.response
@@ -86,6 +89,27 @@ export default (state = initialState, action = {}) => {
                 isLoaded: true,
                 error: action.response
             });
+
+        ///--GETSUBURBS
+        //   case GETSUBURBS_FETCH:
+        //       return Object.assign({}, state,{
+        //           isLoading:true
+        //       })
+
+        case GETSUBURBS_FETCH_SUCCESS:
+
+            return Object.assign({}, state, {
+                isLoading: false,
+                sectors: action.response
+            });
+
+        case GETSUBURBS_FETCH_FAILURE:
+            return Object.assign({}, state, {
+                isLoading: false,
+                isLoaded: true,
+                error: action.response
+            });
+
     }
     return state
 }

@@ -133,7 +133,7 @@ const validate = values => {
     if (values.centreCode && values.centreCode.length > 10) { errors.centreCode = 'Invalid centre Code' }
     if (values.deecD_CODE && values.deecD_CODE.length > 8) { errors.deecD_CODE = 'Invalid DEECD CODE' }
     if (values.dscode && values.dscode.length > 5) { errors.dscode = 'Invalid code' }
-    if (values.dsName && values.dsName.length > 15) { errors.dsName = 'Invalid centreName' }
+    if (values.dsName && values.dsName.length > 100) { errors.dsName = 'Invalid centreName' }
 
     if (values.deliveryCode && values.deliveryCode.length > 5) { errors.deliveryCode = 'Invalid deliveryCode' }
     if (values.deliverySchoolName && values.deliverySchoolName.length > 100) { errors.deliverySchoolName = 'Invalid School Name' }

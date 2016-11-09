@@ -42,11 +42,11 @@ export function getSchoolAsync(schoolCode) {
 
     return dispatch => {
 
-        //   dispatch({
-        //     type: GETSCHOOL_FETCH,
-        //       isLoading: true,
-        //       isLoaded: false
-        //    });
+        dispatch({
+            type: types.GETSCHOOL_FETCH,
+            isLoading: true,
+            isLoaded: false
+        });
 
         return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/GetCentreDetails/centreCode/" + schoolCode)
 
@@ -125,6 +125,33 @@ export function getSectorsAsync() {
 
                 dispatch({
                     type: types.GETSECTORS_FETCH_FAILURE_SUBMIT_FAILURE,
+                    isLoading: false,
+                    isLoaded: true
+                })
+            })
+    }
+}
+
+export function getSuburbsAsync(postCode) {
+
+    return dispatch => {
+
+        //--TODO
+        //----Handle loading !
+        return axios.get("http://audockerintstg01.epenau.local:12500/api/v1/PostCodeSearch/postCode/" + postCode)
+            .then((response) => {
+
+                dispatch({
+                    type: types.GETSUBURBS_FETCH_SUCCESS,
+                    isLoading: false,
+                    isLoaded: true,
+                    response: response.data
+                })
+            })
+            .catch((error) => {
+
+                dispatch({
+                    type: types.GETSUBURBS_FETCH_FAILURE_SUBMIT_FAILURE,
                     isLoading: false,
                     isLoaded: true
                 })

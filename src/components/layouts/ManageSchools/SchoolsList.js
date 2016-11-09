@@ -34,12 +34,15 @@ class SchoolList extends React.Component {
             //--handle Modal 
             open: false,
             openSnack: false,
-            snackMessage: ''
+            snackMessage: '',
+            centreCode: null
         }
 
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.submitForm = this.submitForm.bind(this);
+
+
     }
 
     componentDidMount() {
@@ -55,8 +58,10 @@ class SchoolList extends React.Component {
         });
     }
 
-    handleOpen = () => {
-        this.setState({ open: true });
+    handleOpen = (centreCode) => {
+        console.log(centreCode)
+
+        this.setState({ open: true, centreCode: centreCode });
     }
 
     handleClose = () => {
@@ -69,8 +74,45 @@ class SchoolList extends React.Component {
     submitForm = (model) => {
         this.props.submitSchoolAsync(model)
     }
+    //--- grid_table
+    onRowSelect(row, isSelected) {
 
+        // console.log(row);
+        //   console.log("selected: " + isSelected)
+        if (isSelected) {
+            //--handle delete
+            //  this.setState({ selectedSchool : })
+        }
+    }
+
+    onSelectAll(isSelected) {
+        //  console.log("is select all: " + isSelected);
+    }
+
+    selectRowProp = {
+        mode: "checkbox",
+        clickToSelect: false,
+        bgColor: "rgb(238, 193, 213)",
+        onSelect: this.onRowSelect,
+        onSelectAll: this.onSelectAll
+    };
+    handleUpdate(cell, row) {
+
+        return <RaisedButton
+            label="Edit"
+            icon={<FontIcon className="muidocs-icon-custom-github" />}
+            onTouchTap={(e) => {
+
+                this.handleOpen(cell)
+            } }
+            primary={true}
+            fullWidth={false}
+            style={{ width: 100 }} />
+        //cell;
+
+    }
     render() {
+
         const { schoolData } = this.props;
         //--TODO 
         //-should use shared const
@@ -105,14 +147,16 @@ class SchoolList extends React.Component {
                     <Heading tag="h2">
                         <div className="numberCircle">1</div>
                         Manage Schools
-                         </Heading>
+                        <h1></h1>
+                    </Heading>
                     <RaisedButton
                         label="Add New School"
                         icon={<FontIcon className="muidocs-icon-custom-github" />}
                         onTouchTap={this.handleOpen}
                         primary={true}
                         fullWidth={false}
-                        style={{marginBottom:10,width:200}} />
+                        style={{ marginBottom: 10, width: 200 }} />
+
                     <Dialog
                         title="Add School"
                         actions={actions}
@@ -120,10 +164,19 @@ class SchoolList extends React.Component {
                         open={this.state.open}
                         onRequestClose={this.handleClose}
                         autoScrollBodyContent={true}
+                        autoDetectWindowHeight={true}
                         >
-                        <AddSchoolContainer actions={actions} submitForm={this.submitForm} ref={'addSchoolForm'} />
+                        <AddSchoolContainer actions={actions} submitForm={this.submitForm} ref={'addSchoolForm'} centreCode={this.state.centreCode} />
                     </Dialog>
-                  
+
+                    <panel className='grid'>
+                        <BootstrapTable data={this.state.schoolData} striped={true} hover={true} pagination={true} selectRow={this.selectRowProp}>
+                            <TableHeaderColumn dataField="centreCode" isKey={true} width={200} dataSort={true}  dataFormat={(cell, row) => { return this.handleUpdate(cell, row) } }>School Code</TableHeaderColumn>
+                            <TableHeaderColumn dataField="centreCode" dataSort={true} width={200} filter={{ type: "TextFilter", placeholder: "search by Code" }}>School Code</TableHeaderColumn>
+                            <TableHeaderColumn dataField="sector" dataSort={true} width={200} filter={{ type: "SelectFilter", options: sectorType }}>Sector</TableHeaderColumn>
+                            <TableHeaderColumn dataField="centreName" dataSort={true} filter={{ type: "TextFilter", placeholder: "Search by Name" }}>School Name</TableHeaderColumn>
+                        </BootstrapTable>
+                    </panel>
                     <Snackbar
                         open={this.state.openSnack}
                         message={this.state.snackMessage}
@@ -143,7 +196,6 @@ function mapStateToProps(globalState) {
     return {
         isLoading: globalState.manageSchool.isLoading,
         schoolData: globalState.manageSchool.schoolDataList
-
     }
 }
 
