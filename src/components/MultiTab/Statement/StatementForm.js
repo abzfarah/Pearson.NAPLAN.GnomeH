@@ -67,7 +67,6 @@ class StatementForm extends React.Component {
 
         const { securityLevel, isOtherLevel } = this.props
 
-
         return (
 
             <form onSubmit={handleSubmit((model) => { this.submitStatement(model) })}>
@@ -120,8 +119,8 @@ class StatementForm extends React.Component {
                                     {isOtherLevel &&
                                         <Field name="otherText" type="text" component={renderField} label="Other Text" />
                                     }
-                                    <br/>
-                                    <br/>
+                                    <br />
+                                    <br />
                                     <Paragraph>
                                         Please note:
                                     While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
