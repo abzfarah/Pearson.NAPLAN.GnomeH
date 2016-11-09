@@ -9,17 +9,18 @@ class StatementContainer extends React.Component {
 
   constructor() {
     super();
-
     this.state = {
       currentSchool: {},
       statementData: {},
-      form: {}
+      form: {},
+      validated: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit(data) {
+    debugger
 
     data["securityLevel"] = parseInt(data["securityLevel"])   //Api expects securitylevel property to be an integer
     this.props.actions.submitStatement(data)
@@ -41,13 +42,16 @@ class StatementContainer extends React.Component {
     if (_.isEqual(this.state.form.values, nextProps.form.values)) {
          this.setState({form: nextProps.form})
       }
+
+    if (!nextProps.form.syncErrors) {
+        this.setState({validated: true})
+    }  
   }
 
   render() {
-
-    let { currentSchool, statementData } = this.state
+    let { currentSchool, statementData, validated } = this.state
     return (
-      <Statement onSubmit={this.handleSubmit} statementData={statementData}/>
+      <Statement onSubmit={this.handleSubmit} statementData={statementData} validated={validated}/>
     )
   }
 }

@@ -167,6 +167,7 @@
     "redux-auth-wrapper": "^0.8.0",
     "redux-form": "^6.1.1",
     "redux-form-material-ui": "^4.1.0",
+    "redux-form-validation": "0.0.8",
     "redux-immutable-state-invariant": "^1.2.4",
     "redux-logger": "^2.7.0",
     "redux-oidc": "^2.2.1",

@@ -9,22 +9,19 @@ class SchoolDetailsContainer extends React.Component {
 
   constructor() {
     super();
-
     this.state = {
       currentSchool: {},
       schoolData: {},
       schoolDetails: {},
       form: {}
     }
-
     this.handleSubmit = this.handleSubmit.bind(this)
-
   }
 
   handleSubmit(data) {
     debugger
+    this.props.actions.submitDetails(data)
   }
-
   componentWillReceiveProps(nextProps) {
     if (!_.isEqual(this.state.currentSchool, nextProps.currentSchool))  {
          this.setState({currentSchool: nextProps.currentSchool})

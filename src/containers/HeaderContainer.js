@@ -29,12 +29,12 @@ class Login extends React.Component {
           <div className="button-groups">
             { loggedIn ?
               <div>
-                <Button label="Help" secondary={true} />
-                <Button label="Log Out" onClick={() => onLogout(event, dispatch)}  primary={true} />
+                <Button className="separate-button" label="Help" secondary={true} />
+                <Button className="separate-button"  label="Log Out" onClick={() => onLogout(event, dispatch)}  primary={true} />
               </div> :
               <div>
-                <Button label="Help" secondary={true} />
-                <Button label="Log In" onClick={onLogin} primary={true} />
+                <Button className="separate-button"  label="Help" secondary={true} />
+                <Button className="separate-button"  label="Log In" onClick={onLogin} primary={true} />
               </div> }
           </div>
         </Box>

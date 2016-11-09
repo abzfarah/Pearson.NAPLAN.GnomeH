@@ -1,11 +1,49 @@
 import React, { Component, PropTypes } from 'react';
+import FormMessages from 'redux-form-validation';
 import { Field, reduxForm } from 'redux-form'
 import { RadioButton, MenuItem } from 'material-ui'
 import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
 import {Button, Box, Heading, Paragraph, Footer, Form, FormField, Section, Tab, Tabs} from '../common'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../common/Table';
-import { validate } from "../utils/validation"
 
+
+const validate = values => {
+  const errors = {}
+  function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+  if (!values.firstName) {
+    errors.firstName = 'Required'
+  } else if(isNumeric(values.firstName)) {
+    errors.firstName = 'Must not contain a number'
+  }
+  if (!values.lastName) {
+    errors.lastName = 'Required'
+  } else if(isNumeric(values.lastName)) {
+    errors.lastName = 'Must not contain a number'
+  }
+
+  if (!values.isDeclared) {
+    errors.isDeclared = 'Required'
+  } else if(isNumeric(values.isDeclared)) {
+    errors.isDeclared = 'Must declare'
+  }
+
+  if (!values.isCertified) {
+    errors.isCertified = 'Required'
+  } else if(isNumeric(values.isDeclared)) {
+    errors.isCertified = 'Must certify'
+  }
+
+
+
+  return errors
+}
 
 
 class Statement extends Component {
@@ -18,31 +56,26 @@ class Statement extends Component {
       statementData: {}
     }
   }
-  
-
-  componentDidMount() {
-  }
 
   componentWillReceiveProps(nextProps) {
 
-    if ( !_.isEqual(this.state.statementData , nextProps.statementData) ) {
-        this.setState({ statementData: nextProps.statementData  })
-        this.props.initialize(nextProps.statementData);  
+  if ( !_.isEqual(this.state.statementData , nextProps.statementData) ) {
+      this.setState({ statementData: nextProps.statementData  })
+      this.props.initialize(nextProps.statementData);  
     }
   }
 
-  componentWillMount() {
+  componentWillUpdate() {
+
+    var i=0;
     
  }
 
   render() {
 
-  const { handleSubmit, pristine, reset, submitting } = this.props
-
-  debugger;
-
-    return (
-
+  const { handleSubmit, pristine, reset, submitting, validated } = this.props
+  
+  return (
    <Box className="form-container">     
       <Section className="test">
         <form onSubmit={handleSubmit}>
@@ -70,7 +103,7 @@ class Statement extends Component {
             <Paragraph> Please read Principal's responsibilities</Paragraph>
           </Box>
           <Box className="man">
-             <Field name="isConfirmed"  component={Checkbox} label="I have read and accept the Principal responsibilities"/>
+             <Field name="isConfirmed"   component={Checkbox} label="I have read and accept the Principal responsibilities"/>
           </Box>
         </Box>
 
@@ -83,11 +116,11 @@ class Statement extends Component {
                          double secure storage arrangement for NAPLAN test materials at your school.
               </Paragraph>
               <Paragraph>Please select the option which best describes the two levels of security at your school </Paragraph>
-              <Field name="securityLevel" component={RadioButtonGroup}>
-                <RadioButton value="0"   label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                <RadioButton value="1" label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                <RadioButton value="2" label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
-                <RadioButton value="3" label="Other" />
+              <Field name="securityLevel"  disabled={pristine || submitting}  component={RadioButtonGroup}>
+                <RadioButton value="1"   disabled={pristine || submitting} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                <RadioButton value="2" disabled={pristine || submitting} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                <RadioButton value="3" disabled={pristine || submitting} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
+                <RadioButton value="4" disabled={pristine || submitting}  label="Other" />
               </Field><br/>
               <Paragraph>
                 Please note:
@@ -105,29 +138,29 @@ class Statement extends Component {
                   </Heading>
                   <Box>
                     <div>
-                      <Field name="firstName" component={TextField} hintText="First" floatingLabelText="First Name"
+                      <Field name="firstName"  disabled={pristine || submitting}  component={TextField} hintText="First" floatingLabelText="First Name"
                         ref="firstName"/> <br/>
-                      <Field name="lastName" component={TextField}  hintText="Last" floatingLabelText="Last Name"
+                      <Field name="lastName"  disabled={pristine || submitting}  component={TextField}  hintText="Last" floatingLabelText="Last Name"
                         ref="lastName"/><br/>
-                      <Field name="email" component={TextField} hintText="Email" floatingLabelText="Email"/>
+                      <Field name="email" disabled={pristine || submitting}   component={TextField} hintText="Email" floatingLabelText="Email"/>
                     </div>
                    <Box className="declaration" >
-                      <Field name="isDeclared" component={Checkbox} label="I declare that I am the Principal of the school detailed above."/>
-                      <Field name="isCertified" component={Checkbox} label="I certify that the information provided on this form is correct."/>
+                      <Field name="isDeclared"   disabled={pristine || submitting} component={Checkbox} label="I declare that I am the Principal of the school detailed above."/>
+                      <Field name="isCertified"   disabled={pristine || submitting}  component={Checkbox} label="I certify that the information provided on this form is correct."/>
                     </Box>
                  </Box>
                 </Box>
              </Box>
-
-             <Box className="statement-button">
-                <div className="button-groups">
-                      <button className="submit-button grommetux-button grommetux-button--secondary" type="button">Return</button>
-                      <button className="submit-button grommetux-button grommetux-button--primary" type="submit">Submit</button>
-                </div>
-              </Box>
           </Box>
         </Box>
         </form>
+
+        <Box className="button-group-padding">
+            <div className="button-groups">
+              <Button className="separate-button" type="button" secondary={true} label="Return" />  
+              <Button className="separate-button" type="submit" disabled={!validated} primary={true } label="Submit"  />
+            </div>
+       </Box>
       </Section>
     </Box>  
     )
@@ -139,7 +172,6 @@ class Statement extends Component {
 Statement = reduxForm({
   form: 'Statement',
   validate,
-  fields: ['email']
   
 })(Statement)
 

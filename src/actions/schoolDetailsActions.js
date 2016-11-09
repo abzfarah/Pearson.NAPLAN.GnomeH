@@ -27,3 +27,32 @@ export function schoolDetailsAsync(keyword) {
             });
     }
 }
+
+//-- Insert statement
+export function submitDetails(data) {
+    return dispatch => {
+        dispatch({
+            type: SCHOOL_DETAILS_SUBMIT,
+            isLoading: true,
+            isLoaded: false
+        });
+        return axios.post("http://audockerintstg01.epenau.local:12100/api/v1/StatementCompliance/", data)
+            .then((response) => {
+                dispatch({
+                    type: SCHOOL_DETAILS_SUBMIT_SUCCESS,
+                    isLoading: false,
+                    isLoaded: true,
+                    response: response
+                })
+                return response.data;
+            })
+            .catch((error) => {
+                dispatch({
+                    type: DETAILS_SUBMIT_FAILURE,
+                    isLoading: false,
+                    isLoaded: false,
+                    error: error
+                })
+            });
+    }
+}

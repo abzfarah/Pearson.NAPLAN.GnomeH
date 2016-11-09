@@ -15,14 +15,13 @@ import ManageUsersContainer from '../containers/ManageUsersContainer'
 import ManageSchoolsContainer from '../containers/ManageSchoolsContainer'
 import session from './utils/session'
 
-
 export default {
   path: '/',
   indexRoute: { onEnter: renderRoot },
   component: AppContainer,
   childRoutes: [
       { 
-        path: '/school',  
+        path:'/school',  
         indexRoute: '/school/summary',
         component: SchoolContainer,
         childRoutes: [                                
@@ -32,22 +31,17 @@ export default {
           { path: 'authorisedstaff',  component: AuthorizedStaff },
         ] 
       },
-
-      { path: '/manageschools', 
+      { path:'/manageschools', 
         component: ManageSchoolsContainer 
       },
-
-      { path: '/manageusers', 
+      { path:'/manageusers', 
         component: ManageUsersContainer 
       },
-
-      { path: '/callback', 
+      { path:'/callback', 
         component: CallbackPage
       },
   ]
-
 }
-
 
 function redirectToLogin(nextState, replace) {
   if (!session.login) {
