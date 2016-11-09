@@ -12,7 +12,8 @@ import AuthorizedStaff from  '../components/MultiTab/AuthorizedStaff';
 import FormContainer from '../containers/FormContainer';
 import SchoolContainer from '../containers/SchoolContainer'
 import ManageUsersContainer from '../containers/ManageUsersContainer'
-import ManageSchoolsContainer from '../containers/ManageSchoolsContainer'
+//import ManageSchoolsContainer from '../containers/ManageSchoolsContainer'
+import ManageSchools from '../components/layouts/ManageSchools'
 import session from './utils/session'
 
 export default {
@@ -31,8 +32,8 @@ export default {
           { path: 'authorisedstaff',  component: AuthorizedStaff },
         ] 
       },
-      { path:'/manageschools', 
-        component: ManageSchoolsContainer 
+      { path: '/manageschools', 
+        component: ManageSchools 
       },
       { path:'/manageusers', 
         component: ManageUsersContainer 

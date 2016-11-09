@@ -17,6 +17,7 @@ const steps =
   {name: 'School details', component: <SchoolDetails />},
   {name: 'Test Format Order', component: <ActiveTestOrder />},
   {name: 'Student Registration', component: <StudentRegistration />}
+
 ]
 
 
