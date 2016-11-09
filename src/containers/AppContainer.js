@@ -13,12 +13,13 @@ import HeaderContainer from './HeaderContainer'
 import NavContainer from './NavContainer'
 import userManager from '../utils/userManager';
 import session from '../routes/utils/session'
-import injectTapEventPlugin from 'react-tap-event-plugin'
+import schools from '../data/schools.json';
 import _ from 'lodash';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
-//--TODO remove after new release
-//--http://www.material-ui.com/#/get-started/installation
-injectTapEventPlugin()
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 class AppContainer extends React.Component {
 

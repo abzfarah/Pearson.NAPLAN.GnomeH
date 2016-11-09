@@ -123,13 +123,7 @@ class SchoolList extends React.Component {
                         >
                         <AddSchoolContainer actions={actions} submitForm={this.submitForm} ref={'addSchoolForm'} />
                     </Dialog>
-                    <panel>
-                        <BootstrapTable data={this.state.schoolData} striped={true} hover={true} pagination={true}>
-                            <TableHeaderColumn dataField="sector" dataSort={true} filter={{ type: "SelectFilter", options: sectorType }}>Sector</TableHeaderColumn>
-                            <TableHeaderColumn dataField="centreCode" isKey={true} dataSort={true} filter={{ type: "TextFilter", placeholder: "search by Code" }}>School Code</TableHeaderColumn>
-                            <TableHeaderColumn dataField="centreName" dataSort={true} filter={{ type: "TextFilter", placeholder: "Search by Name" }}>School Name</TableHeaderColumn>
-                        </BootstrapTable>
-                    </panel>
+                  
                     <Snackbar
                         open={this.state.openSnack}
                         message={this.state.snackMessage}
