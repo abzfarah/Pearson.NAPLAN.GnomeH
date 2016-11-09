@@ -50,7 +50,7 @@ class AddSchoolContainer extends Component {
 }
 
 function mapStateToProps(globalState) {
-    console.log(globalState.manageSchool.sectors)
+
     var schoolData = {};
 
     return {

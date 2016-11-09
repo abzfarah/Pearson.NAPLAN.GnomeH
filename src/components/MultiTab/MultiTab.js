@@ -7,11 +7,6 @@ import SchoolDetails from './SchoolDetails'
 import AuthorizedStaff from './AuthorizedStaff'
 import ActiveTestOrder from './ActiveTestOrder'
 import StudentRegistration from './StudentRegistration'
-//--TODO _TEMPRORY
-import SchoolList  from '../layouts/ManageSchools'
-import SchoolModal  from '../layouts/ManageSchools/SchoolModal'
-import AddSchool  from '../layouts/ManageSchools/AddSchoolContainer'
-import UpdateSchool  from '../layouts/ManageSchools/UpdateSchoolContainer'
 import Home from './Home'
 
 const steps =
@@ -20,13 +15,9 @@ const steps =
   {name: 'Statement', component: <StatementContainer />},
   {name: 'AuthorizedStaff', component: <AuthorizedStaff />},
   {name: 'School details', component: <SchoolDetails />},
-//  {name: 'Test Format Order', component: <ActiveTestOrder />},
-//  {name: 'Student Registration', component: <StudentRegistration />}
-  {name: 'AddSchool', component: <AddSchool />},
-    {name: 'UpdateSchool', component: <UpdateSchool />},
-  {name: 'SchoolModal', component: <SchoolModal />},
-  
- {name: 'SchoolList', component: <SchoolList />}
+  {name: 'Test Format Order', component: <ActiveTestOrder />},
+  {name: 'Student Registration', component: <StudentRegistration />}
+
 ]
 
 

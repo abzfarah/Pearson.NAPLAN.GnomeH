@@ -27,7 +27,7 @@ class SchoolModal extends React.Component {
     componentWillReceiveProps(nextProps) {
 
         if (nextProps.initialValues) {
-            console.log(nextProps.initialValues)
+          //  console.log(nextProps.initialValues)
             // this.setState({initialValues: nextProps.initialValues })
         }
     }
