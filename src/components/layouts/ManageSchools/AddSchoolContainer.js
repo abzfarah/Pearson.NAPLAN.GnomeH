@@ -53,7 +53,7 @@ class AddSchoolContainer extends Component {
         const { isLoading, isLoaded, schoolData, sectors, centreCode} = this.props;
         
         return (
-            <div style={{minHeight:200}}>
+            <div style={{maxHeight:390,width:550}}>
                 {((isLoaded && !isLoading) || centreCode == null) && <SchoolModal schoolData={schoolData} initialValues={schoolData} sectors={sectors} onSubmit={this.submitForm} ref={'schoolForm'} />}
             </div>
         )

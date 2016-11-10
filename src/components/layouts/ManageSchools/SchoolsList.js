@@ -92,7 +92,7 @@ class SchoolList extends React.Component {
     selectRowProp = {
         mode: "checkbox",
         clickToSelect: false,
-        bgColor: "rgb(238, 193, 213)",
+        bgColor: "rgb(176,224,230)",
         onSelect: this.onRowSelect,
         onSelectAll: this.onSelectAll
     };
@@ -144,8 +144,7 @@ class SchoolList extends React.Component {
         return (
             <Box className="form-container">
                 <Section className="test">
-                    <Heading tag="h2">
-                        <div className="numberCircle">1</div>
+                    <Heading tag="h2">                       
                         Manage Schools
                         <h1></h1>
                     </Heading>
@@ -158,7 +157,7 @@ class SchoolList extends React.Component {
                         style={{ marginBottom: 10, width: 200 }} />
 
                     <Dialog
-                        title="Add School"
+                        title="Manage School"
                         actions={actions}
                         modal={true}
                         open={this.state.open}
@@ -169,9 +168,9 @@ class SchoolList extends React.Component {
                         <AddSchoolContainer actions={actions} submitForm={this.submitForm} ref={'addSchoolForm'} centreCode={this.state.centreCode} />
                     </Dialog>
 
-                    <panel className='grid'>
+                    <panel className='grid'  style={{width:1050}}>
                         <BootstrapTable data={this.state.schoolData} striped={true} hover={true} pagination={true} selectRow={this.selectRowProp}>
-                            <TableHeaderColumn dataField="centreCode" isKey={true} width={200} dataSort={true}  dataFormat={(cell, row) => { return this.handleUpdate(cell, row) } }>School Code</TableHeaderColumn>
+                            <TableHeaderColumn dataField="centreCode" isKey={true} width={200}  dataFormat={(cell, row) => { return this.handleUpdate(cell, row) } }>Edit School</TableHeaderColumn>
                             <TableHeaderColumn dataField="centreCode" dataSort={true} width={200} filter={{ type: "TextFilter", placeholder: "search by Code" }}>School Code</TableHeaderColumn>
                             <TableHeaderColumn dataField="sector" dataSort={true} width={200} filter={{ type: "SelectFilter", options: sectorType }}>Sector</TableHeaderColumn>
                             <TableHeaderColumn dataField="centreName" dataSort={true} filter={{ type: "TextFilter", placeholder: "Search by Name" }}>School Name</TableHeaderColumn>
