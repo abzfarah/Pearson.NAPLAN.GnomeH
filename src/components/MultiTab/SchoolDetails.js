@@ -13,19 +13,20 @@ const validate = values => {
   if (!values.details) {
     errors.details = 'Must declare'
   }
-
   if (!values.phone) {
     errors.phone = 'Required'
   } else if(!isNumeric(values.phone)) {
-    errors.phone = 'Must ne a number'
+    errors.phone = 'Must be a number'
+  } else if(values.phone > 50) {
+      errors.phone = 'Must not exceed 50 characters'
   }
-
   if (!values.fax) {
     errors.fax = 'Required'
   } else if(!isNumeric(values.fax)) {
-    errors.fax = 'Must ne a number'
+    errors.fax = 'Must be a number'
+  } else if(values.fax > 50) {
+      errors.fax = 'Must not exceed 50 characters'
   }
-
   return errors
 }
 
@@ -82,12 +83,10 @@ class SchoolDetails extends React.Component {
                 <div className="numberCircle">3</div>
                 <span className="sd_hColor">School Details</span>
               </Heading>
-
               <Paragraph>
                 Principals are responsible for the security of the NAPLAN test materials and for the administration of the tests. Principals are required to submit an annual Statement of Compliance,
                 indicating their understanding of the VCAA’s requirements in relation to test security and administration.
               </Paragraph>
-
               <Paragraph>
                 While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
                 Security Log. The Test Materials Security Log should be kept by the school for 12 months after the test and may be subject to audit by the VCAA.
@@ -95,9 +94,7 @@ class SchoolDetails extends React.Component {
               <Paragraph>
                 <span className="sd_note">NOTE: Fields marked with <span className="colorRed">*</span> or <span className="sd_fieldRequired">This field is required</span>{` in the forms below are required`}</span>
               </Paragraph>
-
             </Box>
-
             <Box direction="row" className="boxRow">
               <Box className="sd_boxLeft sd_readBgColor" align="start" pad="small" colorIndex="light-2">
                 <Heading tag="h5" className="sd_hColor">Part A: Test Material Delivery (Site Address)</Heading>
@@ -220,7 +217,6 @@ class SchoolDetails extends React.Component {
                   </List>
                 </Box>
               </Box>
-
             </Box>
 
             <Box direction="row" className="boxRow">
@@ -230,12 +226,9 @@ class SchoolDetails extends React.Component {
                   <Box>
                     <div>
                       <Field name="phone" ref="phone" component={TextField} hintText="Phone" floatingLabelText="Phone"/> <br/>
-                        
-                      <Field name="fax" ref="fax" component={TextField}  hintText="Fax" floatingLabelText="Fax"/><br/>
-                        
+                      <Field name="fax" ref="fax" component={TextField}  hintText="Fax" floatingLabelText="Fax"/><br/>            
                     </div>
                  </Box>
-
                 </div>
                 <br/>
                 <Box direction="row">
@@ -244,9 +237,7 @@ class SchoolDetails extends React.Component {
                     </Box>
                 </Box>
               </Box>
-
             </Box>
-
             </form>  
               <Box className="button-group-padding">
                   <div className="button-groups">
