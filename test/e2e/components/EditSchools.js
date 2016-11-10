@@ -1,5 +1,5 @@
 module.exports = {
-    'VIC-NAPALAN-ADD-SCHOOL': function (browser) {
+    'VIC-NAPALAN-EDIT-School': function (browser) {
         browser
             .url('http://localhost:8004/manageschools')   // visit the url
             .waitForElementVisible('body'); // wait for the body to be rendered

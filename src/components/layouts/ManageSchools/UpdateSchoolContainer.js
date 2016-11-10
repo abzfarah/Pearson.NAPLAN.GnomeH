@@ -34,7 +34,7 @@ class UpdateSchoolContainer extends Component {
               <SchoolModal schoolData={schoolData}
                initialValues={schoolData}
                sectors={sectors}
-                 submitForm={this.submitForm} />
+               submitForm={this.submitForm} />
             </div>     
         )
     }
@@ -48,8 +48,7 @@ function mapStateToProps(globalState) {
         //    isLoading: globalState.AddSchool.isLoading,
         //   isLoaded: globalState.AddSchool.isLoaded,
         schoolData:  globalState.manageSchool.schoolData,
-        sectors:  globalState.manageSchool.sectors,
-        
+        sectors:  globalState.manageSchool.sectors        
     }
 }
 
