@@ -9,7 +9,8 @@ const available_claims =
     ]
 
 export function getClaims(claims) {
-
+  
+  let school_code = parseInt(claims["schoolCode"])
   let user_claims = _.pick(claims, available_claims);
   user_claims = _.pickBy(claims, _.isString);
 
@@ -19,8 +20,9 @@ export function getClaims(claims) {
 
           if (value == "false") return false
               else return true
-
         }
       )
+
+user_claims["schoolCode"] = school_code
       return user_claims
     }

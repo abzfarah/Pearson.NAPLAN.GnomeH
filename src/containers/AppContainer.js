@@ -17,6 +17,13 @@ import schools from '../data/schools.json';
 import _ from 'lodash';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+const school = schools
+
+const lookup = {};
+for (var i = 0, len = school.length; i < len; i++) {
+    lookup[school[i].centreCode] = school[i];
+}
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
@@ -55,6 +62,16 @@ class AppContainer extends React.Component {
     if (session.exists) {
       let user_claims = getClaims(session.user)
       this.props.actions.retrieveClaims(user_claims)
+      debugger
+
+      this.props.actions.selectSchool({
+          code: lookup["10389"].centreCode,
+          name: lookup["10389"].centreName
+
+      })
+
+
+
       this.setState({
         loggedIn: true,
         user: session.user,

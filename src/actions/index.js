@@ -14,8 +14,8 @@ import {
 
 export function selectSchool(school) {
   return {
-    type: SELECT_SCHOOL,
-    payload: school
+    type: 'SELECT_SCHOOL',
+    currentSchool: school
   };
 }
 
