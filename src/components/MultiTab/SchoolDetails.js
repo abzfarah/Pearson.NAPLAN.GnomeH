@@ -7,7 +7,7 @@ import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-m
 const validate = values => {
   const errors = {}
   function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+      return n && /^[0-9 ]+$/g.test(n);
   }
 
   if (!values.details) {
@@ -67,7 +67,7 @@ class SchoolDetails extends React.Component {
 
     render() {
 
-      const { handleSubmits, pristine, reset, submitting, validated} = this.props
+      const { handleSubmit, pristine, reset, submitting, validated} = this.props
 
       const { centreCode, centreName, deliveryAddress1, deliveryAddress2, deliveryPostcode, deliverySchoolName,
         deliveryState, deliverySuburb, dsFax, dsPhone, email, fax, phone, post_address_line1, reportState,
@@ -76,7 +76,7 @@ class SchoolDetails extends React.Component {
         return (
        <Box className="form-container">  
           <Section className="test">
-            <form onSubmit={handleSubmits}>
+            <form onSubmit={handleSubmit}>
             <Box>
               <Heading tag="h2">
                 <div className="numberCircle">3</div>
@@ -229,10 +229,10 @@ class SchoolDetails extends React.Component {
                 <div>
                   <Box>
                     <div>
-                      <Field name="phone" component={TextField} hintText="Phone" floatingLabelText="Phone"
-                        ref="firstName"/> <br/>
-                      <Field name="fax" component={TextField}  hintText="Fax" floatingLabelText="Fax"
-                        ref="fax"/><br/>
+                      <Field name="phone" ref="phone" component={TextField} hintText="Phone" floatingLabelText="Phone"/> <br/>
+                        
+                      <Field name="fax" ref="fax" component={TextField}  hintText="Fax" floatingLabelText="Fax"/><br/>
+                        
                     </div>
                  </Box>
 
@@ -240,24 +240,11 @@ class SchoolDetails extends React.Component {
                 <br/>
                 <Box direction="row">
                    <Box className="declaration" >
-                      <Field name="details" component={Checkbox} label="Details have been reviewed and are correct."/>
+                      <Field name="reviewed"  ref="reviewed"  component={Checkbox} label="Details have been reviewed and are correct."/>
                     </Box>
                 </Box>
               </Box>
 
-              <Box className="sd_boxRight sd_editBgColor" align="start" pad="small" colorIndex="light-2">
-                <Heading tag="h5" className="sd_hColor">Part E: Booklet Packing Order</Heading>
-                <Paragraph>
-                  By default, test booklets will be packed in order of year level, home group and surname as per
-                  the data provided by each school, or supplied by their jurisdictional authority. For schools who wish to
-                  receive their test materials in another order, please briefly describe your request below. If you do not
-                  require a special test packing arrangement no action needs to be taken.
-                </Paragraph>
-                <Box direction="row">
-                  <Field name="isConfirmed"  component={Checkbox} label=" I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group)."/>
-                </Box>
-                <Field name="requestDetails" component={TextField} hintText="Details" floatingLabelText="Details of request"/>              
-              </Box>
             </Box>
 
             </form>  

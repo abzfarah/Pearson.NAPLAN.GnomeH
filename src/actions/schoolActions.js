@@ -34,7 +34,6 @@ export function schoolSearchAsync(keyword) {
 
 //-- manageSchoolComponent
 export function manageSchoolSearch(keyword) {
-    debugger
 
     return dispatch => {
 

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Toast from 'grommet/components/Toast';
 import Statement from './Statement'
 import * as statementActions from '../../actions/statementActions';
 import { getStatement, submitStatement } from '../../actions/statementActions'
@@ -20,7 +21,6 @@ class StatementContainer extends React.Component {
   }
 
   handleSubmit(data) {
-    debugger
 
     data["securityLevel"] = parseInt(data["securityLevel"])   //Api expects securitylevel property to be an integer
     this.props.actions.submitStatement(data)
@@ -51,6 +51,7 @@ class StatementContainer extends React.Component {
   render() {
     let { currentSchool, statementData, validated } = this.state
     return (
+      
       <Statement onSubmit={this.handleSubmit} statementData={statementData} validated={validated}/>
     )
   }

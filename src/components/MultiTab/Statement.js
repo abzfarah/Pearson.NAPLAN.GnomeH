@@ -10,8 +10,9 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 const validate = values => {
   const errors = {}
   function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+       return n && /^\d+$/.test(n);
   }
+
   if (!values.email) {
     errors.email = 'Required'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -108,12 +109,13 @@ class Statement extends Component {
                          double secure storage arrangement for NAPLAN test materials at your school.
               </Paragraph>
               <Paragraph>Please select the option which best describes the two levels of security at your school </Paragraph>
-              <Field name="securityLevel"  disabled={pristine || submitting}  component={RadioButtonGroup}>
+              <Field name="securityLevel"  ref="securityLevel"  disabled={pristine || submitting}  component={RadioButtonGroup}>
                 <RadioButton value="1"   disabled={pristine || submitting} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
                 <RadioButton value="2" disabled={pristine || submitting} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
                 <RadioButton value="3" disabled={pristine || submitting} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
                 <RadioButton value="4" disabled={pristine || submitting}  label="Other" />
               </Field><br/>
+               <Field name="securityLevelOther" ref="securityLevelOther"  disabled={pristine || submitting}   component={TextField}/>
               <Paragraph>
                 Please note:
                 While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
@@ -145,14 +147,16 @@ class Statement extends Component {
              </Box>
           </Box>
         </Box>
-        </form>
 
         <Box className="button-group-padding">
-            <div className="button-groups">
-              <Button className="separate-button" type="button" secondary={true} label="Return" />  
-              <Button className="separate-button" type="submit" disabled={!validated} primary={true } label="Submit"  />
-            </div>
+          <div className="button-groups">
+            <Button className="separate-button" type="button" secondary={true} label="Return" />  
+            <Button className="separate-button" type="submit" disabled={submitting} primary={true } label="Submit"  />
+          </div>
        </Box>
+      </form>
+
+
       </Section>
     </Box>  
     )

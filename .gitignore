@@ -4,3 +4,5 @@ node_modules
 dist
 coverage
 .idea/
+sh.exe.stackdump
+bash.exe.stackdump
