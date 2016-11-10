@@ -22,7 +22,7 @@ class SchoolDetailsContainer extends React.Component {
   }
 
   handleSubmit(data) {
-    debugger
+
   }
 
   componentWillReceiveProps(nextProps) {
