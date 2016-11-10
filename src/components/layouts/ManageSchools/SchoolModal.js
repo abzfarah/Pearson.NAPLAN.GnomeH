@@ -54,8 +54,8 @@ class SchoolModal extends React.Component {
                     <Box>
                         <Heading tag="h2">
                             <div className="numberrCircle"></div>
-                            <span className="sd_hColor"></span>
-
+                           
+                           <span className="sd_hColor"></span> 
                         </Heading>
                     </Box>
                     <form onSubmit={handleSubmit}>
@@ -64,7 +64,7 @@ class SchoolModal extends React.Component {
 
                                 <Heading tag="h5" className="sd_hColor">Part A: School Details</Heading>
                                 <Field name="centreName" type="text" component={TextField} floatingLabelText="School Name" />
-                                <Field name="centreCode" type="text" component={TextField} floatingLabelText="School Code" />
+                                <Field name="centreCode" type="text" component={TextField} floatingLabelText="School Code"  />
                                 <Field
                                     name="sector"
                                     component={SelectField}
@@ -97,7 +97,7 @@ class SchoolModal extends React.Component {
                                 <Field name="deliveryAddress1" type="text" component={TextField} floatingLabelText="Address 1" />
                                 <Field name="deliveryAddress2" type="text" component={TextField} floatingLabelText="Address 2" />
                                 <Field name="deliverySuburb" type="text" component={TextField} floatingLabelText="Suburb" />
-                                <Field name="deliveryPostcode" type="text" component={TextField} floatingLabelText="Post Code" />
+                                <Field name="deliveryPostcode" type="number" component={TextField} floatingLabelText="Post Code" />
                                 <Field name="deliveryState" type="text" component={TextField} floatingLabelText="State" />
                             </Box>
 
@@ -108,7 +108,7 @@ class SchoolModal extends React.Component {
                                 <Field name="reportAddress1" type="text" component={TextField} floatingLabelText="Address 1" />
                                 <Field name="reportAddress2" type="text" component={TextField} floatingLabelText="Address 2" />
                                 <Field name="reportSuburb" type="text" component={TextField} floatingLabelText="Suburb" />
-                                <Field name="reportPostcode" type="text" component={TextField} floatingLabelText="Post Code" />
+                                <Field name="reportPostcode" type="number" component={TextField} floatingLabelText="Post Code" />
                                 <Field name="reportState" type="text" component={TextField} floatingLabelText="State" />
                             </Box>
                         </Box>
@@ -130,10 +130,10 @@ const validate = values => {
     if (values.phone && values.phone.length > 15) { errors.phone = 'Invalid Phone Number' }
     if (values.fax && values.fax.length > 15) { errors.fax = 'Invalid Fax Number' }
     if (values.centreName && values.centreName.length > 100) { errors.centreName = 'Invalid centreName' }
-    if (values.centreCode && values.centreCode.length > 10) { errors.centreCode = 'Invalid centre Code' }
+    if (values.centreCode && values.centreCode.length > 5) { errors.centreCode = 'Invalid centre Code' }
     if (values.deecD_CODE && values.deecD_CODE.length > 8) { errors.deecD_CODE = 'Invalid DEECD CODE' }
     if (values.dscode && values.dscode.length > 5) { errors.dscode = 'Invalid code' }
-    if (values.dsName && values.dsName.length > 15) { errors.dsName = 'Invalid centreName' }
+    if (values.dsName && values.dsName.length > 100) { errors.dsName = 'Invalid centreName' }
 
     if (values.deliveryCode && values.deliveryCode.length > 5) { errors.deliveryCode = 'Invalid deliveryCode' }
     if (values.deliverySchoolName && values.deliverySchoolName.length > 100) { errors.deliverySchoolName = 'Invalid School Name' }

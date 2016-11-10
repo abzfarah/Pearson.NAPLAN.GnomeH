@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SchoolModal from './SchoolModal'
-import { getSectorsAsync, submitSchoolAsync } from '../../../actions/manageSchoolActions'
+import { getSchoolAsync, getSectorsAsync, getSuburbsAsync, submitSchoolAsync } from '../../../actions/manageSchoolActions'
 
 class AddSchoolContainer extends Component {
 
@@ -9,27 +9,38 @@ class AddSchoolContainer extends Component {
         super(props)
 
         this.submitForm = this.submitForm.bind(this);
-    }
 
+
+    }
 
     componentDidMount() {
 
+        //--Update School
+        if (this.props.centreCode) {
+            
+            this.props.getSchoolAsync(this.props.centreCode);
+        }
+
         this.props.getSectorsAsync();
+    }
+
+    getSuburbs(postalCode) {
+
+        this.props.getSuburbsAsync(postalCode);
     }
 
     submitForm(model) {
 
         return this.props.submitSchoolAsync(model)
-
     }
 
     doSubmit() {
-        
+
         return new Promise((resolve, reject) => {
             let form = this.refs.schoolForm.getWrappedInstance();
             let result = form.submit();
             if (form.valid) {
-               resolve()
+                resolve()
             }
 
             reject('Invalid form');
@@ -39,11 +50,11 @@ class AddSchoolContainer extends Component {
 
     render() {
 
-        const { isLoading, isLoaded, schoolData, sectors} = this.props;
-
+        const { isLoading, isLoaded, schoolData, sectors, centreCode} = this.props;
+        
         return (
-            <div>
-                <SchoolModal schoolData={schoolData} initialValues={schoolData} sectors={sectors} onSubmit={this.submitForm} ref={'schoolForm'} />
+            <div style={{maxHeight:390,width:550}}>
+                {((isLoaded && !isLoading) || centreCode == null) && <SchoolModal schoolData={schoolData} initialValues={schoolData} sectors={sectors} onSubmit={this.submitForm} ref={'schoolForm'} />}
             </div>
         )
     }
@@ -53,12 +64,19 @@ function mapStateToProps(globalState) {
 
     var schoolData = {};
 
+    if (globalState.manageSchool.schoolData) {
+        schoolData = globalState.manageSchool.schoolData;
+    }
+
+
     return {
         //    isLoading: globalState.AddSchool.isLoading,
         //   isLoaded: globalState.AddSchool.isLoaded,
         schoolData: schoolData,
         sectors: globalState.manageSchool.sectors,
+        isLoaded: globalState.manageSchool.isLoaded,
+        isLoading: globalState.manageSchool.isLoading
     }
 }
 
-export default connect(mapStateToProps, { getSectorsAsync, submitSchoolAsync }, null, { withRef: true })(AddSchoolContainer)
+export default connect(mapStateToProps, { getSchoolAsync, getSectorsAsync, getSuburbsAsync, submitSchoolAsync }, null, { withRef: true })(AddSchoolContainer)
