@@ -97,6 +97,7 @@
     "babel-runtime": "^6.3.19",
     "better-npm-run": "0.0.10",
     "boom": "^4.2.0",
+    "bootstrap-table": "^1.11.0",
     "classnames": "^2.2.5",
     "css-loader": "^0.23.0",
     "cssnano": "^3.3.2",
