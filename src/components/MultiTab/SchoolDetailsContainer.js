@@ -11,8 +11,11 @@ const details_post =
       'fax',
       'email',
       'reviewed',
+      'lastUpdatedByID',
+      'lastUpdatedDate',
       'requestPackingOrder',
-      'packingOrderDetails'
+      'packingOrderDetails',
+      'requestedByID'
     ]
 
 
@@ -33,10 +36,6 @@ class SchoolDetailsContainer extends React.Component {
   handleSubmit(data) {
 
     let post = _.pick(data, details_post);
-
-    post["requestedByID"] = null
-    post["lastUpdatedDate"] = null
-    post["lastUpdatedBy"] = null 
     this.props.actions.submitDetails(post)
   }
   componentWillReceiveProps(nextProps) {

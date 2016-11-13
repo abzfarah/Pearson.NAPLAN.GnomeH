@@ -32,13 +32,13 @@ class AdminPage extends React.Component {
     }
 
     componentWillUpdate() {
-      debugger;
+   
         return true
 
     }
 
     componentWillReceiveProps() {
-      debugger;
+
         return true
     }
 

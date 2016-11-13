@@ -2,7 +2,7 @@ import { SCHOOL_DETAILS_SUBMIT_SUCCESS, SCHOOL_DETAILS_FETCH_SUCCESS,SCHOOL_DETA
 import logger from 'redux-logger';
 import axios from 'axios';
 import thunk from "redux-thunk"
-
+var request = require('superagent');
 export function schoolDetailsAsync(keyword) {
 
     return dispatch => {
@@ -32,11 +32,11 @@ export function schoolDetailsAsync(keyword) {
 export function submitDetails(data) {
     return dispatch => {
         dispatch({
-            type: SCHOOL_DETAILS_SUBMIT,
+            type: 'SCHOOL_DETAILS_SUBMIT',
             isLoading: true,
             isLoaded: false
         });
-        return axios.post("http://audockerintstg01.epenau.local:12100/api/v1/StatementCompliance/", data)
+         return axios.post("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/PostCentreDetails/", data)
             .then((response) => {
                 dispatch({
                     type: SCHOOL_DETAILS_SUBMIT_SUCCESS,
@@ -46,13 +46,5 @@ export function submitDetails(data) {
                 })
                 return response.data;
             })
-            .catch((error) => {
-                dispatch({
-                    type: DETAILS_SUBMIT_FAILURE,
-                    isLoading: false,
-                    isLoaded: false,
-                    error: error
-                })
-            });
     }
 }

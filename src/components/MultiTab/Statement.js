@@ -56,6 +56,10 @@ class Statement extends Component {
     }
   }
 
+  componentWillUpdate(props, state) {
+    return true
+  }
+
   componentWillReceiveProps(nextProps) {
 
   if ( !_.isEqual(this.state.statementData , nextProps.statementData) ) {

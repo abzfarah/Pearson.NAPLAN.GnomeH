@@ -62,15 +62,13 @@ class AppContainer extends React.Component {
     if (session.exists) {
       let user_claims = getClaims(session.user)
       this.props.actions.retrieveClaims(user_claims)
-      debugger
 
-      this.props.actions.selectSchool({
-          code: lookup["10389"].centreCode,
-          name: lookup["10389"].centreName
-
-      })
-
-
+      if (user_claims["schoolCode"]) {
+        this.props.actions.selectSchool({
+            code: lookup["10389"].centreCode,
+            name: lookup["10389"].centreName
+        })
+      }
 
       this.setState({
         loggedIn: true,

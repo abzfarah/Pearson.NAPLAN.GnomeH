@@ -10,8 +10,8 @@ const validate = values => {
       return n && /^[0-9 ]+$/g.test(n);
   }
 
-  if (!values.details) {
-    errors.details = 'Must declare'
+  if (!values.reviewed) {
+    errors.reviewed = 'Must declare'
   }
   if (!values.phone) {
     errors.phone = 'Required'
@@ -65,6 +65,10 @@ class SchoolDetails extends React.Component {
           this.props.initialize(nextProps. schoolDetails);  
       }
     }
+
+  componentWillUpdate(props, state) {
+    return true
+  }
 
     render() {
 
@@ -237,14 +241,16 @@ class SchoolDetails extends React.Component {
                     </Box>
                 </Box>
               </Box>
+            </Box>              
+            
+            <Box className="button-group-padding">
+              <div className="button-groups">
+                <Button className="separate-button" type="button" secondary={true} label="Return" />  
+                <Button className="separate-button" type="submit" disabled={submitting} primary={true} label="Submit"  />
+              </div>
             </Box>
             </form>  
-              <Box className="button-group-padding">
-                  <div className="button-groups">
-                    <Button className="separate-button" type="button" secondary={true} label="Return" />  
-                    <Button className="separate-button" type="submit" disabled={!validated} primary={true } label="Submit"  />
-                  </div>
-            </Box>
+
           </Section>
         </Box>
 

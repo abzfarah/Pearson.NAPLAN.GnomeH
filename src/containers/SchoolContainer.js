@@ -71,8 +71,8 @@ class SchoolContainer extends React.Component {
             <div>
                 <Box className="tab-container">      
                     <Tabs justify="start" onActive={this.onActive} claims={this.props.claims}>
-                       <Tab title="Home" subtitle="" className="home"/>                                  
-                       <Tab title="Statement of Compliance" subtitle="required" className="check" />      
+                        <Tab title="Home" subtitle="" className="home"/>                                  
+                        <Tab title="Statement of Compliance" subtitle="required" className="check" />      
                         <Tab title="Authorised Staff" subtitle="required" className="staff"/>               
                         <Tab title="School Details" subtitle="required" className=""/>                     
                         <Tab title="Test Format Order" subtitle="optional" className="staff"/>               

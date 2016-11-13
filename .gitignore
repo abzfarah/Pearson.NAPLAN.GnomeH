@@ -6,3 +6,14 @@ coverage
 .idea/
 sh.exe.stackdump
 bash.exe.stackdump
+reports/CHROME_54.0.2840.71_WIN8_1_github.xml
+reports/CHROME_54.0.2840.71_WIN8_1_guineaPig.xml
+reports/components/CHROME_54.0.2840.71_WIN8_1_schooldetails.xml
+reports/components/CHROME_54.0.2840.71_WIN8_1_statement.xml
+screenshots/components/AddSchool/VIC-NAPALAN-ADD-SCHOOL_ERROR_Nov-10-2016-150816-GMT+1000-(AUS-Eastern-Standard.png
+screenshots/components/EditSchools/VIC-NAPALAN-EDIT-School_ERROR_Nov-10-2016-150823-GMT+1000-(AUS-Eastern-Standard.png
+screenshots/components/ManageSchools/VIC-NAPALAN-MANAGESCHOOLS_ERROR_Nov-10-2016-150829-GMT+1000-(AUS-Eastern-Standard.png
+screenshots/components/schooldetails/VIC-NAPALAN-SCHOOL-DETAILS_ERROR_Nov-10-2016-150955-GMT+1000-(AUS-Eastern-Standard.png
+screenshots/components/schooldetails/VIC-NAPALAN-SCHOOL-DETAILS_ERROR_Nov-10-2016-153300-GMT+1000-(AUS-Eastern-Standard.png
+screenshots/components/schooldetails/VIC-NAPALAN-SCHOOL-DETAILS_ERROR_Nov-10-2016-153305-GMT+1000-(AUS-Eastern-Standard.png
+screenshots/components/AddSchool/VIC-NAPALAN-ADD-SCHOOL_ERROR_Nov-10-2016-150817-GMT+1000-(AUS-Eastern-Standard.png
