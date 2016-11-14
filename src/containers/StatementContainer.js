@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
-import {Button, Box, Heading, Paragraph, Footer, Form, FormField, Section, Tab, Tabs} from '../common';
+import {Button, Box, Heading, Paragraph, Footer, Form, FormField, Section, Tab, Tabs} from '../components/common';
 import { RadioButton, MenuItem } from 'material-ui'
 import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
 import Toast from 'grommet/components/Toast';
@@ -22,13 +22,19 @@ class StatementContainer extends React.Component {
   }
 
   handleSubmit(data) {
+
+    data["securityLevel"] = parseInt(data["securityLevel"])   //Api expects securitylevel property to be an integer
+    this.props.actions.submitStatement(data)
   }
 
+
   componentWillReceiveProps(nextProps) {
+    debugger
     this.props.initialize(this.props.statement)
   }
 
   componentWillMount() {
+    debugger
     this.props.initialize(this.props.statement)
   }
 
@@ -162,18 +168,9 @@ const validate = values => {
   return errors
 }
 
-function mapStateToProps (state) {
-  return {
-    currentSchool: state.currentSchool.currentSchool,
-    statementData: state.statement.statementData,
-    form: state.form.Statement
-  }
-}
-
-
 const form = reduxForm({
   form: 'Statement',
   validate
 });
 
-export default connect(mapStateToProps, null)(form(StatementContainer)); 
+export default connect(null, null)(form(StatementContainer)); 

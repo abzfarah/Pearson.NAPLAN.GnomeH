@@ -10,7 +10,7 @@ import Home from  '../components/MultiTab/Home';
 import SchoolDetails from  '../components/MultiTab/SchoolDetailsContainer';
 import AuthorizedStaff from  '../components/MultiTab/AuthorizedStaff';
 import FormContainer from '../containers/FormContainer';
-import SchoolContainer from '../containers/SchoolContainer'
+import RegistrationContainer from '../containers/RegistrationContainer'
 import ManageUsersContainer from '../containers/ManageUsersContainer'
 //import ManageSchoolsContainer from '../containers/ManageSchoolsContainer'
 import ManageSchools from '../components/layouts/ManageSchools'
@@ -18,19 +18,11 @@ import session from './utils/session'
 
 export default {
   path: '/',
-  indexRoute: { onEnter: renderRoot },
   component: AppContainer,
   childRoutes: [
       { 
-        path:'/school',  
-        indexRoute: '/school/summary',
-        component: SchoolContainer,
-        childRoutes: [                                
-          { path: 'summary', component: Home },   
-          { path: 'statement',  component: StatementContainer },
-          { path: 'schooldetails',  component: SchoolDetails },
-          { path: 'authorisedstaff',  component: AuthorizedStaff },
-        ] 
+        path:'/school',
+        component: RegistrationContainer,
       },
       { path: '/manageschools', 
         component: ManageSchools 

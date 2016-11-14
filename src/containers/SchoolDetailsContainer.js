@@ -2,10 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
-import {Button, Box, Heading, Paragraph, Footer, Form, List, ListItem, FormField, Select, Section, Tab, Tabs} from '../common';
+import {Button, Box, Heading, Paragraph, Footer, Form, List, ListItem, FormField, Select, Section, Tab, Tabs} from '../components/common';
 import { RadioButton, MenuItem } from 'material-ui'
 import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
-import * as detailsActions from '../../actions/schoolDetailsActions';
 import _ from 'lodash';
 
 class SchoolDetailsContainer extends React.Component {

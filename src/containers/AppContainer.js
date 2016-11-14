@@ -8,7 +8,6 @@ import * as schoolActions from '../actions'
 import { loadSchools } from '../actions/searchActions'
 import { getClaims } from '../components/utils/getClaims'
 import Footer from '../containers/Footer';
-import FormContainer from './FormContainer'
 import HeaderContainer from './HeaderContainer'
 import NavContainer from './NavContainer'
 import userManager from '../utils/userManager';
@@ -36,7 +35,7 @@ class AppContainer extends React.Component {
       loggedIn: false,
       user: false,
       claims: false,
-      currentSchool: [],
+      currentSchool: {},
       schools: schools
    }
     this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
@@ -79,7 +78,7 @@ class AppContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps, nextState) {
-    if (this.state.currentSchool != nextProps.currentSchool) {
+    if (!_.isEqual(this.state.currentSchool, nextProps.currentSchool)) {
         this.setState({currentSchool: nextProps.currentSchool})
     }
 
@@ -120,12 +119,12 @@ class AppContainer extends React.Component {
     let user = (this.props.user || this.state.user);
     let that = this;
 
-      var children = React.Children.map(this.props.children, function (child) {
+    var children = React.Children.map(this.props.children, function (child) {
          return React.cloneElement(child, {
-             claims: that.state.claims
+             claims: that.state.claims,
+             currentSchool: currentSchool
     })
   })
-
 
     return (
       <div>
@@ -140,7 +139,7 @@ class AppContainer extends React.Component {
 
         {loggedIn && <NavContainer claims={claims}/>}
       
-        { children }     
+         { children }     
        
       <Footer/>
     </div>
@@ -152,7 +151,8 @@ class AppContainer extends React.Component {
     return {
         user: state.oidc.user,
         loggedIn: state.loggedIn,
-        claims: state.claims.claims
+        claims: state.claims.claims,
+        currentSchool: state.currentSchool.currentSchool
     };
   }
 

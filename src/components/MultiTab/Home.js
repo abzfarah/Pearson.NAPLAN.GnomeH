@@ -16,7 +16,7 @@ class Home extends React.Component {
   
   render() {
     return (
-    <Box className="form-container">   
+    <Box>   
       <Section className="tabwidth">
           <Table>
             <TableHeader>

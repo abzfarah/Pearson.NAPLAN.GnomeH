@@ -86,8 +86,8 @@ class SvgIcon extends Component {
       display: 'inline-block',
       color: svgIcon.color,
       fill: this.state.hovered ? onColor : offColor,
-      height: 24,
-      width: 24,
+      height: 44,
+      width: 44,
       userSelect: 'none',
       transition: transitions.easeOut(),
     }, style);

@@ -75,11 +75,6 @@ class SchoolName extends React.Component {
 class HeaderContainer extends React.Component {
   constructor() {
     super()
-    this.state = {
-      currentSchool: [],
-      loggedIn: false,
-      claims: ""
-   }
   }
 
   componentWillMount(props) {
@@ -87,9 +82,9 @@ class HeaderContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
 
-    if (this.state.currentSchool != nextProps.currentSchool) {
-        this.setState({currentSchool: nextProps.currentSchool})
-    }
+  //  if (this.state.currentSchool != nextProps.currentSchool) {
+  //      this.setState({currentSchool: nextProps.currentSchool})
+ //   }
     if (this.props.user != nextProps.user) {
         this.setState({
           loggedIn: true
@@ -111,7 +106,7 @@ class HeaderContainer extends React.Component {
 
   render(props) {
 
-    const { loggedIn, currentSchool, currentSchoolname, currentSchoolcode, claims } = this.props
+    const { loggedIn, claims } = this.props
     const { centreSearch } = claims
 
     return (
@@ -120,10 +115,10 @@ class HeaderContainer extends React.Component {
             <Login status={this.props} dispatch={this.props.dispatch} />
             <Box direction="row"  wrap={true} align="center" className="second-header">
               <Box direction="row" className="school-info">
-                { currentSchool && <SchoolName school={this.state.currentSchool}/> }
+                { <SchoolName school={this.props.currentSchool}/> }
               </Box>
               <Box direction="row" className="school-search">
-                { centreSearch && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool}/> }
+                { <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool}/> }
               </Box>
             </Box>
           </Sticky>
@@ -134,7 +129,6 @@ class HeaderContainer extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-      currentSchool: state.currentSchool.currentSchool,
       loggedIn: ownProps.loggedIn,
       claims: ownProps.claims
     };
