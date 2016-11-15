@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
+import { toastr } from 'react-redux-toastr'
+import * as detailsActions from '../actions';
 import {Button, Box, Heading, Paragraph, Footer, Form, List, ListItem, FormField, Select, Section, Tab, Tabs} from '../components/common';
 import { RadioButton, MenuItem } from 'material-ui'
 import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
@@ -16,29 +18,38 @@ class SchoolDetailsContainer extends React.Component {
       schoolDetails: {},
       form: {},
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
-  handleSubmit(data) {
-    let post = _.pick(data, details_post);
-    this.props.actions.submitDetails(post)
+  handleFormSubmit(data) {
+
+
+    toastr.success('Success', 'School details submitted')
+    this.props.actions.submitDetails(data)
   }
 
   componentWillReceiveProps(nextProps) {
+     if (!_.isEqual(this.props.schoolDetails, nextProps.schoolDetails)) {
+        this.props.initialize(nextProps.schoolDetails)
+     }
+  }
 
+  componentWillMount() {
+    debugger
+    this.props.initialize(this.props.schoolDetails)
   }
 
   render() {
     let { currentSchool, schoolDetails } = this.props
-    const { handleSubmit, pristine, reset, submitting, validated } = this.props
+    const { handleSubmit, pristine, reset, submitting, validated, invalid } = this.props
     const { centreCode, centreName, deliveryAddress1, deliveryAddress2, deliveryPostcode, deliverySchoolName,
-            deliveryState, deliverySuburb, dsFax, dsPhone, email, fax, phone, post_address_line1, reportState,
+            deliveryState, deliverySuburb, dsFax, dsPhone, email, post_address_line1, reportState,
             reportSuburb, requestPackingOrder } = this.props.schoolDetails 
 
     return (
         <Box>  
           <Section className="test">
-            <form>
+            <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
             <Box>
               <Heading tag="h2">
                 <div className="numberCircle">3</div>
@@ -199,7 +210,7 @@ class SchoolDetailsContainer extends React.Component {
             <Box className="button-group-padding">
               <div className="button-groups">
                 <Button className="separate-button" type="button" secondary={true} label="Return" />  
-                <Button className="separate-button" type="submit" disabled={submitting} primary={true} label="Submit"  />
+                <Button className="separate-button" type="submit" disabled={invalid} primary={true} label="Submit"  />
               </div>
             </Box>
             </form>  
@@ -234,17 +245,10 @@ const validate = values => {
   return errors
 }
 
-function mapStateToProps (state) {
-  return {
-    currentSchool: state.currentSchool.currentSchool,
-    schoolDetails: state.schoolDetails.schoolDetails,
-    form: state.form.SchoolDetails
-  }
-}
 
 const form = reduxForm({
   form: 'SchoolDetails',
   validate
 });
 
-export default connect(mapStateToProps, null)(form(SchoolDetailsContainer)); 
+export default connect(null, null)(form(SchoolDetailsContainer)); 

@@ -18,16 +18,19 @@ import session from './utils/session'
 
 export default {
   path: '/',
+  indexRoute: { onEnter: redirectToHome },
   component: AppContainer,
   childRoutes: [
       { 
         path:'/school',
         component: RegistrationContainer,
       },
-      { path: '/manageschools', 
+      { 
+        path: '/manageschools', 
         component: ManageSchools 
       },
-      { path:'/manageusers', 
+      { 
+        path:'/manageusers', 
         component: ManageUsersContainer 
       },
       { path:'/callback', 
@@ -36,20 +39,20 @@ export default {
   ]
 }
 
-function redirectToLogin(nextState, replace) {
-  if (!session.login) {
-      replace({
-        pathname: '/',
-        state: { nextPathname: nextState.location.pathname }
-      })
-   }
+function render(nextState, replaceState) {
+  if (session.login)
+    replaceState({ nextPathname: nextState.location.pathname }, '/school')
 }
 
 function redirectToHome(nextState, replace) { 
-  if (session.login) { replace('/') } }
+  if (session.login) { replace('/school') } 
+
+}
       
 function renderRoot(nextState, replace) {
-  if (session.login) { replace('/school/summary')}}
+  if (1) { replace('/school') }
+
+}
       
 
 

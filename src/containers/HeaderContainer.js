@@ -115,10 +115,10 @@ class HeaderContainer extends React.Component {
             <Login status={this.props} dispatch={this.props.dispatch} />
             <Box direction="row"  wrap={true} align="center" className="second-header">
               <Box direction="row" className="school-info">
-                { <SchoolName school={this.props.currentSchool}/> }
+                { centreSearch  && <SchoolName school={this.props.currentSchool}/> }
               </Box>
               <Box direction="row" className="school-search">
-                { <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool}/> }
+                { centreSearch  && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool}/> }
               </Box>
             </Box>
           </Sticky>

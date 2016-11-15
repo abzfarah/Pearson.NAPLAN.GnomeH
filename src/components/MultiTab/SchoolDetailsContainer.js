@@ -26,15 +26,16 @@ class SchoolDetailsContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    debugger
+    this.props.initialize(this.props.schoolDetails)
+  }
 
+  componentWillMount() {
+    debugger
+    this.props.initialize(this.props.schoolDetails)
   }
 
   render() {
-    let { currentSchool, schoolDetails } = this.props
-    const { handleSubmit, pristine, reset, submitting, validated } = this.props
-    const { centreCode, centreName, deliveryAddress1, deliveryAddress2, deliveryPostcode, deliverySchoolName,
-            deliveryState, deliverySuburb, dsFax, dsPhone, email, fax, phone, post_address_line1, reportState,
-            reportSuburb, requestPackingOrder } = this.props.schoolDetails 
 
     return (
         <Box>  

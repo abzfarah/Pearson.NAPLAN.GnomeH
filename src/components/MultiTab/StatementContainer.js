@@ -5,7 +5,6 @@ import { Field, reduxForm } from 'redux-form';
 import {Button, Box, Heading, Paragraph, Footer, Form, FormField, Section, Tab, Tabs} from '../common';
 import { RadioButton, MenuItem } from 'material-ui'
 import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
-import Toast from 'grommet/components/Toast';
 
 import _ from 'lodash';
 
@@ -22,6 +21,10 @@ class StatementContainer extends React.Component {
   }
 
   handleSubmit(data) {
+
+    actions.submitStatement(data)
+
+
   }
 
   componentWillReceiveProps(nextProps) {

@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
+import { toastr } from 'react-redux-toastr'
+import * as statementActions from '../actions';
 import {Button, Box, Heading, Paragraph, Footer, Form, FormField, Section, Tab, Tabs} from '../components/common';
 import { RadioButton, MenuItem } from 'material-ui'
 import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
-import Toast from 'grommet/components/Toast';
-
 import _ from 'lodash';
 
 class StatementContainer extends React.Component {
@@ -18,19 +18,23 @@ class StatementContainer extends React.Component {
       statementData: {},
       form: {},
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
-  handleSubmit(data) {
+  handleFormSubmit(data) {
 
     data["securityLevel"] = parseInt(data["securityLevel"])   //Api expects securitylevel property to be an integer
+    toastr.success('Success', 'Statement of compliance submitted')
     this.props.actions.submitStatement(data)
   }
 
 
   componentWillReceiveProps(nextProps) {
-    debugger
-    this.props.initialize(this.props.statement)
+    let level = nextProps.statement["securityLevel"].toString() 
+    nextProps.statement["securityLevel"] = level
+     if (!_.isEqual(this.props.statement, nextProps.statement)) {
+        this.props.initialize(nextProps.statement)
+     }
   }
 
   componentWillMount() {
@@ -39,13 +43,13 @@ class StatementContainer extends React.Component {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, validated } = this.props
+    const { handleSubmit, pristine, reset, submitting, validated, invalid } = this.props
     let { currentSchool, statementData} = this.state
 
     return (
       <Box>     
       <Section className="test">
-        <form>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <Box className="PartA">
            <Heading tag="h2">
            <div className="numberCircle">1</div>
@@ -82,10 +86,10 @@ class StatementContainer extends React.Component {
               </Paragraph>
               <Paragraph>Please select the option which best describes the two levels of security at your school </Paragraph>
               <Field name="securityLevel"  ref="securityLevel"  disabled={pristine || submitting}  component={RadioButtonGroup}>
-                <RadioButton value="1"   disabled={pristine || submitting} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                <RadioButton value="2" disabled={pristine || submitting} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                <RadioButton value="3" disabled={pristine || submitting} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
-                <RadioButton value="4" disabled={pristine || submitting}  label="Other" />
+                <RadioButton value='1'   disabled={pristine || submitting} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                <RadioButton value='2' disabled={pristine || submitting} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                <RadioButton value='3' disabled={pristine || submitting} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
+                <RadioButton value='4' disabled={pristine || submitting}  label="Other" />
               </Field><br/>
                <Field name="securityLevelOther" ref="securityLevelOther"  disabled={pristine || submitting}   component={TextField}/>
               <Paragraph>
@@ -110,8 +114,8 @@ class StatementContainer extends React.Component {
                       <Field name="email" disabled={pristine || submitting}   component={TextField} hintText="Email" floatingLabelText="Email"/>
                     </div>
                    <Box className="declaration" >
-                      <Field name="isDeclared"   disabled={pristine || submitting} component={Checkbox} label="I declare that I am the Principal of the school detailed above."/>
-                      <Field name="isCertified"   disabled={pristine || submitting}  component={Checkbox} label="I certify that the information provided on this form is correct."/>
+                      <Field name="isDeclared"   ref="isDeclared" disabled={pristine || submitting} component={Checkbox} label="I declare that I am the Principal of the school detailed above."/>
+                      <Field name="isCertified"  ref="isCertified"  disabled={pristine || submitting}  component={Checkbox} label="I certify that the information provided on this form is correct."/>
                     </Box>
                  </Box>
                 </Box>
@@ -121,7 +125,7 @@ class StatementContainer extends React.Component {
         <Box className="button-group-padding">
           <div className="button-groups">
             <Button className="separate-button" type="button" secondary={true} label="Return" />  
-            <Button className="separate-button" type="submit" disabled={submitting} primary={true } label="Submit"  />
+            <Button className="separate-button" type="submit" disabled={invalid} primary={true } label="Submit"  />
           </div>
        </Box>
       </form>
@@ -152,25 +156,29 @@ const validate = values => {
   } else if(isNumeric(values.lastName)) {
     errors.lastName = 'Must not contain a number'
   }
-
   if (!values.isDeclared) {
     errors.isDeclared = 'Required'
   } else if(isNumeric(values.isDeclared)) {
     errors.isDeclared = 'Must declare'
   }
-
   if (!values.isCertified) {
     errors.isCertified = 'Required'
   } else if(isNumeric(values.isDeclared)) {
     errors.isCertified = 'Must certify'
   }
-
   return errors
 }
+
 
 const form = reduxForm({
   form: 'Statement',
   validate
 });
 
-export default connect(null, null)(form(StatementContainer)); 
+function mapDispatchToProps(dispatch) {
+  return {
+      actions: bindActionCreators(statementActions, dispatch)
+  };
+}
+
+export default connect(null, mapDispatchToProps)(form(StatementContainer)); 

@@ -39,11 +39,25 @@ export function retrieveClaims(claims) {
   };
 }
 
-export function schoolDetailsAsync(keyword) {
 
-    return dispatch => {
+export function retrieveAllData(keyword) {
+  return dispatch => Promise.all([
+    dispatch(schoolDetailsAsync(keyword)),
+    dispatch(getStatement(keyword))
+  ]);
+}
 
-        return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/GetCentreDetails/centreCode/" + keyword)
+export function schoolDetailsAsync(schoolCode) {
+
+   return dispatch => {
+
+        dispatch({
+            type: 'SCHOOL_DETAILS_FETCH',
+            isLoading: true,
+            isLoaded: false
+        });
+
+        return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/GetCentreDetails/centreCode/" + schoolCode)
             .then((response) => {
                 console.log('response')
 
@@ -64,26 +78,6 @@ export function schoolDetailsAsync(keyword) {
     }
 }
 
-//-- Insert statement
-export function submitDetails(data) {
-    return dispatch => {
-        dispatch({
-            type: 'SCHOOL_DETAILS_SUBMIT',
-            isLoading: true,
-            isLoaded: false
-        });
-         return axios.post("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/PostCentreDetails/", data)
-            .then((response) => {
-                dispatch({
-                    type: SCHOOL_DETAILS_SUBMIT_SUCCESS,
-                    isLoading: false,
-                    isLoaded: true,
-                    response: response
-                })
-                return response.data;
-            })
-    }
-}
 
 
 export function getStatement(schoolCode) {
@@ -139,5 +133,26 @@ export function submitStatement(statement) {
                     error: error
                 })
             });
+    }
+}
+
+//-- Insert statement
+export function submitDetails(data) {
+    return dispatch => {
+        dispatch({
+            type: 'SCHOOL_DETAILS_SUBMIT',
+            isLoading: true,
+            isLoaded: false
+        });
+         return axios.post("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/PostCentreDetails/", data)
+            .then((response) => {
+                dispatch({
+                    type: SCHOOL_DETAILS_SUBMIT_SUCCESS,
+                    isLoading: false,
+                    isLoaded: true,
+                    response: response
+                })
+                return response.data;
+            })
     }
 }

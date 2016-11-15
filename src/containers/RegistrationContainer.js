@@ -21,6 +21,8 @@ class RegistrationContainer extends React.Component {
         stepIndex: 0,
         currentSchool: {},
         visited: [],
+        statementData: {},
+        detailsData: {},
 
         schoolDetails: {
           centreCode: "",
@@ -75,16 +77,32 @@ class RegistrationContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
 
-    if (!_.isEqual(this.state.currentSchool, nextProps.currentSchool)) {
+    if (!_.isEqual(this.props.currentSchool, nextProps.currentSchool)) {
+         this.setState({currentSchool:  nextProps.currentSchool}) 
          this.props.actions.getStatement(nextProps.currentSchool.code)
-         this.setState({currentSchool: nextProps.currentSchool})
-         
+         this.props.actions.schoolDetailsAsync(nextProps.currentSchool.code)
     }
 
-    if (!_.isEqual(this.state.statement, nextProps.statementData)) {
-        this.setState({statement: nextProps.statementData})
+    if (!_.isEqual(this.state.statementData, nextProps.statementData)) {
+        let level = nextProps.statementData["securityLevel"].toString() 
+        nextProps.statementData["securityLevel"] = level
+        this.setState({
+          statement: nextProps.statementData,
+          statementData: nextProps.statementData
+      })
     }
+
+    if (!_.isEqual(this.state.detailsData, nextProps.schoolDetails)) {
+        this.setState({
+          schoolDetails: nextProps.schoolDetails,
+          detailsData: nextProps.schoolDetails
+      })
+    }
+
+
  }
+
+ 
 
  renderSchool() {
 
@@ -96,9 +114,14 @@ class RegistrationContainer extends React.Component {
       case 0:
         return <Home/>;
       case 1:
-        return <StatementContainer  statement={this.state.statement}/>;      
+        return <StatementContainer  
+                 statement={this.state.statementData} 
+                 currentSchool={this.state.currentSchool}/>;      
       case 3:
-        return <SchoolDetailsContainer statement={this.state.statement}/>;
+        return <SchoolDetailsContainer 
+                  schoolDetails={this.state.schoolDetails}
+                  currentSchool={this.state.currentSchool} />;
+        
     }
   }
 
@@ -172,7 +195,6 @@ function mapStateToProps(state, ownProps) {
       loggedIn: state.loggedIn,
       schoolDetails: state.schoolDetails.schoolDetails,
       statementData: state.statement.statementData
-
   };
 }
 
