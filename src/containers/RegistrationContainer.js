@@ -12,6 +12,14 @@ import userManager from '../utils/userManager';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import * as schoolActions from '../actions';
+import schools from '../data/schools.json';
+
+const school = schools
+
+const lookup = {};
+for (var i = 0, len = school.length; i < len; i++) {
+    lookup[school[i].centreCode] = school[i];
+}
 
 class RegistrationContainer extends React.Component {
 
@@ -23,7 +31,6 @@ class RegistrationContainer extends React.Component {
         visited: [],
         statementData: {},
         detailsData: {},
-
         schoolDetails: {
           centreCode: "",
           centreName: "",
@@ -60,19 +67,30 @@ class RegistrationContainer extends React.Component {
       this.renderSchool = this.renderSchool.bind(this)
     }
 
-
-
   componentWillMount() {
+
+
+
     let stepIndex = this.state.stepIndex;
     let visited = this.state.visited;
     this.setState({visited: visited.concat(stepIndex)});
   }
 
   componentWillUpdate(nextProps, nextState) {
+
+
+
     const {stepIndex, visited} = nextState;
     if (visited.indexOf(stepIndex) === -1) {
       this.setState({visited: visited.concat(stepIndex)});
     }
+  }
+
+  componentDidMount() {
+
+    const { claims } = this.props
+
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -98,8 +116,6 @@ class RegistrationContainer extends React.Component {
           detailsData: nextProps.schoolDetails
       })
     }
-
-
  }
 
  
@@ -129,13 +145,12 @@ class RegistrationContainer extends React.Component {
     const visited = this.state.visited
     const stepIndex = this.state.stepIndex
     const { currentSchool } = this.props
-
     const styles = getStyles();
 
     return (
       <div style={styles.root}>
 
-        <Stepper linear={false}>
+        <Stepper linear={false} claims={this.props.claims}>
           <Step completed={visited.indexOf(0) !== -1} active={stepIndex === 0}>
             <StepButton onClick={() => this.setState({stepIndex: 0})}>
               Home

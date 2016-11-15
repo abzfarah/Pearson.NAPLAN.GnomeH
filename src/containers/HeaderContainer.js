@@ -94,6 +94,9 @@ class HeaderContainer extends React.Component {
   }
 
   componentDidMount() {
+
+    var u =2;
+    debugger
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -107,7 +110,7 @@ class HeaderContainer extends React.Component {
   render(props) {
 
     const { loggedIn, claims } = this.props
-    const { centreSearch } = claims
+    const { centreSearch, schoolCode } = claims
 
     return (
       <StickyContainer>
@@ -115,7 +118,7 @@ class HeaderContainer extends React.Component {
             <Login status={this.props} dispatch={this.props.dispatch} />
             <Box direction="row"  wrap={true} align="center" className="second-header">
               <Box direction="row" className="school-info">
-                { centreSearch  && <SchoolName school={this.props.currentSchool}/> }
+                { (centreSearch || schoolCode)  && <SchoolName school={this.props.currentSchool}/> }
               </Box>
               <Box direction="row" className="school-search">
                 { centreSearch  && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool}/> }

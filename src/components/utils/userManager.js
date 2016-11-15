@@ -1,5 +1,6 @@
 import { createUserManager } from 'redux-oidc';
 
+
 var config = {
     client_id: 'VICRegWeb',
     redirect_uri: 'http://localhost:8004/callback',

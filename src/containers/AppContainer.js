@@ -64,8 +64,8 @@ class AppContainer extends React.Component {
 
       if (user_claims["schoolCode"]) {
         this.props.actions.selectSchool({
-            code: lookup["10389"].centreCode,
-            name: lookup["10389"].centreName
+            code: lookup[user_claims["schoolCode"].toString()].centreCode,
+            name: lookup[user_claims["schoolCode"].toString()].centreName
         })
       }
 
@@ -77,12 +77,21 @@ class AppContainer extends React.Component {
     }
   }
 
+  componentDidMount() {
+
+    var d =5;
+
+    debugger;
+  }
+
   componentWillReceiveProps(nextProps, nextState) {
     if (!_.isEqual(this.state.currentSchool, nextProps.currentSchool)) {
+
         this.setState({currentSchool: nextProps.currentSchool})
     }
 
     if (this.props.user != nextProps.user) {
+
         this.setState({user: nextProps.user})
     }
 
@@ -110,6 +119,8 @@ class AppContainer extends React.Component {
   }
 
   componentDidMount(props, state) {
+
+    var x =3;
 
   }
 

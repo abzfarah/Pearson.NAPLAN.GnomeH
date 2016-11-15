@@ -245,10 +245,16 @@ const validate = values => {
   return errors
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+      actions: bindActionCreators(detailsActions, dispatch)
+  };
+}
+
 
 const form = reduxForm({
   form: 'SchoolDetails',
   validate
 });
 
-export default connect(null, null)(form(SchoolDetailsContainer)); 
+export default connect(null, mapDispatchToProps)(form(SchoolDetailsContainer)); 

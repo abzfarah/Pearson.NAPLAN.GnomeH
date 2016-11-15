@@ -7,6 +7,7 @@ import Tabs from '../common/Tabs';
 import  CallbackComponent  from './CallbackComponent';
 import { push } from 'react-router-redux';
 
+
 class CallbackPage extends React.Component {
 
   componentWillMount() {
@@ -18,6 +19,8 @@ class CallbackPage extends React.Component {
   successCallback = (user) => {
     const { dispatch } = this.props;
     const claims = user.profile;
+
+
     var userSession = JSON.stringify(user.profile)
     sessionStorage.setItem('userSession', userSession);
     this.props.dispatch(push('/'));

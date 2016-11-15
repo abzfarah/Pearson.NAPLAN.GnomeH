@@ -15,6 +15,32 @@ const getStyles = (props) => {
   };
 };
 
+var mapTabs = {
+  summary: 0,
+  statement: 1,
+  authorisedstaff: 2,
+  schooldetails: 3,
+  alternativeTestFormatOrder: 4,
+  studentRegistrationData: 5
+}
+
+var mapTabtoClaim = {
+  "0": "home",
+  "1": "soc",
+  "2": "authorizedStaff",
+  "3": "schooldetails",
+  "4": "alternativeTestFormatOrder",
+  "5": "studentRegistrationData"
+}
+
+var mapClaims = {
+  soc: mapTabs["statement"],
+  authorisedstaff: mapTabs["authorizedStaff"],
+  schooldetails: mapTabs["schooldetails"],
+  alternativeTestFormatOrder: mapTabs["alternativeTest"],
+  studentRegistrationData: mapTabs["studentRegistration"]
+}
+
 class Stepper extends Component {
 
   static propTypes = {
@@ -60,10 +86,12 @@ class Stepper extends Component {
       children,
       linear,
       style,
+      claims
     } = this.props;
 
     const {prepareStyles} = this.context.muiTheme;
     const styles = getStyles(this.props, this.context);
+    const menu = []
 
     /**
      * One day, we may be able to use real CSS tools
@@ -74,7 +102,10 @@ class Stepper extends Component {
     const steps = React.Children.map(children, (step, index) => {
 
 
+      const hasClaim = claims[mapTabtoClaim[index]];
       const controlProps = {index};
+
+
 
       if (activeStep === index) {
         controlProps.active = true;
@@ -89,13 +120,24 @@ class Stepper extends Component {
       }
 
       return [
-        React.cloneElement(step, Object.assign(controlProps, step.props)),
+        React.cloneElement(step, Object.assign(controlProps, step.props, {hasClaim: hasClaim})),
       ];
     });
 
+    _.forEach(steps, function(step, index) {
+          if (step.props.hasClaim == true ) {
+              menu.push(step)
+          }
+          else if (step.props.index == 0 || step.props.index == 3) {
+             menu.push(step)
+          }
+      });
+
+
+
     return (
       <div style={prepareStyles(Object.assign(styles.root, style))}>
-        {steps}
+        {menu}
       </div>
     );
   }
