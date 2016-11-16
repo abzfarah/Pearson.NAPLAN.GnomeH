@@ -101,11 +101,8 @@ class Stepper extends Component {
      */
     const steps = React.Children.map(children, (step, index) => {
 
-
       const hasClaim = claims[mapTabtoClaim[index]];
       const controlProps = {index};
-
-
 
       if (activeStep === index) {
         controlProps.active = true;
@@ -132,8 +129,6 @@ class Stepper extends Component {
              menu.push(step)
           }
       });
-
-
 
     return (
       <div style={prepareStyles(Object.assign(styles.root, style))}>

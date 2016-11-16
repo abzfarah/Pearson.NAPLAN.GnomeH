@@ -30,6 +30,7 @@ class SchoolDetailsContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
      if (!_.isEqual(this.props.schoolDetails, nextProps.schoolDetails)) {
+
         this.props.initialize(nextProps.schoolDetails)
      }
   }

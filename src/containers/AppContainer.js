@@ -33,7 +33,7 @@ class AppContainer extends React.Component {
     super(props);
     this.state = {
       loggedIn: false,
-      user: false,
+      user: {},
       claims: false,
       currentSchool: {},
       schools: schools
@@ -52,8 +52,6 @@ class AppContainer extends React.Component {
       localStorage.clear();
       userManager.removeUser();
       userManager.signoutRedirect();
-      this.setState({loggedIn: false});
-      this.forceUpdate()
   }
 
   componentWillMount(props) {
@@ -90,17 +88,31 @@ class AppContainer extends React.Component {
         this.setState({currentSchool: nextProps.currentSchool})
     }
 
-    if (this.props.user != nextProps.user) {
+    if (this.state.user != nextProps.user) {
 
-        this.setState({user: nextProps.user})
+      this.setState({user: nextProps.user})
+
+      if (this.state.user ) {
+          const prefix = userManager._userStore._prefix
+          const key = userManager._userStoreKey;
+          const user_profile = JSON.parse(sessionStorage.getItem(prefix+key)).profile
+
+          if (user_profile["schoolCode"])  {
+              this.props.actions.selectSchool({
+                code: lookup[user_profile["schoolCode"].toString()].centreCode,
+                name: lookup[user_profile["schoolCode"].toString()].centreName
+          })
+       }     
+     }
+
+
+      if (nextProps.user && !this.state.claims) {
+          let user_claims = getClaims(nextProps.user.profile)
+          this.setState({claims: user_claims})
+      }
+
+      else return false
     }
-
-    if (nextProps.user && !this.state.claims) {
-        let user_claims = getClaims(nextProps.user.profile)
-        this.setState({claims: user_claims})
-    }
-
-    else return false
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -118,22 +130,25 @@ class AppContainer extends React.Component {
     }
   }
 
-  componentDidMount(props, state) {
+  componentDidMount() {
 
     var x =3;
+    debugger
 
   }
 
+
   render() {
     const { schools, currentSchool, claims } = this.state;
+
     let loggedIn = (this.props.user || this.state.loggedIn) ? true : false;
     let user = (this.props.user || this.state.user);
-    let that = this;
-
-    var children = React.Children.map(this.props.children, function (child) {
+    let isAdmin = claims["schoolCode"] ? false: true;  //Determine if authenticated user is an admin based on whether "schoolCode" claim is found 
+    let children = React.Children.map(this.props.children, child => {
          return React.cloneElement(child, {
-             claims: that.state.claims,
-             currentSchool: currentSchool
+             claims: this.state.claims,
+             currentSchool: currentSchool,
+             isAdmin: isAdmin
     })
   })
 
@@ -148,7 +163,7 @@ class AppContainer extends React.Component {
            onLogout={this.onLogoutButtonClick}
            onLogin={this.onLoginButtonClick} />
 
-        {loggedIn && <NavContainer claims={claims}/>}
+         { loggedIn && <NavContainer claims={claims} /> }
       
          { children }     
        

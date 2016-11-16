@@ -16,6 +16,8 @@ class StatementContainer extends React.Component {
     this.state = {
       currentSchool: {},
       statementData: {},
+      isSchoolUser: true,
+      isConfirmed: false,
       form: {},
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
@@ -23,7 +25,7 @@ class StatementContainer extends React.Component {
 
   handleFormSubmit(data) {
 
-    data["securityLevel"] = parseInt(data["securityLevel"])   //Api expects securitylevel property to be an integer
+    data["securityLevel"] = parseInt(data["securityLevel"])   //WebApi expects securitylevel property to be an integer
     toastr.success('Success', 'Statement of compliance submitted')
     this.props.actions.submitStatement(data)
   }
@@ -38,13 +40,17 @@ class StatementContainer extends React.Component {
   }
 
   componentWillMount() {
-    debugger
-    this.props.initialize(this.props.statement)
+    const { statement: { isConfirmed }, statement} = this.props;     //Check if form has already been submitted
+    this.setState({ isConfirmed: isConfirmed })
+
+    let level = statement["securityLevel"].toString() 
+    statement["securityLevel"] = level
+    this.props.initialize(statement)
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, validated, invalid } = this.props
-    let { currentSchool, statementData} = this.state
+    const { handleSubmit, pristine, reset, submitting, validated, invalid, isAdmin } = this.props
+    let { isConfirmed} = this.state
 
     return (
       <Box>     
@@ -73,7 +79,7 @@ class StatementContainer extends React.Component {
             <Paragraph> Please read Principal's responsibilities</Paragraph>
           </Box>
           <Box className="man">
-             <Field name="isConfirmed"   component={Checkbox} label="I have read and accept the Principal responsibilities"/>
+             <Field name="isConfirmed"  disabled={isConfirmed && !isAdmin} component={Checkbox} label="I have read and accept the Principal responsibilities"/>
           </Box>
         </Box>
         <Box className="PartA1">
@@ -125,7 +131,7 @@ class StatementContainer extends React.Component {
         <Box className="button-group-padding">
           <div className="button-groups">
             <Button className="separate-button" type="button" secondary={true} label="Return" />  
-            <Button className="separate-button" type="submit" disabled={invalid} primary={true } label="Submit"  />
+            <Button className="separate-button" type="submit" disabled={invalid || (isConfirmed && !isAdmin)} primary={true } label="Submit"  />
           </div>
        </Box>
       </form>
@@ -139,7 +145,7 @@ class StatementContainer extends React.Component {
 const validate = values => {
   const errors = {}
   function isNumeric(n) {
-       return n && /^\d+$/.test(n);
+       return n && !/[^a-zA-Z]/.test(n);
   }
   if (!values.email) {
     errors.email = 'Required'
@@ -148,22 +154,35 @@ const validate = values => {
   }
   if (!values.firstName) {
     errors.firstName = 'Required'
-  } else if(isNumeric(values.firstName)) {
+  } else if(!isNumeric(values.firstName)) {
     errors.firstName = 'Must not contain a number'
   }
   if (!values.lastName) {
     errors.lastName = 'Required'
-  } else if(isNumeric(values.lastName)) {
+  } else if(!isNumeric(values.lastName)) {
     errors.lastName = 'Must not contain a number'
   }
+
+  if (!values.securityLevel) {
+    errors.securityLevel = 'Required'
+  } else if(isNumeric(values.securityLevel)) {
+    errors.securityLevel = 'Must declare'
+  }
+
+  if (!values.isConfirmed) {
+    errors.isConfirmed = 'Required'
+  } else if(!isNumeric(values.isConfirmed)) {
+    errors.isConfirmed = 'Must declare'
+  }
+
   if (!values.isDeclared) {
     errors.isDeclared = 'Required'
-  } else if(isNumeric(values.isDeclared)) {
+  } else if(!isNumeric(values.isDeclared)) {
     errors.isDeclared = 'Must declare'
   }
   if (!values.isCertified) {
     errors.isCertified = 'Required'
-  } else if(isNumeric(values.isDeclared)) {
+  } else if(!isNumeric(values.isDeclared)) {
     errors.isCertified = 'Must certify'
   }
   return errors

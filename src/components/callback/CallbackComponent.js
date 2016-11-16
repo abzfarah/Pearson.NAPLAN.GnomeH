@@ -21,6 +21,8 @@ class CallbackComponent extends React.Component {
 
   onRedirectSuccess = (user) => {
     localStorage.removeItem(STORAGE_KEY);
+    let userSession = JSON.stringify(user.profile)
+    sessionStorage.setItem('userSessionss', userSession);
     this.props.successCallback(user);
   };
 

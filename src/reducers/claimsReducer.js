@@ -1,7 +1,7 @@
 
 
 const initialState = {
-  claims: ""
+  claims: {}
 }
 
 const RETRIEVE_CLAIMS = 'RETRIEVE_CLAIMS';

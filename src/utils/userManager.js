@@ -1,9 +1,12 @@
 import { createUserManager } from 'redux-oidc';
 
-
+let _callbackURI;
+if (__DEV__)  _callbackURI = "http://localhost:8004/callback"  
+if (__PROD__) _callbackURI = "http://melbnstgweb1.epenau.local:2016/callback" 
+    
 var config = {
     client_id: 'VICRegWeb',
-    redirect_uri: 'http://localhost:8004/callback',
+    redirect_uri: _callbackURI,
     response_type: 'id_token token',
     scope: 'openid profile email roles VICRegScope all_claims',
     authority: 'https://melbndevweb1.epenau.local:1301/ids',

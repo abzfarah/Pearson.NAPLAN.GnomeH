@@ -7,7 +7,7 @@ import { Anchor, Button, Box, Header, Menu, NavAnchor } from '../components/comm
 import {Step, StepButton, StepConnector, StepContent, StepLabel, Stepper} from '../components/common/Stepper';
 import StatementContainer from './StatementContainer';
 import SchoolDetailsContainer from './SchoolDetailsContainer';
-import Home from '../components/MultiTab/Home';
+import Home from './HomeContainer';
 import userManager from '../utils/userManager';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -69,7 +69,11 @@ class RegistrationContainer extends React.Component {
 
   componentWillMount() {
 
-
+    if (this.props.schoolUser) {
+         this.setState({currentSchool:  this.props.currentSchool}) 
+         this.props.actions.getStatement(this.props.currentSchool.code)
+         this.props.actions.schoolDetailsAsync(this.props.currentSchool.code)
+    }
 
     let stepIndex = this.state.stepIndex;
     let visited = this.state.visited;
@@ -132,11 +136,15 @@ class RegistrationContainer extends React.Component {
       case 1:
         return <StatementContainer  
                  statement={this.state.statementData} 
-                 currentSchool={this.state.currentSchool}/>;      
+                 currentSchool={this.state.currentSchool}
+                 isAdmin={this.props.isAdmin}
+                 />;      
       case 3:
         return <SchoolDetailsContainer 
                   schoolDetails={this.state.schoolDetails}
-                  currentSchool={this.state.currentSchool} />;
+                  currentSchool={this.state.currentSchool} 
+                  isAdmin={this.props.isAdmin}
+                  />;
         
     }
   }
