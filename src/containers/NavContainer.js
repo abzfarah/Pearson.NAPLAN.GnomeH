@@ -30,7 +30,7 @@ class NavContainer extends React.Component {
 
     return (
                                 <Menu  inline={true} direction="row">
-                {                 <Anchor href="#" className="active">Home</Anchor>  }
+                {                 <Anchor href="/school/summary" className="active">Home</Anchor>  }
                 {                 <Anchor href="#">Tasks</Anchor>                    }
                 {                 <Anchor href="#">2017 NAPLAN Online Pilot</Anchor> }
                 { centreSearch && <Anchor href="#">Bulk Download</Anchor>            }

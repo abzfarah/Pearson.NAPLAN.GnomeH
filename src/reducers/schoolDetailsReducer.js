@@ -12,6 +12,12 @@ export default (state = initialState, action = {}) => {
 
     switch (action.type) {
 
+       case 'SCHOOL_DETAILS_FETCH':
+            return Object.assign({}, state, {
+                isLoading: true,
+                isLoaded: false
+            });
+
         //-- Fetch
         case SCHOOL_DETAILS_SUBMIT_SUCCESS:
             return Object.assign({}, state, {

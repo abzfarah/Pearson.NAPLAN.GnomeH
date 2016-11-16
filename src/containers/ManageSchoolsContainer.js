@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
-import { Anchor, Button, Box, Header, Menu, NavAnchor, Section, Tab, Tabs } from '../components/common';
+import { Anchor, Button, Box, Header, Menu, NavAnchor, Section} from '../components/common';
 import userManager from '../utils/userManager';
 
 

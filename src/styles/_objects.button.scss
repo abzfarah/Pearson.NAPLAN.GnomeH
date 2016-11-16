@@ -1,44 +1,35 @@
 // (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
 
-$button-vertical-padding: round($inuit-base-spacing-unit / 3) - $button-border-width;
-$button-horizontal-padding: round($inuit-base-spacing-unit) - $button-border-width;
+$button-vertical-padding:
+  round($inuit-base-spacing-unit / 3) - $button-border-width;
+$button-horizontal-padding:
+  round($inuit-base-spacing-unit) - $button-border-width;
 
 @mixin basic-button {
-    display: inline-block;
-    color: rgba(0,0,0,.86);
-    text-align: center;
-    font-weight: 500;
-    height: 44px;
-    padding: 0 30px;
-    font-size: 12px;
-    line-height: 1.5;
-    letter-spacing: .5px;
-    text-transform: uppercase;
-    text-decoration: none;
-    white-space: nowrap;
-    background-color: transparent;
-    border-radius: 3px;
-    border: 0;
-    cursor: pointer;
-    box-sizing: border-box;
-    border: 1px solid rgba(0,0,0,.2);
-    background-clip: padding-box;
-    font-size: 16px;
-    padding: 10px 22px;
-
-  &:focus:not(.#{$grommet-namespace}button--disabled) {
-    border-color: $focus-border-color;
-    box-shadow: 0 0 1px 1px $focus-border-color;
-  }
+  padding: $button-vertical-padding $button-horizontal-padding;
+  background-color: transparent;
+  border: $button-border-width solid $button-border-color;
+  border-radius: $border-radius;
+  color: $button-text-color;
+  @include inuit-font-size($control-font-size, $inuit-base-spacing-unit);
+  font-weight: $button-font-weight;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  min-width: $button-min-width;
+  max-width: $button-max-width;
 
   @include media-query(lap-and-up) {
     transition: 0.1s ease-in-out;
   }
 }
 
-.statement-button {
-  text-decoration: none;
-  padding-top: 35px;
+.separate-button {
+  margin-left: 17px;
+}
+
+.button-group-padding {
+  padding-top: 10px
 }
 
 .grommet {
@@ -46,6 +37,11 @@ $button-horizontal-padding: round($inuit-base-spacing-unit) - $button-border-wid
   input[type="submit"],
   button:not(.#{$grommet-namespace}button) {
     @include basic-button();
+
+    &:focus {
+      border-color: $focus-border-color;
+      box-shadow: 0 0 1px 1px $focus-border-color;
+    }
   }
 
   a.#{$grommet-namespace}button {
@@ -57,131 +53,128 @@ $button-horizontal-padding: round($inuit-base-spacing-unit) - $button-border-wid
   }
 }
 
-.#{$grommet-namespace}button + .#{$grommet-namespace}button {
-  margin-left: 18px;
-}
-
-
 .#{$grommet-namespace}button {
   @include basic-button();
 
-  &__icon {
-    display: inline-block;
-    padding: halve($inuit-base-spacing-unit);
+  &--focus {
+    border-color: $focus-border-color;
+    box-shadow: 0 0 1px 1px $focus-border-color;
+  }
 
-    svg {
-      vertical-align: top;
+  @include background-context-color($button-text-color, $button-text-color);
+}
+
+.#{$grommet-namespace}button:hover {
+  .#{$grommet-namespace}control-icon {
+    @include icon-color($active-icon-color);
+    transition: none;
+  }
+
+  #{$dark-background-context} {
+    .#{$grommet-namespace}control-icon {
+      @include icon-color($active-colored-icon-color);
     }
   }
 
-  &:hover {
+  #{$light-background-context} {
     .#{$grommet-namespace}control-icon {
       @include icon-color($active-icon-color);
-      transition: none;
     }
-  }
-
-  &--icon,
-  &__icon {
-    &:hover {
-      .#{$grommet-namespace}control-icon {
-        @include icon-color($active-icon-color);
-        transition: none;
-      }
-    }
-  }
-
-  &:not(.#{$grommet-namespace}button--plain) {
-    .#{$grommet-namespace}button__icon {
-      padding: 0;
-      margin-right: halve($inuit-base-spacing-unit);
-    }
-  }
-
-  &--primary {
-    border-color: #0BB5FF;
-    background-color:#0BB5FF;
-    color: $active-colored-text-color;
-
-    // used for control icons (e.g. in video)
-    .#{$grommet-namespace}control-icon {
-      @include icon-color($colored-icon-color);
-    }
-
-    &:hover:not(.#{$grommet-namespace}button--disabled) {
-      color: $active-colored-text-color;
-
-     .#{$grommet-namespace}button__icon .#{$grommet-namespace}control-icon {
-        @include icon-color($active-colored-icon-color)
-      }
-    }
-  }
-
-  &--secondary {
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);
-  }
-
-  &--accent {
-    border-color: $button-accent-color;
-  }
-
-  &--align-start {
-    text-align: left;
-
-    html.rtl & {
-      text-align: right;
-    }
-  }
-
-  &--plain {
-    border: none;
-    padding: 0;
-    width: auto;
-    height: auto;
-    min-width: 0;
-    max-width: none;
-    font-weight: inherit;
-
-    &.#{$grommet-namespace}button--primary {
-      background-color: $brand-color;
-    }
-
-    > span:not(.#{$grommet-namespace}button__icon) {
-
-      &:first-child {
-        margin-left: halve($inuit-base-spacing-unit);
-      }
-
-      &:last-child {
-        margin-right: halve($inuit-base-spacing-unit);
-      }
-    }
-
-    @include dark-background-context-icon();
-  }
-
-  &--disabled {
-
-  }
-
-  &--icon,
-  &:not(.#{$grommet-namespace}button--fill) {
-    flex: 0 0 auto;
-  }
-
-  &--fill {
-    width: 100%;
-    max-width: none;
-    //used to add full height for button inside a flex container
-    flex-grow: 1;
   }
 }
 
-#{$dark-background-context} .#{$grommet-namespace}button:not(.#{$grommet-namespace}button--primary) {
-  border-color: $button-colored-border-color;
-  color: $colored-text-color;
+.#{$grommet-namespace}button__icon {
+  display: inline-block;
 
-  &.#{$grommet-namespace}button--accent {
-    border-color: $button-accent-color;
+  .#{$grommet-namespace}control-icon {
+    vertical-align: bottom;
   }
+}
+
+.#{$grommet-namespace}button--primary {
+  &:not(.#{$grommet-namespace}button--focus) {
+    border-color: #37a0eb;
+  }
+  background-color:#37a0eb;
+  color: $active-colored-text-color;
+
+  &:hover:not(.#{$grommet-namespace}button--disabled) {
+    color: $active-colored-text-color;
+
+   .#{$grommet-namespace}button__icon .#{$grommet-namespace}control-icon {
+      @include icon-color($active-colored-icon-color)
+    }
+  }
+
+  .#{$grommet-namespace}control-icon {
+    @include icon-color($active-colored-icon-color);
+  }
+
+  @include background-context-color($active-colored-text-color,
+    $active-colored-text-color);
+}
+
+.#{$grommet-namespace}button--secondary:not(.#{$grommet-namespace}button--focus) {
+  border-color: $button-secondary-color;
+}
+
+.#{$grommet-namespace}button--accent:not(.#{$grommet-namespace}button--focus) {
+  border-color: $button-accent-color;
+}
+
+.#{$grommet-namespace}button--align-start {
+  text-align: left;
+
+  html.rtl & {
+    text-align: right;
+  }
+}
+
+.#{$grommet-namespace}button--plain {
+  border: none;
+  padding: 0;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  max-width: none;
+  font-weight: inherit;
+
+  .#{$grommet-namespace}button__label {
+    margin: 0 halve($inuit-base-spacing-unit);
+  }
+
+  .#{$grommet-namespace}button__icon {
+    padding: halve($inuit-base-spacing-unit);
+
+    + .#{$grommet-namespace}button__label {
+      margin-left: 0;
+    }
+  }
+}
+
+.#{$grommet-namespace}button:not(.#{$grommet-namespace}button--plain) {
+  .#{$grommet-namespace}button__icon {
+
+    @include background-context-icon($button-text-color, $button-text-color);
+
+    + .#{$grommet-namespace}button__label {
+      margin-left: halve($inuit-base-spacing-unit);
+    }
+  }
+}
+
+.#{$grommet-namespace}button--disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.#{$grommet-namespace}button:not(.#{$grommet-namespace}button--fill) {
+  flex: 0 0 auto;
+}
+
+.#{$grommet-namespace}button--fill {
+  width: 100%;
+  max-width: none;
+  // used to add full height for button inside a flex container
+  flex-grow: 1;
 }

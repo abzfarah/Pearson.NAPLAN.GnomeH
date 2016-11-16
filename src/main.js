@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import { syncHistoryWithStore, routerActions } from 'react-router-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { OidcProvider } from 'redux-oidc';
+import ReduxToastr from 'react-redux-toastr'
 import createStore from './store';
 import AppContainer from './containers/AppContainer';
 import userManager from './utils/userManager';
@@ -24,14 +25,20 @@ let render = () => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <OidcProvider store={store} userManager={userManager}>
-          <MuiThemeProvider  muiTheme={getMuiTheme()}>
-              <Router
-                history={history}
-                routes={routes} />
-          </MuiThemeProvider>
-      </OidcProvider>
-    </Provider>,
+        <div>
+          <ReduxToastr timeOut={3500} newestOnTop={false} preventDuplicates={true}  position="top-right"
+                     transitionIn="fadeIn" transitionOut="fadeOut" progressBar/>  
+                      
+          <OidcProvider store={store} userManager={userManager}>
+              <MuiThemeProvider  muiTheme={getMuiTheme()}>
+                  <Router
+                    history={history}
+                    routes={routes} />
+              </MuiThemeProvider>
+          </OidcProvider> 
+    </div>          
+    </Provider>
+     ,
     MOUNT_NODE
   )
 }
@@ -39,6 +46,7 @@ let render = () => {
 
 
 
+      
 
 
 // ========================================================

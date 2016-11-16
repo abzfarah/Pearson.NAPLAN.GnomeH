@@ -19,8 +19,6 @@ export function schoolSearchAsync(keyword) {
                     isLoading: false,
                     schoolDetails: response.data
                 });
-
-                //   return response.data;
             })
             .catch((err) => {
                 //--TODO Handle Error
@@ -34,7 +32,6 @@ export function schoolSearchAsync(keyword) {
 
 //-- manageSchoolComponent
 export function manageSchoolSearch(keyword) {
-    debugger
 
     return dispatch => {
 

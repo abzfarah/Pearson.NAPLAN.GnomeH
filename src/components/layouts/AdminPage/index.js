@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '../../common/Box';
 import Tab from '../../common/Tab';
 import Tabs from '../../common/Tabs';
-import MultiTab from '../../MultiTab';
+
 import Button from '../../common/Button';
 import { StickyContainer, Sticky } from '../../common/Sticky';
 import { connect } from 'react-redux';
@@ -32,13 +32,13 @@ class AdminPage extends React.Component {
     }
 
     componentWillUpdate() {
-      debugger;
+   
         return true
 
     }
 
     componentWillReceiveProps() {
-      debugger;
+
         return true
     }
 

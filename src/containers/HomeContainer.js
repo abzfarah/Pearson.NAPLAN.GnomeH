@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import {Box, Tab, Heading , Section, Paragraph, Tabs } from '../common/'
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from '../common/Table';
-import {orange500, blue500, black} from '../common/utils/materialStyles/colors';
+import {Box, Tab, Heading , Section, Paragraph, Tabs } from '../components/common/'
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from '../components/common/Table';
+import {orange500, blue500, black} from '../components/common/utils/materialStyles/colors';
 
 var statusIndex = [0, 0, 1, 2, 2];
 
@@ -16,7 +16,7 @@ class Home extends React.Component {
   
   render() {
     return (
-    <Box className="form-container">   
+    <Box>   
       <Section className="tabwidth">
           <Table>
             <TableHeader>

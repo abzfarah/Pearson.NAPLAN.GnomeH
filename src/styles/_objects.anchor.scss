@@ -1,4 +1,5 @@
 // (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+
 @mixin anchor-style() {
   color: white;
   text-decoration: $brand-link-text-decoration;
@@ -14,7 +15,7 @@
   }
 
   &:visited {
-    color: white;
+    color:white;
   }
 
   &.active {
@@ -24,11 +25,11 @@
   // While it's tempting to use :not(.anchor--disabled) here, that makes it
   // messier for things like Menu to adjust styling in its context.
   &:hover {
-    color: rgb(100, 181, 246);
+    color: $link-hover-color;
     text-decoration: underline;
   }
 
-  @include dark-background-context-icon();
+  @include background-context-color($link-color, $link-hover-color);
 }
 
 .grommet a:not(.#{$grommet-namespace}anchor):not(.#{$grommet-namespace}button) {
@@ -41,13 +42,26 @@
 
 .#{$grommet-namespace}anchor__icon {
   display: inline-block;
+  height: double($inuit-base-spacing-unit);
   padding: halve($inuit-base-spacing-unit);
+
+  .#{$grommet-namespace}control-icon {
+    @include icon-color($icon-color);
+  }
+
+  &:hover {
+    .#{$grommet-namespace}control-icon {
+      @include icon-color($active-icon-color);
+      @include icon-hover-grow();
+    }
+  }
+
+  @include background-context-color($icon-color, $active-icon-color);
+  @include background-context-icon($icon-color, $active-icon-color);
 }
 
-.#{$grommet-namespace}anchor__icon:hover {
-  .#{$grommet-namespace}control-icon {
-    @include icon-color($active-icon-color);
-  }
+.#{$grommet-namespace}anchor--icon {
+  flex: 0 0 auto;
 }
 
 .#{$grommet-namespace}anchor--primary,
@@ -59,7 +73,6 @@
   .#{$grommet-namespace}control-icon {
     vertical-align: middle;
     margin-right: halve($inuit-base-spacing-unit);
-    @include icon-color($control-brand-color);
 
     html.rtl & {
       margin-right: 0;
@@ -73,7 +86,7 @@
 
   &:hover:not(.#{$grommet-namespace}anchor--disabled) {
     .#{$grommet-namespace}control-icon {
-      @include icon-hover-grow($control-brand-color);
+      @include icon-hover-grow();
     }
   }
 }
@@ -85,17 +98,54 @@
   }
 }
 
+.#{$grommet-namespace}anchor--icon-label:not(.#{$grommet-namespace}anchor--primary) {
+  color: $text-color;
+
+  &:visited {
+    color: $text-color;
+  }
+
+  .#{$grommet-namespace}control-icon {
+    @include icon-color($icon-color);
+  }
+
+  &:hover:not(.#{$grommet-namespace}anchor--disabled) {
+    color: $hover-text-color;
+    text-decoration: none;
+
+    .#{$grommet-namespace}control-icon {
+      @include icon-hover-grow();
+    }
+  }
+
+  @include background-context-color($icon-color, $active-icon-color);
+  @include background-context-icon($icon-color, $active-icon-color);
+}
+
 .#{$grommet-namespace}anchor--primary {
   color: $control-brand-color;
+
+  .#{$grommet-namespace}control-icon {
+    @include icon-color($control-brand-color);
+  }
+
+  &.active {
+    color: $control-brand-color;
+  }
 
   // Only animate icon when it's a primary anchor
   &.#{$grommet-namespace}anchor--animate-icon:not(.#{$grommet-namespace}anchor--disabled) {
     &:hover {
+      text-decoration: none;
+
       .#{$grommet-namespace}control-icon {
         transform: translateX(round($inuit-base-spacing-unit * 0.125));
       }
     }
   }
+
+  @include background-context-color($control-brand-color, $control-brand-color);
+  @include background-context-icon($control-brand-color, $control-brand-color);
 }
 
 .#{$grommet-namespace}anchor--disabled {
@@ -118,26 +168,20 @@
   &.#{$grommet-namespace}anchor:not(.#{$grommet-namespace}anchor--primary) {
     color: $link-color;
   }
-}
 
-.#{$grommet-namespace}anchor--icon {
-  display: inline-block;
-}
+  #{$dark-background-context} {
+    @include icon-color($colored-icon-color);
 
-#{$dark-background-context} a { // to generic, change
-  color: $colored-text-color;
-
-  &:hover {
-    color: $active-colored-text-color;
+    &.#{$grommet-namespace}anchor--primary {
+      color: $colored-icon-color;
+    }
   }
-}
 
-#{$dark-background-context} .#{$grommet-namespace}anchor {
-  &.#{$grommet-namespace}anchor--disabled:hover {
-    color: $colored-text-color;
+  #{$light-background-context} {
+    @include icon-color($link-color);
 
-    .#{$grommet-namespace}control-icon {
-      @include icon-color($colored-icon-color);
+    &.#{$grommet-namespace}anchor--primary {
+      color: $control-brand-color;
     }
   }
 }

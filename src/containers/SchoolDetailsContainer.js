@@ -1,63 +1,65 @@
-import React, { Component, PropTypes } from 'react'
-import {Anchor, Button, Box, Heading, Paragraph, Footer, Form, FormField, Label } from '../common'
-import {Tiles, Tile, List, ListItem, Select, Section, TextField, Tab, Tabs} from '../common'
-import {orange500, blue500, black} from '../common/utils/materialStyles/colors';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Field, reduxForm } from 'redux-form';
+import { toastr } from 'react-redux-toastr'
+import * as detailsActions from '../actions';
+import {Button, Box, Heading, Paragraph, Footer, Form, List, ListItem, FormField, Select, Section, Tab, Tabs} from '../components/common';
+import { RadioButton, MenuItem } from 'material-ui'
+import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
+import _ from 'lodash';
 
+class SchoolDetailsContainer extends React.Component {
 
-const styles = {
-  errorStyle: {
-    color: orange500,
-  },
-  underlineStyle: {
-    borderColor: orange500,
-  },
-  floatingLabelStyle: {
-    color:black,
-  },
-  floatingLabelFocusStyle: {
-    color: blue500,
-  },
-};
-
-class SchoolDetailsForm extends React.Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            // isDisabled: false,
-            // isConfirmed: true
-        }
-
-        this.confirmed = this.confirmed.bind(this);
-        // this.handleInputChange = this.handleInputChange.bind(this);
-        this.submitStatement = this.submitStatement.bind(this);
+  constructor() {
+    super();
+    this.state = {
+      schoolData: {},
+      schoolDetails: {},
+      form: {},
     }
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+  }
 
-    componentWillMount() {
+  handleFormSubmit(data) {
 
-        if (this.props.initialValues) {
-            this.setState({
-                isConfirmed: this.props.initialValues.isConfirmed
-            });
-        }
-    }
 
-    render() {
+    toastr.success('Success', 'School details submitted')
+    this.props.actions.submitDetails(data)
+  }
 
-        return (
-          <Box className="sd_MainBox">
+  componentWillReceiveProps(nextProps) {
+     if (!_.isEqual(this.props.schoolDetails, nextProps.schoolDetails)) {
+
+        this.props.initialize(nextProps.schoolDetails)
+     }
+  }
+
+  componentWillMount() {
+    debugger
+    this.props.initialize(this.props.schoolDetails)
+  }
+
+  render() {
+    let { currentSchool, schoolDetails } = this.props
+    const { handleSubmit, pristine, reset, submitting, validated, invalid } = this.props
+    const { centreCode, centreName, deliveryAddress1, deliveryAddress2, deliveryPostcode, deliverySchoolName,
+            deliveryState, deliverySuburb, dsFax, dsPhone, email, post_address_line1, reportState,
+            reportSuburb, requestPackingOrder } = this.props.schoolDetails 
+
+    return (
+        <Box>  
+          <Section className="test">
+            <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
             <Box>
               <Heading tag="h2">
                 <div className="numberCircle">3</div>
                 <span className="sd_hColor">School Details</span>
               </Heading>
-
               <Paragraph>
                 Principals are responsible for the security of the NAPLAN test materials and for the administration of the tests. Principals are required to submit an annual Statement of Compliance,
                 indicating their understanding of the VCAA’s requirements in relation to test security and administration.
               </Paragraph>
-
               <Paragraph>
                 While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
                 Security Log. The Test Materials Security Log should be kept by the school for 12 months after the test and may be subject to audit by the VCAA.
@@ -65,9 +67,7 @@ class SchoolDetailsForm extends React.Component {
               <Paragraph>
                 <span className="sd_note">NOTE: Fields marked with <span className="colorRed">*</span> or <span className="sd_fieldRequired">This field is required</span>{` in the forms below are required`}</span>
               </Paragraph>
-
             </Box>
-
             <Box direction="row" className="boxRow">
               <Box className="sd_boxLeft sd_readBgColor" align="start" pad="small" colorIndex="light-2">
                 <Heading tag="h5" className="sd_hColor">Part A: Test Material Delivery (Site Address)</Heading>
@@ -76,49 +76,48 @@ class SchoolDetailsForm extends React.Component {
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Code</span>
-                        <span className="secondary">01678</span>
+                        <span className="secondary">{centreCode}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Name</span>
-                        <span className="secondary">ST PAUL'S ANGLICAN GRAMMAR SCHOOL</span>
+                        <span className="secondary">{centreName}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Address 1</span>
-                        <span className="secondary">150 Bowen Street</span>
+                        <span className="secondary">{deliveryAddress1}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Address 2</span>
-                        <span className="secondary">152 Lower Street</span>
+                        <span className="secondary">{deliveryAddress2}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Suburb</span>
-                        <span className="secondary">WARRAGUL</span>
+                        <span className="secondary">{deliverySuburb}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Postcode</span>
-                        <span className="secondary">3820</span>
+                        <span className="secondary">{deliveryPostcode}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">State</span>
-                        <span className="secondary">VIC</span>
+                        <span className="secondary">{deliveryState}</span>
                       </Box>
                     </ListItem>
                   </List>
                 </Box>
               </Box>
-
               <Box className="sd_boxRight sd_readBgColor" align="start" pad="small" colorIndex="light-2">
                 <Heading tag="h5" className="sd_hColor">Part B: Reporting Material Delivery (Site Address)</Heading>
                 <Box className="sd_boxList">
@@ -126,50 +125,49 @@ class SchoolDetailsForm extends React.Component {
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Code</span>
-                        <span className="secondary">01678</span>
+                        <span className="secondary">{centreCode}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Name</span>
-                        <span className="secondary">ST PAUL'S ANGLICAN GRAMMAR SCHOOL</span>
+                        <span className="secondary">{centreName}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Address 1</span>
-                        <span className="secondary">150 Bowen Street</span>
+                        <span className="secondary">{deliveryAddress1}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Address 2</span>
-                        <span className="secondary">152 Lower Street</span>
+                        <span className="secondary">{deliveryAddress2}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Suburb</span>
-                        <span className="secondary">WARRAGUL</span>
+                        <span className="secondary">{reportSuburb}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">Postcode</span>
-                        <span className="secondary">3820</span>
+                        <span className="secondary">{deliveryPostcode}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">State</span>
-                        <span className="secondary">VIC</span>
+                        <span className="secondary">{deliveryState}</span>
                       </Box>
                     </ListItem>
                   </List>
                 </Box>
               </Box>
             </Box>
-
             <Box direction="row" className="boxRow">
               <Box className="sd_boxLeft sd_readBgColor" align="start" pad="small" colorIndex="light-2">
                 <Heading tag="h5" className="sd_hColor">Part C: Data Services</Heading>
@@ -178,102 +176,86 @@ class SchoolDetailsForm extends React.Component {
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Code</span>
-                        <span className="secondary">01678</span>
+                        <span className="secondary">{centreCode}</span>
                       </Box>
                     </ListItem>
                     <ListItem justify="between">
                       <Box direction="column">
                         <span className="sd_readName">School Name</span>
-                        <span className="secondary">ST PAUL'S ANGLICAN GRAMMAR SCHOOL</span>
+                        <span className="secondary">{centreName}</span>
                       </Box>
                     </ListItem>
                   </List>
                 </Box>
               </Box>
-
             </Box>
-
             <Box direction="row" className="boxRow">
               <Box className="sd_boxLeft sd_editBgColor" align="start" pad="small" colorIndex="light-2">
                 <Heading tag="h5" className="sd_hColor">Part D: Review School Details</Heading>
                 <div>
-                  <TextField
-                    floatingLabelText="Phone"
-                    floatingLabelStyle={styles.floatingLabelStyle}
-                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                    errorText="This field is required"
-                    errorStyle={styles.errorStyle}
-                  /><br />
-
-                  <TextField
-                    floatingLabelText="Fax"
-                    floatingLabelStyle={styles.floatingLabelStyle}
-                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                    errorText="This field is required"
-                    errorStyle={styles.errorStyle}
-                  /><br />
+                  <Box>
+                    <div>
+                      <Field name="phone" ref="phone" component={TextField} hintText="Phone" floatingLabelText="Phone"/> <br/>
+                      <Field name="fax" ref="fax" component={TextField}  hintText="Fax" floatingLabelText="Fax"/><br/>            
+                    </div>
+                 </Box>
                 </div>
                 <br/>
                 <Box direction="row">
-                  <CheckBox id="chkReviewed" name="chkReviewed" />
-                  <Paragraph>
-                    <span className="colorRed">*</span>{` Details have been reviewed and are correct.`}
-                  </Paragraph>
+                   <Box className="declaration" >
+                      <Field name="reviewed"  ref="reviewed"  component={Checkbox} label="Details have been reviewed and are correct."/>
+                    </Box>
                 </Box>
               </Box>
-
-              <Box className="sd_boxRight sd_editBgColor" align="start" pad="small" colorIndex="light-2">
-                <Heading tag="h5" className="sd_hColor">Part E: Booklet Packing Order</Heading>
-                <Paragraph>
-                  By default, test booklets will be packed in order of year level, home group and surname as per
-                  the data provided by each school, or supplied by their jurisdictional authority. For schools who wish to
-                  receive their test materials in another order, please briefly describe your request below. If you do not
-                  require a special test packing arrangement no action needs to be taken.
-                </Paragraph>
-                <Box direction="row">
-                  <CheckBox id="chkCustomPaching" name="chkCustomPaching" label="" />
-                  <Paragraph>
-                    I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group).
-                  </Paragraph>
-                </Box>
-
-                <Box direction="row">
-                  <Box pad="small"><Paragraph><span className="colorRed">*</span>{` Requested by:`}</Paragraph></Box>
-                  <Form>
-                    <FormField>
-                      <Select id="selRequestedBy" name="selRequestedBy" options={["person one", "person two", "person three", "person four", "person five", "person six", "person seven", "person eight"]} value="person one" />
-                    </FormField>
-                  </Form>
-                </Box>
-                <TextField
-                  floatingLabelText="Details of request"
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                  floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                  multiLine={true}
-                  rows={3}
-                  errorStyle={styles.errorStyle}
-                />
-              </Box>
+            </Box>              
+            <Box className="button-group-padding">
+              <div className="button-groups">
+                <Button className="separate-button" type="button" secondary={true} label="Return" />  
+                <Button className="separate-button" type="submit" disabled={invalid} primary={true} label="Submit"  />
+              </div>
             </Box>
-          </Box>
+            </form>  
+          </Section>
+        </Box>
+    )
+  }
+}
 
-        )
-    }
+const validate = values => {
+  const errors = {}
+  function isNumeric(n) {
+      return n && /^[0-9 ]+$/g.test(n);
+  }
+  if (!values.reviewed) {
+    errors.reviewed = 'Must declare'
+  }
+  if (!values.phone) {
+    errors.phone = 'Required'
+  } else if(!isNumeric(values.phone)) {
+    errors.phone = 'Must be a number'
+  } else if(values.phone > 50) {
+      errors.phone = 'Must not exceed 50 characters'
+  }
+  if (!values.fax) {
+    errors.fax = 'Required'
+  } else if(!isNumeric(values.fax)) {
+    errors.fax = 'Must be a number'
+  } else if(values.fax > 50) {
+      errors.fax = 'Must not exceed 50 characters'
+  }
+  return errors
+}
 
-    submitStatement(model) {
-
-        console.log(model)
-        this.props.submitStatement(model);
-    }
-
-    confirmed(evt) {
-
-        // this.setState({ isDisabled: !evt.target.checked })
-        // this.setState({ isConfirmed: evt.target.checked })
-    }
-
+function mapDispatchToProps(dispatch) {
+  return {
+      actions: bindActionCreators(detailsActions, dispatch)
+  };
 }
 
 
-// export default SchoolDetailsForm
-export default SchoolDetailsForm
+const form = reduxForm({
+  form: 'SchoolDetails',
+  validate
+});
+
+export default connect(null, mapDispatchToProps)(form(SchoolDetailsContainer)); 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
-import { Anchor, Button, Box, Header, Menu, NavAnchor, Tab, Tabs } from '../components/common';
+import { Anchor, Button, Box, Header, Menu, NavAnchor } from '../components/common';
 import userManager from '../utils/userManager';
 
 class SchoolContainer extends React.Component {
@@ -71,8 +71,8 @@ class SchoolContainer extends React.Component {
             <div>
                 <Box className="tab-container">      
                     <Tabs justify="start" onActive={this.onActive} claims={this.props.claims}>
-                       <Tab title="Home" subtitle="" className="home"/>                                  
-                       <Tab title="Statement of Compliance" subtitle="required" className="check" />      
+                        <Tab title="Home" subtitle="" className="home"/>                                  
+                        <Tab title="Statement of Compliance" subtitle="required" className="check" />      
                         <Tab title="Authorised Staff" subtitle="required" className="staff"/>               
                         <Tab title="School Details" subtitle="required" className=""/>                     
                         <Tab title="Test Format Order" subtitle="optional" className="staff"/>               
