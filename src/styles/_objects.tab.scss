@@ -6,6 +6,13 @@
   font-style: normal;
 }
 
+.required label:after {
+    color: #e32;
+    content: ' *';
+    display:inline;
+}
+
+
 
 .tab-step {
   text-decoration: none;

@@ -15,14 +15,6 @@ export default class Anchor extends Component {
   }
 
   _onClick (event) {
-    const { method, onClick, path} = this.props;
-    const { router } = this.context;
-
-    if ('push' === method) {
-      router.push(path);
-    } else if ('replace' === method) {
-      router.replace(path);
-    }
 
     if (onClick) {
       event.preventDefault();

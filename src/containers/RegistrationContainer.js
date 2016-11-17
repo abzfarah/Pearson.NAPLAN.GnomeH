@@ -29,8 +29,10 @@ class RegistrationContainer extends React.Component {
         stepIndex: 0,
         currentSchool: {},
         visited: [],
+        status: [],
         statementData: {},
         detailsData: {},
+        isAdmin: false,
         schoolDetails: {
           centreCode: "",
           centreName: "",
@@ -69,15 +71,20 @@ class RegistrationContainer extends React.Component {
 
   componentWillMount() {
 
-    if (this.props.schoolUser) {
-         this.setState({currentSchool:  this.props.currentSchool}) 
-         this.props.actions.getStatement(this.props.currentSchool.code)
-         this.props.actions.schoolDetailsAsync(this.props.currentSchool.code)
+    const { isAdmin } = this.props
+    if (!isAdmin) {
+      this.props.actions.getStatement(this.props.currentSchool.code)
+      this.props.actions.schoolDetailsAsync(this.props.currentSchool.code)
     }
-
+    
     let stepIndex = this.state.stepIndex;
     let visited = this.state.visited;
-    this.setState({visited: visited.concat(stepIndex)});
+
+    this.setState({
+      currentSchool:  this.props.currentSchool,
+      isAdmin: isAdmin,
+      visited: visited.concat(stepIndex)
+    });
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -101,8 +108,10 @@ class RegistrationContainer extends React.Component {
 
     if (!_.isEqual(this.props.currentSchool, nextProps.currentSchool)) {
          this.setState({currentSchool:  nextProps.currentSchool}) 
-         this.props.actions.getStatement(nextProps.currentSchool.code)
-         this.props.actions.schoolDetailsAsync(nextProps.currentSchool.code)
+         if (this.state.isAdmin) {
+          this.props.actions.getStatement(nextProps.currentSchool.code)
+          this.props.actions.schoolDetailsAsync(nextProps.currentSchool.code)
+         }
     }
 
     if (!_.isEqual(this.state.statementData, nextProps.statementData)) {

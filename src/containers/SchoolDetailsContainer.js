@@ -6,7 +6,8 @@ import { toastr } from 'react-redux-toastr'
 import * as detailsActions from '../actions';
 import {Button, Box, Heading, Paragraph, Footer, Form, List, ListItem, FormField, Select, Section, Tab, Tabs} from '../components/common';
 import { RadioButton, MenuItem } from 'material-ui'
-import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
+import SelectField from 'material-ui/SelectField'
+import { Checkbox, RadioButtonGroup, TextField } from 'redux-form-material-ui'
 import _ from 'lodash';
 
 class SchoolDetailsContainer extends React.Component {
@@ -189,6 +190,7 @@ class SchoolDetailsContainer extends React.Component {
                 </Box>
               </Box>
             </Box>
+
             <Box direction="row" className="boxRow">
               <Box className="sd_boxLeft sd_editBgColor" align="start" pad="small" colorIndex="light-2">
                 <Heading tag="h5" className="sd_hColor">Part D: Review School Details</Heading>
@@ -207,13 +209,46 @@ class SchoolDetailsContainer extends React.Component {
                     </Box>
                 </Box>
               </Box>
-            </Box>              
+
+               <Box className="sd_boxLeft sd_editBgColor" align="start" pad="small" colorIndex="light-2">
+                <Heading tag="h5" className="sd_hColor">Part E: Booklet Packing Order</Heading>
+                <Paragraph>
+                  By default, test booklets will be packed in order of year level, home group and surname as per
+                  the data provided by each school, or supplied by their jurisdictional authority. For schools who wish to
+                  receive their test materials in another order, please briefly describe your request below. If you do not
+                  require a special test packing arrangement no action needs to be taken.
+                </Paragraph>
+                <Box direction="row">
+                  <Field name="requestPacking"  ref="requestPacking"  component={Checkbox} label=" I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group)."/>
+                </Box>
+                <Box direction="row">
+      
+                  <Field  component={SelectField}>
+                    <MenuItem value={'0'} primaryText="Tony Allen"/>
+                    <MenuItem value={'1'} primaryText="Mike Conley"/>
+                    <MenuItem value={'2'} primaryText="Omar Remmy"/>
+                  </Field> 
+
+                </Box>
+
+                <Field name="requestDetails" component={requestDetails =>
+                      <TextField 
+                        hintText = "Details of request"
+                        floatingLabelText="Details"
+                        {...requestDetails} />   
+                    }/>
+               </Box>
+            </Box>
+
+      
+    
             <Box className="button-group-padding">
               <div className="button-groups">
                 <Button className="separate-button" type="button" secondary={true} label="Return" />  
                 <Button className="separate-button" type="submit" disabled={invalid} primary={true} label="Submit"  />
               </div>
             </Box>
+
             </form>  
           </Section>
         </Box>
@@ -240,7 +275,7 @@ const validate = values => {
     errors.fax = 'Required'
   } else if(!isNumeric(values.fax)) {
     errors.fax = 'Must be a number'
-  } else if(values.fax > 50) {
+  } else if(values.fax.length > 50) {
       errors.fax = 'Must not exceed 50 characters'
   }
   return errors

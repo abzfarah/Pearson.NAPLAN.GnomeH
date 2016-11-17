@@ -30,13 +30,13 @@ class NavContainer extends React.Component {
 
     return (
                                 <Menu  inline={true} direction="row">
-                {                 <Anchor href="/school/summary" className="active">Home</Anchor>  }
+                {                 <Anchor  onClick={()=>this.props.dispatch(push('/school'))} className="active">Home</Anchor>  }
                 {                 <Anchor href="#">Tasks</Anchor>                    }
                 {                 <Anchor href="#">2017 NAPLAN Online Pilot</Anchor> }
                 { centreSearch && <Anchor href="#">Bulk Download</Anchor>            }
                 {                 <Anchor href="#">Contact Us</Anchor>               }
-                { centreSearch && <Anchor  path="/manageschools">Manage Schools</Anchor>           }
-                { centreSearch && <Anchor  path="/manageusers">Manage Users</Anchor>             }
+                { centreSearch && <Anchor onClick={()=>this.props.dispatch(push('/manageschools'))}> Manage Schools </Anchor>           }
+                { centreSearch && <Anchor onClick={()=>this.props.dispatch(push('/manageusers'))}> Manage Users </Anchor>               }
                 { centreSearch && <Anchor href="#">Reports</Anchor>                  }
                                 </Menu>
       )
