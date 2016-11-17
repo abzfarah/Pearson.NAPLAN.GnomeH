@@ -13,9 +13,10 @@ module.exports = {
   }),
 
   // ======================================================
-  // Overrides when NODE_ENV === 'production'
+  // Overrides when NODE_ENV === 'dev'
   // ======================================================
-  production : (config) => ({
+
+  devserver : (config) => ({
     compiler_public_path     : 'http://melbnstgweb1.epenau.local:2016/',
     compiler_fail_on_warning : false,
     compiler_hash_type       : 'chunkhash',
@@ -25,5 +26,38 @@ module.exports = {
       chunkModules : true,
       colors       : true
     }
-  })
+  }),
+
+  // ======================================================
+  // Overrides when NODE_ENV === 'stg'
+  // ======================================================
+
+  staging : (config) => ({
+    compiler_public_path     : 'http://melbnintstgweb1.epenau.local:2016/',
+    compiler_fail_on_warning : false,
+    compiler_hash_type       : 'chunkhash',
+    compiler_devtool         : null,
+    compiler_stats           : {
+      chunks       : true,
+      chunkModules : true,
+      colors       : true
+    }
+  }),
+
+  // ======================================================
+  // Overrides when NODE_ENV === 'intstg'
+  // ======================================================
+
+  internal_staging : (config) => ({
+    compiler_public_path     : 'http://melbndevweb1.epenau.local:2016/',
+    compiler_fail_on_warning : false,
+    compiler_hash_type       : 'chunkhash',
+    compiler_devtool         : null,
+    compiler_stats           : {
+      chunks       : true,
+      chunkModules : true,
+      colors       : true
+    }
+  }),
+
 }

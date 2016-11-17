@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const cssnano = require('cssnano')
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const config = require('../config')
@@ -17,7 +18,10 @@ const webpackConfig = {
   devtool : config.compiler_devtool,
   resolve : {
     root       : paths.client(),
-    extensions : ['', '.js', '.jsx', '.json']
+    extensions : ['', '.js', '.jsx', '.json'],
+    alias: {
+      'ag-grid-root': __dirname + "/node_modules/ag-grid"
+     }
   },
   module : {}
 }

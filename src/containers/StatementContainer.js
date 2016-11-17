@@ -78,7 +78,7 @@ class StatementContainer extends React.Component {
             </Heading>
             <Paragraph> Please read Principal's responsibilities</Paragraph>
           </Box>
-          <Box className="man">
+          <Box className="man required">
              <Field name="isConfirmed"  disabled={isConfirmed && !isAdmin} component={Checkbox} label="I have read and accept the Principal responsibilities"/>
           </Box>
         </Box>
@@ -91,13 +91,16 @@ class StatementContainer extends React.Component {
                          double secure storage arrangement for NAPLAN test materials at your school.
               </Paragraph>
               <Paragraph>Please select the option which best describes the two levels of security at your school </Paragraph>
-              <Field name="securityLevel"  ref="securityLevel"  disabled={pristine || submitting}  component={RadioButtonGroup}>
-                <RadioButton value='1'   disabled={pristine || submitting} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                <RadioButton value='2' disabled={pristine || submitting} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                <RadioButton value='3' disabled={pristine || submitting} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
-                <RadioButton value='4' disabled={pristine || submitting}  label="Other" />
-              </Field><br/>
-               <Field name="securityLevelOther" ref="securityLevelOther"  disabled={pristine || submitting}   component={TextField}/>
+              <Field name="securityLevel" ref="securityLevel" disabled={pristine || submitting}  component={securityLevel => 
+                <RadioButtonGroup {...securityLevel}>
+                  <RadioButton value='1'   disabled={pristine || submitting} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                  <RadioButton value='2' disabled={pristine || submitting} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                  <RadioButton value='3' disabled={pristine || submitting} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
+                  <RadioButton value='4' disabled={pristine || submitting}  label="Other" />
+               </RadioButtonGroup>
+              }/><br/>
+
+              <Field name="securityLevelOther" ref="securityLevelOther"  disabled={pristine || submitting}   component={TextField}/>
               <Paragraph>
                 Please note:
                 While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
@@ -119,7 +122,7 @@ class StatementContainer extends React.Component {
                         ref="lastName"/><br/>
                       <Field name="email" disabled={pristine || submitting}   component={TextField} hintText="Email" floatingLabelText="Email"/>
                     </div>
-                   <Box className="declaration" >
+                   <Box className="declaration required" >
                       <Field name="isDeclared"   ref="isDeclared" disabled={pristine || submitting} component={Checkbox} label="I declare that I am the Principal of the school detailed above."/>
                       <Field name="isCertified"  ref="isCertified"  disabled={pristine || submitting}  component={Checkbox} label="I certify that the information provided on this form is correct."/>
                     </Box>
@@ -151,28 +154,36 @@ const validate = values => {
     errors.email = 'Required'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
+  } else if(values.email.length > 50) {
+      errors.email = 'Email must not exceed 50 characters'
   }
+
   if (!values.firstName) {
     errors.firstName = 'Required'
   } else if(!isNumeric(values.firstName)) {
     errors.firstName = 'Must not contain a number'
+  } else if(values.firstName.length > 50) {
+      errors.firstName = 'First name must not exceed 50 characters'
   }
+
   if (!values.lastName) {
     errors.lastName = 'Required'
   } else if(!isNumeric(values.lastName)) {
     errors.lastName = 'Must not contain a number'
+  } else if(values.lastName.length > 50) {
+      errors.lastName = 'Last name must not exceed 50 characters'
   }
 
-  if (!values.securityLevel) {
+  if (values.securityLevel =="0") {
     errors.securityLevel = 'Required'
   } else if(isNumeric(values.securityLevel)) {
-    errors.securityLevel = 'Must declare'
+    errors.securityLevel = 'Must choose security level'
   }
 
   if (!values.isConfirmed) {
     errors.isConfirmed = 'Required'
   } else if(!isNumeric(values.isConfirmed)) {
-    errors.isConfirmed = 'Must declare'
+    errors.isConfirmed = 'Must confirm'
   }
 
   if (!values.isDeclared) {
