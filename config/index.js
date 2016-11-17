@@ -77,8 +77,9 @@ config.globals = {
   },
   'NODE_ENV'         : config.env,
   '__DEV__'          : config.env === 'development',
-  '__INTSTAGING__'   : config.env === 'intstaging',
-  '__PROD__'         : config.env === 'production',
+  '__DEVSERVER__'    : config.env === 'devserver',
+  '__INTSTG__'       : config.env === 'internal_staging',
+  '__STG__'          : config.env === 'staging',
   '__TEST__'         : config.env === 'test',
   '__COVERAGE__'     : !argv.watch && config.env === 'test',
   '__BASENAME__'     : JSON.stringify(process.env.BASENAME || '')

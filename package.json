@@ -17,9 +17,9 @@
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "better-npm-run test",
     "deploy": "better-npm-run deploy",
-    "build:test": "better-npm-run deploy:test",
-    "build:melbdev": "better-npm-run deploy:test",
+    "build:dev": "better-npm-run deploy:dev",
     "build:intstg": "better-npm-run deploy:intstg",
+    "build:stg": "better-npm-run deploy:stg",
     "postinstall": "node nightwatch.conf.js",
     "codecov": "cat coverage/*/lcov.info | codecov",
     "sauce": "./node_modules/.bin/nightwatch -e chrome",
@@ -35,13 +35,7 @@
         "DEBUG": "app:*"
       }
     },
-    "dev": {
-      "command": "nodemon --exec babel-node bin/server",
-      "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "app:*"
-      }
-    },
+
     "deploy": {
       "command": "npm run clean && npm run compile",
       "env": {
@@ -51,29 +45,21 @@
     "deploy:dev": {
       "command": "npm run deploy",
       "env": {
-        "NODE_ENV": "development",
+        "NODE_ENV": "devserver",
         "DEBUG": "app:*"
       }
     },
-    "deploy:melbdev": {
+    "deploy:intstg": {
       "command": "npm run deploy",
       "env": {
-        "NODE_ENV": "melbdev",
+        "NODE_ENV": "intstg",
         "DEBUG": "app:*"
       }
     },
-    "deploy:intstaging": {
+    "deploy:stg": {
       "command": "npm run deploy",
       "env": {
-        "NODE_ENV": "intstaging",
-        "DEBUG": "app:*"
-      }
-    },
-
-    "deploy:test": {
-      "command": "npm run deploy",
-      "env": {
-        "NODE_ENV": "test",
+        "NODE_ENV": "stg",
         "DEBUG": "app:*"
       }
     },
