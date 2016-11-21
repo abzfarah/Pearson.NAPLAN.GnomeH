@@ -64,6 +64,8 @@ class Stepper extends Component {
      * Override the inline-style of the root element.
      */
     style: PropTypes.object,
+
+    hasClaim: PropTypes.object,
   };
 
   static defaultProps = {

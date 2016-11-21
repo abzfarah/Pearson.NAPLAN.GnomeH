@@ -23,12 +23,7 @@ import {
 } from '../constants'
 
 
-export function selectSchool(school) {
-  return {
-    type: 'SELECT_SCHOOL',
-    currentSchool: school
-  };
-}
+
 
 export function retrieveClaims(claims) {
   return {

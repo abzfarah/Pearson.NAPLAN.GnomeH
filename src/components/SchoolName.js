@@ -1,30 +1,33 @@
 import React, { Component } from 'react';
-import { Anchor, Box, Columns, Footer, Menu, Label, Header, Paragraph } from '../components/common';
+import { Anchor, Box, Columns, Footer, Menu, Label, Header, Paragraph } from './common';
 import classnames from 'classnames';
 
 class SchoolName extends React.Component {
-
+  constructor() {
+    super()
+  }
+  
   render() {
-    const { schoolName, schoolCode } = this.props;
+    const { centreName, centreCode } = this.props.school;
     let string = 'School Code: ';
     var full;
-    if (schoolCode != undefined) {
-         full = string + schoolCode;
+    if (centreCode != undefined) {
+         full = string + centreCode;
     }
     else full = ""
 
     return (
-      <div className="school-heading">
+      <Box direction="row" className="school-info">
           <Header className="school-name">
-            { schoolName}
+            { centreName }
           </Header>
-
           <Header size="small" className="school-code">
             {full}
           </Header>
-      </div>
-        )
-    }
+      </Box>
+
+      )
   }
+}
 
 export default SchoolName;

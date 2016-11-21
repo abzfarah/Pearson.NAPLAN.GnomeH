@@ -4,24 +4,25 @@ import { reducer as oidcReducer } from 'redux-oidc';
 import { reducer as formReducer } from 'redux-form'
 import { reducer as toastrReducer } from 'react-redux-toastr'
 import manageSchoolReducer from './manageSchoolsReducer'
-import currentSchool from './currentSchoolReducer'
+import selectSchool from './selectSchoolReducer'
+import { searchTerms, packagesBySearch } from './schoolSearchReducer'
 import schoolDetailsReducer from './schoolDetailsReducer'
 import statementReducer from './statementReducer'
-import claimsReducer from './claimsReducer'
-
-
+import statusReducer from './statusReducer'
 
 export const USER_LOGGEDIN = 'USER_LOGGEDIN';
 
 
 
-const reducer = combineReducers(
+const reducers = combineReducers(
   {
     routing: routerReducer,
     oidc: oidcReducer,
-    claims: claimsReducer,
     form : formReducer,
-    currentSchool: currentSchool,
+    school: selectSchool,
+    searchResults: packagesBySearch,
+    search: searchTerms,
+    status: statusReducer,
     statement : statementReducer,
     schoolDetails: schoolDetailsReducer,
     manageSchool: manageSchoolReducer,
@@ -30,4 +31,4 @@ const reducer = combineReducers(
   }
 );
 
-export default reducer;
+export default reducers;

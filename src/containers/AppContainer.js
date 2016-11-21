@@ -2,151 +2,142 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
-import { StickyContainer, Sticky } from '../components/common/Sticky';
-import { Box, Button, Header } from '../components/common';
-import * as schoolActions from '../actions'
-import { loadSchools } from '../actions/searchActions'
-import { getClaims } from '../components/utils/getClaims'
+import { selectSchool } from '../actions/schoolSearchActions'
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import Footer from '../containers/Footer';
 import HeaderContainer from './HeaderContainer'
 import NavContainer from './NavContainer'
 import userManager from '../utils/userManager';
-import session from '../routes/utils/session'
-import schools from '../data/schools.json';
-import _ from 'lodash';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import session from '../utils/session'
 
-const school = schools
 
-const lookup = {};
-for (var i = 0, len = school.length; i < len; i++) {
-    lookup[school[i].centreCode] = school[i];
-}
-
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
 class AppContainer extends React.Component {
+
+    /**
+   * constructor
+   * 
+   * @param {object} props
+   */
 
   constructor(props) {
     super(props);
     this.state = {
       loggedIn: false,
+      isAdmin: false,
       user: {},
-      claims: false,
-      currentSchool: {},
-      schools: schools
+      claims: {},
+      currentSchool: {}
    }
-    this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
+    this.onLoginButtonClick  = this.onLoginButtonClick.bind(this);
+    this.onLogoutButtonClick = this.onLogoutButtonClick.bind(this);
   }
 
-   onLoginButtonClick = (event) => {
-      event.preventDefault();
+  /**
+   * handle login click
+   * 
+   * @param {SytheticEvent} e
+   */
+
+   onLoginButtonClick = (e) => {
+      e.preventDefault();
       userManager.signinRedirect();
   };
 
-    onLogoutButtonClick = (event, dispatch) => {
-      event.preventDefault();
+    /**
+   * Handle logout click
+   * 
+   * @param {SytheticEvent} e
+   */
+
+    onLogoutButtonClick = (e) => {
+      e.preventDefault();
       sessionStorage.clear();
       localStorage.clear();
       userManager.removeUser();
       userManager.signoutRedirect();
   }
 
+  /**
+ * componentWillMount is used to initialise the currentSchool state when an existing 
+ * session is found in sessionStorage. Only useful during refresh.
+ * 
+ * An admin user is not associated with any school, so no school data will be found in session storage.
+ * In either case, initialise login status and claims [claims, loggedIn] if session is found.
+ * 
+ * TODO: Maybe we can manually store a session everytime an admin selects a school, so that the same school
+ * can be reloaded if the page is refreshed. Although this will mean extra work as we have to manage the session
+ * everytime an admin selects a different school.
+ 
+ * 
+ * @param {object} props
+ */
+
   componentWillMount(props) {
-    const { dispatch } = this.props;
     if (session.exists) {
-      let user_claims = getClaims(session.user)
-      this.props.actions.retrieveClaims(user_claims)
-
-      if (user_claims["schoolCode"]) {
-        this.props.actions.selectSchool({
-            code: lookup[user_claims["schoolCode"].toString()].centreCode,
-            name: lookup[user_claims["schoolCode"].toString()].centreName
-        })
+      let user_claims = session.claims
+    
+      if (!session.isAdmin) {
+        let schoolcode = session.schoolcode 
+        this.props.actions.selectSchool(schoolcode)
       }
-
-      this.setState({
-        loggedIn: true,
-        user: session.user,
-        claims: user_claims
-      })
+      this.setState({ claims: user_claims,  loggedIn: true})   
     }
-  }
-
-  componentDidMount() {
-
-    var d =5;
-
-    debugger;
   }
 
   componentWillReceiveProps(nextProps, nextState) {
     if (!_.isEqual(this.state.currentSchool, nextProps.currentSchool)) {
-
         this.setState({currentSchool: nextProps.currentSchool})
-    }
+    } 
 
-    if (this.state.user != nextProps.user) {
+    // Create session only if it doesn't exist. 
+    // If it exists, session will be created during componentWillMount
+    if (nextProps.user && !this.state.loggedIn) {
 
-      this.setState({user: nextProps.user})
+      let user_claims = {}
+      session.loggedIn = true
+      user_claims = session.claims
 
-      if (this.state.user ) {
-          const prefix = userManager._userStore._prefix
-          const key = userManager._userStoreKey;
-          const user_profile = JSON.parse(sessionStorage.getItem(prefix+key)).profile
-
-          if (user_profile["schoolCode"])  {
-              this.props.actions.selectSchool({
-                code: lookup[user_profile["schoolCode"].toString()].centreCode,
-                name: lookup[user_profile["schoolCode"].toString()].centreName
-          })
-       }     
-     }
-
-
-      if (nextProps.user && !this.state.claims) {
-          let user_claims = getClaims(nextProps.user.profile)
-          this.setState({claims: user_claims})
+      // if user is not an admin, user will be determined to be a school user
+      if (!session.isAdmin) { 
+        let schoolcode = session._schoolcode 
+        this.props.actions.selectSchool(schoolcode)
       }
 
-      else return false
+      this.setState({ 
+        claims: user_claims, 
+        isAdmin: session.isAdmin,
+        loggedIn: true
+      })
     }
   }
-
+  
   shouldComponentUpdate(nextProps, nextState) {
-    if ( !this.props.user && nextProps.user) return true
-    if ( this.props.currentSchool != nextProps.currentSchool) return true
-    if ( !this.state.loggedIn && nextState.loggedIn ) return true
+    if (!this.props.user && !nextProps.user) return false
+    if (_.isEmpty(this.state.currentSchool) && _.isEmpty(nextProps.currentSchool) && !session.isAdmin) return false
     else return true
   }
 
   componentWillUpdate(props, state) {
-    if (!this.state.loggedIn && session.exists) {
-        const user = session.user
-        session.login = true;
-        this.setState({loggedIn: true, user: user})
-    }
+    var y =3;
+
   }
 
   componentDidMount() {
-
     var x =3;
-    debugger
-
   }
 
-
   render() {
-    const { schools, currentSchool, claims } = this.state;
+    const { loggedIn, claims, currentSchool } = this.state;
+    const { router } = this.props
+    const isAdmin = this.state.isAdmin || session.isAdmin
 
-    let loggedIn = (this.props.user || this.state.loggedIn) ? true : false;
-    let user = (this.props.user || this.state.user);
-    let isAdmin = claims["schoolCode"] ? false: true;  //Determine if authenticated user is an admin based on whether "schoolCode" claim is found 
+    //Attach props [ claims, currentSchool, isAdmin ] to all child components of AppContainer
     let children = React.Children.map(this.props.children, child => {
          return React.cloneElement(child, {
-             claims: this.state.claims,
+             claims: claims,
+             router: router, 
              currentSchool: currentSchool,
              isAdmin: isAdmin
     })
@@ -155,15 +146,12 @@ class AppContainer extends React.Component {
     return (
       <div>
         <HeaderContainer
-           loggedIn={loggedIn}
-           user={user}
-           claims={claims}
-           schools={schools}
-           currentSchool={currentSchool}
-           onLogout={this.onLogoutButtonClick}
-           onLogin={this.onLoginButtonClick} />
-
-         { loggedIn && <NavContainer claims={claims} /> }
+           loggedIn     = { loggedIn }
+           claims       = { claims }
+           isAdmin      = { isAdmin }
+           currentSchool= { currentSchool }
+           onLogout     = { this.onLogoutButtonClick }
+           onLogin      = { this.onLoginButtonClick } />
       
          { children }     
        
@@ -176,15 +164,14 @@ class AppContainer extends React.Component {
   function mapStateToProps(state, ownProps) {
     return {
         user: state.oidc.user,
-        loggedIn: state.loggedIn,
-        claims: state.claims.claims,
-        currentSchool: state.currentSchool.currentSchool
+        currentSchool: state.school.currentSchool,
+        route: ownProps.router
     };
   }
 
   function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(schoolActions, dispatch)
+        actions: bindActionCreators(selectSchool, dispatch)
     };
   }
 

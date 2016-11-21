@@ -12,11 +12,29 @@
     display:inline;
 }
 
+.horiz-menu > div {
+  display: inline-block;
+}
+.pop  span {
+  color: 'white';
+}
 
+
+span[type=button],
+div[type=button] {
+  appearance: none;
+  -webkit-appearance: none;
+}
 
 .tab-step {
   text-decoration: none;
   text-align: center;
+}
+
+.step-tab {
+  text-decoration: none;
+  text-align: center;
+  font-size: 12px
 }
 
 .numberCircle {

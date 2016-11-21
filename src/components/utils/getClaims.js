@@ -1,6 +1,7 @@
 const available_claims =
     [ 'centreSearch',
       'centre',
+      'soc',
       'authorizedStaff',
       'userService',
       'socService',
@@ -11,13 +12,11 @@ const available_claims =
 export function getClaims(claims) {
   
   let school_code = parseInt(claims["schoolCode"])
-  let user_claims = _.pick(claims, available_claims);
-  user_claims = _.pickBy(claims, _.isString);
-
+  let filter_claims = _.pick(claims, available_claims);
+  user_claims = _.pickBy(filter_claims, _.isString);
 
   user_claims = _.mapValues(user_claims, function(value) {
           value = _.toLower(value)
-
           if (value == "false") return false
               else return true
         }

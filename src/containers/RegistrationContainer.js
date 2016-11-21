@@ -7,19 +7,11 @@ import { Anchor, Button, Box, Header, Menu, NavAnchor } from '../components/comm
 import {Step, StepButton, StepConnector, StepContent, StepLabel, Stepper} from '../components/common/Stepper';
 import StatementContainer from './StatementContainer';
 import SchoolDetailsContainer from './SchoolDetailsContainer';
-import Home from './HomeContainer';
+import SummaryTable from './SummaryTable';
 import userManager from '../utils/userManager';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import * as schoolActions from '../actions';
-import schools from '../data/schools.json';
-
-const school = schools
-
-const lookup = {};
-for (var i = 0, len = school.length; i < len; i++) {
-    lookup[school[i].centreCode] = school[i];
-}
+import * as registrationActions from '../actions/registrationActions';
 
 class RegistrationContainer extends React.Component {
 
@@ -27,12 +19,11 @@ class RegistrationContainer extends React.Component {
       super();
       this.state = {
         stepIndex: 0,
-        currentSchool: {},
-        visited: [],
         status: [],
         statementData: {},
         detailsData: {},
         isAdmin: false,
+
         schoolDetails: {
           centreCode: "",
           centreName: "",
@@ -66,87 +57,67 @@ class RegistrationContainer extends React.Component {
           centreCode: ""
         }
       };
-      this.renderSchool = this.renderSchool.bind(this)
+    
     }
 
   componentWillMount() {
 
     const { isAdmin } = this.props
-    if (!isAdmin) {
-      this.props.actions.getStatement(this.props.currentSchool.code)
-      this.props.actions.schoolDetailsAsync(this.props.currentSchool.code)
-    }
-    
     let stepIndex = this.state.stepIndex;
-    let visited = this.state.visited;
-
-    this.setState({
-      currentSchool:  this.props.currentSchool,
-      isAdmin: isAdmin,
-      visited: visited.concat(stepIndex)
-    });
   }
 
   componentWillUpdate(nextProps, nextState) {
-
-
-
     const {stepIndex, visited} = nextState;
-    if (visited.indexOf(stepIndex) === -1) {
-      this.setState({visited: visited.concat(stepIndex)});
-    }
   }
 
-  componentDidMount() {
-
-    const { claims } = this.props
-
-
+  shouldComponentUpdate(nextProps, nextState) {
+    if ( _.isEmpty(this.props.currentSchool) && _.isEmpty(nextProps.currentSchool) ) return false
+    return true 
   }
 
   componentWillReceiveProps(nextProps) {
-
     if (!_.isEqual(this.props.currentSchool, nextProps.currentSchool)) {
-         this.setState({currentSchool:  nextProps.currentSchool}) 
-         if (this.state.isAdmin) {
-          this.props.actions.getStatement(nextProps.currentSchool.code)
-          this.props.actions.schoolDetailsAsync(nextProps.currentSchool.code)
-         }
+          this.props.actions.fetchStatement(nextProps.currentSchool.centreCode)
+          this.props.actions.fetchSchoolDetails(nextProps.currentSchool.centreCode)
+          /**
+           * TODO: Fetch Authorised Staff, Alternative Test Order Format & Student Registration Data
+           * */
+          this.props.actions.fetchRegistrationStatus(nextProps.currentSchool.centreCode)
     }
 
     if (!_.isEqual(this.state.statementData, nextProps.statementData)) {
         let level = nextProps.statementData["securityLevel"].toString() 
         nextProps.statementData["securityLevel"] = level
+
         this.setState({
           statement: nextProps.statementData,
           statementData: nextProps.statementData
       })
+
     }
 
-    if (!_.isEqual(this.state.detailsData, nextProps.schoolDetails)) {
+    if (!_.isEqual(this.state.schoolDetails, nextProps.schoolDetails)) {
         this.setState({
           schoolDetails: nextProps.schoolDetails,
           detailsData: nextProps.schoolDetails
       })
     }
- }
 
- 
-
- renderSchool() {
-
-
+    if (!_.isEqual(this.props.status, nextProps.status)) {
+          this.setState({ status: nextProps.status })    
+    }
  }
 
   getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
-        return <Home/>;
+        return <SummaryTable/>;
       case 1:
         return <StatementContainer  
                  statement={this.state.statementData} 
                  currentSchool={this.state.currentSchool}
                  isAdmin={this.props.isAdmin}
+                 router={this.props.router}
                  />;      
       case 3:
         return <SchoolDetailsContainer 
@@ -159,38 +130,41 @@ class RegistrationContainer extends React.Component {
   }
 
   render() {
-    const visited = this.state.visited
     const stepIndex = this.state.stepIndex
-    const { currentSchool } = this.props
+    const { currentSchool, status } = this.props
     const styles = getStyles();
 
     return (
       <div style={styles.root}>
-
         <Stepper linear={false} claims={this.props.claims}>
-          <Step completed={visited.indexOf(0) !== -1} active={stepIndex === 0}>
+          <Step completed={status[0]} active={stepIndex === 0}>
             <StepButton onClick={() => this.setState({stepIndex: 0})}>
               Home
             </StepButton>
           </Step>
-          <Step completed={visited.indexOf(1) !== -1} active={stepIndex === 1}>
+          <Step completed={status[0]} active={stepIndex === 1}>
             <StepButton onClick={() => this.setState({stepIndex: 1})}>
               Statement of Compliance
             </StepButton>
           </Step>
-          <Step completed={visited.indexOf(2) !== -1} active={stepIndex === 2}>
+          <Step completed={status[1]} active={stepIndex === 2}>
             <StepButton onClick={() => this.setState({stepIndex: 2})}>
               Authorised Staff
             </StepButton>
           </Step>
-          <Step completed={visited.indexOf(3) !== -1} active={stepIndex === 3}>
+          <Step completed={status[2]} active={stepIndex === 3}>
             <StepButton onClick={() => this.setState({stepIndex: 3})}>
               School Details 
             </StepButton>
           </Step>
-          <Step completed={visited.indexOf(4) !== -1} active={stepIndex === 4}>
+          <Step completed={status[3]} active={stepIndex === 3}>
+            <StepButton onClick={() => this.setState({stepIndex: 3})}>
+              Alternative Test Order Format 
+            </StepButton> 
+          </Step>
+          <Step completed={status[4]} active={stepIndex === 4}>
             <StepButton onClick={() => this.setState({stepIndex: 4})}>
-              Student Registration Data
+              Student Registration
             </StepButton>
           </Step>
         </Stepper>
@@ -222,17 +196,25 @@ const getStyles = () => {
 
 
 function mapStateToProps(state, ownProps) {
+  let status =  _.map(state.status.status, "status")
+
+ // let statementFormValues     = state.form.statement.values
+ // let schoolDetailsFormValues = state.form.statement.values
+
   return {
       user: state.oidc.user,
       loggedIn: state.loggedIn,
       schoolDetails: state.schoolDetails.schoolDetails,
-      statementData: state.statement.statementData
+      statementData: state.statement.statementData,
+      form: state.form,
+      route: ownProps.router,
+      status
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-      actions: bindActionCreators(schoolActions, dispatch)
+      actions: bindActionCreators(registrationActions, dispatch)
   };
 }
 

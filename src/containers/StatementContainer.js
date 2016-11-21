@@ -2,6 +2,18 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
+import { formValueSelector } from 'redux-form';
+import {
+  getFormValues,
+  getFormSyncErrors,
+  isDirty,
+  isPristine,
+  isValid,
+  isInvalid
+} from 'redux-form'
+
+
+
 import { toastr } from 'react-redux-toastr'
 import * as statementActions from '../actions';
 import {Button, Box, Heading, Paragraph, Footer, Form, FormField, Section, Tab, Tabs} from '../components/common';
@@ -21,7 +33,20 @@ class StatementContainer extends React.Component {
       form: {},
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.routerWillLeave = this.routerWillLeave.bind(this)
   }
+
+  componentDidMount() {
+      this.props.router.setRouteLeaveHook(this.props.router, this.routerWillLeave)
+    }
+
+  routerWillLeave(nextLocation) {
+      // return false to prevent a transition w/o prompting the user,
+      // or return a string to allow the user to decide:
+      if (1)
+        return 'Your work is not saved! Are you sure you want to leave?'
+    }
+
 
   handleFormSubmit(data) {
 
@@ -37,19 +62,39 @@ class StatementContainer extends React.Component {
      if (!_.isEqual(this.props.statement, nextProps.statement)) {
         this.props.initialize(nextProps.statement)
      }
+
+  //   if (!_.isEqual(this.props.form["object Object"].values, nextProps.form["object Object"].values)) {
+        
+    // }
+    
   }
 
   componentWillMount() {
     const { statement: { isConfirmed }, statement} = this.props;     //Check if form has already been submitted
     this.setState({ isConfirmed: isConfirmed })
-
     let level = statement["securityLevel"].toString() 
     statement["securityLevel"] = level
     this.props.initialize(statement)
   }
 
+  componentWillUnmount(props) {
+
+    var x =33;
+    debugger
+  }
+
+
+  shouldComponentUpdate(nextProps, nextState) {
+
+    return true
+  }
+
   render() {
-    const { handleSubmit, pristine, reset, submitting, validated, invalid, isAdmin } = this.props
+    const { handleSubmit, pristine, reset, submitting, validated, invalid, isAdmin, otherDisabled } = this.props
+
+  //  let isOther = this.props.form["object Object"].values["securityLevel"]
+  //  isOther = "4" ? false : true
+
     let { isConfirmed} = this.state
 
     return (
@@ -91,16 +136,16 @@ class StatementContainer extends React.Component {
                          double secure storage arrangement for NAPLAN test materials at your school.
               </Paragraph>
               <Paragraph>Please select the option which best describes the two levels of security at your school </Paragraph>
-              <Field name="securityLevel" ref="securityLevel" disabled={pristine || submitting}  component={securityLevel => 
+              <Field name="securityLevel" ref="securityLevel" disabled={pristine}  component={securityLevel => 
                 <RadioButtonGroup {...securityLevel}>
-                  <RadioButton value='1'   disabled={pristine || submitting} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                  <RadioButton value='2' disabled={pristine || submitting} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                  <RadioButton value='3' disabled={pristine || submitting} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
-                  <RadioButton value='4' disabled={pristine || submitting}  label="Other" />
+                  <RadioButton value='1'   disabled={pristine } label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                  <RadioButton value='2' disabled={pristine} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                  <RadioButton value='3' disabled={pristine } label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
+                  <RadioButton value='4' disabled={pristine }  label="Other" />
                </RadioButtonGroup>
               }/><br/>
 
-              <Field name="securityLevelOther" ref="securityLevelOther"  disabled={pristine || submitting}   component={TextField}/>
+              <Field name="securityLevelOther" ref="securityLevelOther"  disabled={otherDisabled}   component={TextField}/>
               <Paragraph>
                 Please note:
                 While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
@@ -120,7 +165,7 @@ class StatementContainer extends React.Component {
                         ref="firstName"/> <br/>
                       <Field name="lastName"  disabled={pristine || submitting}  component={TextField}  hintText="Last" floatingLabelText="Last Name"
                         ref="lastName"/><br/>
-                      <Field name="email" disabled={pristine || submitting}   component={TextField} hintText="Email" floatingLabelText="Email"/>
+                      <Field name="email" id="email" disabled={pristine || submitting}   component={TextField} hintText="Email" floatingLabelText="Email"/>
                     </div>
                    <Box className="declaration required" >
                       <Field name="isDeclared"   ref="isDeclared" disabled={pristine || submitting} component={Checkbox} label="I declare that I am the Principal of the school detailed above."/>
@@ -142,6 +187,10 @@ class StatementContainer extends React.Component {
     </Box>  
     )
   }
+}
+
+StatementContainer.contextTypes = {
+    router: React.PropTypes.func.isRequired
 }
 
 
@@ -176,6 +225,8 @@ const validate = values => {
 
   if (values.securityLevel =="0") {
     errors.securityLevel = 'Required'
+  } else if ( values.securityLevelOther != "" && values.securityLevel !="4" ) {
+    errors.securityLevel = 'Please clear text field or select "other"'
   } else if(isNumeric(values.securityLevel)) {
     errors.securityLevel = 'Must choose security level'
   }
@@ -200,10 +251,12 @@ const validate = values => {
 }
 
 
-const form = reduxForm({
+const selector = formValueSelector('Statement')
+
+StatementContainer = reduxForm({
   form: 'Statement',
-  validate
-});
+  validate  
+})(StatementContainer)
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -211,4 +264,15 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(form(StatementContainer)); 
+function mapStateToProps(state, ownProps) {
+    const securityLevel = selector(state, 'securityLevel')
+    const otherDisabled = securityLevel == "4" ? false : true //If "other" is not selected, disable its corresponding text field
+
+    return {
+        otherDisabled
+    };
+}
+
+StatementContainer = connect(mapStateToProps, mapDispatchToProps)(StatementContainer)
+
+export default StatementContainer
