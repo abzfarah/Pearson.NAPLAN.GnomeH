@@ -38,8 +38,10 @@ const style = {
     }
 
     onNewRequest(selectedSchool) {
-      let school        = Object.assign({}, { "centreName": selectedSchool })
-      let currentSchool = _.filter(this.state.schools, school)[0]
+      const { schoolResults } = this.props
+      const schools = schoolResults.schools
+
+      const currentSchool = _.find(schools, { "centreName": selectedSchool });
       this.props.actions.selectSchool(currentSchool)
   }
 
@@ -106,8 +108,13 @@ function mapStateToProps(state) {
   const searchLoading = search.isLoading;
   const singleSearchResult = searchResults[search.term] || {};
 
+  const lastKey = _.findLastKey(searchResults)
+  const schoolResults = searchResults[lastKey]
+
+
   return {
       singleSearchResult,
+      schoolResults,
       searchLoading
     };
 }

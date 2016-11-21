@@ -6,6 +6,12 @@ import PublicPage from '../components/layouts/PublicPage';
 import RegistrationContainer from '../containers/RegistrationContainer'
 import ManageUsersContainer from '../containers/ManageUsersContainer'
 import ManageSchools from '../components/layouts/ManageSchools';
+import StatementContainer from '../containers/StatementContainer';
+import SchoolDetailsContainer from '../containers/SchoolDetailsContainer';
+import SummaryTable from '../containers/SummaryTable';
+
+
+
 import session from '../utils/session'
 
 export default {
@@ -16,6 +22,13 @@ export default {
       { 
         path:'/school',
         component: RegistrationContainer,
+        childRoutes: [
+          { path: 'summary',             component: SummaryTable },
+          { path: 'soc',                 component: StatementContainer },
+   //       { path: 'authorisedstaff',     component: Summary },
+          { path: 'schooldetails',       component: SchoolDetailsContainer }
+    //      { path: 'studentregistration', component: Summary },
+      ]
       },
       { 
         path: '/manageschools', 
@@ -47,6 +60,4 @@ function renderRoot(nextState, replace) {
   if (1) { replace('/school') }
 
 }
-      
-
-
+    

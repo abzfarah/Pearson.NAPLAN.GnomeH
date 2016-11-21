@@ -57,9 +57,30 @@ class RegistrationContainer extends React.Component {
           centreCode: ""
         }
       };
-    
+    this.handleActiveStep = this.handleActiveStep.bind(this)
     }
 
+  handleActiveStep(stepIndex) {
+
+    this.setState({ stepIndex })
+
+    switch(stepIndex) {
+        case 0:
+              this.props.dispatch(push('/school/summary'));
+            break;
+        case 1:
+              this.props.dispatch(push('/school/soc'));
+            break;
+        case 2:
+              this.props.dispatch(push('/school/authorisedstaff'));
+            break;
+        case 3:
+            this.props.dispatch(push('/school/schooldetails'));
+            break;
+        default:    
+    }
+
+  }
   componentWillMount() {
 
     const { isAdmin } = this.props
@@ -130,47 +151,59 @@ class RegistrationContainer extends React.Component {
   }
 
   render() {
-    const stepIndex = this.state.stepIndex
-    const { currentSchool, status } = this.props
     const styles = getStyles();
+
+    const { stepIndex, statementData, currentSchool, schoolDetails } = this.state
+    const { isAdmin, router } = this.props
+    
+
+    let children = React.Children.map(this.props.children, child => {
+         return React.cloneElement(child, {
+                 statement: statementData, 
+                 schoolDetails: schoolDetails,
+                 currentSchool: currentSchool,
+                 isAdmin: isAdmin,
+                 router: router
+    })
+  })
 
     return (
       <div style={styles.root}>
         <Stepper linear={false} claims={this.props.claims}>
-          <Step completed={status[0]} active={stepIndex === 0}>
-            <StepButton onClick={() => this.setState({stepIndex: 0})}>
+          <Step completed={status[0]} active={stepIndex === 0}  >
+            <StepButton onClick={ ()=> this.handleActiveStep(0)}>
               Home
             </StepButton>
           </Step>
-          <Step completed={status[0]} active={stepIndex === 1}>
-            <StepButton onClick={() => this.setState({stepIndex: 1})}>
+          <Step completed={status[0]} active={stepIndex === 1} >
+            <StepButton onClick={()=>  this.handleActiveStep(1)}>
               Statement of Compliance
             </StepButton>
           </Step>
           <Step completed={status[1]} active={stepIndex === 2}>
-            <StepButton onClick={() => this.setState({stepIndex: 2})}>
+            <StepButton  onClick={ ()=> this.handleActiveStep(2)}>
               Authorised Staff
             </StepButton>
           </Step>
           <Step completed={status[2]} active={stepIndex === 3}>
-            <StepButton onClick={() => this.setState({stepIndex: 3})}>
+            <StepButton  onClick={ ()=> this.handleActiveStep(3)}>
               School Details 
             </StepButton>
           </Step>
-          <Step completed={status[3]} active={stepIndex === 3}>
-            <StepButton onClick={() => this.setState({stepIndex: 3})}>
+          <Step completed={status[3]} active={stepIndex === 4}>
+            <StepButton  onClick={ ()=> this.handleActiveStep(4)}>
               Alternative Test Order Format 
             </StepButton> 
           </Step>
-          <Step completed={status[4]} active={stepIndex === 4}>
-            <StepButton onClick={() => this.setState({stepIndex: 4})}>
+          <Step completed={status[4]} active={stepIndex === 5}>
+            <StepButton  onClick={ ()=> this.handleActiveStep(6)}>
               Student Registration
             </StepButton>
           </Step>
         </Stepper>
 
         <div>
-          {this.getStepContent(stepIndex)}
+          { children }
         </div>
 
       </div>
@@ -214,7 +247,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-      actions: bindActionCreators(registrationActions, dispatch)
+      actions: bindActionCreators(registrationActions, dispatch),
+      dispatch
   };
 }
 
