@@ -1,14 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Field, reduxForm } from 'redux-form';
 import { toastr } from 'react-redux-toastr'
 import * as detailsActions from '../actions';
 import {Button, Box, Heading, Paragraph, Footer, Form, List, ListItem, FormField, Select, Section, Tab, Tabs} from '../components/common';
 import { RadioButton, MenuItem } from 'material-ui'
 import SelectField from 'material-ui/SelectField'
 import { Checkbox, RadioButtonGroup, TextField } from 'redux-form-material-ui'
-import _ from 'lodash';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import {
+  getFormValues,
+  getFormSyncErrors,
+  isDirty,
+  isPristine,
+  isValid,
+  isInvalid
+} from 'redux-form'
 
 class SchoolDetailsContainer extends React.Component {
 
@@ -281,23 +288,28 @@ const validate = values => {
   return errors
 }
 
+
+const selector = formValueSelector('SchoolDetails')
+
+SchoolDetailsContainer = reduxForm({
+  form: 'SchoolDetails',
+  validate  
+})(SchoolDetailsContainer)
+
 function mapDispatchToProps(dispatch) {
   return {
       actions: bindActionCreators(detailsActions, dispatch)
   };
 }
 
-  function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps) {
+
+
     return {
-        form: state.form
+        
     };
-  }
+}
 
+SchoolDetailsContainer = connect(mapStateToProps, mapDispatchToProps)(SchoolDetailsContainer)
 
-
-const form = reduxForm({
-  form: 'SchoolDetails',
-  validate
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(form(SchoolDetailsContainer)); 
+export default SchoolDetailsContainer

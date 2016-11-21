@@ -57,12 +57,14 @@ class StatementContainer extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    let level = nextProps.statement["securityLevel"].toString() 
-    nextProps.statement["securityLevel"] = level
-     if (!_.isEqual(this.props.statement, nextProps.statement)) {
-        this.props.initialize(nextProps.statement)
-     }
 
+    if ( !_.isEmpty(nextProps.statement) ) {
+      let level = nextProps.statement["securityLevel"].toString() 
+      nextProps.statement["securityLevel"] = level
+      if (!_.isEqual(this.props.statement, nextProps.statement)) {
+          this.props.initialize(nextProps.statement)
+      }
+    }
   //   if (!_.isEqual(this.props.form["object Object"].values, nextProps.form["object Object"].values)) {
         
     // }
@@ -72,9 +74,12 @@ class StatementContainer extends React.Component {
   componentWillMount() {
     const { statement: { isConfirmed }, statement} = this.props;     //Check if form has already been submitted
     this.setState({ isConfirmed: isConfirmed })
-    let level = statement["securityLevel"].toString() 
-    statement["securityLevel"] = level
-    this.props.initialize(statement)
+
+    if ( !_.isEmpty(statement) ) {
+      let level = statement["securityLevel"].toString() 
+      statement["securityLevel"] = level
+      this.props.initialize(statement)
+    }
   }
 
   componentWillUnmount(props) {

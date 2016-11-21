@@ -56,6 +56,7 @@ class HeaderContainer extends React.Component {
     const { loggedIn, currentSchool, claims, dispatch } = this.props
 
     const { centreSearch } = claims
+
  
 
     return (
