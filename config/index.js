@@ -75,14 +75,14 @@ config.globals = {
   'process.env'  : {
     'NODE_ENV' : JSON.stringify(config.env)
   },
-  'NODE_ENV'         : config.env,
-  '__DEV__'          : config.env === 'development',
-  '__DEVSERVER__'    : config.env === 'devserver',
-  '__INTSTG__'       : config.env === 'internal_staging',
-  '__STG__'          : config.env === 'staging',
-  '__TEST__'         : config.env === 'test',
-  '__COVERAGE__'     : !argv.watch && config.env === 'test',
-  '__BASENAME__'     : JSON.stringify(process.env.BASENAME || '')
+  'NODE_ENV'          : config.env,
+  '__DEV__'           : config.env === 'development',
+  '__DEVSERVER__'     : config.env === 'devserver',
+  '__INTSTG__'          : config.env === 'intstg',
+  '__STG__'          : config.env === 'stg',
+  '__TEST__'          : config.env === 'test',
+  '__COVERAGE__'      : !argv.watch && config.env === 'test',
+  '__BASENAME__'      : JSON.stringify(process.env.BASENAME || '')
 }
 
 // ------------------------------------

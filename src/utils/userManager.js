@@ -1,12 +1,11 @@
 import { createUserManager } from 'redux-oidc';
 
 let _callbackURI;
-if (__DEV__)                  _callbackURI = "http://localhost:8004/callback"
-if (__DEVSERVER__)            _callbackURI = "http://melbnstgweb1.epenau.local:2016/callback"
-if (__INTSTG__)               _callbackURI = "http://melbnstgweb1.epenau.local:2016/callback"
-if (__STG__)                  _callbackURI = "http://melbnintstgweb1.epenau.local:2016/callback" 
+if (__DEV__)                _callbackURI = "http://localhost:8004/callback"  
+if (__DEVSERVER__)          _callbackURI = "http://melbnstgweb1.epenau.local:2016/callback" 
+if (__INTSTG__)             _callbackURI = "http://melbndevweb1.epenau.local:2016/callback"  
+if (__STG__)                _callbackURI = "http://melbnintstgweb1.epenau.local:2016/callback"  
 
-    
 var config = {
     client_id: 'VICRegWeb',
     redirect_uri: _callbackURI,

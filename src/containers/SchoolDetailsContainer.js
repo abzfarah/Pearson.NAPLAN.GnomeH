@@ -287,10 +287,17 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+  function mapStateToProps(state, ownProps) {
+    return {
+        form: state.form
+    };
+  }
+
+
 
 const form = reduxForm({
   form: 'SchoolDetails',
   validate
 });
 
-export default connect(null, mapDispatchToProps)(form(SchoolDetailsContainer)); 
+export default connect(mapStateToProps, mapDispatchToProps)(form(SchoolDetailsContainer)); 

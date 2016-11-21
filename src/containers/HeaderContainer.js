@@ -1,141 +1,93 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Box, Button, Header} from '../components/common';
+import { Anchor, Box, Button, Header} from '../components/common';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
-import Footer from '../containers/Footer';
+import  LoginMenu  from '../components/LoginMenu';
 import  SchoolSearch  from './SchoolSearch';
-import { selectSchool } from "../actions"
-import _ from 'lodash';
+import  SchoolName  from '../components/SchoolName';
+import Footer from '../containers/Footer';
+import NavContainer from './NavContainer'
+import Paper from 'material-ui/Paper';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import {List, ListItem} from 'material-ui/List';
 
-class Login extends React.Component {
-  constructor() {
-    super()
+import Divider from 'material-ui/Divider';
+const style = {
+  paper: {
+    margin: 'auto',
+    width: '79%',
+    backgroundColor: '#9c9c9c'
+ 
+  },
+  rightIcon: {
+    textAlign: 'center',
+    lineHeight: '24px',
+  },
+
+  list: {
+    display: 'flex',
+    paddingTop: '0px',
+    paddingBottom: '0px',
+    color: 'white'
   }
-
-  render() {
-
-    let { dispatch } = this.props
-    let { loggedIn, onLogout, onLogin } = this.props.status;
-
-    return (
-    <div>
-      <div className="header-bar"><i></i> </div>
-      <Box direction="row" className="footerContainer" wrap={true} align="center" className="numba1" className="first-header">
-          <div className="under">
-              <a href="http://imgur.com/OlNC7UY"><img id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="source: imgur.com" />  </a>
-          </div>
-          <ul className="menu"></ul>
-          <div className="button-groups">
-            { loggedIn ?
-              <div>
-                <Button className="separate-button" label="Help" secondary={true} />
-                <Button className="separate-button"  label="Log Out" onClick={() => onLogout(event, dispatch)}  primary={true} />
-              </div> :
-              <div>
-                <Button className="separate-button"  label="Help" secondary={true} />
-                <Button className="separate-button"  label="Log In" onClick={onLogin} primary={true} />
-              </div> }
-          </div>
-        </Box>
-      </div>
-      )
-  }
-}
-
-class SchoolName extends React.Component {
-  constructor() {
-    super()
-  }
-
-  render() {
-    const { name, code } = this.props.school;
-    let string = 'School Code: ';
-    var full;
-    if (code != undefined) {
-         full = string + code;
-    }
-    else full = ""
-
-    return (
-      <Box direction="row" className="school-info">
-          <Header className="school-name">
-            { name}
-          </Header>
-
-          <Header size="small" className="school-code">
-            {full}
-          </Header>
-      </Box>
-
-      )
-  }
-}
+};
 
 class HeaderContainer extends React.Component {
   constructor() {
     super()
   }
 
-  componentWillMount(props) {
-  }
-
   componentWillReceiveProps(nextProps) {
 
-  //  if (this.state.currentSchool != nextProps.currentSchool) {
-  //      this.setState({currentSchool: nextProps.currentSchool})
- //   }
-    if (this.props.user != nextProps.user) {
-        this.setState({
-          loggedIn: true
-        })
-    }
-    else return true
+    var x =3;
   }
 
-  componentDidMount() {
-
-    var u =2;
-    debugger
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    return true
+  shouldComponentUpdate(nextProps) {
+    if ( nextProps.isAdmin ) return true
+    if ( _.isEmpty(this.props.currentSchool) && _.isEmpty(nextProps.currentSchool) && !this.props.isAdmin )  return false
+        
+    return true 
   }
 
   render(props) {
 
-    const { loggedIn, claims } = this.props
-    const { centreSearch, schoolCode } = claims
+    const { loggedIn, currentSchool, claims, dispatch } = this.props
+
+    const { centreSearch } = claims
+ 
 
     return (
+    <div>
       <StickyContainer>
           <Sticky style={{ zIndex: 5 }}>
-            <Login status={this.props} dispatch={this.props.dispatch} />
+            <LoginMenu status={this.props} dispatch={dispatch} />
             <Box direction="row"  wrap={true} align="center" className="second-header">
               <Box direction="row" className="school-info">
-                { (centreSearch || schoolCode)  && <SchoolName school={this.props.currentSchool}/> }
+                { loggedIn && <SchoolName school={currentSchool}/> }
               </Box>
               <Box direction="row" className="school-search">
-                { centreSearch  && <SchoolSearch schools={this.props.schools} onSelect={this.selectSchool}/> }
+                { centreSearch && <SchoolSearch /> }
               </Box>
             </Box>
           </Sticky>
+
       </StickyContainer>
-  )
+          <Paper style={style.paper}>
+            <Menu listStyle={style.list}  >
+            { centreSearch &&   <MenuItem  onClick={()=>this.props.dispatch(push('/school'))}         primaryText="Home"            />   }
+            { centreSearch &&   <MenuItem  onClick={()=>this.props.dispatch(push('/manageschools'))}  primaryText="Manage Schools"  />   }
+            { centreSearch &&   <MenuItem  onClick={()=>this.props.dispatch(push('/manageusers'))}    primaryText="Manage Users"     />  } 
+            { centreSearch &&   <MenuItem primaryText="Reports" />                                                                       } 
+            </Menu>
+          </Paper>
+
+    </div>
+    )
   }
 }
 
-function mapStateToProps(state, ownProps) {
-    return {
-      loggedIn: ownProps.loggedIn,
-      claims: ownProps.claims
-    };
-}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -143,4 +95,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
+export default connect(null, mapDispatchToProps)(HeaderContainer);

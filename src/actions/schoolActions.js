@@ -17,7 +17,7 @@ export function schoolSearchAsync(keyword) {
                 return dispatch({
                     type: SCHOOLSEARCH_FETCH_SUCCESS,
                     isLoading: false,
-                    schoolDetails: response.data
+                    school: response.data[0]
                 });
             })
             .catch((err) => {

@@ -8,10 +8,14 @@ import ReduxToastr from 'react-redux-toastr'
 import createStore from './store';
 import AppContainer from './containers/AppContainer';
 import userManager from './utils/userManager';
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 import routes from './routes';
 import store from './store';
+
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+
 
 const initialState = window.___INITIAL_STATE__;
 const history = syncHistoryWithStore(browserHistory, store);
@@ -30,7 +34,7 @@ let render = () => {
                      transitionIn="fadeIn" transitionOut="fadeOut" progressBar/>  
                       
           <OidcProvider store={store} userManager={userManager}>
-              <MuiThemeProvider  muiTheme={getMuiTheme()}>
+              <MuiThemeProvider   muiTheme={getMuiTheme()}>
                   <Router
                     history={history}
                     routes={routes} />
@@ -42,11 +46,6 @@ let render = () => {
     MOUNT_NODE
   )
 }
-
-
-
-
-      
 
 
 // ========================================================

@@ -50,6 +50,8 @@ class Step extends Component {
      * Override the inline-style of the root element.
      */
     style: PropTypes.object,
+
+    hasClaim: PropTypes.bool,
   };
 
   static contextTypes = {

@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {orange400, orange500} from 'material-ui/styles/colors';
 import AlertWarning from '../svg-icons/alert/warning';
 import CheckCircle from '../svg-icons/action/check-circle';
+import ActionHome from '../svg-icons/action/home';
 import SvgIcon from '../SvgIcon';
 
 const getStyles = ({active, completed, disabled}, {muiTheme, stepper}) => {
@@ -15,7 +16,7 @@ const getStyles = ({active, completed, disabled}, {muiTheme, stepper}) => {
 
   const styles = {
     root: {
-      height: orientation === 'horizontal' ? 72 : 64,
+      height: orientation === 'horizontal' ? 79 : 64,
       color: textColor,
       display: 'flex',
       alignItems: 'center',
@@ -107,15 +108,22 @@ class StepLabel extends Component {
     stepper: PropTypes.object,
   };
 
-  renderIcon(completed, icon, styles) {
+  renderIcon(completed, icon, styles, index) {
     const iconType = typeof icon;
 
     if (iconType === 'number' || iconType === 'string') {
-      if (completed) {
+      if (icon == 1 ) {
+        return (
+          <ActionHome
+            color={styles.icon.color}
+          />
+        );
+      }
+
+      else if (completed) {
         return (
           <CheckCircle
             color={styles.icon.color}
-     
           />
         );
       }

@@ -4,7 +4,25 @@ import {
 } from '../constants'
 
 const initialState = {
-    schoolDetails: {},
+      schoolDetails: {
+          centreCode: "",
+          centreName: "",
+          deliveryAddress1: "",
+          deliveryAddress2: "",
+          deliveryPostcode: "",  
+          deliverySchoolName: "",
+          deliveryState: "",
+          deliverySuburb: "",
+          dsFax: "",
+          dsPhone: "",
+          email: "",
+          fax: "",
+          phone: "",
+          post_address_line1: "",
+          reportState: "",
+          reportSuburb: "",
+          requestPackingOrder: ""
+        }
 };
 
 
