@@ -41,10 +41,6 @@ function redirectToHome(nextState, replace) {
     replace('/manageschools') 
   } 
 
-  else {
-    replace('/school') 
-  }
-
 }
       
 function renderRoot(nextState, replace) {

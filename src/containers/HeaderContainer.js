@@ -53,8 +53,10 @@ class HeaderContainer extends React.Component {
 
   render(props) {
 
-    const { loggedIn, currentSchool, dispatch } = this.props
-    const claims = this.props.claims
+    const { loggedIn, currentSchool, claims, dispatch } = this.props
+
+    const { centreSearch } = claims
+ 
 
     return (
     <div>
@@ -66,7 +68,7 @@ class HeaderContainer extends React.Component {
                 { loggedIn && <SchoolName school={currentSchool}/> }
               </Box>
               <Box direction="row" className="school-search">
-                {<SchoolSearch /> }
+                { centreSearch && <SchoolSearch /> }
               </Box>
             </Box>
           </Sticky>
@@ -74,10 +76,10 @@ class HeaderContainer extends React.Component {
       </StickyContainer>
           <Paper style={style.paper}>
             <Menu listStyle={style.list}  >
-              <MenuItem  onClick={()=>this.props.dispatch(push('/school'))}       primaryText="Home"            />
-              <MenuItem  onClick={()=>this.props.dispatch(push('/manageschools'))} primaryText="Manage Schools"  />
-              <MenuItem  onClick={()=>this.props.dispatch(push('/manageusers'))}   primaryText="Manage Users"    />
-              <MenuItem primaryText="Reports" />
+            { centreSearch &&   <MenuItem  onClick={()=>this.props.dispatch(push('/school'))}         primaryText="Home"            />   }
+            { centreSearch &&   <MenuItem  onClick={()=>this.props.dispatch(push('/manageschools'))}  primaryText="Manage Schools"  />   }
+            { centreSearch &&   <MenuItem  onClick={()=>this.props.dispatch(push('/manageusers'))}    primaryText="Manage Users"     />  } 
+            { centreSearch &&   <MenuItem primaryText="Reports" />                                                                       } 
             </Menu>
           </Paper>
 
