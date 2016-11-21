@@ -37,7 +37,6 @@ export function manageSchoolsAsync() {
     }
 }
 
-
 export function getSchoolAsync(schoolCode) {
 
     return dispatch => {
@@ -63,7 +62,7 @@ export function getSchoolAsync(schoolCode) {
             .catch((err) => {
 
                 dispatch({
-                    type: GETSCHOOL_FETCH_FAILURE,
+                    type: types.GETSCHOOL_FETCH_FAILURE,
                     isLoading: false,
                     isLoaded: false
                 })
@@ -98,6 +97,28 @@ export function submitSchoolAsync(schoolData) {
                     isLoading: false,
                     isLoaded: false,
                     error: error
+                })
+            })
+    }
+}
+
+export function deleteSchool(schoolCode) {
+
+    return dispatch => {
+
+        return axios.post('http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/DeleteCentreDetails/centreCode/' + schoolCode)
+            .then((response) => {
+
+                dispatch({
+                    type: types.SCHOOL_DELETE_SUCCESS,
+                    isLoading: true
+                })
+            })
+            .catch((error) => {
+
+                dispatch({
+                    type: types.SCHOOL_DELETE_FAILURE,
+                    isLoading: false
                 })
             })
     }
@@ -151,10 +172,11 @@ export function getSuburbsAsync(postCode) {
             .catch((error) => {
 
                 dispatch({
-                    type: types.GETSUBURBS_FETCH_FAILURE_SUBMIT_FAILURE,
+                    type: types.GETSUBURBS_FETCH_FAILURE,
                     isLoading: false,
                     isLoaded: true
                 })
             })
     }
 }
+

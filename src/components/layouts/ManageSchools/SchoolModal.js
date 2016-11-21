@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { RadioButton } from 'material-ui/RadioButton'
 import { Checkbox, SelectField, TextField } from 'redux-form-material-ui'
 import RaisedButton from 'material-ui/RaisedButton';
@@ -25,16 +25,15 @@ class SchoolModal extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
+        
         if (nextProps.initialValues) {
-          //  console.log(nextProps.initialValues)
+            //  console.log(nextProps.initialValues)
             // this.setState({initialValues: nextProps.initialValues })
         }
     }
 
     submitForm(model) {
         this.props.submitForm(model);
-
     }
 
     handleOpen = () => {
@@ -45,6 +44,13 @@ class SchoolModal extends React.Component {
         this.setState({ open: false });
     };
 
+    handlepostalCodeChange = () => {
+        //---
+        let pCode = '3108'
+        if (pCode.length == 4) {
+
+        }
+    }
     render() {
         const {  handleSubmit, pristine, reset, submitting } = this.props
 
@@ -54,8 +60,8 @@ class SchoolModal extends React.Component {
                     <Box>
                         <Heading tag="h2">
                             <div className="numberrCircle"></div>
-                           
-                           <span className="sd_hColor"></span> 
+
+                            <span className="sd_hColor"></span>
                         </Heading>
                     </Box>
                     <form onSubmit={handleSubmit}>
@@ -64,7 +70,7 @@ class SchoolModal extends React.Component {
 
                                 <Heading tag="h5" className="sd_hColor">Part A: School Details</Heading>
                                 <Field name="centreName" type="text" component={TextField} floatingLabelText="School Name" />
-                                <Field name="centreCode" type="text" component={TextField} floatingLabelText="School Code"  />
+                                <Field name="centreCode" type="text" component={TextField} floatingLabelText="School Code" />
                                 <Field
                                     name="sector"
                                     component={SelectField}
@@ -156,7 +162,10 @@ const validate = values => {
 
 export default connect(null, null, null, { withRef: true })(reduxForm({
     form: 'SchoolForm',
-    validate
+    validate,
+
+
+
 })(SchoolModal))
 //-- TODO
 //--1- er-injectTapEventPlugin

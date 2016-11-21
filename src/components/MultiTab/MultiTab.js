@@ -4,7 +4,7 @@ import Tabs from '../common/Tabs'
 
 import StatementContainer from './StatementContainer'
 import SchoolDetails from './SchoolDetails'
-import AuthorizedStaff from './AuthorizedStaff'
+import AuthorizedStaff from './AuthStaff/AuthStaff'
 import ActiveTestOrder from './ActiveTestOrder'
 import StudentRegistration from './StudentRegistration'
 import Home from './Home'

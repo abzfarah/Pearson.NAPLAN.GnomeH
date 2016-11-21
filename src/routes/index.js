@@ -8,7 +8,7 @@ import PublicPage from '../components/layouts/PublicPage';
 import StatementContainer from  '../components/MultiTab/StatementContainer';
 import Home from  '../components/MultiTab/Home';
 import SchoolDetails from  '../components/MultiTab/SchoolDetailsContainer';
-import AuthorizedStaff from  '../components/MultiTab/AuthorizedStaff';
+import AuthorizedStaff from  '../components/MultiTab/AuthStaff/AuthStaff';
 import FormContainer from '../containers/FormContainer';
 import SchoolContainer from '../containers/SchoolContainer'
 import ManageUsersContainer from '../containers/ManageUsersContainer'

@@ -17,11 +17,14 @@ class AddSchoolContainer extends Component {
 
         //--Update School
         if (this.props.centreCode) {
-            
+
             this.props.getSchoolAsync(this.props.centreCode);
         }
 
         this.props.getSectorsAsync();
+        //--TODO _temp
+        var postalCode = '3805'
+        this.props.getSuburbsAsync(postalCode);
     }
 
     getSuburbs(postalCode) {
@@ -50,11 +53,11 @@ class AddSchoolContainer extends Component {
 
     render() {
 
-        const { isLoading, isLoaded, schoolData, sectors, centreCode} = this.props;
-        
+        const { isLoading, isLoaded, schoolData, sectors, suburbs, centreCode} = this.props;
+
         return (
-            <div style={{maxHeight:390,width:550}}>
-                {((isLoaded && !isLoading) || centreCode == null) && <SchoolModal schoolData={schoolData} initialValues={schoolData} sectors={sectors} onSubmit={this.submitForm} ref={'schoolForm'} />}
+            <div style={{ maxHeight: 390, width: 550 }}>
+                {((isLoaded && !isLoading) || centreCode == null) && <SchoolModal schoolData={schoolData} initialValues={schoolData} sectors={sectors} suburbs={suburbs} onSubmit={this.submitForm} ref={'schoolForm'} />}
             </div>
         )
     }
@@ -70,12 +73,13 @@ function mapStateToProps(globalState) {
 
 
     return {
-        //    isLoading: globalState.AddSchool.isLoading,
-        //   isLoaded: globalState.AddSchool.isLoaded,
+        //isLoading: globalState.AddSchool.isLoading,
+        //isLoaded: globalState.AddSchool.isLoaded,
         schoolData: schoolData,
         sectors: globalState.manageSchool.sectors,
         isLoaded: globalState.manageSchool.isLoaded,
-        isLoading: globalState.manageSchool.isLoading
+        isLoading: globalState.manageSchool.isLoading,
+        suburbs: globalState.manageSchool.suburbs
     }
 }
 

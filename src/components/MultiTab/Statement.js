@@ -39,7 +39,7 @@ class Statement extends Component {
 
   const { handleSubmit, pristine, reset, submitting } = this.props
 
-  debugger;
+
 
     return (
 
