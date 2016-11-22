@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
-import { selectSchool } from '../actions/schoolSearchActions'
+import * as searchSchoolActions from '../actions/schoolSearchActions'
+import * as registrationActions from '../actions/registrationActions';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Footer from '../containers/Footer';
 import HeaderContainer from './HeaderContainer'
@@ -79,12 +80,19 @@ class AppContainer extends React.Component {
       let user_claims = session.claims
     
       if (!session.isAdmin) {
-        let schoolcode = session.schoolcode 
-        this.props.actions.selectSchool(schoolcode)
-      }
-      this.setState({ claims: user_claims,  loggedIn: true})   
+        let centreCode = session.schoolcode 
+        debugger
+        let ee = this.props.searchActions.selectSchool(centreCode)
+        this.props.registrationActions.fetchStatement(centreCode)
+        this.props.registrationActions.fetchSchoolDetails(centreCode)
+        this.props.registrationActions.fetchRegistrationStatus(centreCode)
+        }
+        this.setState({ claims: user_claims,  loggedIn: true})   
     }
-  }
+
+      
+ }
+  
 
   componentWillReceiveProps(nextProps, nextState) {
     if (!_.isEqual(this.state.currentSchool, nextProps.currentSchool)) {
@@ -102,6 +110,7 @@ class AppContainer extends React.Component {
       // if user is not an admin, user will be determined to be a school user
       if (!session.isAdmin) { 
         let schoolcode = session._schoolcode 
+        debugger
         this.props.actions.selectSchool(schoolcode)
       }
 
@@ -171,7 +180,8 @@ class AppContainer extends React.Component {
 
   function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(selectSchool, dispatch)
+       searchActions: bindActionCreators(searchSchoolActions, dispatch),
+       registrationActions: bindActionCreators(registrationActions, dispatch),
     };
   }
 

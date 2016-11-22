@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import Notification from './Notification'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
@@ -72,12 +72,16 @@ class StatementContainer extends React.Component {
   }
 
   componentDidMount() {
-
+      this.props.router.setRouteLeaveHook(
+        this.props.route,
+        this.routerWillLeave
+      )
   }
 
-
   routerWillLeave(nextLocation) {
-
+    if (!this.props.pristine) {
+      return 'You have unsaved information, are you sure you want to leave this page?'
+    }
   }
 
 
@@ -128,8 +132,7 @@ class StatementContainer extends React.Component {
   };
 
   handleContinue() {
-    let nextLocation = this.state.nextLocation
-    this.props.router.push('/school/summary');
+ 
    
   }
 
@@ -148,7 +151,7 @@ class StatementContainer extends React.Component {
     return (
       <Box>     
 
-      
+      <Notification open={open} handleCancel={this.handleCancel} handleContinue={this.handleContinue}/>
 
       <Section className="test">
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>

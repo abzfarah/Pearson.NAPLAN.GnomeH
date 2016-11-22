@@ -11,7 +11,7 @@ const initialState = {
 
 export default (state = initialState, action = {}) => {
     switch (action.type) {
-        case SELECT_SCHOOL:
+        case 'SELECT_SCHOOL_FETCH_SUCCESS':
             return Object.assign({}, state, {
                 isLoading: false,
                 isLoaded: true,

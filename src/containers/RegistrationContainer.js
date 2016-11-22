@@ -12,11 +12,8 @@ import userManager from '../utils/userManager';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-
 import Notification from './Notification';
-
 import * as registrationActions from '../actions/registrationActions';
-
 
 class RegistrationContainer extends React.Component {
 
@@ -66,7 +63,6 @@ class RegistrationContainer extends React.Component {
       };
     this.handleActiveStep = this.handleActiveStep.bind(this)
     this.handleUnsaved = this.handleUnsaved.bind(this)
-    
     }
 
 
@@ -74,7 +70,7 @@ class RegistrationContainer extends React.Component {
 
   handleUnsaved(open) {
     if (open) {
-      this.setState({open: true})
+      this.setState({open})
       return true
     }
 
@@ -86,11 +82,10 @@ class RegistrationContainer extends React.Component {
 
   handleActiveStep(stepIndex) {
 
-    
 
     this.setState({ stepIndex })
 
-
+  
     switch(stepIndex) {
         case 0:
               this.props.dispatch(push('/school/summary'));
@@ -128,12 +123,11 @@ class RegistrationContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!_.isEqual(this.props.currentSchool, nextProps.currentSchool)) {
-          this.props.actions.fetchStatement(nextProps.currentSchool.centreCode)
-          this.props.actions.fetchSchoolDetails(nextProps.currentSchool.centreCode)
+
           /**
            * TODO: Fetch Authorised Staff, Alternative Test Order Format & Student Registration Data
            * */
-          this.props.actions.fetchRegistrationStatus(nextProps.currentSchool.centreCode)
+         
     }
 
     if (!_.isEqual(this.state.statementData, nextProps.statementData)) {
@@ -187,8 +181,8 @@ class RegistrationContainer extends React.Component {
       
       
       <div style={styles.root}>
-       <Notification open={open} />
-  
+       
+        <Notification open={this.state.open} />
         <Stepper linear={false} claims={this.props.claims}>
           <Step completed={status[0]} active={stepIndex === 0}  >
             <StepButton onClick={ ()=> this.handleActiveStep(0)}>

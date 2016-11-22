@@ -6,7 +6,8 @@ import * as detailsActions from '../actions';
 import {Button, Box, Heading, Paragraph, Footer, Form, List, ListItem, FormField, Select, Section, Tab, Tabs} from '../components/common';
 import { RadioButton, MenuItem } from 'material-ui'
 import SelectField from 'material-ui/SelectField'
-import { Checkbox, RadioButtonGroup, TextField } from 'redux-form-material-ui'
+import { AutoComplete, Checkbox, RadioButtonGroup, TextField } from 'redux-form-material-ui'
+import { AutoComplete as MUIAutoComplete } from 'material-ui'
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import {
   getFormValues,
@@ -30,12 +31,19 @@ class SchoolDetailsContainer extends React.Component {
     this.routerWillLeave = this.routerWillLeave.bind(this)
   }
 
+  componentDidMount() {
+      this.props.router.setRouteLeaveHook(
+        this.props.route,
+        this.routerWillLeave
+      )
+  }
+
   routerWillLeave(nextLocation) {
-      // return false to prevent a transition w/o prompting the user,
-      // or return a string to allow the user to decide:
-      if (1)
-        return 'Your work is not saved! Are you sure you want to leave?'
+    if (!this.props.pristine) {
+      return 'You have unsaved information, are you sure you want to leave this page?'
     }
+  }
+  
   handleFormSubmit(data) {
 
 
@@ -236,14 +244,19 @@ class SchoolDetailsContainer extends React.Component {
                   <Field name="requestPacking"  ref="requestPacking"  component={Checkbox} label=" I request a custom packing order for the NAPLAN tests. Details of this request are provided below (e.g. Year 7 are to be packed aphabetically only and not by home group)."/>
                 </Box>
                 <Box direction="row">
-      
-                  <Field  component={SelectField}>
-                    <MenuItem value={'0'} primaryText="Tony Allen"/>
-                    <MenuItem value={'1'} primaryText="Mike Conley"/>
-                    <MenuItem value={'2'} primaryText="Omar Remmy"/>
-                  </Field> 
 
+                <Field
+                  name="authorisedstaff"
+                  hintText="Authorised"
+                  component={AutoComplete}
+                  floatingLabelText="Select Authorised Staff"
+                  openOnFocus={true}
+                  filter={MUIAutoComplete.fuzzyFilter}
+                  dataSource={[ 'Tony Allen', 'Mike Conley', 'Omar Remmy', 'James Harden' ]}
+                 />
                 </Box>
+
+
 
                 <Field name="requestDetails" component={requestDetails =>
                       <TextField 

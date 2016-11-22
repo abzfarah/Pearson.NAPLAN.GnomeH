@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { RECEIVE_SCHOOL_SEARCH, REQUEST_SCHOOL_SEARCH, SELECT_SCHOOL } from '../constants'
+import { RECEIVE_SCHOOL_SEARCH, REQUEST_SCHOOL_SEARCH, SELECT_SCHOOL, SELECT_SCHOOL_FETCH,
+    SELECT_SCHOOL_FETCH_SUCCESS,
+    SELECT_SCHOOL_FETCH_FAILURE } from '../constants'
 
 export function requestSearch(search) {
     return {
@@ -9,12 +11,46 @@ export function requestSearch(search) {
     };
 }
 
-function fetchSearchFromServer(search) {
+
+export function selectSchool(schoolCode) {
+    return dispatch => {
+          return axios.get("http://audockerintstg01.epenau.local:12000/api/v1/centresearch/" + schoolCode)
+                      .then((response) => {
+                          dispatch({
+                              type: 'SELECT_SCHOOL_FETCH_SUCCESS',
+                              isLoading: false,
+                              isLoaded: true,
+                              school: response.data[0]
+                          });
+                      })
+                      .catch((err) => {
+                          dispatch({
+                              type: 'SELECT_SCHOOL_FETCH_FAILURE',
+                              isLoading: false,
+                              isLoaded: false
+                          })
+                      });
+    }
+
+}
+
+
+
+export function fetchSearchFromServer(search) {
     return dispatch => {
         dispatch(requestSearch(search));
             return fetch(`http://audockerintstg01.epenau.local:12000/api/v1/centresearch/${search.term}`)
         .then(req => req.json())
         .then(json => dispatch(receiveSearch(search, json)));
+    }
+}
+
+export function fetchSchoolFromServer(centreCode) {
+    return dispatch => {
+        dispatch(requestSearch(centreCode));
+            return fetch(`http://audockerintstg01.epenau.local:12000/api/v1/centresearch/${centreCode}`)
+        .then(req => req.json())
+        .then(json => dispatch(receiveSchool(centreCode, json)));
     }
 }
 
@@ -45,12 +81,4 @@ function receiveSearch(search, json) {
         search: Object.assign({}, search, { schools: result }),
     };
 }
-
-export function selectSchool(selectedSchool) {
-        return{
-            type: SELECT_SCHOOL,
-            school: selectedSchool,
-            isLoading: false
-        }            
-    }
 

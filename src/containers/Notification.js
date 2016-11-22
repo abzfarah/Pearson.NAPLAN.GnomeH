@@ -5,7 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 export default class Notification extends React.Component {
 
-
   render() {
 
    const { open, handleCancel, handleContinue } = this.props
@@ -29,7 +28,7 @@ export default class Notification extends React.Component {
           actions={actions}
           modal={false}
           open={open}
-  
+
         >
           You have unsaved data. Discard changes?
         </Dialog>

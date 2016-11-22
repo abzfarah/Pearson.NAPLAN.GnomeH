@@ -37,6 +37,25 @@ export function searchResults(state = {
     }
 }
 
+
+export function schoolResult(state = {
+    isLoading: false,
+    schools: [],
+    search: {},
+    }, action) {
+
+    switch (action.type) {
+        case 'RECEIVE_SCHOOL':
+            return Object.assign({}, state, {
+                isLoading: false,
+                currentSchool: action.currentSchool,
+                lastUpdated: action.receivedAt,
+         });
+        default:
+          return state;
+    }
+}
+
 export function searchTerms(state = { term: null }, action) {
   switch (action.type) {
   case 'CLEAR_SEARCH':

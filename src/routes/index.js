@@ -22,8 +22,9 @@ export default {
       { 
         path:'/school',
         component: RegistrationContainer,
+        indexRoute: {component: SummaryTable},
         childRoutes: [
-          { path: 'summary',             component: SummaryTable, onChange:yourHandler},
+          { path: 'summary',             component: SummaryTable},
           { path: 'soc',                 component: StatementContainer },
    //       { path: 'authorisedstaff',     component: Summary },
           { path: 'schooldetails',       component: SchoolDetailsContainer }
@@ -45,9 +46,6 @@ export default {
 }
 
 
-function yourHandler(previousRoute, nextRoute) {
- var x =3;
-}
 
 function render(nextState, replaceState) {
   if (session.login)
@@ -58,6 +56,9 @@ function redirectToHome(nextState, replace) {
   if (session.isAdmin) { 
     replace('/manageschools') 
   } 
+  else if (session.schoolcode) {
+    replace('/school') 
+  }
 
 }
       
