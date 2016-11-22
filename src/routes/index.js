@@ -23,7 +23,7 @@ export default {
         path:'/school',
         component: RegistrationContainer,
         childRoutes: [
-          { path: 'summary',             component: SummaryTable },
+          { path: 'summary',             component: SummaryTable, onChange:yourHandler},
           { path: 'soc',                 component: StatementContainer },
    //       { path: 'authorisedstaff',     component: Summary },
           { path: 'schooldetails',       component: SchoolDetailsContainer }
@@ -42,6 +42,11 @@ export default {
         component: CallbackPage
       },
   ]
+}
+
+
+function yourHandler(previousRoute, nextRoute) {
+ var x =3;
 }
 
 function render(nextState, replaceState) {

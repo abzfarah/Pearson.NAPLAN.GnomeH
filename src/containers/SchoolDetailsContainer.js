@@ -27,8 +27,15 @@ class SchoolDetailsContainer extends React.Component {
       form: {},
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.routerWillLeave = this.routerWillLeave.bind(this)
   }
 
+  routerWillLeave(nextLocation) {
+      // return false to prevent a transition w/o prompting the user,
+      // or return a string to allow the user to decide:
+      if (1)
+        return 'Your work is not saved! Are you sure you want to leave?'
+    }
   handleFormSubmit(data) {
 
 

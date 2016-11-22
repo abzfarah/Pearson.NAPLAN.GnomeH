@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+
+import Notification from './Notification'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { formValueSelector } from 'redux-form';
@@ -12,6 +16,7 @@ import {
   isInvalid
 } from 'redux-form'
 
+import _ from 'lodash';
 
 
 import { toastr } from 'react-redux-toastr'
@@ -19,7 +24,32 @@ import * as statementActions from '../actions';
 import {Button, Box, Heading, Paragraph, Footer, Form, FormField, Section, Tab, Tabs} from '../components/common';
 import { RadioButton, MenuItem } from 'material-ui'
 import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui'
-import _ from 'lodash';
+
+
+function setAsyncRouteLeaveHook(router, route, hook) {
+  let withinHook = false
+  let finalResult = undefined
+  let finalResultSet = false
+  router.setRouteLeaveHook(route, nextLocation => {
+    withinHook = true
+    if (!finalResultSet) {
+      hook(nextLocation).then(result => {
+        finalResult = result
+        finalResultSet = true
+        if (!withinHook && nextLocation) {
+          // Re-schedule the navigation
+          router.push(nextLocation)
+        }
+      })
+    }
+    let result = finalResultSet ? finalResult : false
+    withinHook = false
+    finalResult = undefined
+    finalResultSet = false
+    return result
+  })
+}
+
 
 class StatementContainer extends React.Component {
 
@@ -28,28 +58,30 @@ class StatementContainer extends React.Component {
     this.state = {
       currentSchool: {},
       statementData: {},
+      open: false,
+      nextLocation: "",
       isSchoolUser: true,
       isConfirmed: false,
       form: {},
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.routerWillLeave = this.routerWillLeave.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.handleCancel= this.handleCancel.bind(this)
+    this.handleContinue= this.handleContinue.bind(this)
   }
 
   componentDidMount() {
-      this.props.router.setRouteLeaveHook(this.props.router, this.routerWillLeave)
-    }
+
+  }
+
 
   routerWillLeave(nextLocation) {
-      // return false to prevent a transition w/o prompting the user,
-      // or return a string to allow the user to decide:
-      if (1)
-        return 'Your work is not saved! Are you sure you want to leave?'
-    }
+
+  }
 
 
   handleFormSubmit(data) {
-
     data["securityLevel"] = parseInt(data["securityLevel"])   //WebApi expects securitylevel property to be an integer
     toastr.success('Success', 'Statement of compliance submitted')
     this.props.actions.submitStatement(data)
@@ -57,7 +89,6 @@ class StatementContainer extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-
     if ( !_.isEmpty(nextProps.statement) ) {
       let level = nextProps.statement["securityLevel"].toString() 
       nextProps.statement["securityLevel"] = level
@@ -83,13 +114,28 @@ class StatementContainer extends React.Component {
   }
 
   componentWillUnmount(props) {
-
     var x =33;
-    debugger
+ 
   }
 
+  handleClose(hey) {
+    var s=3;
+    return true
+  }
+
+  handleCancel() {
+    this.setState({open: false})
+  };
+
+  handleContinue() {
+    let nextLocation = this.state.nextLocation
+    this.props.router.push('/school/summary');
+   
+  }
 
   shouldComponentUpdate(nextProps, nextState) {
+
+    //if (this.state.open || nextState.open ) return false
 
     return true
   }
@@ -97,13 +143,13 @@ class StatementContainer extends React.Component {
   render() {
     const { handleSubmit, pristine, reset, submitting, validated, invalid, isAdmin, otherDisabled } = this.props
 
-  //  let isOther = this.props.form["object Object"].values["securityLevel"]
-  //  isOther = "4" ? false : true
-
-    let { isConfirmed} = this.state
+    let { isConfirmed, open} = this.state
 
     return (
       <Box>     
+
+      
+
       <Section className="test">
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <Box className="PartA">
@@ -195,7 +241,7 @@ class StatementContainer extends React.Component {
 }
 
 StatementContainer.contextTypes = {
-    router: React.PropTypes.func.isRequired
+    router: React.PropTypes.object
 }
 
 
@@ -272,9 +318,11 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state, ownProps) {
     const securityLevel = selector(state, 'securityLevel')
     const otherDisabled = securityLevel == "4" ? false : true //If "other" is not selected, disable its corresponding text field
+    var unsaved = ownProps.unsaved
 
     return {
-        otherDisabled
+        otherDisabled,
+        unsaved
     };
 }
 
