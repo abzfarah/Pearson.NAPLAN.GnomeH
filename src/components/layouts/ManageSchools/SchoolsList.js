@@ -55,7 +55,7 @@ class SchoolList extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-debugger
+
         this.setState({
             schoolData: nextProps.schoolData,
             isDeleted: nextProps.isDeleted
@@ -128,15 +128,15 @@ debugger
         var cell = this.state.selectedSchoolCode;
         this.props.deleteSchool(cell);
         //--TODO
-        debugger
-        // if (this.state.isDeleted) {
-        //     var index = this.state.schoolData.findIndex(x => x.centreCode == this.state.selectedSchoolCode);
-        //     this.state.schoolData.splice(index, 1);
-        //     this.setState({ openSnack: true, snackMessage: 'School has been removed successfully!' })
-        // }
-        // else {
-        //     this.setState({ openSnack: true, snackMessage: 'An error occured !' })
-        // }
+
+        if (this.state.isDeleted) {
+            var index = this.state.schoolData.findIndex(x => x.centreCode == this.state.selectedSchoolCode);
+            this.state.schoolData.splice(index, 1);
+            this.setState({ openSnack: true, snackMessage: 'School has been removed successfully!' })
+        }
+        else {
+            this.setState({ openSnack: true, snackMessage: 'An error occured !' })
+        }
 
     }
 
@@ -161,13 +161,16 @@ debugger
         //--TODO 
         //-should use shared const
         let sectorType = {
+            C: "C",
             G: "G",
-            I: "I",
-            C: "C"
+            H: "H",
+            I: "I", 
+            O: "O"
         }
 
         const actions = [
             <FlatButton
+                id="cancle"
                 label="Cancel"
                 primary={true}
                 onTouchTap={this.handleClose}
@@ -187,17 +190,19 @@ debugger
 
         const actionsConfirm = [
             <FlatButton
+                id="confirmCancel"
                 label="Cancel"
                 primary={true}
                 onTouchTap={this.handleConfirmationCancel}
                 />,
             <FlatButton
+
                 label="Submit"
                 primary={true}
                 keyboardFocused={true}
                 onTouchTap={() => {
                     this.handleConfirmationOK()
-                     this.setState({ openSnack: true, snackMessage: 'School has been removed successfully!' })
+                    this.setState({ openSnack: true, snackMessage: 'School has been removed successfully!' })
 
                 } }
                 />
@@ -211,6 +216,7 @@ debugger
                     </Heading>
 
                     <RaisedButton
+                        id="addSchool"
                         label="Add New School"
                         icon={<FontIcon className="muidocs-icon-custom-github" />}
                         onTouchTap={this.handleOpen}
@@ -226,7 +232,8 @@ debugger
                         onRequestClose={this.handleClose}
                         autoScrollBodyContent={true}
                         autoDetectWindowHeight={true}>
-                        <AddSchoolContainer actions={actions} submitForm={this.submitForm} ref={'addSchoolForm'} centreCode={this.state.centreCode} /></Dialog>
+                        <AddSchoolContainer actions={actions} submitForm={this.submitForm} ref={'addSchoolForm'} centreCode={this.state.centreCode} />
+                    </Dialog>
 
                     <panel className='grid' style={{ width: 1050 }}>
                         <BootstrapTable data={this.state.schoolData} striped={true} hover={true} pagination={true} selectRow={this.selectRowProp}>
@@ -235,22 +242,24 @@ debugger
                             <TableHeaderColumn dataField="sector" dataSort={true} width={200} filter={{ type: "SelectFilter", options: sectorType }}>Sector</TableHeaderColumn>
                             <TableHeaderColumn dataField="centreName" dataSort={true} filter={{ type: "TextFilter", placeholder: "Search by Name" }}>School Name</TableHeaderColumn>
                             <TableHeaderColumn dataField="centreCode" width={200} dataFormat={(cell, row) => { return this.handleDelete(cell, row) } }>Delete  School</TableHeaderColumn>
-                        </BootstrapTable></panel>
+                        </BootstrapTable>
+                    </panel>
 
-                    <Dialog
-                        title="Confirm delete school"
-                        actions={actionsConfirm}
-                        modal={false}
-                        open={this.state.openConfirmation}>
-                        <h5>Are you sure that you want to delete this school ?</h5>
-                    </Dialog>
+                    <div id="ConfirmDialog">
+                        <Dialog
+                            title="Confirm delete school"
+                            actions={actionsConfirm}
+                            modal={false}
+                            open={this.state.openConfirmation}>
+                            <h5 id="ConfirmDialogTitle">Are you sure that you want to delete this school ?</h5>
+                        </Dialog>
+                    </div>
                     <Snackbar
                         open={this.state.openSnack}
                         message={this.state.snackMessage}
                         autoHideDuration={4000}
                         onRequestClose={this.handleSnackClose}
                         style={{ color: 'green' }} />
-
                 </Section>
             </Box>
         )

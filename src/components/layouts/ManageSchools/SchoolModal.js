@@ -7,6 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem'
 
 import { Button, Box, Heading, Paragraph, Form, FormField, Section } from '../../common'
+import { getSuburbsAsync } from '../../../actions/manageSchoolActions'
 
 const style = {
     margin: 12,
@@ -19,20 +20,60 @@ class SchoolModal extends React.Component {
         //--Modal
         this.state = {
             open: false,
+            suburbs: []
         };
         this.submitForm = this.submitForm.bind(this);
+        this.getSuburbs = this.getSuburbs.bind(this);
+    }
 
+    getSuburbs(postalCode, type) {
+
+        getSuburbsAsync(postalCode).then((result) => {
+            if (result) {
+                if (type == 'report') {
+                    this.setState({ reportSuburbs: result })
+                }
+                else if (type == 'delivery') {
+                    this.setState({ deliverySuburbs: result })
+                }
+            }
+        });
+    }
+
+    componentDidMount() {
+        if (this.props.initialValues && this.props.initialValues.deliveryPostcode) {
+            this.getSuburbs(this.props.initialValues.deliveryPostcodeValue, 'delivery')
+        }
+        if (this.props.initialValues && this.props.initialValues.reportPostcode) {
+            this.getSuburbs(this.props.initialValues.reportPostcode, 'delivery')
+        }
     }
 
     componentWillReceiveProps(nextProps) {
         
-        if (nextProps.initialValues) {
-            //  console.log(nextProps.initialValues)
-            // this.setState({initialValues: nextProps.initialValues })
+        if (nextProps.deliveryPostcodeValue != this.props.deliveryPostcodeValue) {
+            // if (nextProps.deliveryPostcodeValue.length < 4) {
+            //     this.setState({ deliverySuburbs: [] })
+            //  }
+            //  else
+            if (nextProps.deliveryPostcodeValue.length == 4) {
+                this.getSuburbs(nextProps.deliveryPostcodeValue, 'delivery')
+            }
+        }
+       
+        if (nextProps.reportPostcodeValue != this.props.reportPostcodeValue) {
+            // if (nextProps.reportPostcodeValue.length < 4) {
+            //     this.setState({ deliverySuburbs: [] })
+            //  }
+            //  else
+            if (nextProps.reportPostcodeValue.length == 4) {
+                this.getSuburbs(nextProps.reportPostcodeValue, 'report')
+            }
         }
     }
 
     submitForm(model) {
+        console.log(model)
         this.props.submitForm(model);
     }
 
@@ -52,7 +93,8 @@ class SchoolModal extends React.Component {
         }
     }
     render() {
-        const {  handleSubmit, pristine, reset, submitting } = this.props
+
+        const {  handleSubmit, pristine, reset, submitting, deliveryPostcodeValue, reportPostcodeValue, centreNameValue } = this.props
 
         return (
             <Box className="form-container">
@@ -68,7 +110,7 @@ class SchoolModal extends React.Component {
                         <Box direction="row" className="boxRow">
                             <Box className="sd_boxLeft sd_editBgColor" align="start" pad="small" colorIndex="light-2">
 
-                                <Heading tag="h5" className="sd_hColor">Part A: School Details</Heading>
+                                <Heading tag="h5" className="sd_hColor">Part A: School Details {centreNameValue}</Heading>
                                 <Field name="centreName" type="text" component={TextField} floatingLabelText="School Name" />
                                 <Field name="centreCode" type="text" component={TextField} floatingLabelText="School Code" />
                                 <Field
@@ -102,8 +144,18 @@ class SchoolModal extends React.Component {
                                 <Field name="deliverySchoolName" type="text" component={TextField} floatingLabelText="School Name" />
                                 <Field name="deliveryAddress1" type="text" component={TextField} floatingLabelText="Address 1" />
                                 <Field name="deliveryAddress2" type="text" component={TextField} floatingLabelText="Address 2" />
-                                <Field name="deliverySuburb" type="text" component={TextField} floatingLabelText="Suburb" />
                                 <Field name="deliveryPostcode" type="number" component={TextField} floatingLabelText="Post Code" />
+                                <Field
+                                    name="deliverySuburb"
+                                    component={SelectField}
+                                    hintText="Select Suburb"
+                                    floatingLabelText="Select Suburb">
+                                    {
+                                        this.state.deliverySuburbs && this.state.deliverySuburbs.map((item, i) => {
+                                            return <MenuItem suburb={i} value={item.suburb} primaryText={item.suburb} />
+                                        })
+                                    }
+                                </Field>
                                 <Field name="deliveryState" type="text" component={TextField} floatingLabelText="State" />
                             </Box>
 
@@ -113,8 +165,19 @@ class SchoolModal extends React.Component {
                                 <Field name="reportSchoolName" type="text" component={TextField} floatingLabelText="School Name" />
                                 <Field name="reportAddress1" type="text" component={TextField} floatingLabelText="Address 1" />
                                 <Field name="reportAddress2" type="text" component={TextField} floatingLabelText="Address 2" />
-                                <Field name="reportSuburb" type="text" component={TextField} floatingLabelText="Suburb" />
+
                                 <Field name="reportPostcode" type="number" component={TextField} floatingLabelText="Post Code" />
+                                <Field
+                                    name="reportSuburb"
+                                    component={SelectField}
+                                    hintText="Select Suburb"
+                                    floatingLabelText="Select Suburb">
+                                    {
+                                        this.state.reportSuburbs && this.state.reportSuburbs.map((item, i) => {
+                                            return <MenuItem suburb={i} value={item.suburb} primaryText={item.suburb} />
+                                        })
+                                    }
+                                </Field>
                                 <Field name="reportState" type="text" component={TextField} floatingLabelText="State" />
                             </Box>
                         </Box>
@@ -135,13 +198,13 @@ const validate = values => {
     if (values.email && values.email.length > 100) { errors.email = 'Invalid email address' }
     if (values.phone && values.phone.length > 15) { errors.phone = 'Invalid Phone Number' }
     if (values.fax && values.fax.length > 15) { errors.fax = 'Invalid Fax Number' }
-    if (values.centreName && values.centreName.length > 100) { errors.centreName = 'Invalid centreName' }
+    if (values.centreName && values.centreName.length > 100) { errors.centreName = 'Invalid centre Name' }
     if (values.centreCode && values.centreCode.length > 5) { errors.centreCode = 'Invalid centre Code' }
     if (values.deecD_CODE && values.deecD_CODE.length > 8) { errors.deecD_CODE = 'Invalid DEECD CODE' }
     if (values.dscode && values.dscode.length > 5) { errors.dscode = 'Invalid code' }
     if (values.dsName && values.dsName.length > 100) { errors.dsName = 'Invalid centreName' }
 
-    if (values.deliveryCode && values.deliveryCode.length > 5) { errors.deliveryCode = 'Invalid deliveryCode' }
+    if (values.deliveryCode && values.deliveryCode.length > 5) { errors.deliveryCode = 'Invalid delivery Code' }
     if (values.deliverySchoolName && values.deliverySchoolName.length > 100) { errors.deliverySchoolName = 'Invalid School Name' }
     if (values.deliveryAddress1 && values.deliveryAddress1.length > 100) { errors.deliveryAddress1 = 'Invalid Address1' }
     if (values.deliveryAddress2 && values.deliveryAddress2.length > 100) { errors.deliveryAddress2 = 'Invalid Address 2' }
@@ -155,26 +218,28 @@ const validate = values => {
     if (values.reportAddress2 && values.reportAddress2.length > 100) { errors.reportAddress2 = 'Invalid reportAddress 2' }
     if (values.reportSuburb && values.reportSuburb.length > 50) { errors.reportSuburb = 'Invalid Suburb' }
     if (values.reportPostcode && values.reportPostcode.length > 4) { errors.reportPostcode = 'Invalid Postcode' }
-    if (values.reportState && values.reportState.length > 17) { errors.reportState = 'Invalid Postcode' }
+    if (values.reportState && values.reportState.length > 17) { errors.reportState = 'Invalid state' }
 
     return errors
 }
 
-export default connect(null, null, null, { withRef: true })(reduxForm({
+//connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
+const selector = formValueSelector('SchoolForm')
+export default connect(state => {
+
+    const deliveryPostcodeValue = selector(state, 'deliveryPostcode')
+    const reportPostcodeValue = selector(state, 'reportPostcode')
+    const centreNameValue = selector(state, 'centreName')
+
+    return {
+        deliveryPostcodeValue, reportPostcodeValue, centreNameValue
+    }
+}, { getSuburbsAsync }, null, { withRef: true })(reduxForm({
     form: 'SchoolForm',
     validate,
-
-
-
 })(SchoolModal))
 //-- TODO
-//--1- er-injectTapEventPlugin
-//-- 2- Modal submit form
 //---3 - suburb loading
 //-- 2- SchoolCode shuld be uniq
 //--3 design
 
-//-- Modal
-//-- phone number
-
-//Error: Invariant Violation: injectTapEventPlugin(): Can only be called once per application lifecycle. It is recommended to call injectTapEventPlugin() just before you call ReactDOM.render(). If you are using an external library which calls injectTapEventPlugin() itself, please contact the //maintainer as it shouldn't be called in library code and should be injected by the application.
