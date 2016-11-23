@@ -50,25 +50,25 @@ class SchoolModal extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        
+
         if (nextProps.deliveryPostcodeValue != this.props.deliveryPostcodeValue) {
-            // if (nextProps.deliveryPostcodeValue.length < 4) {
-            //     this.setState({ deliverySuburbs: [] })
-            //  }
-            //  else
-            if (nextProps.deliveryPostcodeValue.length == 4) {
-                this.getSuburbs(nextProps.deliveryPostcodeValue, 'delivery')
+            if (nextProps.deliveryPostcodeValue && nextProps.deliveryPostcodeValue.length < 4) {
+                this.setState({ deliverySuburbs: [] })
             }
+            else
+                if (nextProps.deliveryPostcodeValue && nextProps.deliveryPostcodeValue.length == 4) {
+                    this.getSuburbs(nextProps.deliveryPostcodeValue, 'delivery')
+                }
         }
-       
+
         if (nextProps.reportPostcodeValue != this.props.reportPostcodeValue) {
-            // if (nextProps.reportPostcodeValue.length < 4) {
-            //     this.setState({ deliverySuburbs: [] })
-            //  }
-            //  else
-            if (nextProps.reportPostcodeValue.length == 4) {
-                this.getSuburbs(nextProps.reportPostcodeValue, 'report')
+            if (nextProps.reportPostcodeValue && nextProps.reportPostcodeValue.length < 4) {
+                this.setState({ reportSuburbs: [] })
             }
+            else
+                if (nextProps.reportPostcodeValue && nextProps.reportPostcodeValue.length == 4) {
+                    this.getSuburbs(nextProps.reportPostcodeValue, 'report')
+                }
         }
     }
 

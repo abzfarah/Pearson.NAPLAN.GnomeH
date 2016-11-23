@@ -118,7 +118,8 @@ export function deleteSchool(schoolCode) {
 
                 dispatch({
                     type: types.SCHOOL_DELETE_FAILURE,
-                    isLoading: false
+                    isLoading: false,
+                    error: error
                 })
             })
     }

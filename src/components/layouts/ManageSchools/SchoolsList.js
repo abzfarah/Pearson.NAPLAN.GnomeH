@@ -58,8 +58,18 @@ class SchoolList extends React.Component {
 
         this.setState({
             schoolData: nextProps.schoolData,
-            isDeleted: nextProps.isDeleted
+           // isDeleted: nextProps.isDeleted
         });
+
+        
+        if (nextProps.isDeleted) {
+            var index = this.state.schoolData.findIndex(x => x.centreCode == this.state.selectedSchoolCode);
+            this.state.schoolData.splice(index, 1);
+            this.setState({ openSnack: true, snackMessage: 'School has been removed successfully!' })
+        }
+        else if (nextProps.isDeleted == false) {
+            this.setState({ openSnack: true, snackMessage: 'An error occured !' })
+        }
 
     }
 
@@ -127,16 +137,8 @@ class SchoolList extends React.Component {
 
         var cell = this.state.selectedSchoolCode;
         this.props.deleteSchool(cell);
-        //--TODO
-
-        if (this.state.isDeleted) {
-            var index = this.state.schoolData.findIndex(x => x.centreCode == this.state.selectedSchoolCode);
-            this.state.schoolData.splice(index, 1);
-            this.setState({ openSnack: true, snackMessage: 'School has been removed successfully!' })
-        }
-        else {
-            this.setState({ openSnack: true, snackMessage: 'An error occured !' })
-        }
+    
+    
 
     }
 
@@ -164,7 +166,7 @@ class SchoolList extends React.Component {
             C: "C",
             G: "G",
             H: "H",
-            I: "I", 
+            I: "I",
             O: "O"
         }
 
@@ -202,7 +204,6 @@ class SchoolList extends React.Component {
                 keyboardFocused={true}
                 onTouchTap={() => {
                     this.handleConfirmationOK()
-                    this.setState({ openSnack: true, snackMessage: 'School has been removed successfully!' })
 
                 } }
                 />
@@ -267,11 +268,12 @@ class SchoolList extends React.Component {
 }
 
 function mapStateToProps(globalState) {
-
+    
     return {
         isLoading: globalState.manageSchool.isLoading,
         schoolData: globalState.manageSchool.schoolDataList,
-        isDeleted: globalState.manageSchool.isDeleted
+        isDeleted: globalState.manageSchool.isDeleted,
+        error: globalState.manageSchool.error
     }
 }
 
