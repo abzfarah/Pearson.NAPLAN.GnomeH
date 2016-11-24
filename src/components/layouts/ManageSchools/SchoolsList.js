@@ -152,10 +152,6 @@ class SchoolList extends React.Component {
             this.setState({ openSnack: true, snackMessage: 'An error occured !' })
         });
 
-
-
-
-
     }
 
     updateList() {
