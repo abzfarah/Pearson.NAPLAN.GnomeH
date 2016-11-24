@@ -1,32 +1,162 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import update from 'react-addons-update'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-
-import { getAuthStaffsAsync } from '../../../Actions/AuthStaff'
+import AddAuthStaffContainer from './AddAuthStaffContainer'
+import { getAuthStaffsAsync } from '../../../Actions/AuthStaffActions'
+import '../../../styles/data-grid.css'
+import Section from '../../common/Section'
+import Heading from '../../common/Heading'
+import Paragraph from '../../common/Paragraph'
+import Box from '../../common/Box'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
+import { Snackbar, FontIcon } from 'material-ui'
+import  FontAwesome   from 'react-fontawesome'
 
 
 class AuthStaff extends React.Component {
 
+    static propTypes = {
+        //  authStaffData: PropTypes.array.isRequired,
+
+    };
+
     constructor(props) {
         super(props)
+
+        this.state = {
+            open: false,
+            isLoading: false,
+            authStaffData: []
+        }
+        this.formatLockout = this.formatLockout.bind()
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        //   this.setState({
+        //       authStaffData: nextProps.authStaffData,
+        //  });
     }
 
     componentDidMount() {
 
-        this.props.getAuthStaffsAsync();
+        //--TODO
+        let centerCode = '01008';
+        this.props.getAuthStaffsAsync(centerCode).then((result) => {
+
+            this.setState({
+                authStaffData: result
+            })
+        });
     }
-    render() {
+
+    handleUpdate(cell, row) {
+
+        return <RaisedButton
+            label="Edit"
+            icon={<FontIcon className="muidocs-icon-custom-github" />}
+            primary={true}
+            fullWidth={false}
+            style={{ width: 100 }} />
+        //cell;
+
+    }
+
+    handleDelete(cell, row) {
+        return <RaisedButton
+            label="Delete"
+            icon={<FontIcon className="muidocs-icon-custom-github" />}
+            primary={true}
+            fullWidth={false}
+            style={{ width: 100 }} />
+    }
+
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    formatLockout(cell, row) {
         return (
-            <h2>This is new authorized staff page</h2>
+            <div>
+                {cell && <h2>true </h2>}
+                {!cell && <h3>---</h3>}
+            </div>
+        )
+    }
+
+    render() {
+
+        console.log(this.state.authStaffData)
+        const actions = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onTouchTap={this.handleClose}
+                />,
+            <FlatButton
+                label="Submit"
+                primary={true}
+                disabled={true}
+                onTouchTap={this.handleClose}
+                />,
+        ];
+        return (
+            <Box className="form-container">
+                <Section className="test">
+                    <Heading tag="h2">
+                        Authorised Staff
+         
+                    </Heading>
+                    <RaisedButton
+                        label="Add Contacts"
+                        onTouchTap={this.handleOpen}
+                        primary={true}
+                        fullWidth={false}
+                        style={{ marginBottom: 10, width: 200 }} />
+                    <Dialog
+                        actions={actions}
+                        modal={true}
+                        open={this.state.open}
+                        autoScrollBodyContent={true}
+                        >
+                        <AddAuthStaffContainer />
+                    </Dialog>
+                    <panel className='grid' style={{ width: 1000 }}>
+                    <i className="fa fa-tag"></i>
+                        <BootstrapTable data={this.state.authStaffData} striped={true} hover={true} selectRow={this.selectRowProp} tableStyle={{ width: 1200 }} >
+                            <TableHeaderColumn dataField="userId" dataSort={true} width={200} isKey hidden> </TableHeaderColumn>
+                           
+                            <TableHeaderColumn dataField="firstName" dataSort={true} width={200} columnTitle>First Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="lastName" dataSort={true} width={200} >Last Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="authUserRole" dataSort={true} width={200} >Role</TableHeaderColumn>
+                            <TableHeaderColumn dataField="userName" dataSort={true} width={200} >User Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="receiveEmails" dataSort={true} width={200} >Receive Emails</TableHeaderColumn>
+                            <TableHeaderColumn dataField="testAdmin" dataSort={true} width={200} >Test Admin</TableHeaderColumn>
+                            <TableHeaderColumn dataField="email" dataSort={true} width={200} >Email</TableHeaderColumn>
+                            <TableHeaderColumn dataField="lockedout" dataSort={true} width={200} dataFormat={this.formatLockout}>lockedout</TableHeaderColumn>
+                             <TableHeaderColumn dataField="userId" width={200} dataFormat={(cell, row) => { return this.handleUpdate(cell, row) } }>  </TableHeaderColumn>
+                            <TableHeaderColumn dataField="userId" width={200} dataFormat={(cell, row) => { return this.handleDelete(cell, row) } }>  </TableHeaderColumn>
+                        </BootstrapTable>
+                    </panel>
+                </Section>
+            </Box>
         )
     }
 }
 
-
 function mapStateToProps(globalState) {
 
     return {
-
+        isLoading: globalState.manageSchool.isLoading,
+        // authStaffData: globalState.authStaff.authStaffList,
+        error: globalState.manageSchool.error
     }
 }
 
@@ -39,3 +169,7 @@ function mapDispatchToProps() {
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthStaff)
 //export default AuthStaff
+//-- check claim
+//-- get current school code
+//--  ADD Modal --> column half
+//-- School Delete error message just one time

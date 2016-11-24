@@ -6,8 +6,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { manageSchoolsAsync, deleteSchool, submitSchoolAsync } from '../../../actions/manageSchoolActions'
 
 import AddSchoolContainer from './AddSchoolContainer'
-
-import './data-grid.css'
+import '../../../styles/data-grid.css'
 import Section from '../../common/Section'
 import Heading from '../../common/Heading'
 import Paragraph from '../../common/Paragraph'
@@ -15,7 +14,8 @@ import Box from '../../common/Box'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Snackbar, FontIcon } from 'material-ui';
+import FontIcon from 'material-ui/FontIcon';
+import { Snackbar } from 'material-ui';
 
 
 class SchoolList extends React.Component {
@@ -58,13 +58,14 @@ class SchoolList extends React.Component {
 
         this.setState({
             schoolData: nextProps.schoolData,
-           // isDeleted: nextProps.isDeleted
+            // isDeleted: nextProps.isDeleted
         });
 
-        
+
         if (nextProps.isDeleted) {
+            debugger
             var index = this.state.schoolData.findIndex(x => x.centreCode == this.state.selectedSchoolCode);
-            this.state.schoolData.splice(index, 1);
+            //   this.state.schoolData.splice(index, 1);
             this.setState({ openSnack: true, snackMessage: 'School has been removed successfully!' })
         }
         else if (nextProps.isDeleted == false) {
@@ -75,6 +76,7 @@ class SchoolList extends React.Component {
 
     handleOpen = (centreCode) => {
         this.setState({ open: true, centreCode: centreCode });
+
     }
 
     handleClose = () => {
@@ -105,6 +107,7 @@ class SchoolList extends React.Component {
         onSelect: this.onRowSelect,
         onSelectAll: this.onSelectAll
     };
+
     handleUpdate(cell, row) {
 
         return <RaisedButton
@@ -119,6 +122,7 @@ class SchoolList extends React.Component {
         //cell;
 
     }
+
     deleteSchool(cell) {
 
         this.setState({ openConfirmation: true })
@@ -136,9 +140,21 @@ class SchoolList extends React.Component {
         this.setState({ openConfirmation: false })
 
         var cell = this.state.selectedSchoolCode;
-        this.props.deleteSchool(cell);
-    
-    
+
+        deleteSchool(cell).then(result => {
+
+            this.setState({ openSnack: true, snackMessage: 'School has been removed successfully!' })
+
+            var keyWord = '';
+            this.props.manageSchoolsAsync(keyWord);
+
+        }).catch(err => {
+            this.setState({ openSnack: true, snackMessage: 'An error occured !' })
+        });
+
+
+
+
 
     }
 
@@ -155,6 +171,28 @@ class SchoolList extends React.Component {
             primary={true}
             fullWidth={false}
             style={{ width: 100 }} />
+    }
+
+    renderActions(cell, row) {
+        return <div>
+            <RaisedButton
+                label="Edit"
+                onTouchTap={(e) => {
+                    this.handleOpen(cell)
+                } }
+                primary={true}
+                fullWidth={false}
+                style={{ width: 100, marginRight: 10 }} />
+
+            <RaisedButton
+                label="Delete"
+                onTouchTap={(e) => {
+                    this.deleteSchool(cell)
+                } }
+                secondary={true}
+                fullWidth={false}
+                style={{ width: 100 }} />
+        </div>
     }
 
     render() {
@@ -238,11 +276,10 @@ class SchoolList extends React.Component {
 
                     <panel className='grid' style={{ width: 1050 }}>
                         <BootstrapTable data={this.state.schoolData} striped={true} hover={true} pagination={true} selectRow={this.selectRowProp}>
-                            <TableHeaderColumn dataField="centreCode" isKey={true} width={200} dataFormat={(cell, row) => { return this.handleUpdate(cell, row) } }>Edit School</TableHeaderColumn>
-                            <TableHeaderColumn dataField="centreCode" dataSort={true} width={200} filter={{ type: "TextFilter", placeholder: "search by Code" }}>School Code</TableHeaderColumn>
-                            <TableHeaderColumn dataField="sector" dataSort={true} width={200} filter={{ type: "SelectFilter", options: sectorType }}>Sector</TableHeaderColumn>
-                            <TableHeaderColumn dataField="centreName" dataSort={true} filter={{ type: "TextFilter", placeholder: "Search by Name" }}>School Name</TableHeaderColumn>
-                            <TableHeaderColumn dataField="centreCode" width={200} dataFormat={(cell, row) => { return this.handleDelete(cell, row) } }>Delete  School</TableHeaderColumn>
+                            <TableHeaderColumn dataField="centreCode" isKey={true} dataSort={true} width={200} filter={{ type: "TextFilter", placeholder: "Filter by Code" }}></TableHeaderColumn>
+                            <TableHeaderColumn dataField="sector" dataSort={true} width={200} filter={{ type: "SelectFilter", options: sectorType }}></TableHeaderColumn>
+                            <TableHeaderColumn dataField="centreName" dataSort={true} filter={{ type: "TextFilter", placeholder: "Filter by Name" }}></TableHeaderColumn>
+                            <TableHeaderColumn dataField="centreCode" width={300} dataFormat={(cell, row) => { return this.renderActions(cell, row) } }>Actions</TableHeaderColumn>
                         </BootstrapTable>
                     </panel>
 
@@ -268,7 +305,7 @@ class SchoolList extends React.Component {
 }
 
 function mapStateToProps(globalState) {
-    
+
     return {
         isLoading: globalState.manageSchool.isLoading,
         schoolData: globalState.manageSchool.schoolDataList,
@@ -277,5 +314,5 @@ function mapStateToProps(globalState) {
     }
 }
 
-export default connect(mapStateToProps, { manageSchoolsAsync, deleteSchool })(SchoolList)
+export default connect(mapStateToProps, { manageSchoolsAsync })(SchoolList)
  //<RaisedButton label="Modal Dialog" onTouchTap={this.handleOpen} />

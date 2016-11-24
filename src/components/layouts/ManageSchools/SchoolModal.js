@@ -110,7 +110,7 @@ class SchoolModal extends React.Component {
                         <Box direction="row" className="boxRow">
                             <Box className="sd_boxLeft sd_editBgColor" align="start" pad="small" colorIndex="light-2">
 
-                                <Heading tag="h5" className="sd_hColor">Part A: School Details {centreNameValue}</Heading>
+                                <Heading tag="h5" className="sd_hColor">Part A: School Details</Heading>
                                 <Field name="centreName" type="text" component={TextField} floatingLabelText="School Name" />
                                 <Field name="centreCode" type="text" component={TextField} floatingLabelText="School Code" />
                                 <Field

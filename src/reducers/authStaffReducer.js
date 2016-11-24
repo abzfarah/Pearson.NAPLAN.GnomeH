@@ -2,15 +2,16 @@ import * as types from '../constants'
 
 const initialState = {
     isLoading: false,
-    isLoaded: fasle,
+    isLoaded: false,
     authStaffList: [],
     error: {}
 }
-export default (state, action = {}) => {
+export default (state  = initialState, action = {}) => {
 
-    switch (action.types) {
+    switch (action.type) {
 
         case types.GETAUTHSTAFFS_FETCH_SUCCESS:
+ 
             return Object.assign({}, state, {
                 isLoading: false,
                 isLoaded: true,
@@ -19,8 +20,10 @@ export default (state, action = {}) => {
             
         case types.GETSCHOOL_FETCH_FAILURE:
             return Object.assign({}, state, {
-                isLoading: fasle,
+                isLoading: false,
                 isLoaded: false
             })
     }
+     return state
 }
+

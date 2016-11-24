@@ -8,19 +8,25 @@ class AddSchoolContainer extends Component {
     constructor(props) {
         super(props)
 
-        this.submitForm = this.submitForm.bind(this);        
+        this.submitForm = this.submitForm.bind(this);
     }
 
     componentDidMount() {
 
         //--Update School
-        if (this.props.centreCode ) {
+        if (this.props.centreCode) {
 
             this.props.getSchoolAsync(this.props.centreCode);
         }
 
         this.props.getSectorsAsync();
-          }
+
+
+    }
+
+    componentDidUpdate() {
+        window.dispatchEvent(new Event('resize'))
+    }
 
     submitForm(model) {
 
@@ -73,7 +79,7 @@ function mapStateToProps(globalState) {
         sectors: globalState.manageSchool.sectors,
         isLoaded: globalState.manageSchool.isLoaded,
         isLoading: globalState.manageSchool.isLoading,
-    
+
     }
 }
 

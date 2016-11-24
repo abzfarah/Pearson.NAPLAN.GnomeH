@@ -5,25 +5,24 @@ import { reducer as formReducer } from 'redux-form'
 import manageSchoolReducer from './manageSchoolsReducer'
 import currentSchool from './currentSchoolReducer'
 import schoolDetailsReducer from './schoolDetailsReducer'
+import authStaffReducer from './authStaffReducer'
 import statementReducer from './statementReducer'
 import claimsReducer from './claimsReducer'
 
 
 export const USER_LOGGEDIN = 'USER_LOGGEDIN';
 
-
-
 const reducer = combineReducers(
   {
     routing: routerReducer,
     oidc: oidcReducer,
     claims: claimsReducer,
-    form : formReducer,
+    form: formReducer,
     currentSchool: currentSchool,
-    statement : statementReducer,
+    statement: statementReducer,
     schoolDetails: schoolDetailsReducer,
-      manageSchool: manageSchoolReducer,
-
+    manageSchool: manageSchoolReducer,
+    authStaff: authStaffReducer
   }
 );
 
