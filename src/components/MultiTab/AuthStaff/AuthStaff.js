@@ -13,7 +13,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Snackbar, FontIcon } from 'material-ui'
-import  FontAwesome   from 'react-fontawesome'
+import FontAwesome from 'react-fontawesome'
 
 
 class AuthStaff extends React.Component {
@@ -31,7 +31,7 @@ class AuthStaff extends React.Component {
             isLoading: false,
             authStaffData: []
         }
-        this.formatLockout = this.formatLockout.bind()
+       // this.formatLockout = this.formatLockout.bind()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -82,14 +82,14 @@ class AuthStaff extends React.Component {
         this.setState({ open: false });
     };
 
-    formatLockout(cell, row) {
-        return (
-            <div>
-                {cell && <h2>true </h2>}
-                {!cell && <h3>---</h3>}
-            </div>
-        )
-    }
+    // formatLockout(cell, row) {
+    //     return (
+    //         <div>
+    //             {cell && <h2>true </h2>}
+    //             {!cell && <h3>---</h3>}
+    //         </div>
+    //     )
+    // }
 
     render() {
 
@@ -112,7 +112,7 @@ class AuthStaff extends React.Component {
                 <Section className="test">
                     <Heading tag="h2">
                         Authorised Staff
-         
+
                     </Heading>
                     <RaisedButton
                         label="Add Contacts"
@@ -128,11 +128,9 @@ class AuthStaff extends React.Component {
                         >
                         <AddAuthStaffContainer />
                     </Dialog>
-                    <panel className='grid' style={{ width: 1000 }}>
-                    <i className="fa fa-tag"></i>
+                    <panel className='grid' style={{ width: 1000 }}>                      
                         <BootstrapTable data={this.state.authStaffData} striped={true} hover={true} selectRow={this.selectRowProp} tableStyle={{ width: 1200 }} >
                             <TableHeaderColumn dataField="userId" dataSort={true} width={200} isKey hidden> </TableHeaderColumn>
-                           
                             <TableHeaderColumn dataField="firstName" dataSort={true} width={200} columnTitle>First Name</TableHeaderColumn>
                             <TableHeaderColumn dataField="lastName" dataSort={true} width={200} >Last Name</TableHeaderColumn>
                             <TableHeaderColumn dataField="authUserRole" dataSort={true} width={200} >Role</TableHeaderColumn>
@@ -140,8 +138,7 @@ class AuthStaff extends React.Component {
                             <TableHeaderColumn dataField="receiveEmails" dataSort={true} width={200} >Receive Emails</TableHeaderColumn>
                             <TableHeaderColumn dataField="testAdmin" dataSort={true} width={200} >Test Admin</TableHeaderColumn>
                             <TableHeaderColumn dataField="email" dataSort={true} width={200} >Email</TableHeaderColumn>
-                            <TableHeaderColumn dataField="lockedout" dataSort={true} width={200} dataFormat={this.formatLockout}>lockedout</TableHeaderColumn>
-                             <TableHeaderColumn dataField="userId" width={200} dataFormat={(cell, row) => { return this.handleUpdate(cell, row) } }>  </TableHeaderColumn>
+                            <TableHeaderColumn dataField="userId" width={200} dataFormat={(cell, row) => { return this.handleUpdate(cell, row) } }>  </TableHeaderColumn>
                             <TableHeaderColumn dataField="userId" width={200} dataFormat={(cell, row) => { return this.handleDelete(cell, row) } }>  </TableHeaderColumn>
                         </BootstrapTable>
                     </panel>
@@ -171,5 +168,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(AuthStaff)
 //export default AuthStaff
 //-- check claim
 //-- get current school code
-//--  ADD Modal --> column half
-//-- School Delete error message just one time
+  //<TableHeaderColumn dataField="lockedout" dataSort={true} width={200} dataFormat={this.formatLockout}>lockedout</TableHeaderColumn>
