@@ -16,7 +16,7 @@ module.exports = {
   // Overrides when NODE_ENV === 'intstg'
   // ======================================================
   intstg : (config) => ({
-    compiler_public_path     : 'http://melbndevweb1.epenau.local:2016/',
+    compiler_public_path     : 'http://melbnintstgweb1.epenau.local:2016/',
     compiler_fail_on_warning : false,
     compiler_hash_type       : 'chunkhash',
     compiler_devtool         : null,
@@ -32,7 +32,7 @@ module.exports = {
   // Overrides when NODE_ENV === 'stg'
   // ======================================================
   stg : (config) => ({
-    compiler_public_path     : 'http://melbnintstgweb1.epenau.local:2016/',
+    compiler_public_path     : 'http://melbnstgweb1.epenau.local:2016/',
     compiler_fail_on_warning : false,
     compiler_hash_type       : 'chunkhash',
     compiler_devtool         : null,
@@ -48,7 +48,7 @@ module.exports = {
   // Overrides when NODE_ENV === 'devserver'
   // ======================================================
   devserver : (config) => ({
-    compiler_public_path     : 'http://melbnstgweb1.epenau.local:2016/',
+    compiler_public_path     : 'http://melbndevweb1.epenau.local:2016/',
     compiler_fail_on_warning : false,
     compiler_hash_type       : 'chunkhash',
     compiler_devtool         : null,
