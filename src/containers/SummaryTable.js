@@ -88,7 +88,7 @@ class SummaryTable extends React.Component {
     return (
       <div>
         <Table 
-         
+   
           height={this.state.height}
           fixedHeader={this.state.fixedHeader}
           fixedFooter={this.state.fixedFooter}
@@ -116,10 +116,10 @@ class SummaryTable extends React.Component {
 
             {tableData.map( (row, index) => (
               <TableRow  className="pop" key={index} selected={row.selected}>
-                <TableRowColumn  className="pop" >{row.task}</TableRowColumn>
-                <TableRowColumn>{row.requirement}</TableRowColumn>
-                <TableRowColumn >{row.due}</TableRowColumn>
-                <TableRowColumn>{row.status}</TableRowColumn>
+                <TableRowColumn         style={{ texAlign: 'center' }} >{row.task}</TableRowColumn>
+                <TableRowColumn style={{ texAlign: 'center' }} >{row.requirement}</TableRowColumn>
+                <TableRowColumn style={{ texAlign: 'center' }}>{row.due}</TableRowColumn>
+                <TableRowColumn style={{ texAlign: 'center' }}>{row.status}</TableRowColumn>
               </TableRow>
               ))}
 

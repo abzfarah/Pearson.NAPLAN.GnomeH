@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import AutoComplete   from 'material-ui/AutoComplete';
 import JSONP  from 'jsonp';
 import { bindActionCreators } from 'redux';
-import * as searchSchool from '../actions/schoolSearchActions'
+import * as searchSchoolActions from '../actions/schoolSearchActions'
+import * as registrationActions from '../actions/registrationActions';
 import { browserHistory } from 'react-router'
 import { Box, Form, FormField , Search, Select } from '../components/common';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -42,12 +43,15 @@ const style = {
       const schools = schoolResults.schools
 
       const currentSchool = _.find(schools, { "centreName": selectedSchool });
-      this.props.actions.selectSchool(currentSchool)
+      this.props.searchActions.selectSchool(currentSchool)
+      this.props.registrationActions.fetchStatement(currentSchool.centreCode)
+      this.props.registrationActions.fetchSchoolDetails(currentSchool.centreCode)
+      this.props.registrationActions.fetchRegistrationStatus(currentSchool.centreCode)
   }
 
     performSearch(term) {
       if( term !== '' && term.length > 3 ) {
-        this.props.actions.fetchSearch({ term })  
+        this.props.searchActions.fetchSearch({ term })  
       }
    }
 
@@ -98,7 +102,8 @@ const style = {
 
 function mapDispatchToProps(dispatch) {
   return {
-      actions: bindActionCreators(searchSchool, dispatch),
+      searchActions: bindActionCreators(searchSchoolActions, dispatch),
+      registrationActions: bindActionCreators(registrationActions, dispatch),
       
   };
 }

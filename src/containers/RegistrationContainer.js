@@ -9,8 +9,10 @@ import StatementContainer from './StatementContainer';
 import SchoolDetailsContainer from './SchoolDetailsContainer';
 import SummaryTable from './SummaryTable';
 import userManager from '../utils/userManager';
-import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import Notification from './Notification';
 import * as registrationActions from '../actions/registrationActions';
 
 class RegistrationContainer extends React.Component {
@@ -23,6 +25,8 @@ class RegistrationContainer extends React.Component {
         statementData: {},
         detailsData: {},
         isAdmin: false,
+        open: false,
+        unsaved: false,
 
         schoolDetails: {
           centreCode: "",
@@ -58,12 +62,30 @@ class RegistrationContainer extends React.Component {
         }
       };
     this.handleActiveStep = this.handleActiveStep.bind(this)
+    this.handleUnsaved = this.handleUnsaved.bind(this)
     }
+
+
+    
+
+  handleUnsaved(open) {
+    if (open) {
+      this.setState({open})
+      return true
+    }
+
+    else return false
+  }
+
+  
+
 
   handleActiveStep(stepIndex) {
 
+
     this.setState({ stepIndex })
 
+  
     switch(stepIndex) {
         case 0:
               this.props.dispatch(push('/school/summary'));
@@ -87,23 +109,25 @@ class RegistrationContainer extends React.Component {
     let stepIndex = this.state.stepIndex;
   }
 
+
+
   componentWillUpdate(nextProps, nextState) {
     const {stepIndex, visited} = nextState;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     if ( _.isEmpty(this.props.currentSchool) && _.isEmpty(nextProps.currentSchool) ) return false
+    if (this.state.open) return false
     return true 
   }
 
   componentWillReceiveProps(nextProps) {
     if (!_.isEqual(this.props.currentSchool, nextProps.currentSchool)) {
-          this.props.actions.fetchStatement(nextProps.currentSchool.centreCode)
-          this.props.actions.fetchSchoolDetails(nextProps.currentSchool.centreCode)
+
           /**
            * TODO: Fetch Authorised Staff, Alternative Test Order Format & Student Registration Data
            * */
-          this.props.actions.fetchRegistrationStatus(nextProps.currentSchool.centreCode)
+         
     }
 
     if (!_.isEqual(this.state.statementData, nextProps.statementData)) {
@@ -129,46 +153,36 @@ class RegistrationContainer extends React.Component {
     }
  }
 
-  getStepContent(stepIndex) {
-    switch (stepIndex) {
-      case 0:
-        return <SummaryTable/>;
-      case 1:
-        return <StatementContainer  
-                 statement={this.state.statementData} 
-                 currentSchool={this.state.currentSchool}
-                 isAdmin={this.props.isAdmin}
-                 router={this.props.router}
-                 />;      
-      case 3:
-        return <SchoolDetailsContainer 
-                  schoolDetails={this.state.schoolDetails}
-                  currentSchool={this.state.currentSchool} 
-                  isAdmin={this.props.isAdmin}
-                  />;
-        
-    }
-  }
 
   render() {
+
+    var index=0;
     const styles = getStyles();
 
-    const { stepIndex, statementData, currentSchool, schoolDetails } = this.state
+    const { stepIndex, statementData, currentSchool, schoolDetails, open } = this.state
     const { isAdmin, router } = this.props
     
 
-    let children = React.Children.map(this.props.children, child => {
+    let children = React.Children.map(this.props.children, (child, index) => {
+
          return React.cloneElement(child, {
+                 ref: index++,
                  statement: statementData, 
                  schoolDetails: schoolDetails,
                  currentSchool: currentSchool,
                  isAdmin: isAdmin,
+                 unsaved: this.handleUnsaved,
                  router: router
     })
   })
 
     return (
+
+      
+      
       <div style={styles.root}>
+       
+        <Notification open={this.state.open} />
         <Stepper linear={false} claims={this.props.claims}>
           <Step completed={status[0]} active={stepIndex === 0}  >
             <StepButton onClick={ ()=> this.handleActiveStep(0)}>
@@ -210,6 +224,11 @@ class RegistrationContainer extends React.Component {
     );
   }
 }
+
+RegistrationContainer.contextTypes = {
+    router: React.PropTypes.func.isRequired
+}
+
 
 const getStyles = () => {
   return {
