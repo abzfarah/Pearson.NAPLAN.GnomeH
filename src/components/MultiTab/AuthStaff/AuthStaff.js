@@ -108,7 +108,7 @@ class AuthStaff extends React.Component {
                 />,
         ];
         return (
-            <Box className="form-container">
+            <Box >
                 <Section className="test">
                     <Heading tag="h2">
                         Authorised Staff
@@ -128,8 +128,8 @@ class AuthStaff extends React.Component {
                         >
                         <AddAuthStaffContainer />
                     </Dialog>
-                    <panel className='grid' style={{ width: 1000 }}>                      
-                        <BootstrapTable data={this.state.authStaffData} striped={true} hover={true} selectRow={this.selectRowProp} tableStyle={{ width: 1200 }} >
+                    <panel className='grid'>                      
+                        <BootstrapTable data={this.state.authStaffData} striped={true} hover={true} selectRow={this.selectRowProp} tableStyle={{ width: 1300 }} >
                             <TableHeaderColumn dataField="userId" dataSort={true} width={200} isKey hidden> </TableHeaderColumn>
                             <TableHeaderColumn dataField="firstName" dataSort={true} width={200} columnTitle>First Name</TableHeaderColumn>
                             <TableHeaderColumn dataField="lastName" dataSort={true} width={200} >Last Name</TableHeaderColumn>
