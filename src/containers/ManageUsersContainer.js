@@ -6,8 +6,8 @@ import FontIcon from '../components/FontIcons';
 import { sort } from '../components/utils/ListUtils';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import { bindActionCreators } from 'redux';
-import * as manageUsersActions from '../actions/manageUsersActions';
-import '../scss/react-md.scss';
+//import * as manageUsersActions from '../actions/manageUsersActions';
+//import '../scss/react-md.scss';
 import { DataTable, TableHeader, TableBody, TableRow, TableColumn, EditDialogColumn, TablePagination   } from '../components/DataTables'
 import Paper from 'react-md/lib/Papers';
 import PaginationLoader from './PaginationLoader';
@@ -102,8 +102,8 @@ e
 
     let columns = [
       { fieldName: "userName" },
-      { fieldName: "centreName" }, 
       { fieldName: "sectors" }, 
+      { fieldName: "centreName" }, 
       { fieldName: "role" },
     ]
     const rows = sortedUsers.slice(start, start + rowsPerPage).map((datum, i) => (
@@ -150,30 +150,32 @@ e
               <DataTable className="pagination-table">
                 <TableHeader>
                   <TableRow>
+                  
                       <TableColumn 
-                         tooltipLabel="username" key="role">User Name
+                        tooltipLabel="username" key="role"
                         sorted={userNameSorted}
-                        onClick={typeof userNameSorted === 'boolean' ? this.sort : null}>
-                      </TableColumn>
-                      <TableColumn 
-                         tooltipLabel="schoolname" key="role">School Nmae
-                        sorted={centreNameSorted}
-                        onClick={typeof centreNameSorted === 'boolean' ? this.sort : null}>
-                      </TableColumn>
-                      <TableColumn 
-                        tooltipLabel="username" key="sectors">Sectors
-                      </TableColumn>
-                      <TableColumn 
-                        tooltipLabel="username" key="role">Role
+                        onClick={typeof userNameSorted === 'boolean' ? this.sort : null}> User Name
                       </TableColumn>
 
+
+                      <TableColumn>Sectors</TableColumn>
+
+                      <TableColumn 
+                        tooltipLabel="schoolname" key="role"
+                        sorted={centreNameSorted}
+                        onClick={typeof centreNameSorted === 'boolean' ? this.sort : null}>School Name
+                      </TableColumn>
+
+
+                      <TableColumn >Role </TableColumn>
+                        
+                      
                   </TableRow>
                 </TableHeader>
-
                 <TableBody>
                   {rows}
                 </TableBody>
-                <TablePagination onPagination={this._handlePagination} rows={data.length} />
+                <TablePagination onPagination={this._handlePagination} rows={sortedUsers.length} />
               </DataTable>
             </PaginationLoader>
           </Box>
@@ -186,7 +188,7 @@ e
 
 function mapDispatchToProps(dispatch) {
   return {
-      actions: bindActionCreators(manageUsersActions, dispatch)
+    
   };
 }
 

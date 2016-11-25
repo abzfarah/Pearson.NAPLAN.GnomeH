@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
-import SelectField from '../SelectFields';
+import SelectField from 'react-md/lib/SelectFields';
 import IconButton from '../Buttons/IconButton';
 
 /**

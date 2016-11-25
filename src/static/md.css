@@ -1,0 +1,27 @@
+/* line 241, ../src/scss/components/_data-tables.scss */
+.md-table-footer-controls {
+  align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  display: inline-flex;
+  font-size: 12px;
+  justify-content: flex-start;
+  position: absolute;
+  white-space: nowrap;
+}
+/* line 250, ../src/scss/components/_data-tables.scss */
+.md-table-footer-controls .md-select-field {
+  color: inherit;
+  font-size: inherit;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: right;
+  width: 40px;
+}
+/* line 259, ../src/scss/components/_data-tables.scss */
+.md-table-footer-controls .md-icon-btn {
+  color: inherit;
+}
+/* line 263, ../src/scss/components/_data-tables.scss */
+.md-table-footer-controls .pagination {
+  margin-left: 32px;
+}

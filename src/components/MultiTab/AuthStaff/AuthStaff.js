@@ -13,7 +13,6 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Snackbar, FontIcon } from 'material-ui'
-import FontAwesome from 'react-fontawesome'
 
 
 class AuthStaff extends React.Component {
