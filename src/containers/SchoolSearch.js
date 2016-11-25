@@ -90,8 +90,7 @@ const style = {
                     hintText      = "Search school"
                    />
 
-                   <RefreshIndicator size={40} left={10} top={0} status={searchLoading} style={style.refresh} /> 
-                                                
+                   <RefreshIndicator size={40} left={10} top={0} status={searchLoading} style={style.refresh} />                                                
 
               </Box>
                  

@@ -14,7 +14,7 @@ export function manageSchoolsAsync() {
         });
 
         return new Promise((resolve, reject) => {
-
+            // return axios.get("http://localhost:3000/schoolList")
             axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails")
                 .then((response) => {
 
@@ -24,7 +24,7 @@ export function manageSchoolsAsync() {
                         response: response.data
                     });
 
-                    resolve(response)
+                   // resolve(response)
                 })
                 .catch((err) => {
                     dispatch({
@@ -37,7 +37,6 @@ export function manageSchoolsAsync() {
     }
 }
 
-
 export function getSchoolAsync(schoolCode) {
 
     return dispatch => {
@@ -47,7 +46,7 @@ export function getSchoolAsync(schoolCode) {
             isLoading: true,
             isLoaded: false
         });
-
+        //  return axios.get("http://localhost:3000/schoolDetails")
         return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/GetCentreDetails/centreCode/" + schoolCode)
 
             .then((response) => {
@@ -63,7 +62,7 @@ export function getSchoolAsync(schoolCode) {
             .catch((err) => {
 
                 dispatch({
-                    type: GETSCHOOL_FETCH_FAILURE,
+                    type: types.GETSCHOOL_FETCH_FAILURE,
                     isLoading: false,
                     isLoaded: false
                 })
@@ -103,6 +102,29 @@ export function submitSchoolAsync(schoolData) {
     }
 }
 
+export function deleteSchool(schoolCode) {
+
+    
+
+        return axios.post('http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/DeleteCentreDetails/centreCode/' + schoolCode)
+            // .then((response) => {
+
+            //     dispatch({
+            //         type: types.SCHOOL_DELETE_SUCCESS,
+            //         isLoading: true
+            //     })
+            // })
+            // .catch((error) => {
+
+            //     dispatch({
+            //         type: types.SCHOOL_DELETE_FAILURE,
+            //         isLoading: false,
+            //         error: error
+            //     })
+            // })
+    
+}
+
 //--TODO 
 //----Move to a shared action
 export function getSectorsAsync() {
@@ -111,6 +133,7 @@ export function getSectorsAsync() {
 
         //--TODO
         //----Handle loading !
+        //  return axios.get("http://localhost:3000/sectors")
         return axios.get("http://audockerintstg01.epenau.local:12300/api/v1/CentreDetails/GetSectors")
             .then((response) => {
 
@@ -134,27 +157,31 @@ export function getSectorsAsync() {
 
 export function getSuburbsAsync(postCode) {
 
-    return dispatch => {
+    //  return dispatch => {
 
-        //--TODO
-        //----Handle loading !
-        return axios.get("http://audockerintstg01.epenau.local:12500/api/v1/PostCodeSearch/postCode/" + postCode)
-            .then((response) => {
+    //--TODO
+    //----Handle loading !
+    //  return axios.get("http://localhost:3000/suburbs")
+    return axios.get("http://audockerintstg01.epenau.local:12500/api/v1/PostCodeSearch/postCode/" + postCode)
+        .then((response) => {
 
-                dispatch({
-                    type: types.GETSUBURBS_FETCH_SUCCESS,
-                    isLoading: false,
-                    isLoaded: true,
-                    response: response.data
-                })
-            })
-            .catch((error) => {
+            /*  dispatch({
+                  type: types.GETSUBURBS_FETCH_SUCCESS,
+                  isLoading: false,
+                  isLoaded: true,
+                  response: response.data
+              
+              })*/
+            return response.data
+        })
+        .catch((error) => {
 
-                dispatch({
-                    type: types.GETSUBURBS_FETCH_FAILURE_SUBMIT_FAILURE,
+            /*    dispatch({
+                    type: types.GETSUBURBS_FETCH_FAILURE,
                     isLoading: false,
                     isLoaded: true
-                })
-            })
-    }
+                })*/
+        })
+    // }
 }
+
