@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import FlatButton from '../Buttons/FlatButton';
 import TableColumn from './TableColumn';
 import TextField from '../TextFields';
-import { ENTER, TAB, ESC } from '../constants/keyCodes';
+import { ENTER, TAB, ESC } from '../utils/keyCodes';
 import { onOutsideClick } from '../utils';
 
 /**

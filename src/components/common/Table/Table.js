@@ -5,7 +5,7 @@ function getStyles(props, context) {
 
   return {
     root: {
-      backgroundColor: 'rgb(255, 255, 255)',
+      backgroundColor: 'rgb(100, 181, 246)',
       padding: `0px`,
       width: '100%',
       borderCollapse: 'collapse',
