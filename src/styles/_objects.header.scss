@@ -265,21 +265,26 @@ img {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    width: 79%;
+    width: 80%;
     padding-bottom: 19px;
     padding-top: 36px;
     height: 25px;
     margin: auto;
 
 }
+.users-header {
 
+  padding-top: 26px;
+  margin-top: 9px;
+  margin-left: 15px;
+}
 .second-header {
     background: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    width: 79%;
+    width: 80%;
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(0,0,0,.1);
     margin: auto;

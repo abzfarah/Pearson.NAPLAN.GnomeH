@@ -17,7 +17,7 @@ import Divider from 'material-ui/Divider';
 const style = {
   paper: {
     margin: 'auto',
-    width: '79%',
+    width: '80%',
     backgroundColor: '#9c9c9c'
  
   },
@@ -54,10 +54,8 @@ class HeaderContainer extends React.Component {
   render(props) {
 
     const { loggedIn, currentSchool, claims, dispatch } = this.props
-
     const { centreSearch } = claims
 
- 
 
     return (
     <div>

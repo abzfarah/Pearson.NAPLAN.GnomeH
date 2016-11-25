@@ -4,7 +4,7 @@ import AppContainer from '../containers/AppContainer';
 import CallbackPage from '../components/callback';
 import PublicPage from '../components/layouts/PublicPage';
 import RegistrationContainer from '../containers/RegistrationContainer'
-import ManageUsersContainer from '../containers/ManageUsersContainer'
+//import ManageUsersContainer from '../containers/ManageUsersContainer'
 import ManageSchools from '../components/layouts/ManageSchools';
 import StatementContainer from '../containers/StatementContainer';
 import SchoolDetailsContainer from '../containers/SchoolDetailsContainer';
@@ -26,7 +26,7 @@ export default {
         childRoutes: [
           { path: 'summary',             component: SummaryTable},
           { path: 'soc',                 component: StatementContainer },
-   //       { path: 'authorisedstaff',     component: Summary },
+     //     { path: 'authorisedstaff',     component: Summary },
           { path: 'schooldetails',       component: SchoolDetailsContainer }
     //      { path: 'studentregistration', component: Summary },
       ]
@@ -35,10 +35,7 @@ export default {
         path: '/manageschools', 
         component: ManageSchools 
       },
-      { 
-        path:'/manageusers', 
-        component: ManageUsersContainer 
-      },
+
       { path:'/callback', 
         component: CallbackPage
       },

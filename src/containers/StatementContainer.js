@@ -189,7 +189,7 @@ class StatementContainer extends React.Component {
               <Paragraph> Apart from when the tests are being administered, test materials are to be kept in a double secure area at all times. Please tick the option which best describes the
                          double secure storage arrangement for NAPLAN test materials at your school.
               </Paragraph>
-              <Paragraph>Please select the option which best describes the two levels of security at your school </Paragraph>
+              <Paragraph className="required-field">Please select the option which best describes the two levels of security at your school </Paragraph>
               <Field name="securityLevel" ref="securityLevel" disabled={pristine}  component={securityLevel => 
                 <RadioButtonGroup {...securityLevel}>
                   <RadioButton value='1'   disabled={pristine } label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
