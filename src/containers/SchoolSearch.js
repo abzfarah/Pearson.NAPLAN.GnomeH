@@ -43,7 +43,7 @@ const style = {
       const schools = schoolResults.schools
 
       const currentSchool = _.find(schools, { "centreName": selectedSchool });
-      this.props.searchActions.selectSchool(currentSchool)
+      this.props.searchActions.selectSchool(currentSchool.centreCode)
       this.props.registrationActions.fetchStatement(currentSchool.centreCode)
       this.props.registrationActions.fetchSchoolDetails(currentSchool.centreCode)
       this.props.registrationActions.fetchRegistrationStatus(currentSchool.centreCode)
