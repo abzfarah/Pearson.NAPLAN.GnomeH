@@ -92,8 +92,12 @@ class SchoolList extends React.Component {
     }
 
     //--- grid_table
-    onRowSelect(row, isSelected) {
-        console.log(row);
+    onRowSelect(row, isSelected, e) {
+
+        if (e.target.tagName === "TD") {
+            console.log(e.target.tagName);
+        }
+
     }
 
     onSelectAll(isSelected) {
@@ -102,8 +106,9 @@ class SchoolList extends React.Component {
 
     selectRowProp = {
         mode: "checkbox",
-        clickToSelect: false,
-        bgColor: "rgb(176,224,230)",
+        hideSelectColumn: true,
+        clickToSelect: true,
+        //  bgColor: "rgb(176,224,230)",
         onSelect: this.onRowSelect,
         onSelectAll: this.onSelectAll
     };
@@ -192,7 +197,7 @@ class SchoolList extends React.Component {
     }
 
     render() {
-        console.log(this.state)
+
         const { schoolData } = this.props;
         //--TODO 
         //-should use shared const
@@ -273,7 +278,7 @@ class SchoolList extends React.Component {
                     <panel className='grid' style={{ width: 1050 }}>
                         <BootstrapTable data={this.state.schoolData} striped={true} hover={true} pagination={true} selectRow={this.selectRowProp} tableStyle={{ width: 1200 }} >
                             <TableHeaderColumn dataField="centreCode" isKey={true} dataSort={true} width={200} filter={{ type: "TextFilter", placeholder: "Filter by code" }}></TableHeaderColumn>
-                            <TableHeaderColumn dataField="sector" dataSort={true} width={200} filter={{ type: "SelectFilter", options: sectorType , placeholder: "Select sector"}}></TableHeaderColumn>
+                            <TableHeaderColumn dataField="sector" dataSort={true} width={200} filter={{ type: "SelectFilter", options: sectorType, placeholder: "Select sector" }}></TableHeaderColumn>
                             <TableHeaderColumn dataField="centreName" dataSort={true} filter={{ type: "TextFilter", placeholder: "Filter by name" }}></TableHeaderColumn>
                             <TableHeaderColumn dataField="centreCode" width={300} dataFormat={(cell, row) => { return this.renderActions(cell, row) } }>Actions</TableHeaderColumn>
                         </BootstrapTable>

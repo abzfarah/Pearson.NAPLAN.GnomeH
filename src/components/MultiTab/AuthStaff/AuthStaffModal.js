@@ -14,28 +14,18 @@ const renderCheckbox = ({ input, label }) => (
         onCheck={input.onChange} />
 )
 
-// const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom })(
-//     <SelectField
-//         floatingLabelText={label}
-//         errorText={touched && error}
-//         {...input}
-//         onChange={(event, index, value) => input.onChange(value)}
-//         children={children}
-//         {...custom} />
-// )
-
 class AuthStaffModal extends React.Component {
 
     constructor(props) {
         super(props)
 
         this.state = {
-            open: false
+            open: false            
         }
         this.handleChange = this.handleChange.bind(this)
-        this.onChange = this.onChange.bind(this)
-    }
 
+    }
+    handleChange = (event, index, value) => this.setState({ value });
     componentDidMount() {
 
         if (this.props.initialValues) {
@@ -43,27 +33,35 @@ class AuthStaffModal extends React.Component {
         }
     }
 
-    handleChange() {
-        console.log('handleChange')
-    }
-    onChange() {
-
-    }
-
     render() {
         return (
             <Box className="form-container">
                 <Section className="test">
-                    <Heading tag="h2">
-                        <div className="numberrCircle"></div>
-                        <span className="sd_hColor">Add Contact </span>
-                    </Heading>
+
                     <form >
                         <Field name="firstName" type="text" component={TextField} floatingLabelText="First Name" />
                         <Field name="lastName" type="text" component={TextField} floatingLabelText="Last Code" />
                         <Field name="phoneNumber" type="text" component={TextField} floatingLabelText="Phone" />
                         <Field name="email" type="text" component={TextField} floatingLabelText="Email" />
-                        <Field name="authUserRole" type="text" component={TextField} floatingLabelText="Role" /><br />
+                        <Field
+                            name="authUserRole"
+                            component={SelectField}
+                            hintText="Select Role"
+                            floatingLabelText="Role">
+                            <MenuItem value="1" primaryText="Principal or Acting equivalent" />
+                            <MenuItem value="2" primaryText="Deputy Principal" />
+                            <MenuItem value="3" primaryText="Learning Director" />
+                            <MenuItem value="4" primaryText="Senior Years Coordinator" />
+                            <MenuItem value="5" primaryText="Middle Years Coordinator" />
+                            <MenuItem value="6" primaryText="Junior Years Coordinator" />
+                            <MenuItem value="7" primaryText="Year Level Coordinato" />
+                            <MenuItem value="8" primaryText="NAPLAN  Coordinator" />
+                            <MenuItem value="9" primaryText="Teacher" />
+                            <MenuItem value="10" primaryText="Office Business Manager" />
+                            <MenuItem value="11" primaryText="Administration Staff" />
+                            <MenuItem value="12" primaryText="Other Coordinator/Manager" />
+                            <MenuItem value="13" primaryText="Other" />
+                        </Field><br /><br /><br /><br />
                         <Field name="receiveEmails" component={renderCheckbox} label="Receive NAPLAN email updates and memos" /><br />
                         <Field name="testdelivery" component={renderCheckbox} label="Authorised Staff for test delivery" /><br />
                         <Field name="testAdmin" component={renderCheckbox} label="Test Administrator" />

@@ -85,13 +85,7 @@ class SchoolModal extends React.Component {
         this.setState({ open: false });
     };
 
-    handlepostalCodeChange = () => {
-        //---
-        let pCode = '3108'
-        if (pCode.length == 4) {
 
-        }
-    }
     render() {
 
         const {  handleSubmit, pristine, reset, submitting, deliveryPostcodeValue, reportPostcodeValue, centreNameValue } = this.props
@@ -102,7 +96,6 @@ class SchoolModal extends React.Component {
                     <Box>
                         <Heading tag="h2">
                             <div className="numberrCircle"></div>
-
                             <span className="sd_hColor"></span>
                         </Heading>
                     </Box>

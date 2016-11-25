@@ -121,6 +121,7 @@ class AuthStaff extends React.Component {
                         fullWidth={false}
                         style={{ marginBottom: 10, width: 200 }} />
                     <Dialog
+                    title="Add School Contact"
                         actions={actions}
                         modal={true}
                         open={this.state.open}
