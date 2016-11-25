@@ -171,7 +171,6 @@ export default class TableRow extends Component {
         onMouseOver={this._handleMouseOver}
         onMouseLeave={this._handleMouseLeave}
       >
-        {checkbox}
         {columns}
       </tr>
     );
