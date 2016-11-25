@@ -4,13 +4,12 @@ import AppContainer from '../containers/AppContainer';
 import CallbackPage from '../components/callback';
 import PublicPage from '../components/layouts/PublicPage';
 import RegistrationContainer from '../containers/RegistrationContainer'
+import AuthorizedStaff from  '../components/MultiTab/AuthStaff/AuthStaff';
 import ManageUsersContainer from '../containers/ManageUsersContainer'
 import ManageSchools from '../components/layouts/ManageSchools';
 import StatementContainer from '../containers/StatementContainer';
 import SchoolDetailsContainer from '../containers/SchoolDetailsContainer';
 import SummaryTable from '../containers/SummaryTable';
-
-
 
 import session from '../utils/session'
 

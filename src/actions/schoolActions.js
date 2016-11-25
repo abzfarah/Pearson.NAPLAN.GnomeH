@@ -33,6 +33,7 @@ export function schoolSearchAsync(keyword) {
 //-- manageSchoolComponent
 export function manageSchoolSearch(keyword) {
 
+
     return dispatch => {
 
         dispatch({

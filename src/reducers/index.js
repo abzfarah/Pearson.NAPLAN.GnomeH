@@ -7,12 +7,11 @@ import manageSchoolReducer from './manageSchoolsReducer'
 import selectSchool from './selectSchoolReducer'
 import { searchTerms, packagesBySearch } from './schoolSearchReducer'
 import schoolDetailsReducer from './schoolDetailsReducer'
+import authStaffReducer from './authStaffReducer'
 import statementReducer from './statementReducer'
 import statusReducer from './statusReducer'
 
 export const USER_LOGGEDIN = 'USER_LOGGEDIN';
-
-
 
 const reducers = combineReducers(
   {
@@ -26,9 +25,9 @@ const reducers = combineReducers(
     statement : statementReducer,
     schoolDetails: schoolDetailsReducer,
     manageSchool: manageSchoolReducer,
+    authStaff: authStaffReducer,
     toastr: toastrReducer
 
-  }
 );
 
 export default reducers;

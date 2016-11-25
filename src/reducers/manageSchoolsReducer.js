@@ -1,7 +1,8 @@
 import {
     MANAGESCHOOLSEARCH_FETCH, MANAGESCHOOLSEARCH_FETCH_SUCCESS, MANAGESCHOOLSEARCH_FETCH_FAILURE,
     GETSCHOOL_FETCH, GETSCHOOL_FETCH_SUCCESS, GETSCHOOL_FETCH_FAILURE,
-    SCHOOL_SUBMIT, SCHOOL_SUBMIT_SUCCESS, SCHOOL_SUBMIT_FAILUR,
+    SCHOOL_SUBMIT, SCHOOL_SUBMIT_SUCCESS, SCHOOL_SUBMIT_FAILURE,
+    SCHOOL_DELETE_SUCCESS, SCHOOL_DELETE_FAILURE,
     GETSECTORS_FETCH, GETSECTORS_FETCH_SUCCESS, GETSECTORS_FETCH_FAILURE,
     GETSUBURBS_FETCH, GETSUBURBS_FETCH_SUCCESS, GETSUBURBS_FETCH_FAILURE
 } from '../constants'
@@ -64,17 +65,34 @@ export default (state = initialState, action = {}) => {
                 response: action.response
             });
 
-        case SCHOOL_SUBMIT_FAILUR:
+        case SCHOOL_SUBMIT_FAILURE:
             return Object.assign({}, state, {
                 isLoading: false,
                 isLoaded: true,
                 error: action.response
             });
-        ///--GETSECTORS
-        //   case GETSECTORS_FETCH:
-        //       return Object.assign({}, state,{
-        //           isLoading:true
-        //       })
+        //--DELETE    
+
+        case SCHOOL_DELETE_SUCCESS:
+            return Object.assign({}, state, {
+                isLoading: false,
+                isLoaded: true,
+                isDeleted: true
+            });
+
+        case SCHOOL_DELETE_FAILURE:
+
+            return Object.assign({}, state, {
+                isLoading: false,
+                isLoaded: true,
+                isDeleted: false,
+                response: action.error
+            });
+        //--GETSECTORS
+        case GETSECTORS_FETCH:
+            return Object.assign({}, state, {
+                isLoading: true
+            })
 
         case GETSECTORS_FETCH_SUCCESS:
 
@@ -100,14 +118,14 @@ export default (state = initialState, action = {}) => {
 
             return Object.assign({}, state, {
                 isLoading: false,
-                sectors: action.response
+                suburbs: action.response
             });
 
         case GETSUBURBS_FETCH_FAILURE:
             return Object.assign({}, state, {
                 isLoading: false,
                 isLoaded: true,
-                error: action.response
+
             });
 
     }
