@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import ReactTransitionGroup from 'react-addons-transition-group';
-import Dom from '../dom';
+import Dom from './dom';
 import CircleRipple from './CircleRipple';
 
 // Remove the first element of the array

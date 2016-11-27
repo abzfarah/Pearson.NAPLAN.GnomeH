@@ -1,10 +1,10 @@
 import merge from 'lodash/merge';
-import {darken, fade, emphasize, lighten} from '../colorManipulator';
+import {darken, fade, emphasize, lighten} from './colorManipulator';
 import lightBaseTheme from './baseThemes/lightBaseTheme';
 import zIndex from './zIndex';
-import autoprefixer from '../autoprefixer';
-import callOnce from '../callOnce';
-import rtl from '../rtl';
+import autoprefixer from './autoprefixer';
+import callOnce from './callOnce';
+import rtl from './rtl';
 import compose from 'recompose/compose';
 import typography from './typography';
 import {

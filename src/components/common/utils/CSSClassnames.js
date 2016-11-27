@@ -81,6 +81,8 @@ export default {
   TAB: `${namespace}tab`,
   TABLE: `${namespace}table`,
   TABLE_ROW: `${namespace}table-row`,
+  TABLE_HEAD: `${namespace}table-head`,
+  TABLE_BODY: `${namespace}table-body`,
   TABS: `${namespace}tabs`,
   TAG: `${namespace}tag`,
   TAGS: `${namespace}tags`,

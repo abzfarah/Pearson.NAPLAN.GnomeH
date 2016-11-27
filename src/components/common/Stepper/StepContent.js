@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import TransitionComponent from '../utils/internal/ExpandTransition';
+import TransitionComponent from '../utils/ExpandTransition';
 import warning from 'warning';
 
 function ExpandTransition(props) {
