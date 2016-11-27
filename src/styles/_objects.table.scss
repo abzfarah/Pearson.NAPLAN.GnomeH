@@ -78,11 +78,6 @@
     flex-direction: inherit;
     justify-content: flex-start;
 
-    &:focus {
-
-    }
-
-    .#{$grommet-namespace}table--sortlabel {}
 
 
 
@@ -108,8 +103,9 @@
         margin-right: 4px;
     }
 
-        .#{$grommet-namespace}table-sort--active {
+.#{$grommet-namespace}table-sort--active {
         color: rgba(0, 0, 0, 0.87);
+        outline: none;
 
         >span {
 
@@ -117,6 +113,59 @@
 
         }
 
-        
-      
     }
+
+
+
+.md-table-footer-controls .pagination {
+    margin-left: 32px;
+}
+.md-menu-container {
+    display: inline-block;
+    position: relative;
+}
+
+.md-data-table .md-select-field-container {
+    padding: 0;
+}
+
+.md-text-field-label {
+    display: block;
+    position: relative;
+    white-space: nowrap;
+}
+
+.md-ink-container {
+    border-radius: inherit;
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.md-table-footer-controls .pagination {
+    margin-left: 32px;
+}
+.md-select-field-container.select-field-btn .md-text-divider {
+    display: none;
+}
+
+.md-text-field-ind.single-line {
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.md-text-field-ind {
+    color: rgba(0,0,0,.54);
+}
+
+.md-icon {
+    color: rgba(0,0,0,.54);
+    font-size: 24px;
+    transition-duration: .15s;
+    transition-property: color;
+}

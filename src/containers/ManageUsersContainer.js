@@ -3,13 +3,17 @@ import { CardText } from '../components/Cards';
 import { Anchor, Button, Box, Header, Menu, NavAnchor, Section, Heading, Paragraph} from '../components/common';
 import { connect } from 'react-redux';
 import FontIcon from '../components/FontIcons';
+import TablePagination from '../components/DataTables/TablePagination';
 import { sort } from '../components/utils/ListUtils';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import { bindActionCreators } from 'redux';
-//import * as manageUsersActions from '../actions/manageUsersActions';
-//import '../scss/react-md.scss';
 import EnhancedTableHead from './EnhancedTableHead'
 import { createStyleSheet } from 'jss-theme-reactor';
+import Paper from '../components/common/Paper';
+import PaginationLoader from './PaginationLoader';
+import Checkbox from 'material-ui/Checkbox';
+import AutoComplete   from 'material-ui/AutoComplete';
+
 import {
   Table,
   TableHead,
@@ -17,40 +21,41 @@ import {
   TableRow,
   TableCell,
 } from '../components/Table'
-import Paper from 'react-md/lib/Papers';
-import PaginationLoader from './PaginationLoader';
-import Checkbox from 'material-ui/Checkbox';
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-  id += 1;
-  return { id, name, calories, fat, carbs, protein };
-}
-
-const data = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 class ManageUsersContainer extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
       order: 'asc',
-      orderBy: 'calories',
+      orderBy: 'centreName',
       selected: [],
-      data: [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9),
-      ],
+      value: "",
+
+      fetching: false,
+      columns: [],
+      dataa: [],
+      start: 0,
+      rowsPerPage: 10,
+      controlsMarginLeft: 0,
+      data: [],
+      
     };
 
+    this._handlePagination = this._handlePagination.bind(this);
 
+  }
+
+  componentWillMount() {
+    fetch('http://audockerintstg01.epenau.local:12200/api/v1/User/Search')
+      .then(response => response.json())
+      .then(json => {
+        this.setState({ data: json, fetching: false, sortedUsers: json  });
+      });
+    this.setState({ fetching: true });
+  }
+
+   _handlePagination(start, rowsPerPage) {
+    this.setState({ start, rowsPerPage });
   }
 
   handleRequestSort = (event, property) => {
@@ -108,12 +113,23 @@ class ManageUsersContainer extends React.Component{
     return this.state.selected.indexOf(id) !== -1;
   }
 
+ 
 
   render() {
 
-    const { data, order, orderBy, selected } = this.state;
+    const { data, order, orderBy, selected, fetching, columns, start, rowsPerPage  } = this.state;
+
+
+
     return (
-        <div>
+      <Box className="users-container">
+        <Paper zDepth={2} >
+          <Heading tag="h2">
+            <span className="sd_hColor">Manage Users</span>
+          </Heading>
+
+        </Paper>  
+
         <Paper zDepth={2} >
         <Table>
           <EnhancedTableHead
@@ -123,13 +139,13 @@ class ManageUsersContainer extends React.Component{
             onRequestSort={this.handleRequestSort}
           />
           <TableBody>
-            {data.map((n) => {
-              const isSelected = this.isSelected(n.id);
+            { data.slice(start, start + rowsPerPage).map((n) => {
+              const isSelected = this.isSelected(n.userName);
               return (
                 <TableRow
                   hover
-                  onClick={(event) => this.handleClick(event, n.id)}
-                  onKeyDown={(event) => this.handleKeyDown(event, n.id)}
+                  onClick={(event) => this.handleClick(event, n.userName)}
+                  onKeyDown={(event) => this.handleKeyDown(event, n.userName)}
                   role="checkbox"
                   aria-checked={isSelected}
                   tabIndex="-1"
@@ -139,18 +155,19 @@ class ManageUsersContainer extends React.Component{
                   <TableCell checkbox>
                     <Checkbox checked={isSelected} />
                   </TableCell>
-                  <TableCell padding={false}>{n.name}</TableCell>
-                  <TableCell numeric>{n.calories}</TableCell>
-                  <TableCell numeric>{n.fat}</TableCell>
-                  <TableCell numeric>{n.carbs}</TableCell>
-                  <TableCell numeric>{n.protein}</TableCell>
+                  <TableCell padding={false}>{n.userName}</TableCell>
+                  <TableCell numeric>{n.centreName}</TableCell>
+                  <TableCell numeric>{n.role}</TableCell>
+                  <TableCell numeric>{n.sectors}</TableCell>
+                  <TableCell numeric>{n.centreCode}</TableCell>
                 </TableRow>
               );
             })}
           </TableBody>
+            <TablePagination onPagination={this._handlePagination} rows={20870} />
         </Table>
         </Paper>
-      </div>
+      </Box>
     );
   }
 }

@@ -21,47 +21,47 @@ class EnhancedTableHead extends Component {
           </TableCell>
           <TableCell padding={false}>
             <TableSortLabel
-              active={orderBy === 'name'}
+              active={orderBy === 'userName'}
               direction={order}
-              onClick={this.createSortHandler('name')}
+              onClick={this.createSortHandler('userName')}
             >
-              Dessert (100g serving)
+              User ID
             </TableSortLabel>
           </TableCell>
           <TableCell numeric>
             <TableSortLabel
-              active={orderBy === 'calories'}
+              active={orderBy === 'centreName'}
               direction={order}
-              onClick={this.createSortHandler('calories')}
+              onClick={this.createSortHandler('centreName')}
             >
-              Calories
+              School Name
             </TableSortLabel>
           </TableCell>
           <TableCell numeric>
             <TableSortLabel
-              active={orderBy === 'fat'}
+              active={orderBy === 'role'}
               direction={order}
-              onClick={this.createSortHandler('fat')}
+              onClick={this.createSortHandler('role')}
             >
-              Fat (g)
+              Role
             </TableSortLabel>
           </TableCell>
           <TableCell numeric>
             <TableSortLabel
-              active={orderBy === 'carbs'}
+              active={orderBy === 'sectors'}
               direction={order}
-              onClick={this.createSortHandler('carbs')}
+              onClick={this.createSortHandler('sectors')}
             >
-              Carbs (g)
+              Sector
             </TableSortLabel>
           </TableCell>
           <TableCell numeric>
             <TableSortLabel
-              active={orderBy === 'protein'}
+              active={orderBy === 'centreCode'}
               direction={order}
-              onClick={this.createSortHandler('protein')}
+              onClick={this.createSortHandler('centreCode')}
             >
-              Protein (g)
+              School Code
             </TableSortLabel>
           </TableCell>
         </TableRow>
