@@ -13,7 +13,7 @@ import Paper from '../components/common/Paper';
 import PaginationLoader from './PaginationLoader';
 import Checkbox from 'material-ui/Checkbox';
 import AutoComplete   from 'material-ui/AutoComplete';
-
+import TextField from 'material-ui/TextField';
 import {
   Table,
   TableHead,
@@ -42,7 +42,7 @@ class ManageUsersContainer extends React.Component{
     };
 
     this._handlePagination = this._handlePagination.bind(this);
-
+    this._handleChange     = this._handleChange.bind(this);
   }
 
   componentWillMount() {
@@ -113,7 +113,14 @@ class ManageUsersContainer extends React.Component{
     return this.state.selected.indexOf(id) !== -1;
   }
 
- 
+  _handleChange(event) {
+     let value = event.target.value;
+     let data = this.state.data;
+
+     debugger
+
+     
+  }
 
   render() {
 
@@ -127,7 +134,11 @@ class ManageUsersContainer extends React.Component{
           <Heading tag="h2">
             <span className="sd_hColor">Manage Users</span>
           </Heading>
-
+          <TextField
+            id="text-field-controlled"
+            value={this.state.value}
+            onChange={this._handleChange}
+         />
         </Paper>  
 
         <Paper zDepth={2} >
