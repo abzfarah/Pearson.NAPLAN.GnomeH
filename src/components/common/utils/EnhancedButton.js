@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {createChildFragment} from '../childUtils';
-import Events from '../events';
+import {createChildFragment} from './childUtils';
+import Events from './events';
 import keycode from 'keycode';
 import FocusRipple from './FocusRipple';
 import TouchRipple from './TouchRipple';

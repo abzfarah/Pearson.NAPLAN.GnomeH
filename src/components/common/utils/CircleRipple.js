@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
-import autoPrefix from '../autoPrefix';
-import transitions from '../materialStyles/transitions';
+import autoPrefix from './autoPrefix';
+import transitions from './transitions';
 
 class CircleRipple extends Component {
   static propTypes = {

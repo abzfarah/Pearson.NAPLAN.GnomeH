@@ -1,56 +1,53 @@
-import React, { PureComponent } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { CardText } from '../components/Cards';
 import { Anchor, Button, Box, Header, Menu, NavAnchor, Section, Heading, Paragraph} from '../components/common';
 import { connect } from 'react-redux';
 import FontIcon from '../components/FontIcons';
+import TablePagination from '../components/DataTables/TablePagination';
 import { sort } from '../components/utils/ListUtils';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import { bindActionCreators } from 'redux';
-//import * as manageUsersActions from '../actions/manageUsersActions';
-//import '../scss/react-md.scss';
-import { DataTable, TableHeader, TableBody, TableRow, TableColumn, EditDialogColumn, TablePagination   } from '../components/DataTables'
-import Paper from 'react-md/lib/Papers';
+import EnhancedTableHead from './EnhancedTableHead'
+import { createStyleSheet } from 'jss-theme-reactor';
+import Paper from '../components/common/Paper';
 import PaginationLoader from './PaginationLoader';
-import userManager from '../utils/userManager';
-const styles = {
-  block: {
-    maxWidth: 250,
-  },
-  radioButton: {
-    marginBottom: 16,
-  },
-};
+import Checkbox from 'material-ui/Checkbox';
+import AutoComplete   from 'material-ui/AutoComplete';
+import TextField from 'material-ui/TextField';
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '../components/Table'
 
-
-class ManageUsersContainer extends PureComponent {
+class ManageUsersContainer extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      large: false,
-      sortedUsers: [],
-      userNameSorted: true,
-      schoolNameSorted: false,
-      yearSorted: null,
-      okOnOutsideClick: true,
+      order: 'asc',
+      orderBy: 'centreName',
+      selected: [],
+      value: "",
+      filteredData: [],
 
       fetching: false,
       columns: [],
-      data: [],
+      dataa: [],
       start: 0,
       rowsPerPage: 10,
-      controlsMarginLeft: 0
+      controlsMarginLeft: 0,
+      data: [],
+      totalRows: 20870,
+      
     };
 
-    this._load = this._load.bind(this);
     this._handlePagination = this._handlePagination.bind(this);
-    this.handleSortTypeChange = this.handleSortTypeChange.bind(this)
+    this._handleChange     = this._handleChange.bind(this);
   }
 
-  handleOutsideClickChange = () => {
-    this.setState({ okOnOutsideClick: !this.state.okOnOutsideClick });
-  };
-
-  _load() {
+  componentWillMount() {
     fetch('http://audockerintstg01.epenau.local:12200/api/v1/User/Search')
       .then(response => response.json())
       .then(json => {
@@ -59,144 +56,154 @@ class ManageUsersContainer extends PureComponent {
     this.setState({ fetching: true });
   }
 
-  _handlePagination(start, rowsPerPage) {
+   _handlePagination(start, rowsPerPage) {
     this.setState({ start, rowsPerPage });
   }
 
-  componentDidMount() {
+  handleRequestSort = (event, property) => {
+    const orderBy = property;
+    let order = 'desc';
+
+    if (this.state.orderBy === property && this.state.order === 'desc') {
+      order = 'asc';
+    }
+
+    const data = this.state.data.sort(
+      (a, b) => (
+        order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]
+      ),
+    );
+
+    this.setState({ data, order, orderBy });
+  };
+
+  handleSelectAllClick = (event, checked) => {
+    if (checked) {
+      return this.setState({ selected: this.state.data.map((n) => n.id) });
+    }
+    return this.setState({ selected: [] });
+  };
+
+  handleKeyDown = (event, id) => {
+    if (keycode(event) === 'space') {
+      this.handleClick(event, id);
+    }
   }
 
-  sort = () => {
-    const key = typeof this.state.userNameSorted === 'boolean' ? 'userName' : 'centreName';
-    const sorted = !this.state[`${key}Sorted`];
-    this.setState({
-      sortedUsers: sort(this.state.sortedUsers, key, sorted),
-      [`${key}Sorted`]: sorted,
+  handleClick = (event, id) => {
+    const { selected } = this.state;
+    const selectedIndex = selected.indexOf(id);
+    let newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, id);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1),
+      );
+    }
+
+    this.setState({ selected: newSelected });
+  };
+
+  isSelected = (id) => {
+    return this.state.selected.indexOf(id) !== -1;
+  }
+
+  _handleChange(event) {
+
+      let totalRows;
+
+     let value = event.target.value;
+     let data = this.state.data;
+     let filteredData = this.state.data;
+
+
+
+     filteredData = _.filter(data, function (data) {
+          return _.startsWith(data.userName, value);
     });
-  };
 
-  handleSortTypeChange(e, value)  {
-    const key = value === 'userName' ? 'centreName' : 'userName';
-    this.setState({
-      [`${key}Sorted`]: null,
-      [`${value}Sorted`]: true,
-      sortedUsers: sort(this.state.sortedUsers, value, true),
-    });
-  };
+    totalRows = filteredData.length
 
-  handleDialogSizeChange = () => {
-    this.setState({ large: !this.state.large });
-  };
+    this.setState({filteredData, value, totalRows})
 
-  _formattedColumn = (value) => {
-    return value;
-  };
-e
-  handleOutsideClickChange = () => {
-    this.setState({ okOnOutsideClick: !this.state.okOnOutsideClick });
-  };
+
+     debugger
+
+     
+  }
 
   render() {
 
-    const {  sortedUsers, userNameSorted, centreNameSorted, fetching, data, start, rowsPerPage } = this.state;
+    let { data, order, orderBy, selected, fetching, columns, start, rowsPerPage, filteredData, value  } = this.state;
 
-    let columns = [
-      { fieldName: "userName" },
-      { fieldName: "sectors" }, 
-      { fieldName: "centreName" }, 
-      { fieldName: "role" },
-    ]
-    const rows = sortedUsers.slice(start, start + rowsPerPage).map((datum, i) => (
-        <TableRow key={i}>
-        {columns.map(({fieldName}) => (
-          <TableColumn key={fieldName}>
-            { datum[fieldName]}
-          </TableColumn>
-        ))}
-        </TableRow>
-    ));
+
+    let showFiltered = this.state.value != "" ? true : false 
+    
+    data = showFiltered ? filteredData : data
+
 
     return (
-    <div>
-      <Paper zDepth={2} className="user-search-page"> 
-        <Box className="users-header">
-        <Heading tag="h2"> <span className="sd_hColor">Manage Users</span></Heading>
-        </Box>
-        <Box className="userse">
+      <Box className="users-container">
+        <Paper zDepth={2} >
+          <Heading tag="h2">
+            <span className="sd_hColor">Manage Users</span>
+          </Heading>
+          <TextField
+            id="text-field-controlled"
+            value={this.state.value}
+            onChange={this._handleChange}
+         />
+        </Paper>  
 
-        <Box row="direction" className="first-row">
-         
-            <p className="md-title">Filters</p>
-            <div>    
-              <RadioButtonGroup name="shipSpeed" defaultSelected="not_light" onChange={this.handleSortTypeChange} >
-                <RadioButton
-                  value="userName"
-                  label="Sort by user name"
-                  style={styles.radioButton}
-                />
-                <RadioButton
-                  value="centreName"
-                  label="Sort by school"
-                  style={styles.radioButton}
-                />
-              </RadioButtonGroup>
-            </div>
-         </Box>  
-
-         <Box  className="second-row">
-
-         </Box>     
-            <PaginationLoader fetching={fetching} loaded={!!sortedUsers.length} onLoad={this._load} className="data">
-              <DataTable className="pagination-table">
-                <TableHeader>
-                  <TableRow>
-                  
-                      <TableColumn 
-                        tooltipLabel="username" key="role"
-                        sorted={userNameSorted}
-                        onClick={typeof userNameSorted === 'boolean' ? this.sort : null}> User Name
-                      </TableColumn>
-
-
-                      <TableColumn>Sectors</TableColumn>
-
-                      <TableColumn 
-                        tooltipLabel="schoolname" key="role"
-                        sorted={centreNameSorted}
-                        onClick={typeof centreNameSorted === 'boolean' ? this.sort : null}>School Name
-                      </TableColumn>
-
-
-                      <TableColumn >Role </TableColumn>
-                        
-                      
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {rows}
-                </TableBody>
-                <TablePagination onPagination={this._handlePagination} rows={sortedUsers.length} />
-              </DataTable>
-            </PaginationLoader>
-          </Box>
+        <Paper zDepth={2} >
+        <Table>
+          <EnhancedTableHead
+            order={order}
+            orderBy={orderBy}
+            onSelectAllClick={this.handleSelectAllClick}
+            onRequestSort={this.handleRequestSort}
+          />
+          <TableBody>
+            { data.slice(start, start + rowsPerPage).map((n) => {
+              const isSelected = this.isSelected(n.userName);
+              return (
+                <TableRow
+                  hover
+                  onClick={(event) => this.handleClick(event, n.userName)}
+                  onKeyDown={(event) => this.handleKeyDown(event, n.userName)}
+                  role="checkbox"
+                  aria-checked={isSelected}
+                  tabIndex="-1"
+                  key={n.id}
+                  selected={isSelected}
+                >
+                  <TableCell checkbox>
+                    <Checkbox checked={isSelected} />
+                  </TableCell>
+                  <TableCell padding={false}>{n.userName}</TableCell>
+                  <TableCell numeric>{n.centreName}</TableCell>
+                  <TableCell numeric>{n.role}</TableCell>
+                  <TableCell numeric>{n.sectors}</TableCell>
+                  <TableCell numeric>{n.centreCode}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+            <TablePagination onPagination={this._handlePagination} rows={this.state.totalRows} />
+        </Table>
         </Paper>
-      </div>
+      </Box>
     );
   }
 }
 
 
-function mapDispatchToProps(dispatch) {
-  return {
-    
-  };
-}
-
-function mapStateToProps(state, ownProps) {
-    return {     
-    };
-}
-
-ManageUsersContainer = connect(mapStateToProps, mapDispatchToProps)(ManageUsersContainer)
 
 export default ManageUsersContainer

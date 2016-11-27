@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import autoPrefix from '../autoPrefix';
-import transitions from '../materialStyles/transitions';
+import autoPrefix from './autoPrefix';
+import transitions from './transitions';
 
 class ScaleInChild extends Component {
   static propTypes = {

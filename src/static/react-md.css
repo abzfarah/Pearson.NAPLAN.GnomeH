@@ -672,7 +672,7 @@ tbody .md-table-row.hover {
   align-items: center;
   color: rgba(0, 0, 0, 0.54);
   display: inline-flex;
-  font-size: 15px;
+  font-size: 18px;
   justify-content: flex-start;
   position: absolute;
   white-space: nowrap;
@@ -680,7 +680,7 @@ tbody .md-table-row.hover {
 /* line 250, ../src/scss/components/_data-tables.scss */
 .md-table-footer-controls .md-select-field {
   color: inherit;
-  font-size: inherit;
+  font-size: 22px;
   padding-left: 0;
   padding-right: 0;
   text-align: right;
@@ -695,10 +695,7 @@ tbody .md-table-row.hover {
   margin-left: 32px;
 }
 
-.pagination {
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);
-    background: #fff;
-}
+
 
 /* line 1, ../src/scss/components/_dialogs.scss */
 .md-dialog-container {

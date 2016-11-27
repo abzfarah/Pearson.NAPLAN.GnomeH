@@ -8,8 +8,10 @@ import ReduxToastr from 'react-redux-toastr'
 import createStore from './store';
 import AppContainer from './containers/AppContainer';
 import userManager from './utils/userManager';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from './components/common/utils/MuiThemeProvider';
+import getMuiTheme from './components/common/utils/getMuiTheme';
+import { createStyleManager } from 'jss-theme-reactor/styleManager';
+
 
 import routes from './routes';
 import store from './store';
@@ -34,7 +36,7 @@ let render = () => {
                      transitionIn="fadeIn" transitionOut="fadeOut" progressBar/>  
                       
           <OidcProvider store={store} userManager={userManager}>
-              <MuiThemeProvider   muiTheme={getMuiTheme()}>
+              <MuiThemeProvider  muiTheme={getMuiTheme()}>
                   <Router
                     history={history}
                     routes={routes} />

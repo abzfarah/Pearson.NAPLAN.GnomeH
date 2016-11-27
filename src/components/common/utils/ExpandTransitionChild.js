@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import transitions from '../materialStyles/transitions';
+import transitions from './transitions';
 
 const reflow = (elem) => elem.offsetHeight;
 

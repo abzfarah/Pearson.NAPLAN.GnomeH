@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import transitions from '../utils/materialStyles/transitions';
-import EnhancedButton from '../utils/internal/EnhancedButton';
+import transitions from '../utils/transitions';
+import EnhancedButton from '../utils/EnhancedButton';
 import StepLabel from './StepLabel';
 
 const isLabel = (child) => {
