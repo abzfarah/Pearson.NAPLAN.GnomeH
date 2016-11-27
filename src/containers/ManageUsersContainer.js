@@ -30,6 +30,7 @@ class ManageUsersContainer extends React.Component{
       orderBy: 'centreName',
       selected: [],
       value: "",
+      filteredData: [],
 
       fetching: false,
       columns: [],
@@ -38,6 +39,7 @@ class ManageUsersContainer extends React.Component{
       rowsPerPage: 10,
       controlsMarginLeft: 0,
       data: [],
+      totalRows: 20870,
       
     };
 
@@ -114,8 +116,23 @@ class ManageUsersContainer extends React.Component{
   }
 
   _handleChange(event) {
+
+      let totalRows;
+
      let value = event.target.value;
      let data = this.state.data;
+     let filteredData = this.state.data;
+
+
+
+     filteredData = _.filter(data, function (data) {
+          return _.startsWith(data.userName, value);
+    });
+
+    totalRows = filteredData.length
+
+    this.setState({filteredData, value, totalRows})
+
 
      debugger
 
@@ -124,8 +141,12 @@ class ManageUsersContainer extends React.Component{
 
   render() {
 
-    const { data, order, orderBy, selected, fetching, columns, start, rowsPerPage  } = this.state;
+    let { data, order, orderBy, selected, fetching, columns, start, rowsPerPage, filteredData, value  } = this.state;
 
+
+    let showFiltered = this.state.value != "" ? true : false 
+    
+    data = showFiltered ? filteredData : data
 
 
     return (
@@ -175,7 +196,7 @@ class ManageUsersContainer extends React.Component{
               );
             })}
           </TableBody>
-            <TablePagination onPagination={this._handlePagination} rows={20870} />
+            <TablePagination onPagination={this._handlePagination} rows={this.state.totalRows} />
         </Table>
         </Paper>
       </Box>
