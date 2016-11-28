@@ -106,11 +106,8 @@ class ManageUsersContainer extends React.Component{
       order = 'asc';
     }
 
-    const data = this.state.data.sort(
-      (a, b) => (
-        order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]
-      ),
-    );
+
+    const data = _.orderBy(this.state.data, [orderBy], [order])
 
     this.setState({ data, order, orderBy });
   };
