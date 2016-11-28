@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { CardText } from '../components/Cards';
 import { Anchor, Button, Box, Header, Menu, NavAnchor, Section, Heading, Paragraph} from '../components/common';
 import { connect } from 'react-redux';
-import FontIcon from '../components/FontIcons';
+
 import TablePagination from '../components/DataTables/TablePagination';
 import { sort } from '../components/utils/ListUtils';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
@@ -14,6 +14,13 @@ import PaginationLoader from './PaginationLoader';
 import Checkbox from 'material-ui/Checkbox';
 import AutoComplete   from 'material-ui/AutoComplete';
 import TextField from 'material-ui/TextField';
+import Chip from 'material-ui/Chip';
+
+import FontIcon from 'material-ui/FontIcon';
+import SvgIconFace from 'material-ui/svg-icons/action/face';
+import {blue300, indigo900} from 'material-ui/styles/colors';
+
+import Avatar from 'material-ui/Avatar';
 import {
   Table,
   TableHead,
@@ -22,6 +29,16 @@ import {
   TableCell,
 } from '../components/Table'
 
+
+const styles = {
+  chip: {
+    margin: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+};
 class ManageUsersContainer extends React.Component{
   constructor(props) {
     super(props);
@@ -40,12 +57,33 @@ class ManageUsersContainer extends React.Component{
       controlsMarginLeft: 0,
       data: [],
       totalRows: 20870,
+
+      filterSelected: {
+        "User ID": false,
+        "School Name": false,
+        "Role": false,
+        "Sector": false,
+        "School Code": false
+      }
       
     };
 
     this._handlePagination = this._handlePagination.bind(this);
     this._handleChange     = this._handleChange.bind(this);
+    this.handleRequestDelete = this.handleRequestDelete.bind(this);
+    this.handleTouchTap = this.handleTouchTap.bind(this);
   }
+
+   handleRequestDelete() {
+
+   }
+
+   handleTouchTap(e) {
+    Object.keys(this.state.filterSelected).forEach(v => this.state.filterSelected[v] = false)
+    let filterSelected = this.state.filterSelected
+    filterSelected[e.target.innerText] = true
+    this.setState( { filterSelected })
+   }
 
   componentWillMount() {
     fetch('http://audockerintstg01.epenau.local:12200/api/v1/User/Search')
@@ -79,7 +117,7 @@ class ManageUsersContainer extends React.Component{
 
   handleSelectAllClick = (event, checked) => {
     if (checked) {
-      return this.setState({ selected: this.state.data.map((n) => n.id) });
+      return this.setState({ selected: this.state.data.map((n) => n.userName) });
     }
     return this.setState({ selected: [] });
   };
@@ -115,22 +153,51 @@ class ManageUsersContainer extends React.Component{
     return this.state.selected.indexOf(id) !== -1;
   }
 
+  handleTouch(e) {
+
+
+
+ // a.target.style["background-color"]="#0bf"
+
+
+  }
+
   _handleChange(event) {
 
-      let totalRows;
+     let mapColumns = {
+          "User ID": 'userName',
+          "School Name": 'centreName',
+          "Role": 'role',
+          "Sector": 'sectors',
+          "School Code": 'centreCode',
+     }
 
+     let totalRows;
      let value = event.target.value;
      let data = this.state.data;
      let filteredData = this.state.data;
+     let filterSelected = this.state.filterSelected
+     let selectedFilter = _.keys(filterSelected).filter(k => filterSelected[k])[0]
 
-
-
-     filteredData = _.filter(data, function (data) {
-          return _.startsWith(data.userName, value);
-    });
+      switch(selectedFilter) {
+        case "User ID":
+             filteredData = data.filter(n => _.startsWith(n.userName, value));
+            break;
+        case "School Name":
+             filteredData = data.filter(n => _.startsWith(n.centreName, value.toUpperCase()));
+            break;
+        case "role":
+             filteredData = data.filter(n => _.startsWith(n.role, value));
+            break;
+        case "sectors":
+             filteredData = data.filter(n => _.startsWith(n.sectors, value));
+            break;
+        case "School Code":
+             filteredData = data.filter(n => _.startsWith(n.centreCode, value));
+            break;
+    }
 
     totalRows = filteredData.length
-
     this.setState({filteredData, value, totalRows})
 
 
@@ -142,12 +209,8 @@ class ManageUsersContainer extends React.Component{
   render() {
 
     let { data, order, orderBy, selected, fetching, columns, start, rowsPerPage, filteredData, value  } = this.state;
-
-
     let showFiltered = this.state.value != "" ? true : false 
-    
     data = showFiltered ? filteredData : data
-
 
     return (
       <Box className="users-container">
@@ -155,49 +218,75 @@ class ManageUsersContainer extends React.Component{
           <Heading tag="h2">
             <span className="sd_hColor">Manage Users</span>
           </Heading>
-          <TextField
-            id="text-field-controlled"
-            value={this.state.value}
-            onChange={this._handleChange}
-         />
+            <Box direction="row" justify="end">
+              <div style={styles.wrapper}>
+                <Chip  ref="id" style={styles.chip} backgroundColor={ this.state.filterSelected["User ID"] && blue300} onTouchTap={this.handleTouchTap}>
+                  <Avatar size={32}>I</Avatar>
+                  User ID
+                </Chip>
+                <Chip  ref="name" style={styles.chip} backgroundColor={ this.state.filterSelected["School Name"] && blue300} onTouchTap={this.handleTouchTap}>
+                  <Avatar size={32}>N</Avatar>
+                  School Name
+                </Chip>
+                <Chip  ref="role" style={styles.chip} backgroundColor={ this.state.filterSelected["Role"] && blue300} onTouchTap={this.handleTouchTap}>
+                  <Avatar size={32}>R</Avatar>
+                  Role
+                </Chip>
+                <Chip  ref="sector" style={styles.chip} backgroundColor={ this.state.filterSelected["Sector"] && blue300}onTouchTap={this.handleTouchTap} >
+                  <Avatar size={32}>S</Avatar>
+                  Sector
+                </Chip>
+                <Chip ref="code" style={styles.chip}backgroundColor={ this.state.filterSelected["School Code"] && blue300}onTouchTap={this.handleTouchTap}  >
+                  <Avatar size={32}>C</Avatar>
+                  School Code
+                </Chip>
+            </div>
+          </Box>
+          <Box direction="row" justify="end">
+            <TextField
+              id="text-field-controlled"
+              value={this.state.value}
+              onChange={this._handleChange}/>
+          </Box>
         </Paper>  
 
         <Paper zDepth={2} >
-        <Table>
-          <EnhancedTableHead
-            order={order}
-            orderBy={orderBy}
-            onSelectAllClick={this.handleSelectAllClick}
-            onRequestSort={this.handleRequestSort}
-          />
-          <TableBody>
-            { data.slice(start, start + rowsPerPage).map((n) => {
-              const isSelected = this.isSelected(n.userName);
-              return (
-                <TableRow
-                  hover
-                  onClick={(event) => this.handleClick(event, n.userName)}
-                  onKeyDown={(event) => this.handleKeyDown(event, n.userName)}
-                  role="checkbox"
-                  aria-checked={isSelected}
-                  tabIndex="-1"
-                  key={n.id}
-                  selected={isSelected}
-                >
-                  <TableCell checkbox>
-                    <Checkbox checked={isSelected} />
-                  </TableCell>
-                  <TableCell padding={false}>{n.userName}</TableCell>
-                  <TableCell numeric>{n.centreName}</TableCell>
-                  <TableCell numeric>{n.role}</TableCell>
-                  <TableCell numeric>{n.sectors}</TableCell>
-                  <TableCell numeric>{n.centreCode}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
+          <Table>
+            <EnhancedTableHead
+              order={order}
+              orderBy={orderBy}
+              onSelectAllClick={this.handleSelectAllClick}
+              onRequestSort={this.handleRequestSort} />
+            
+            <TableBody>
+              { data.slice(start, start + rowsPerPage).map((n) => {
+                const isSelected = this.isSelected(n.userName);
+                return (
+                  <TableRow
+                    hover
+                    onClick={(event) => this.handleClick(event, n.userName)}
+                    onKeyDown={(event) => this.handleKeyDown(event, n.userName)}
+                    role="checkbox"
+                    aria-checked={isSelected}
+                    tabIndex="-1"
+                    key={n.id}
+                    selected={isSelected}
+                  >
+                    <TableCell checkbox>
+                      <Checkbox checked={isSelected} />
+                    </TableCell>
+                    <TableCell padding={false}>{n.userName}</TableCell>
+                    <TableCell numeric>{n.centreName}</TableCell>
+                    <TableCell numeric>{n.role}</TableCell>
+                    <TableCell numeric>{n.sectors}</TableCell>
+                    <TableCell numeric>{n.centreCode}</TableCell>
+                    <TableCell numeric>{n.status}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
             <TablePagination onPagination={this._handlePagination} rows={this.state.totalRows} />
-        </Table>
+          </Table>
         </Paper>
       </Box>
     );

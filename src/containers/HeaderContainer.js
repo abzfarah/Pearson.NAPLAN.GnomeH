@@ -31,6 +31,10 @@ const style = {
     paddingTop: '0px',
     paddingBottom: '0px',
     color: 'white'
+  },
+
+    menu: {
+      backgroundColor: '#9c9c9c'
   }
 };
 
@@ -74,7 +78,7 @@ class HeaderContainer extends React.Component {
 
       </StickyContainer>
           <Paper style={style.paper}>
-            <Menu listStyle={style.list}  >
+            <Menu listStyle={style.list} innerDivStyle={style.menu}>
             { centreSearch &&   <MenuItem  onClick={()=>this.props.dispatch(push('/school'))}         primaryText="Home"            />   }
             { centreSearch &&   <MenuItem  onClick={()=>this.props.dispatch(push('/manageschools'))}  primaryText="Manage Schools"  />   }
             { centreSearch &&   <MenuItem  onClick={()=>this.props.dispatch(push('/manageusers'))}    primaryText="Manage Users"     />  } 

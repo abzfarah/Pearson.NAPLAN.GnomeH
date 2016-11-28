@@ -92,6 +92,16 @@ export default class EnhancedTableHead extends React.Component {
               School Code
             </TableSortLabel>
           </TableCell>
+
+          <TableCell numeric>
+            <TableSortLabel
+              active={orderBy === 'status'}
+              direction={order}
+              onClick={this.createSortHandler('status')}
+            >
+              Status
+            </TableSortLabel>
+          </TableCell>
         </TableRow>
       </TableHead>
     );
