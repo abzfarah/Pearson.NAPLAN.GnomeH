@@ -32,10 +32,6 @@ export default class TouchRipple extends Component {
     className: PropTypes.string,
   };
 
-  static contextTypes = {
-    theme: PropTypes.object.isRequired,
-    styleManager: PropTypes.object.isRequired,
-  };
 
   state = {
     nextKey: 0,
@@ -44,14 +40,14 @@ export default class TouchRipple extends Component {
 
   componentWillMount() {
     // Pre-render the ripple styles
-    this.context.styleManager.render(rippleStyleSheet);
+
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps, nextState) {
     return (
       !shallowEqual(this.props, nextProps) ||
-      !shallowEqual(this.state, nextState) ||
-      !shallowEqual(this.context.theme, nextContext.theme)
+      !shallowEqual(this.state, nextState) 
+
     );
   }
 
@@ -150,14 +146,13 @@ export default class TouchRipple extends Component {
       ...other
     } = this.props;
 
-    const classes = this.context.styleManager.render(styleSheet);
 
     return (
       <ReactTransitionGroup
         component="span"
         transitionEnterTimeout={550}
         transitionLeaveTimeout={550}
-        className={classNames(classes.root, className)}
+  
         {...other}
       >
         {this.state.ripples}

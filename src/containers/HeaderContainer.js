@@ -34,7 +34,7 @@ const style = {
   },
 
     menu: {
-      backgroundColor: '#9c9c9c'
+      backgroundColor: 'rgb(224, 224, 224);'
   }
 };
 

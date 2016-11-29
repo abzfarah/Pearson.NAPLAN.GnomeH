@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { CardText } from '../components/Cards';
 import { Anchor, Button, Box, Header, Menu, NavAnchor, Section, Heading, Paragraph} from '../components/common';
 import { connect } from 'react-redux';
-
 import TablePagination from '../components/DataTables/TablePagination';
 import { sort } from '../components/utils/ListUtils';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
@@ -15,12 +14,14 @@ import Checkbox from 'material-ui/Checkbox';
 import AutoComplete   from 'material-ui/AutoComplete';
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
-
 import FontIcon from 'material-ui/FontIcon';
 import SvgIconFace from 'material-ui/svg-icons/action/face';
 import {blue300, indigo900} from 'material-ui/styles/colors';
-
 import Avatar from 'material-ui/Avatar';
+import Toolbar from 'material-ui/Toolbar';
+import IconButton from 'material-ui/IconButton';
+import Text from './Text'
+import EnhancedTableToolbar from './EnhancedTableToolbar'
 import {
   Table,
   TableHead,
@@ -57,13 +58,21 @@ class ManageUsersContainer extends React.Component{
       controlsMarginLeft: 0,
       data: [],
       totalRows: 20870,
+      filterBy: "Filter by school code",
+      mapColumnToString: {
+        "userName": "user ID",
+        "centreName": "school name",
+        "sectors": "sector",
+        "status": "status",
+        "role": "role"
+      },
 
       filterSelected: {
         "User ID": false,
         "School Name": false,
         "Role": false,
         "Sector": false,
-        "School Code": false
+        "School Code": true
       }
       
     };
@@ -81,8 +90,9 @@ class ManageUsersContainer extends React.Component{
    handleTouchTap(e) {
     Object.keys(this.state.filterSelected).forEach(v => this.state.filterSelected[v] = false)
     let filterSelected = this.state.filterSelected
+    let filterBy = "Filter by " + `${e.target.innerText}`
     filterSelected[e.target.innerText] = true
-    this.setState( { filterSelected })
+    this.setState( { filterSelected, filterBy })
    }
 
   componentWillMount() {
@@ -106,9 +116,7 @@ class ManageUsersContainer extends React.Component{
       order = 'asc';
     }
 
-
     const data = _.orderBy(this.state.data, [orderBy], [order])
-
     this.setState({ data, order, orderBy });
   };
 
@@ -178,7 +186,7 @@ class ManageUsersContainer extends React.Component{
 
       switch(selectedFilter) {
         case "User ID":
-             filteredData = data.filter(n => _.startsWith(n.userName, value));
+             filteredData = data.filter(n => _.startsWith(n.userName, value.toUpperCase()));
             break;
         case "School Name":
              filteredData = data.filter(n => _.startsWith(n.centreName, value.toUpperCase()));
@@ -190,7 +198,7 @@ class ManageUsersContainer extends React.Component{
              filteredData = data.filter(n => _.startsWith(n.sectors, value));
             break;
         case "School Code":
-             filteredData = data.filter(n => _.startsWith(n.centreCode, value));
+             filteredData = data.filter(n => _.startsWith(n.centreCode, value.toUpperCase()));
             break;
     }
 
@@ -217,6 +225,10 @@ class ManageUsersContainer extends React.Component{
           </Heading>
             <Box direction="row" justify="end">
               <div style={styles.wrapper}>
+                <Chip ref="code" style={styles.chip}backgroundColor={ this.state.filterSelected["School Code"] && blue300}onTouchTap={this.handleTouchTap}  >
+                  <Avatar size={32}>C</Avatar>
+                  School Code
+                </Chip>
                 <Chip  ref="id" style={styles.chip} backgroundColor={ this.state.filterSelected["User ID"] && blue300} onTouchTap={this.handleTouchTap}>
                   <Avatar size={32}>I</Avatar>
                   User ID
@@ -233,21 +245,21 @@ class ManageUsersContainer extends React.Component{
                   <Avatar size={32}>S</Avatar>
                   Sector
                 </Chip>
-                <Chip ref="code" style={styles.chip}backgroundColor={ this.state.filterSelected["School Code"] && blue300}onTouchTap={this.handleTouchTap}  >
-                  <Avatar size={32}>C</Avatar>
-                  School Code
-                </Chip>
+
             </div>
           </Box>
           <Box direction="row" justify="end">
             <TextField
               id="text-field-controlled"
               value={this.state.value}
+              hintText={this.state.filterBy}
+              floatingLabelText="Search"
               onChange={this._handleChange}/>
           </Box>
         </Paper>  
 
         <Paper zDepth={2} >
+         <EnhancedTableToolbar numSelected={selected.length} />
           <Table>
             <EnhancedTableHead
               order={order}

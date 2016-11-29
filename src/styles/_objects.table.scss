@@ -70,50 +70,93 @@
 
 
 .#{$grommet-namespace}table--sort {
-
     cursor: pointer;
     display: inline-flex;
     background: transparent;
     align-items: center;
     flex-direction: inherit;
     justify-content: flex-start;
-
-
-
-
-
-
-
 }
 
-    .#{$grommet-namespace}table-sort--desc {
-        transform: rotate(0deg);
-    }
+.#{$grommet-namespace}table-sort--desc {
+    transform: rotate(0deg);
+}
 
-    .#{$grommet-namespace}table-sort--asc {
-        transform: rotate(180deg);
-    }
+.#{$grommet-namespace}table-sort--asc {
+    transform: rotate(180deg);
+}
 
-  .#{$grommet-namespace}table-sort--icon {
-        opacity: 0;
-        font-size: 16px;
-        transition: opacity,transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1) 0ms;
-        margin-left: 4px;
-        user-select: none;
-        margin-right: 4px;
-    }
+.#{$grommet-namespace}table-sort--icon {
+    opacity: 0;
+    font-size: 16px;
+    transition: opacity,transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1) 0ms;
+    margin-left: 4px;
+    user-select: none;
+    margin-right: 4px;
+}
 
 .#{$grommet-namespace}table-sort--active {
         color: rgba(0, 0, 0, 0.87);
         outline: none;
-
         >span {
 
             opacity: 1
-
         }
+}
 
+.#{$grommet-namespace}table-toolbar--root {
+    padding-right: 12px;
+    height: 56px;
+    display: flex;
+    position: relative;
+    align-items: center;
+
+}
+    .#{$grommet-namespace}table-toolbar--highlight{
+        color: #000000;
+        background-color: rgb(155, 211, 255) !important;
     }
+.#{$grommet-namespace}table-toolbar {
+    color: #000000;
+    background-color: #fce4ec;
+}
+
+.#{$grommet-namespace}table-toolbar--title {
+    flex: 0 0 auto;
+}
+
+.#{$grommet-namespace}table-toolbar--spacer {
+    flex: 1 1 100%;
+}
+
+.#{$grommet-namespace}table-toolbar--actions{
+    color: rgba(0, 0, 0, 0.54);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -4,6 +4,9 @@ import React, { Component, PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
 import { easing } from '../common/utils/transitions';
+import { create } from 'jss';
+import { createStyleManager } from 'jss-theme-reactor/styleManager';
+import jssPreset from 'jss-preset-default';
 
 export const styleSheet = createStyleSheet('Ripple', () => ({
   ripple: {
@@ -85,10 +88,6 @@ export default class Ripple extends Component {
     pulsate: false,
   };
 
-  static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
-  };
-
   state = {
     rippleVisible: false,
   };
@@ -139,7 +138,17 @@ export default class Ripple extends Component {
   render() {
     const { className, pulsate } = this.props;
     const { rippleVisible, rippleLeaving } = this.state;
-    const classes = this.context.styleManager.render(styleSheet);
+
+
+    const styleManager = createStyleManager({
+      jss: create(jssPreset()),
+    });
+
+
+
+
+
+    const classes = styleManager.render(styleSheet);
 
     const rippleClassName = classNames(classes.ripple, {
       [classes.visible]: rippleVisible,

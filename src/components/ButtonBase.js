@@ -7,6 +7,15 @@ import keycode from 'keycode';
 import addEventListener from './common/utils/addEventListener';
 import { TouchRipple, createRippleHandler } from './Ripple';
 
+
+import CSSClassnames from '../components/common/utils/CSSClassnames';
+
+const CLASS_ROOT = CSSClassnames.BUTTON;
+
+const BUTTON_BASE   = `${CLASS_ROOT}-base`;
+
+
+
 let listening = false;
 let focusKeyPressed = false;
 
@@ -34,6 +43,7 @@ export default class ButtonBase extends Component {
     /**
      * The CSS class name of the root element.
      */
+    className: PropTypes.string,
     component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     disabled: PropTypes.bool,
     focusRipple: PropTypes.bool,
@@ -188,6 +198,7 @@ export default class ButtonBase extends Component {
     const {
       centerRipple,
       children,
+      className: classNameProp,
       component,
       /**
        * If true, the base button will be disabled.
@@ -218,6 +229,15 @@ export default class ButtonBase extends Component {
 
 
 
+    const className = classNames(BUTTON_BASE, {
+        [`${BUTTON_BASE}--disabled`]: disabled,
+        [`${BUTTON_BASE}--keyboardFocusedClassName`]:  keyboardFocusedClassName && this.state.keyboardFocused
+    }, classNameProp);
+
+
+
+
+
     const buttonProps = {
       ref: (c) => { this.button = c; },
       onBlur: this.handleBlur,
@@ -230,6 +250,7 @@ export default class ButtonBase extends Component {
       onTouchEnd: this.handleTouchEnd,
       onTouchStart: this.handleTouchStart,
       tabIndex: this.props.tabIndex,
+      className,
       ...other,
     };
 
