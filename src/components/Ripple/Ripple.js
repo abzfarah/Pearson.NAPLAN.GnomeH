@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import classNames from 'classnames';
-import { easing } from '../common/utils/transitions';
+import { easing } from './transitions';
 import { create } from 'jss';
 import { createStyleManager } from 'jss-theme-reactor/styleManager';
 import jssPreset from 'jss-preset-default';

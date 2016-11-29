@@ -7,7 +7,7 @@ import Paragraph from '../components/common/Paragraph';
 import Box from '../components/common/Box';
 import Columns from '../components/common/Columns';
 import Footer from '../components/common/Footer';
-import Menu from '../components/common/Menu';
+import Menu from 'grommet/components/Menu';
 import classnames from 'classnames';
 import { StickyContainer, Sticky } from '../components/common/Sticky';
 

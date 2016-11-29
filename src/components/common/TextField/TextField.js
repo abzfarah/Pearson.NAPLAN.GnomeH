@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
 import {fade} from '../utils/colorManipulator';
-import transitions from '../utils/materialStyles/transitions';
+import transitions from '../utils/transitions';
 import EnhancedTextArea from './EnhancedTextArea';
 import TextFieldHint from './TextFieldHint';
 import TextFieldLabel from './TextFieldLabel';
@@ -459,6 +459,7 @@ class TextField extends Component {
           {...inputProps}
           style={prepareStyles(inputStyleMerged)}
           type={type}
+          className="simple-search-input"
         />
       );
     }

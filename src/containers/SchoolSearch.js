@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import AutoComplete   from 'material-ui/AutoComplete';
+import AutoComplete from '../components/common/Autocomplete';
 import JSONP  from 'jsonp';
 import { bindActionCreators } from 'redux';
 import * as searchSchoolActions from '../actions/schoolSearchActions'
@@ -9,6 +9,11 @@ import { browserHistory } from 'react-router'
 import { Box, Form, FormField , Search, Select } from '../components/common';
 import CircularProgress from 'material-ui/CircularProgress';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+
+import IconButton from './IconButton';
+import ActionSearch from '../components/common/svg-icons/action/search';
+
+
 const style = {
   container: {
     position: 'relative',
@@ -30,6 +35,8 @@ const style = {
             dataSource : [],
             term: "",
         }
+
+        this.handleSearchClick = this.handleSearchClick.bind(this)
     }
 
     onUpdateInput(inputValue) {
@@ -38,12 +45,16 @@ const style = {
       });
     }
 
+    handleSearchClick() {
+      console.log('you madafaka')
+    }
+
     onNewRequest(selectedSchool) {
       const { schoolResults } = this.props
       const schools = schoolResults.schools
 
-      const currentSchool = _.find(schools, { "centreName": selectedSchool });
-      this.props.searchActions.selectSchool(currentSchool.centreCode)
+      const currentSchool = _.find(schools, { "centreName": selectedSchool});
+      this.props.searchActions.selectSchool(currentSchool)
       this.props.registrationActions.fetchStatement(currentSchool.centreCode)
       this.props.registrationActions.fetchSchoolDetails(currentSchool.centreCode)
       this.props.registrationActions.fetchRegistrationStatus(currentSchool.centreCode)
@@ -61,7 +72,7 @@ const style = {
             const schools     = _.map(nextProps.singleSearchResult.schools,_.partialRight(_.pick,['centreName','centreCode']));
             //ES6 Hint: Explicit property name not required for "schools" as it is the same name as the key
             this.setState({ 
-              dataSource: schoolNames,
+              dataSource: schools,
               schools  
             });
         }
@@ -75,6 +86,10 @@ const style = {
 
     render() {
       let { searchLoading } = this.props
+      const iconStyle = {
+        color: '#757575', 
+        backgroundColor: '#e3e0e0', 
+      };
 
         searchLoading = searchLoading ? "loading" : "hide"
         return (
@@ -90,7 +105,9 @@ const style = {
                     hintText      = "Search school"
                    />
 
-                   <RefreshIndicator size={40} left={10} top={0} status={searchLoading} style={style.refresh} />                                                
+                <IconButton onClick={this.handleSearchClick}>
+                  <ActionSearch color={iconStyle.color}  hoverColor="white" backgroundColor={iconStyle.backgroundColor}/>
+                </IconButton>                                               
 
               </Box>
                  

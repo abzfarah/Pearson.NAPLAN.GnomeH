@@ -17,7 +17,6 @@ import Image from './Image'
 import Label from './Label'
 import List from './List'
 import ListItem from './ListItem'
-import Menu from './Menu'
 import NavAnchor from './NavAnchor'
 import Paragraph from './Paragraph'
 import Search from './Search'
@@ -51,7 +50,6 @@ export {
     Label,
     List,
     ListItem,
-    Menu,
     NavAnchor,
     Paragraph,
     Search,

@@ -4,7 +4,7 @@ import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import Box from '../../common/Box';
 import Button from '../../common/Button';
-import Menu from '../../common/Menu';
+import Menu from 'grommet/components/Menu';
 import Paragraph from '../../common/Paragraph';
 import Carousel from '../../common/Carousel';
 import Section from '../../common/Section';

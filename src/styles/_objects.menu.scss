@@ -3,8 +3,25 @@
 .search-box {
 
   text-decoration: none;
-  width: 340px;  
+    -webkit-transition: all .5s ease;
+   -moz-transition: all .5s ease;
+   transition: all .5s ease;
+  width: 748px;  
 }
+
+.simple-search-input {
+  text-decoration: none;
+  width: 768px;  
+
+}
+
+.search-box:focus {
+
+  text-decoration: none;
+  width: 768px !important;  
+}
+
+
 
 .school-info {
   text-indent: inherit;
