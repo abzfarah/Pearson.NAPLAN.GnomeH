@@ -16,7 +16,7 @@ function getStyles(props, context, state) {
     root: {
       display: 'inline-block',
       position: 'relative',
-      width: fullWidth ? '100%' : 256,
+      width: fullWidth ? '101%' : 256,
     },
     menu: {
       width: '100%',
@@ -41,6 +41,7 @@ function getStyles(props, context, state) {
 
 class AutoComplete extends Component {
   static propTypes = {
+
     /**
      * Location of the anchor for the auto complete.
      */
@@ -328,10 +329,12 @@ class AutoComplete extends Component {
       return;
     }
 
+    const open = searchText.length > 3 ? true : false
+
 
     this.setState({
       searchText: searchText,
-      open: true,
+      open: open,
       anchorEl: ReactDOM.findDOMNode(this.refs.searchTextField),
     }, () => {
       this.props.onUpdateInput(searchText, this.props.dataSource);
@@ -503,6 +506,7 @@ class AutoComplete extends Component {
         <TextField
           {...other}
           ref="searchTextField"
+     
           autoComplete="off"
           value={searchText}
           onChange={this.handleChange}

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import TransitionComponent from '../utils/ExpandTransition'
+import TransitionComponent from '../../../../components/common/utils/ExpandTransition'
 import warning from 'warning'
 
 function ExpandTransition (props) {
@@ -13,7 +13,6 @@ const getStyles = (props, context) => {
       marginLeft: 14 + 11, // padding + 1/2 icon
       paddingLeft: 24 - 11 + 8,
       paddingRight: 16,
-
       overflow: 'hidden'
     }
   }
@@ -78,7 +77,6 @@ class StepContent extends Component {
       transitionDuration,
       ...other
     } = this.props
-
     const { stepper, muiTheme: { prepareStyles } } = this.context
 
     if (stepper.orientation !== 'vertical') {
@@ -86,7 +84,7 @@ class StepContent extends Component {
       return null
     }
 
-    const styles = getStyles(this.props, this.context)
+    const styles = getStyles(this.props, this.context);
     const transitionProps = {
       enterDelay: transitionDuration,
       transitionDuration: transitionDuration,

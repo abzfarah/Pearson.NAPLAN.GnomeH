@@ -1,40 +1,32 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import createFragment from 'react-addons-create-fragment';
-import { createStyleSheet } from 'jss-theme-reactor';
-import classNames from 'classnames';
-import keycode from 'keycode';
-import addEventListener from './common/utils/addEventListener';
-import { TouchRipple, createRippleHandler } from './Ripple';
+import React, { Component, PropTypes } from 'react'
+import ReactDOM from 'react-dom'
+import createFragment from 'react-addons-create-fragment'
+import classNames from 'classnames'
+import keycode from 'keycode'
+import addEventListener from './common/utils/addEventListener'
+import { TouchRipple, createRippleHandler } from './Ripple'
 
+import CSSClassnames from '../components/common/utils/CSSClassnames'
+const CLASS_ROOT = CSSClassnames.BUTTON
+const BUTTON_BASE = `${CLASS_ROOT}-base`
 
-import CSSClassnames from '../components/common/utils/CSSClassnames';
+let listening = false
+let focusKeyPressed = false
 
-const CLASS_ROOT = CSSClassnames.BUTTON;
-
-const BUTTON_BASE   = `${CLASS_ROOT}-base`;
-
-
-
-let listening = false;
-let focusKeyPressed = false;
-
-function isFocusKey(event) {
-  return ['tab', 'enter', 'space', 'esc', 'up', 'down', 'left', 'right'].indexOf(keycode(event)) !== -1;
+function isFocusKey (event) {
+  return ['tab', 'enter', 'space', 'esc', 'up', 'down', 'left', 'right'].indexOf(keycode(event)) !== -1
 }
 
-function listenForFocusKeys() {
+function listenForFocusKeys () {
   if (!listening) {
     addEventListener(window, 'keyup', (event) => {
       if (isFocusKey(event)) {
-        focusKeyPressed = true;
+        focusKeyPressed = true
       }
-    });
-    listening = true;
+    })
+    listening = true
   }
 }
-
-
 
 export default class ButtonBase extends Component {
   static propTypes = {
@@ -62,7 +54,7 @@ export default class ButtonBase extends Component {
     ripple: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     role: PropTypes.string,
     tabIndex: PropTypes.string,
-    type: PropTypes.string,
+    type: PropTypes.string
   };
 
   static defaultProps = {
@@ -71,39 +63,37 @@ export default class ButtonBase extends Component {
     focusRipple: false,
     ripple: true,
     tabIndex: '0',
-    type: 'button',
+    type: 'button'
   };
-
-
 
   state = {
-    keyboardFocused: false,
+    keyboardFocused: false
   };
 
-  componentDidMount() {
-    listenForFocusKeys();
+  componentDidMount () {
+    listenForFocusKeys()
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate (nextProps, nextState) {
     if (this.props.focusRipple) {
       if (nextState.keyboardFocused && !this.state.keyboardFocused) {
-        this.ripple.pulsate();
+        this.ripple.pulsate()
       }
     }
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.keyboardFocusTimeout);
+  componentWillUnmount () {
+    clearTimeout(this.keyboardFocusTimeout)
   }
 
-  ripple = undefined;
+  ripple = undefined
   keyDown = false; // Used to help track keyboard activation keyDown
-  button = null;
-  keyboardFocusTimeout = undefined;
+  button = null
+  keyboardFocusTimeout = undefined
 
   handleKeyDown = (event) => {
-    const { component, focusRipple, onKeyDown, onClick } = this.props;
-    const key = keycode(event);
+    const { component, focusRipple, onKeyDown, onClick } = this.props
+    const key = keycode(event)
 
     // Check if key is already down to avoid repeats being counted as multiple activations
     if (focusRipple && !this.keyDown && this.state.keyboardFocused && key === 'space') {
@@ -115,7 +105,7 @@ export default class ButtonBase extends Component {
     }
 
     if (onKeyDown) {
-      onKeyDown(event);
+      onKeyDown(event)
     }
 
     // Keyboard accessibility for non interactive elements
@@ -125,8 +115,8 @@ export default class ButtonBase extends Component {
       component !== 'button' &&
       (key === 'space' || key === 'enter')
     ) {
-      event.preventDefault();
-      onClick(event);
+      event.preventDefault()
+      onClick(event)
     }
   };
 
@@ -225,21 +215,15 @@ export default class ButtonBase extends Component {
       ripple,
       type,
       ...other
-    } = this.props;
-
-
+    } = this.props
 
     const className = classNames(BUTTON_BASE, {
-        [`${BUTTON_BASE}--disabled`]: disabled,
-        [`${BUTTON_BASE}--keyboardFocusedClassName`]:  keyboardFocusedClassName && this.state.keyboardFocused
-    }, classNameProp);
-
-
-
-
+      [`${BUTTON_BASE}--disabled`]: disabled,
+      [`${BUTTON_BASE}--keyboardFocusedClassName`]:  keyboardFocusedClassName && this.state.keyboardFocused
+    }, classNameProp)
 
     const buttonProps = {
-      ref: (c) => { this.button = c; },
+      ref: (c) => { this.button = c },
       onBlur: this.handleBlur,
       onFocus: this.handleFocus,
       onKeyDown: this.handleKeyDown,
@@ -251,20 +235,20 @@ export default class ButtonBase extends Component {
       onTouchStart: this.handleTouchStart,
       tabIndex: this.props.tabIndex,
       className,
-      ...other,
-    };
+      ...other
+    }
 
-    let element = component;
+    let element = component
 
     if (other.href) {
-      element = 'a';
+      element = 'a'
     }
 
     if (element === 'button') {
-      buttonProps.type = type;
-      buttonProps.disabled = disabled;
+      buttonProps.type = type
+      buttonProps.disabled = disabled
     } else if (element !== 'a') {
-      buttonProps.role = this.props.hasOwnProperty('role') ? this.props.role : 'button';
+      buttonProps.role = this.props.hasOwnProperty('role') ? this.props.role : 'button'
     }
 
     return React.createElement(
@@ -272,8 +256,8 @@ export default class ButtonBase extends Component {
       buttonProps,
       createFragment({
         children,
-        ripple: this.renderRipple(ripple, centerRipple),
+        ripple: this.renderRipple(ripple, centerRipple)
       }),
-    );
+    )
   }
 }

@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from 'react';
-import ReactDOM from 'react-dom';
-import shallowEqual from 'recompose/shallowEqual';
-import {fade} from '../utils/colorManipulator';
-import transitions from '../utils/transitions';
-import EnhancedButton from '../utils/EnhancedButton';
-import IconButton from '../../../containers/IconButton';
-import OpenIcon from '../svg-icons/navigation/expand-less';
-import CloseIcon from '../svg-icons/navigation/expand-more';
-import NestedList from './NestedList';
+import React, { Component, PropTypes } from 'react'
+import ReactDOM from 'react-dom'
+import shallowEqual from 'recompose/shallowEqual'
+import { fade } from '../utils/colorManipulator'
+import transitions from '../utils/transitions'
+import EnhancedButton from '../utils/EnhancedButton'
+import IconButton from '../IconButton'
+import OpenIcon from '../svg-icons/navigation/expand-less'
+import CloseIcon from '../svg-icons/navigation/expand-more'
+import NestedList from './NestedList'
 
 function getStyles(props, context, state) {
   const {
@@ -21,18 +21,18 @@ function getStyles(props, context, state) {
     rightIconButton,
     rightToggle,
     secondaryText,
-    secondaryTextLines,
-  } = props;
+    secondaryTextLines
+  } = props
 
-  const {muiTheme} = context;
-  const {listItem} = muiTheme;
+  const { muiTheme } = context
+  const { listItem } = muiTheme
 
-  const textColor = muiTheme.baseTheme.palette.textColor;
-  const hoverColor = props.hoverColor || fade(textColor, 0.1);
-  const singleAvatar = !secondaryText && (leftAvatar || rightAvatar);
-  const singleNoAvatar = !secondaryText && !(leftAvatar || rightAvatar);
-  const twoLine = secondaryText && secondaryTextLines === 1;
-  const threeLine = secondaryText && secondaryTextLines > 1;
+  const textColor = muiTheme.baseTheme.palette.textColor
+  const hoverColor = props.hoverColor || fade(textColor, 0.1)
+  const singleAvatar = !secondaryText && (leftAvatar || rightAvatar)
+  const singleNoAvatar = !secondaryText && !(leftAvatar || rightAvatar)
+  const twoLine = secondaryText && secondaryTextLines === 1
+  const threeLine = secondaryText && secondaryTextLines > 1
 
   const styles = {
     root: {
@@ -63,32 +63,32 @@ function getStyles(props, context, state) {
       display: 'block',
       position: 'absolute',
       top: twoLine ? 12 : singleAvatar ? 4 : 0,
-      margin: 12,
+      margin: 12
     },
 
     leftIcon: {
-      left: 4,
+      left: 4
     },
 
     rightIcon: {
-      right: 4,
+      right: 4
     },
 
     avatars: {
       position: 'absolute',
-      top: singleAvatar ? 8 : 16,
+      top: singleAvatar ? 8 : 16
     },
 
     label: {
-      cursor: 'pointer',
+      cursor: 'pointer'
     },
 
     leftAvatar: {
-      left: 16,
+      left: 16
     },
 
     rightAvatar: {
-      right: 16,
+      right: 16
     },
 
     leftCheckbox: {
@@ -96,7 +96,7 @@ function getStyles(props, context, state) {
       display: 'block',
       width: 24,
       top: twoLine ? 24 : singleAvatar ? 16 : 12,
-      left: 16,
+      left: 16
     },
 
     primaryText: {
@@ -106,7 +106,7 @@ function getStyles(props, context, state) {
       position: 'absolute',
       display: 'block',
       top: twoLine ? 12 : singleAvatar ? 4 : 0,
-      right: 4,
+      right: 4
     },
 
     rightToggle: {
@@ -114,7 +114,7 @@ function getStyles(props, context, state) {
       display: 'block',
       width: 54,
       top: twoLine ? 25 : singleAvatar ? 17 : 13,
-      right: 8,
+      right: 8
     },
 
     secondaryText: {
@@ -131,11 +131,11 @@ function getStyles(props, context, state) {
       whiteSpace: threeLine ? null : 'nowrap',
       display: threeLine ? '-webkit-box' : null,
       WebkitLineClamp: threeLine ? 2 : null,
-      WebkitBoxOrient: threeLine ? 'vertical' : null,
-    },
-  };
+      WebkitBoxOrient: threeLine ? 'vertical' : null
+    }
+  }
 
-  return styles;
+  return styles
 }
 
 class ListItem extends Component {
@@ -355,7 +355,7 @@ class ListItem extends Component {
     }
   }
 
-  createDisabledElement(styles, contentChildren, additionalProps) {
+  createDisabledElement (styles, contentChildren, additionalProps) {
     const {
       innerDivStyle,
       style,
@@ -378,11 +378,11 @@ class ListItem extends Component {
     );
   }
 
-  createLabelElement(styles, contentChildren, additionalProps) {
+  createLabelElement (styles, contentChildren, additionalProps) {
     const {
       innerDivStyle,
-      style,
-    } = this.props;
+      style
+    } = this.props
 
     const mergedLabelStyles = Object.assign({},
       styles.root,
@@ -390,7 +390,7 @@ class ListItem extends Component {
       innerDivStyle,
       styles.label,
       style
-    );
+    )
 
     return (
       <label
@@ -399,51 +399,51 @@ class ListItem extends Component {
       >
         {contentChildren}
       </label>
-    );
+    )
   }
 
-  createTextElement(styles, data, key) {
-    const {prepareStyles} = this.context.muiTheme;
+  createTextElement (styles, data, key) {
+    const {prepareStyles} = this.context.muiTheme
     if (React.isValidElement(data)) {
-      let style = Object.assign({}, styles, data.props.style);
+      let style = Object.assign({}, styles, data.props.style)
       if (typeof data.type === 'string') { // if element is a native dom node
-        style = prepareStyles(style);
+        style = prepareStyles(style)
       }
       return React.cloneElement(data, {
         key: key,
-        style: style,
-      });
+        style: style
+      })
     }
 
     return (
       <div key={key} style={prepareStyles(styles)}>
         {data}
       </div>
-    );
+    )
   }
 
   handleKeyboardFocus = (event, isKeyboardFocused) => {
-    this.setState({isKeyboardFocused: isKeyboardFocused});
-    this.props.onKeyboardFocus(event, isKeyboardFocused);
+    this.setState({isKeyboardFocused: isKeyboardFocused})
+    this.props.onKeyboardFocus(event, isKeyboardFocused)
   };
 
   handleMouseEnter = (event) => {
-    if (!this.state.touch) this.setState({hovered: true});
-    this.props.onMouseEnter(event);
+    if (!this.state.touch) this.setState({hovered: true})
+    this.props.onMouseEnter(event)
   };
 
   handleMouseLeave = (event) => {
-    this.setState({hovered: false});
-    this.props.onMouseLeave(event);
+    this.setState({hovered: false})
+    this.props.onMouseLeave(event)
   };
 
   handleNestedListToggle = (event) => {
-    event.stopPropagation();
+    event.stopPropagation()
 
     if (this.props.open === null) {
       this.setState({open: !this.state.open}, () => {
-        this.props.onNestedListToggle(this);
-      });
+        this.props.onNestedListToggle(this)
+      })
     } else {
       // Exposing `this` in the callback is quite a bad API.
       // I'm doing a one level deep clone to expose a fake state.open.
@@ -460,65 +460,65 @@ class ListItem extends Component {
     if (isKeyboardFocused) {
       this.setState({
         isKeyboardFocused: false,
-        rightIconButtonKeyboardFocused: isKeyboardFocused,
-      });
+        rightIconButtonKeyboardFocused: isKeyboardFocused
+      })
     }
 
-    const iconButton = this.props.rightIconButton;
+    const iconButton = this.props.rightIconButton
 
     if (iconButton && iconButton.props.onKeyboardFocus) iconButton.props.onKeyboardFocus(event, isKeyboardFocused);
   };
 
   handleRightIconButtonMouseLeave = (event) => {
-    const iconButton = this.props.rightIconButton;
-    this.setState({rightIconButtonHovered: false});
+    const iconButton = this.props.rightIconButton
+    this.setState({rightIconButtonHovered: false})
     if (iconButton && iconButton.props.onMouseLeave) iconButton.props.onMouseLeave(event);
   };
 
   handleRightIconButtonMouseEnter = (event) => {
-    const iconButton = this.props.rightIconButton;
-    this.setState({rightIconButtonHovered: true});
+    const iconButton = this.props.rightIconButton
+    this.setState({rightIconButtonHovered: true})
     if (iconButton && iconButton.props.onMouseEnter) iconButton.props.onMouseEnter(event);
   };
 
   handleRightIconButtonMouseUp = (event) => {
-    const iconButton = this.props.rightIconButton;
-    event.stopPropagation();
+    const iconButton = this.props.rightIconButton
+    event.stopPropagation()
     if (iconButton && iconButton.props.onMouseUp) iconButton.props.onMouseUp(event);
   };
 
   handleRightIconButtonTouchTap = (event) => {
-    const iconButton = this.props.rightIconButton;
+    const iconButton = this.props.rightIconButton
 
     // Stop the event from bubbling up to the list-item
-    event.stopPropagation();
+    event.stopPropagation()
     if (iconButton && iconButton.props.onTouchTap) iconButton.props.onTouchTap(event);
   };
 
   handleTouchStart = (event) => {
-    this.setState({touch: true});
-    this.props.onTouchStart(event);
+    this.setState({touch: true})
+    this.props.onTouchStart(event)
   };
 
   handleTouchEnd = (event) => {
-    this.setState({touch: true});
-    this.props.onTouchEnd(event);
+    this.setState({touch: true})
+    this.props.onTouchEnd(event)
   }
 
-  pushElement(children, element, baseStyles, additionalProps) {
+  pushElement (children, element, baseStyles, additionalProps) {
     if (element) {
-      const styles = Object.assign({}, baseStyles, element.props.style);
+      const styles = Object.assign({}, baseStyles, element.props.style)
       children.push(
         React.cloneElement(element, {
           key: children.length,
           style: styles,
-          ...additionalProps,
+          ...additionalProps
         })
-      );
+      )
     }
   }
 
-  render() {
+  render () {
     const {
       autoGenerateNestedIndicator,
       children,
@@ -550,7 +550,7 @@ class ListItem extends Component {
       secondaryTextLines, // eslint-disable-line no-unused-vars
       style,
       ...other
-    } = this.props;
+    } = this.props
 
     const {prepareStyles} = this.context.muiTheme;
     const styles = getStyles(this.props, this.context, this.state);
@@ -696,8 +696,8 @@ class ListItem extends Component {
         }
         {nestedList}
       </div>
-    );
+    )
   }
 }
 
-export default ListItem;
+export default ListItem

@@ -1,7 +1,7 @@
 import {Component, PropTypes} from 'react';
 import {unstable_renderSubtreeIntoContainer, unmountComponentAtNode} from 'react-dom';
 
-import Dom from './dom';
+import Dom from './styles/dom';
 
 // heavily inspired by https://github.com/Khan/react-components/blob/master/js/layered-component-mixin.jsx
 class RenderToLayer extends Component {

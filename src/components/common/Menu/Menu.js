@@ -14,7 +14,7 @@ function getStyles(props, context) {
     width,
   } = props;
 
-  const {muiTheme} = context;
+  const { muiTheme } = context;
 
   const styles = {
     root: {

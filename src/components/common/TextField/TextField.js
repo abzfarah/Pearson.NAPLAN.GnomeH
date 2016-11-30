@@ -101,7 +101,7 @@ const getStyles = (props, context, state) => {
       styles.floatingLabel.color = styles.error.color;
     }
   }
-
+;
   return styles;
 };
 
@@ -117,6 +117,9 @@ function isValid(value) {
 
 class TextField extends Component {
   static propTypes = {
+
+    expandSearch: PropTypes.bool,
+
     children: PropTypes.node,
     /**
      * The css class name of the root element.
@@ -452,6 +455,7 @@ class TextField extends Component {
           rowsMax={rowsMax}
           onHeightChange={this.handleHeightChange}
           textareaStyle={Object.assign(styles.textarea, textareaStyle)}
+
         />
       ) : (
         <input

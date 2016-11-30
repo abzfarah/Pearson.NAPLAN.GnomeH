@@ -1,5 +1,13 @@
 {
   "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true
+    }
+  },
   "extends": [
     "standard",
     "standard-react"
@@ -46,8 +54,9 @@
 
   "rules": {
     "key-spacing"          : 0,
-    "jsx-quotes"           : [2, "prefer-single"],
     "max-len"              : [2, 120, 2],
-    "object-curly-spacing" : [2, "always"]
+    "object-curly-spacing" : [2, "always"],
+    "react/jsx-boolean-value"    : [0],
+    "react/jsx-no-bind"    : [0]         
   }
 }

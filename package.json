@@ -251,6 +251,7 @@
     "eslint-plugin-promise": "^2.0.0",
     "eslint-plugin-react": "^6.0.0",
     "eslint-plugin-standard": "^2.0.0",
+    "eslint-plugin-underscore-lodash-compatibility": "^0.1.0",
     "fs": "0.0.1-security",
     "hammerjs": "^2.0.8",
     "history": "3.0.0-2",

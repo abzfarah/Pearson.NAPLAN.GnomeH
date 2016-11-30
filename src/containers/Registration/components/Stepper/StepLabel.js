@@ -1,18 +1,17 @@
-import React, {Component, PropTypes} from 'react';
-import {orange400, orange500} from 'material-ui/styles/colors';
-import AlertWarning from '../svg-icons/alert/warning';
-import CheckCircle from '../svg-icons/action/check-circle';
-import ActionHome from '../svg-icons/action/home';
-import SvgIcon from '../SvgIcon'
+import React, { Component, PropTypes } from 'react'
+import { orange400 } from 'material-ui/styles/colors'
+import AlertWarning from '../../../../components/common/svg-icons/alert/warning'
+import CheckCircle from '../../../../components/common/svg-icons/action/check-circle'
+import ActionHome from '../../../../components/common/svg-icons/action/home'
 
-const getStyles = ({active, completed, disabled}, {muiTheme, stepper}) => {
+const getStyles = ({ active, completed, disabled }, { muiTheme, stepper }) => {
   const {
     textColor,
     disabledTextColor,
     iconColor,
-    inactiveIconColor,
-  } = muiTheme.stepper;
-  const {orientation} = stepper;
+    inactiveIconColor
+  } = muiTheme.stepper
+  const { orientation } = stepper
 
   const styles = {
     root: {
@@ -25,14 +24,14 @@ const getStyles = ({active, completed, disabled}, {muiTheme, stepper}) => {
       paddingRight: 14,
       display: 'block',
       paddingTop: 13,
-      paddingBottom: 12,
+      paddingBottom: 12
     },
     icon: {
       color: iconColor,
       display: 'block',
       fontSize: 24,
       width: 34,
-      height: 24,
+      height: 24
     },
     iconContainer: {
       display: 'flex',
@@ -41,29 +40,29 @@ const getStyles = ({active, completed, disabled}, {muiTheme, stepper}) => {
       width: 34,
       margin: 'auto',
       paddingBottom: 7
-    },
-  };
+    }
+  }
 
   const iconStyles = {
-   marginRight: 24,
-  };
+    marginRight: 24
+  }
 
   if (active) {
-    styles.root.fontWeight = 500;
+    styles.root.fontWeight = 500
   }
 
   if (!completed && !active) {
-    styles.icon.color = inactiveIconColor;
+    styles.icon.color = inactiveIconColor
   }
 
   if (disabled) {
-    styles.icon.color = inactiveIconColor;
-    styles.root.color = disabledTextColor;
-    styles.root.cursor = 'not-allowed';
+    styles.icon.color = inactiveIconColor
+    styles.root.color = disabledTextColor
+    styles.root.cursor = 'not-allowed'
   }
 
-  return styles;
-};
+  return styles
+}
 
 class StepLabel extends Component {
   static muiName = 'StepLabel';
@@ -91,7 +90,7 @@ class StepLabel extends Component {
     icon: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.string,
-      PropTypes.number,
+      PropTypes.number
     ]),
     /**
      * @ignore
@@ -100,43 +99,41 @@ class StepLabel extends Component {
     /**
      * Override the inline-style of the root element.
      */
-    style: PropTypes.object,
+    style: PropTypes.object
   };
 
   static contextTypes = {
     muiTheme: PropTypes.object.isRequired,
-    stepper: PropTypes.object,
-  };
+    stepper: PropTypes.object
+  }
 
-  renderIcon(completed, icon, styles, index) {
-    const iconType = typeof icon;
+  renderIcon (completed, icon, styles, index) {
+    const iconType = typeof icon
 
     if (iconType === 'number' || iconType === 'string') {
-      if (icon == 1 ) {
+      if (icon === 1) {
         return (
           <ActionHome
             color={styles.icon.color}
           />
-        );
-      }
-
-      else if (completed) {
+        )
+      } else if (completed) {
         return (
           <CheckCircle
             color={styles.icon.color}
           />
-        );
+        )
       }
 
       return (
-        <AlertWarning  color={orange400}/>
-      );
+        <AlertWarning color={orange400} />
+      )
     }
 
-    return icon;
+    return icon
   }
 
-  render() {
+  render () {
     const {
       active, // eslint-disable-line no-unused-vars
       children,
@@ -144,28 +141,28 @@ class StepLabel extends Component {
       icon: userIcon,
       last, // eslint-disable-line no-unused-vars
       style,
-      ...other,
-    } = this.props;
+      ...other
+    } = this.props
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
-    const icon = this.renderIcon(completed, userIcon, styles);
+    const { prepareStyles } = this.context.muiTheme
+    const styles = getStyles(this.props, this.context)
+    const icon = this.renderIcon(completed, userIcon, styles)
 
     return (
       <span style={prepareStyles(Object.assign(styles.root, style))} {...other}>
         {icon && (
           <span style={prepareStyles(styles.iconContainer)}>
-            {icon}
+            { icon }
           </span>
         )}
 
         <div className="step-tab">
-           {children}
+          { children }
         </div>
 
       </span>
-    );
+    )
   }
 }
 
-export default StepLabel;
+export default StepLabel
