@@ -35,7 +35,7 @@ class AuthStaff extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-       
+
         if (this.props.authStaffData != nextProps.authStaff) {
             this.setState({
                 authStaffData: nextProps.authStaffData,
@@ -148,8 +148,7 @@ class AuthStaff extends React.Component {
 }
 
 function mapStateToProps(globalState) {
-
-
+    debugger
     //--TODO 
     //-- Temp way as golablState.School.currentSchool doesnt have value
     var schoolJSON = JSON.parse(sessionStorage.userSession);
@@ -159,7 +158,7 @@ function mapStateToProps(globalState) {
     }
 
     return {
-        // centerCode: globalState.school.currentSchool.currentSchoolCode,
+        // centerCode: globalState.school.currentSchool.centreCode,
         centerCode: centerCode,
         isLoading: globalState.manageSchool.isLoading,
         authStaffData: globalState.authStaff.authStaffList,
