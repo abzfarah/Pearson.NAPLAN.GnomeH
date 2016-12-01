@@ -32,26 +32,6 @@ $button-horizontal-padding:
   padding-top: 10px
 }
 
-.grommet {
-  input[type="button"],
-  input[type="submit"],
-  button:not(.#{$grommet-namespace}button) {
-    @include basic-button();
-
-    &:focus {
-      border-color: $focus-border-color;
-      box-shadow: 0 0 1px 1px $focus-border-color;
-    }
-  }
-
-  a.#{$grommet-namespace}button {
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: none;
-    }
-  }
-}
 
 
 .#{$grommet-namespace}button-base{

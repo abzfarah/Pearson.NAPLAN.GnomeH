@@ -44,7 +44,7 @@ class TableBody extends Component {
     multiSelectable: PropTypes.bool,
     /**
      * @ignore
-     * Callback function for when a cell is clicked.
+     * Callback function for when a cell is clicked.ack
      */
     onCellClick: PropTypes.func,
     /**

@@ -2,27 +2,28 @@ import React, { Component } from 'react'
 import Box from '../components/common/Box'
 import Columns from '../components/common/Columns'
 import { StickyContainer, Sticky } from '../components/common/Sticky'
+import Footer from '../components/common/Footer'
 
 export default class BlogFooter extends Component {
   render () {
     return (
-      <StickyContainer>
-        <Sticky>
+      <Footer>
+
           <Box direction="row" className="footerContainer" wrap={true} align="center">
             <Box direction="row"className="numberOne">
-              <Columns className="logo_1 flexy1" align="center">
+              <Columns >
                 <div className="under"><img id="menuLogo" src="http://i.imgur.com/OlNC7UY.png" title="" /></div>
               </Columns>
 
               <Box direction="row" className="footer-grid flexy2" >
-                <Columns>
-                  <div className="item">
+                <Box>
+                  <div className="item footer-1">
                     <h6>VCAA NAPLAN Help
                     desk</h6>
                   </div>
                   <div className="item"><a href="">Freecall 1800 658 637</a></div>
                   <div className="item"><a href="">vcaa.naplan.help@edumail.vic.gov.au</a></div>
-                </Columns>
+                </Box>
 
                 <Columns>
                   <div className="item">
@@ -46,9 +47,7 @@ export default class BlogFooter extends Component {
             </Box>
 
           </Box>
-        </Sticky>
-
-      </StickyContainer>
+      </Footer>
     )
   }
 }

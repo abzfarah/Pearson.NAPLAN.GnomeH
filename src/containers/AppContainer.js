@@ -8,6 +8,8 @@ import Footer from './Footer'
 import HeaderContainer from './Header/HeaderContainer'
 import userManager from '../utils/userManager'
 import session from '../utils/session'
+import LandingPage from '../layouts/LandingPage'
+import App from '../components/common/App'
 import _ from 'lodash'
 injectTapEventPlugin()
 
@@ -132,7 +134,7 @@ class AppContainer extends React.Component {
     })
 
     return (
-      <div>
+      <App centered={false}>
         <HeaderContainer
           loggedIn={loggedIn}
           claims={claims}
@@ -140,10 +142,12 @@ class AppContainer extends React.Component {
           currentSchool={currentSchool}
           onLogout={this.onLogoutButtonClick}
           onLogin={this.onLoginButtonClick} />
+
+        { !loggedIn && <LandingPage /> }
     
         {children}
         <Footer />
-      </div>
+      </App>
     )
   }
   }

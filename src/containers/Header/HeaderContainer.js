@@ -8,8 +8,9 @@ import LoginMenu from './components/LoginMenu'
 import SchoolSearch from '../../components/SchoolSearch'
 import SchoolName from './components/SchoolName'
 import Paper from 'material-ui/Paper'
-import Menu from '../../components/common/Menu/Menu'
+import Header from '../../components/common/Header'
 import MenuItem from '../../components/common/Menu/MenuItem'
+import NavigationMenu from './components/NavigationMenu'
 
 const style = {
   paper: {
@@ -53,34 +54,26 @@ class HeaderContainer extends React.Component {
   }
 
   render (props) {
-    const { loggedIn, currentSchool } = this.props
-    
+    const { loggedIn, currentSchool, claims } = this.props
+    const { centreSearch } = claims
 
     return (
-      <div>
       <StickyContainer>
-        <Sticky style={{ zIndex: 5 }}>
+        <Sticky>
           <LoginMenu status={this.props} />
           <Box direction="row" wrap={true} align="center" className="second-header">
             <Box direction="row" className="school-info">
               { loggedIn && <SchoolName school={currentSchool} /> }
             </Box>
             <Box direction="row" className="school-search">
-              { <SchoolSearch /> }
+              { centreSearch && <SchoolSearch /> }
             </Box>
           </Box>
-        </Sticky>
+       
 
+        { loggedIn && <NavigationMenu routeActions={this.props.routeActions} /> }
+ </Sticky>
       </StickyContainer>
-        <Paper style={style.paper}>
-          <Menu listStyle={style.list} innerDivStyle={style.menu}>
-            { <MenuItem onClick={() => this.props.routeActions.push('/school')} primaryText="Home" /> }
-            {<MenuItem onClick={() => this.props.routeActions.push('/manageschools')} primaryText="Manage Schools" /> }
-            {<MenuItem onClick={() => this.props.routeActions.push('/manageusers')} primaryText="Manage Users" /> }
-            {<MenuItem primaryText="Reports" /> }
-          </Menu>
-        </Paper>
-    </div>
     )
   }
 }

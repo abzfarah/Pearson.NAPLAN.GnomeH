@@ -42,7 +42,7 @@ class SummaryTable extends React.Component {
     this.state = {
       fixedHeader: true,
       fixedFooter: true,
-      stripedRows: false,
+      stripedRows: true,
       showRowHover: true,
       selectable: true,
       multiSelectable: false,
@@ -65,7 +65,6 @@ class SummaryTable extends React.Component {
 
   render () {
     return (
-      <div>
         <Table
           height={this.state.height}
           fixedHeader={this.state.fixedHeader}
@@ -73,7 +72,7 @@ class SummaryTable extends React.Component {
           selectable={this.state.selectable}
           multiSelectable={this.state.multiSelectable}
         >
-          <TableHeader className="pop" style={{ backgroundColor:'rgb(100, 181, 246)', color: 'white' }}
+          <TableHeader  style={{ backgroundColor:'rgb(100, 181, 246)', color: 'white' }}
             displaySelectAll={this.state.showCheckboxes}
             adjustForCheckbox={this.state.showCheckboxes}
             enableSelectAll={this.state.enableSelectAll}
@@ -85,7 +84,7 @@ class SummaryTable extends React.Component {
               <TableHeaderColumn style={{ color: 'white' }} tooltip="Status">Status</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody className="pop"
+          <TableBody
             displayRowCheckbox={this.state.showCheckboxes}
             deselectOnClickaway={this.state.deselectOnClickaway}
             showRowHover={this.state.showRowHover}
@@ -93,18 +92,16 @@ class SummaryTable extends React.Component {
           >
 
             {tableData.map((row, index) => (
-              <TableRow className="pop" key={index} selected={row.selected}>
-                <TableRowColumn style={{ texAlign: 'center' }} > {row.task} </TableRowColumn>
-                <TableRowColumn style={{ texAlign: 'center' }} > {row.requirement}</TableRowColumn>
-                <TableRowColumn style={{ texAlign: 'center' }} > {row.due} </TableRowColumn>
-                <TableRowColumn style={{ texAlign: 'center' }} > {row.status} </TableRowColumn>
+              <TableRow key={index} selected={row.selected}>
+                <TableRowColumn style={{ backgroundColor:'#fcf9f9', texAlign: 'center' }} > {row.task} </TableRowColumn>
+                <TableRowColumn style={{ backgroundColor:'#fcf9f9', texAlign: 'center' }} > {row.requirement}</TableRowColumn>
+                <TableRowColumn style={{ backgroundColor:'#fcf9f9', texAlign: 'center' }} > {row.due} </TableRowColumn>
+                <TableRowColumn style={{ backgroundColor:'#fcf9f9', texAlign: 'center' }} > {row.status} </TableRowColumn>
               </TableRow>
               ))}
 
           </TableBody>
         </Table>
-
-      </div>
     )
   }
 }

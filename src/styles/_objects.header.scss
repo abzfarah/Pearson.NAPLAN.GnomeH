@@ -4,7 +4,40 @@
   background: #f9f9f9;
 }
 .root-container {
-  min-height: 100%
+
+}
+
+
+.white-text {
+   color: white !important;
+}
+
+
+.Site-header,
+.Site-footer {
+  flex: none; /* 2 */
+}
+
+.Site-content {
+  padding-top: 10px;
+  margin: auto; /* 2 */
+  padding: var(--space) var(--space) 0;
+  width: 85%;
+      color: white;
+}
+.Site-content::after {
+  content: '\00a0'; /* &nbsp; */
+  display: block;
+  margin-top: var(--space);
+  height: 0px;
+  visibility: hidden;
+}
+
+.Site-content--full {
+  padding: 0;
+}
+.Site-content--full::after {
+  content: none;
 }
 
 input[type=button] {
@@ -594,6 +627,12 @@ header.#{$grommet-namespace}header--primary {
 
 .footer-grid {
   padding-left: 5px;
+}
+
+@media (max-width: 1030px) {
+  .footer-1 {
+    display: none;
+  }
 }
 
 .logo_1 {
