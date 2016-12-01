@@ -35,7 +35,7 @@ class AuthStaff extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        debugger
+       
         if (this.props.authStaffData != nextProps.authStaff) {
             this.setState({
                 authStaffData: nextProps.authStaffData,
@@ -157,7 +157,7 @@ function mapStateToProps(globalState) {
     if (schoolJSON.schoolCode) {
         centerCode = schoolJSON.schoolCode;
     }
-   '
+
     return {
         // centerCode: globalState.school.currentSchool.currentSchoolCode,
         centerCode: centerCode,
@@ -169,7 +169,3 @@ function mapStateToProps(globalState) {
 
 
 export default connect(mapStateToProps, { getAuthStaffsAsync })(AuthStaff)
-//export default AuthStaff
-//-- check claim
-//-- get current school code
-  //<TableHeaderColumn dataField="lockedout" dataSort={true} width={200} dataFormat={this.formatLockout}>lockedout</TableHeaderColumn>
