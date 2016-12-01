@@ -1,21 +1,21 @@
-import React, { Component, PropTypes } from 'react';
-import classnames from 'classnames';
-import SpinningIcon from './icons/Spinning';
-import InfiniteScroll from './utils/InfiniteScroll';
-import Selection from './utils/Selection';
-import CSSClassnames from './utils/CSSClassnames';
-import KeyboardAccelerators from './utils/KeyboardAccelerators';
-import Intl from './utils/Intl';
-import { announce } from './utils/Announcer';
+import React, { Component, PropTypes } from 'react'
+import classnames from 'classnames'
+import SpinningIcon from './icons/Spinning'
+import InfiniteScroll from './utils/InfiniteScroll'
+import Selection from './utils/Selection'
+import CSSClassnames from './utils/CSSClassnames'
+import KeyboardAccelerators from './utils/KeyboardAccelerators'
+import Intl from './utils/Intl'
+import { announce } from './utils/Announcer'
 
-const CLASS_ROOT = CSSClassnames.LIST;
-const LIST_ITEM = CSSClassnames.LIST_ITEM;
-const SELECTED_CLASS = `${CLASS_ROOT}-item--selected`;
-const ACTIVE_CLASS = `${CLASS_ROOT}-item--active`;
+const CLASS_ROOT = CSSClassnames.LIST
+const LIST_ITEM = CSSClassnames.LIST_ITEM
+const SELECTED_CLASS = `${CLASS_ROOT}-item--selected`
+const ACTIVE_CLASS = `${CLASS_ROOT}-item--active`
 
 export default class List extends Component {
 
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
 
     this._onClick = this._onClick.bind(this);

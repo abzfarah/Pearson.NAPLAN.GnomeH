@@ -1,126 +1,214 @@
-@mixin small-table {
-
-  thead {
-    display: none;
-  }
-
-  td {
-    display: block;
-
-    &:before {
-      font-weight: 100;
-      @include inuit-font-size($control-font-size, $inuit-base-spacing-unit);
-      content: attr(data-th);
-      display: block;
-
-      padding-right: halve($inuit-base-spacing-unit);
-    }
-  }
-
-  tr {
-    border-bottom: 1px solid $border-color;
-  }
-
-  td,
-  th {
-    padding-left: $inuit-base-spacing-unit;
-  }
+.#{$grommet-namespace}table {
+    width: 100%;
+    overflow: hidden;
+    border-spacing: 0;
+    border-collapse: collapse;
 }
 
-.#{$grommet-namespace}table {
+.#{$grommet-namespace}table-row {
+    height: 48px;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+    font-weight: 500;
 
-  table {
-    width: 100%;
-  }
+    &:focus {
+        outline: none;
+        background: #eeeeee;
+    }
+    
+     &:hover {
+        background: #eeeeee;
+     }      
+    
+    .#{$grommet-namespace}table-row--header {
+        height: 64px;
+    }
 
-  td,
-  th {
-    // -1 to accommodate border
-    padding: (halve($inuit-base-spacing-unit) - 1) halve($inuit-base-spacing-unit);
+    .#{$grommet-namespace}table-row--footer {
+        height: 56px;
+    }
+
+    .#{$grommet-namespace}table-row--selected {
+        background: #f5f5f5;
+    }
+}
+
+
+.#{$grommet-namespace}table-cell{
+
+    overflow: hidden;
     text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+    text-overflow: ellipsis;
 
-    &:first-child {
-      padding-left: $inuit-base-spacing-unit;
+    .#{$grommet-namespace}table-cell--numeric {
+      text-align: right;
+      flex-direction: row-reverse;
     }
 
-    &:last-child {
-      padding-right: $inuit-base-spacing-unit;
+    .#{$grommet-namespace}table-cell--padding {
+      padding: 0 56px 0 24px;  
+      &:last-child {
+        padding-right: 24,
+      }
     }
-  }
 
-  th {
-    font-weight: 100;
+    .#{$grommet-namespace}table-cell--head {
+        white-space: pre;
+    }
+
+   .#{$grommet-namespace}table-cell--compact {
+      padding-right: 12px;
+    }
+
+    .#{$grommet-namespace}table-cell--checkbox {
+        padding-left: 12px;
+        padding-right: 0;
+    }
+}   
+
+
+.#{$grommet-namespace}table--sort {
+    cursor: pointer;
+    display: inline-flex;
+    background: transparent;
+    align-items: center;
+    flex-direction: inherit;
+    justify-content: flex-start;
+}
+
+.#{$grommet-namespace}table-sort--desc {
+    transform: rotate(0deg);
+}
+
+.#{$grommet-namespace}table-sort--asc {
+    transform: rotate(180deg);
+}
+
+.#{$grommet-namespace}table-sort--icon {
+    opacity: 0;
     font-size: 16px;
-    border-bottom: 1px solid $border-color;
-  }
+    transition: opacity,transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1) 0ms;
+    margin-left: 4px;
+    user-select: none;
+    margin-right: 4px;
+}
 
-  &__mirror {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
+.#{$grommet-namespace}table-sort--active {
+        color: rgba(0, 0, 0, 0.87);
+        outline: none;
+        >span {
 
-    > thead {
-      position: fixed;
-      background-color: $header-background-color;
-    }
-  }
+            opacity: 1
+        }
+}
 
-  &__more {
-    margin-top: $inuit-base-spacing-unit;
-    text-align: center;
-  }
-
-  &--scrollable {
+.#{$grommet-namespace}table-toolbar--root {
+    padding-right: 12px;
+    height: 56px;
+    display: flex;
     position: relative;
+    align-items: center;
 
-    .#{$grommet-namespace}table__table {
-      thead {
-        visibility: hidden;
-      }
-
-      th {
-        border-bottom: none;
-      }
+}
+    .#{$grommet-namespace}table-toolbar--highlight{
+        color: #000000;
+        background-color: rgb(155, 211, 255) !important;
     }
-  }
+.#{$grommet-namespace}table-toolbar {
+    color: #000000;
+    background-color: #fce4ec;
+}
 
-  &--selectable {
-    tbody {
-      tr {
-        cursor: pointer;
+.#{$grommet-namespace}table-toolbar--title {
+    flex: 0 0 auto;
+}
 
-        td {
-          transition: background-color 0.2s;
-        }
+.#{$grommet-namespace}table-toolbar--spacer {
+    flex: 1 1 100%;
+}
 
-        &.#{$grommet-namespace}table-row--selected {
-          td {
-            background-color: $selected-background-color;
-            color: $selected-text-color;
+.#{$grommet-namespace}table-toolbar--actions{
+    color: rgba(0, 0, 0, 0.54);
+}
 
-            #{$dark-background-context} & {
-              background-color: $colored-active-background-color;
-              color: $active-colored-text-color;
-            }
-          }
-        }
 
-        &:hover:not(.#{$grommet-namespace}table-row--selected) {
-          td {
-            background-color: $hover-background-color;
-            color: $hover-text-color;
 
-            #{$dark-background-context} & {
-              color: $active-colored-text-color;
-            }
-          }
-        }
-      }
-    }
-  }
 
-  &--small {
-    @include small-table();
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.md-table-footer-controls .pagination {
+    margin-left: 32px;
+}
+.md-menu-container {
+    display: inline-block;
+    position: relative;
+}
+
+.md-data-table .md-select-field-container {
+    padding: 0;
+}
+
+.md-text-field-label {
+    display: block;
+    position: relative;
+    white-space: nowrap;
+}
+
+.md-ink-container {
+    border-radius: inherit;
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.md-table-footer-controls .pagination {
+    margin-left: 32px;
+}
+.md-select-field-container.select-field-btn .md-text-divider {
+    display: none;
+}
+
+.md-text-field-ind.single-line {
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.md-text-field-ind {
+    color: rgba(0,0,0,.54);
+}
+
+.md-icon {
+    color: rgba(0,0,0,.54);
+    font-size: 24px;
+    transition-duration: .15s;
+    transition-property: color;
 }

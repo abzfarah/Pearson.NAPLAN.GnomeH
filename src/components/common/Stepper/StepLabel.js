@@ -3,7 +3,7 @@ import {orange400, orange500} from 'material-ui/styles/colors';
 import AlertWarning from '../svg-icons/alert/warning';
 import CheckCircle from '../svg-icons/action/check-circle';
 import ActionHome from '../svg-icons/action/home';
-import SvgIcon from '../SvgIcon';
+import SvgIcon from '../SvgIcon'
 
 const getStyles = ({active, completed, disabled}, {muiTheme, stepper}) => {
   const {

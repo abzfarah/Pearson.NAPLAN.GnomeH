@@ -11,7 +11,7 @@ const getStyles = ({index}, {stepper}) => {
 
   if (index > 0) {
     if (orientation === 'horizontal') {
-      styles.root.marginLeft = -6;
+     
     } else if (orientation === 'vertical') {
       styles.root.marginTop = -14;
     }

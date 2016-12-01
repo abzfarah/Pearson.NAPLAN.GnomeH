@@ -32,26 +32,62 @@ $button-horizontal-padding:
   padding-top: 10px
 }
 
-.grommet {
-  input[type="button"],
-  input[type="submit"],
-  button:not(.#{$grommet-namespace}button) {
-    @include basic-button();
 
-    &:focus {
-      border-color: $focus-border-color;
-      box-shadow: 0 0 1px 1px $focus-border-color;
-    }
-  }
 
-  a.#{$grommet-namespace}button {
+.#{$grommet-namespace}button-base{
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    user-select: none;
     text-decoration: none;
-
-    &:hover {
-      text-decoration: none;
-    }
-  }
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.0);
 }
+
+
+.#{$grommet-namespace}button-icon {
+    flex: 0 0 auto;
+    color: rgba(0, 0, 0, 0.54);
+    width: 48px;
+    height: 48px;
+    z-index: 1;
+    padding: 0;
+    display: inline-flex;
+    font-size: 24px;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0.0, 0.2, 1) 0ms;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.#{$grommet-namespace}button-icon--contrast {
+
+}
+
+.#{$grommet-namespace}button-icon--label {
+    width: 100%;
+    display: flex;
+    align-items: inherit;
+    justify-content: inherit;
+}
+
+.#{$grommet-namespace}button-icon--keyboardfocused {
+
+}
+
+.#{$grommet-namespace}button-icon--primary {
+
+}
+
+
+.#{$grommet-namespace}button-icon--accent {
+
+}
+
+
 
 .#{$grommet-namespace}button {
   @include basic-button();

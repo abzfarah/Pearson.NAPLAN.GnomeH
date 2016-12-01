@@ -2,8 +2,20 @@ import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
-import SelectField from 'react-md/lib/SelectFields';
 import IconButton from '../Buttons/IconButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
+import CSSClassnames from '../common/utils/CSSClassnames';
+
+const CLASS_ROOT = CSSClassnames.TABLE;
+
+const TABLE_ROW    = `${CLASS_ROOT}-padgination`;
+
+
+
+
+
 
 /**
  * The `TablePagination` component is used to generate the table footer that helps
@@ -172,9 +184,20 @@ export default class TablePagination extends Component {
     this.setState({ start: newStart });
   };
 
-  _setRowsPerPage = (rowsPerPage) => {
+  _setRowsPerPage = (e, rowsPerPage) => {
     const { start } = this.state;
+    let rowPerPageKeys = {
+        '0': 10,
+        '1': 20,
+        '2': 30,
+        '3': 50,
+        '4': 100
+    }
 
+    rowsPerPage = rowPerPageKeys[rowsPerPage]
+
+
+debugger
     const newStart = Math.max(0, start - (start % rowsPerPage));
     this.props.onPagination(newStart, rowsPerPage);
     this.setState({ start: newStart, rowsPerPage });
@@ -209,13 +232,20 @@ export default class TablePagination extends Component {
               style={{ marginLeft: controlsMarginLeft }}
             >
               {rowsPerPageLabel}
+              <div className="row-control">
               <SelectField
                 ref="selectField"
-                menuItems={rowsPerPageItems}
-                position={SelectField.Positions.BELOW}
+                fullWidth={true}
                 value={rowsPerPage}
                 onChange={this._setRowsPerPage}
-              />
+              >
+                <MenuItem value={10} primaryText="10" />
+                <MenuItem value={20} primaryText="20" />
+                <MenuItem value={30} primaryText="30" />
+                <MenuItem value={50} primaryText="50" />
+                <MenuItem value={100} primaryText="100" />
+              </SelectField>
+              </div>
               <span className="pagination">{pagination}</span>
               <IconButton
                 onClick={this._decrement}

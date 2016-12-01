@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-import classnames from 'classnames';
-
-import FontIcon from '../FontIcons';
-import injectInk from '../Inks';
-import injectTooltip from '../Tooltips';
+import React, { Component, PropTypes } from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
+import classnames from 'classnames'
+import FontIcon from '../FontIcons'
+import injectInk from '../Inks'
+import injectTooltip from '../Tooltips'
 
 /**
  * The `IconButton` component automatically includes ink and a tooltip.

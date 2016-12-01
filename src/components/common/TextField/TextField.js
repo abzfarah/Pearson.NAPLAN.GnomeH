@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
 import {fade} from '../utils/colorManipulator';
-import transitions from '../utils/materialStyles/transitions';
+import transitions from '../utils/transitions';
 import EnhancedTextArea from './EnhancedTextArea';
 import TextFieldHint from './TextFieldHint';
 import TextFieldLabel from './TextFieldLabel';
@@ -101,7 +101,7 @@ const getStyles = (props, context, state) => {
       styles.floatingLabel.color = styles.error.color;
     }
   }
-
+;
   return styles;
 };
 
@@ -117,6 +117,9 @@ function isValid(value) {
 
 class TextField extends Component {
   static propTypes = {
+
+    expandSearch: PropTypes.bool,
+
     children: PropTypes.node,
     /**
      * The css class name of the root element.
@@ -452,6 +455,7 @@ class TextField extends Component {
           rowsMax={rowsMax}
           onHeightChange={this.handleHeightChange}
           textareaStyle={Object.assign(styles.textarea, textareaStyle)}
+
         />
       ) : (
         <input
@@ -459,6 +463,7 @@ class TextField extends Component {
           {...inputProps}
           style={prepareStyles(inputStyleMerged)}
           type={type}
+          className="simple-search-input"
         />
       );
     }

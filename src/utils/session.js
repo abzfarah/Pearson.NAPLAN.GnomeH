@@ -72,7 +72,7 @@ class Session {
     let user_claims = _.pickBy(filter_claims, _.isString);
     //if there is a "schoolCode" claim, user is NOT an admin
     this._isAdmin = user_claims["schoolCode"] ? false : true
-    this._schoolUser = this._isAdmin ? false : true
+    this._schoolUser = this._isAdmin ? true : false
 
     if (this._schoolUser) this._schoolcode = user_claims["schoolCode"] 
     

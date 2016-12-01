@@ -12,9 +12,9 @@ export function requestSearch(search) {
 }
 
 
-export function selectSchool(schoolCode) {
+export function selectSchool(currentSchool) {
     return dispatch => {
-          return axios.get("http://audockerintstg01.epenau.local:12000/api/v1/centresearch/" + schoolCode)
+          return axios.get("http://audockerintstg01.epenau.local:12000/api/v1/centresearch/" + currentSchool.centreCode)
                       .then((response) => {
                           dispatch({
                               type: 'SELECT_SCHOOL_FETCH_SUCCESS',

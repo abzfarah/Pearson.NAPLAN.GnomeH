@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import transitions from './utils/materialStyles/transitions';
+import transitions from './utils/transitions';
 
 class SvgIcon extends Component {
   static muiName = 'SvgIcon';
@@ -66,6 +66,7 @@ class SvgIcon extends Component {
     const {
       children,
       color,
+      backgroundColor,
       hoverColor,
       onMouseEnter, // eslint-disable-line no-unused-vars
       onMouseLeave, // eslint-disable-line no-unused-vars
@@ -79,13 +80,15 @@ class SvgIcon extends Component {
       prepareStyles,
     } = this.context.muiTheme;
 
-    const offColor = color ? color : 'currentColor';
-    const onColor = hoverColor ? hoverColor : offColor;
+    const offColor     = color              ? color           : 'white';
+    const onColor      = hoverColor         ? hoverColor      : offColor;
+    const onBackground = this.state.hovered ? backgroundColor : "";
 
     const mergedStyles = Object.assign({
       display: 'inline-block',
       color: svgIcon.color,
       fill: this.state.hovered ? onColor : offColor,
+      backgroundColor: onBackground,
       height: 44,
       width: 44,
       userSelect: 'none',

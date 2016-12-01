@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from 'react';
-import TransitionComponent from '../utils/internal/ExpandTransition';
-import warning from 'warning';
+import React, { Component, PropTypes } from 'react'
+import TransitionComponent from '../utils/ExpandTransition'
+import warning from 'warning'
 
-function ExpandTransition(props) {
-  return <TransitionComponent {...props} />;
+function ExpandTransition (props) {
+  return <TransitionComponent {...props} />
 }
 
 const getStyles = (props, context) => {
@@ -13,16 +13,17 @@ const getStyles = (props, context) => {
       marginLeft: 14 + 11, // padding + 1/2 icon
       paddingLeft: 24 - 11 + 8,
       paddingRight: 16,
-      overflow: 'hidden',
-    },
-  };
 
-  if (!props.last) {
-    styles.root.borderLeft = `1px solid ${context.muiTheme.stepper.connectorLineColor}`;
+      overflow: 'hidden'
+    }
   }
 
-  return styles;
-};
+  if (!props.last) {
+    styles.root.borderLeft = `1px solid ${context.muiTheme.stepper.connectorLineColor}`
+  }
+
+  return styles
+}
 
 class StepContent extends Component {
   static propTypes = {
@@ -53,20 +54,20 @@ class StepContent extends Component {
     /**
      * Adjust the duration of the content expand transition. Passed as a prop to the transition component.
      */
-    transitionDuration: PropTypes.number,
+    transitionDuration: PropTypes.number
   };
 
   static defaultProps = {
     transition: ExpandTransition,
-    transitionDuration: 450,
+    transitionDuration: 450
   };
 
   static contextTypes = {
     muiTheme: PropTypes.object.isRequired,
-    stepper: PropTypes.object,
+    stepper: PropTypes.object
   };
 
-  render() {
+  render () {
     const {
       active,
       children,
@@ -75,28 +76,29 @@ class StepContent extends Component {
       style,
       transition,
       transitionDuration,
-      ...other,
-    } = this.props;
-    const {stepper, muiTheme: {prepareStyles}} = this.context;
+      ...other
+    } = this.props
+
+    const { stepper, muiTheme: { prepareStyles } } = this.context
 
     if (stepper.orientation !== 'vertical') {
       warning(false, '<StepContent /> is only designed for use with the vertical stepper.');
-      return null;
+      return null
     }
 
-    const styles = getStyles(this.props, this.context);
+    const styles = getStyles(this.props, this.context)
     const transitionProps = {
       enterDelay: transitionDuration,
       transitionDuration: transitionDuration,
-      open: active,
-    };
+      open: active
+    }
 
     return (
       <div style={prepareStyles(Object.assign(styles.root, style))} {...other}>
-        {React.createElement(transition, transitionProps, <div style={{overflow: 'hidden'}}>{children}</div>)}
+        {React.createElement(transition, transitionProps, <div style={{ overflow: 'hidden' }}>{children}</div>)}
       </div>
-    );
+    )
   }
 }
 
-export default StepContent;
+export default StepContent
