@@ -23,7 +23,7 @@ function getStyles(props, context, state) {
     },
     list: {
       display: 'block',
-      width: fullWidth ? '100%' : 256,
+      width: fullWidth ? '105%' : 256,
     },
     innerDiv: {
       overflow: 'hidden',
@@ -46,6 +46,8 @@ class AutoComplete extends Component {
      * Location of the anchor for the auto complete.
      */
     anchorOrigin: propTypes.origin,
+
+    openSearch: propTypes.bool,
     /**
      * If true, the auto complete is animated as it is toggled.
      */
@@ -506,6 +508,7 @@ class AutoComplete extends Component {
         <TextField
           {...other}
           ref="searchTextField"
+          openSearch={this.props.openSearch}
      
           autoComplete="off"
           value={searchText}

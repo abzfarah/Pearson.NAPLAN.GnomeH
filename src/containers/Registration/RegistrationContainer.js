@@ -189,7 +189,7 @@ RegistrationContainer.contextTypes = {
 const getStyles = () => {
   return {
     root: {
-      width: '79%',
+      width: '80%',
       margin: 'auto'
     },
     actions: {

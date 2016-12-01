@@ -8,6 +8,10 @@ import TextFieldHint from './TextFieldHint';
 import TextFieldLabel from './TextFieldLabel';
 import TextFieldUnderline from './TextFieldUnderline';
 import warning from 'warning';
+import classnames from 'classnames';
+import CSSClassnames from '..//utils/CSSClassnames';
+
+
 
 const getStyles = (props, context, state) => {
   const {
@@ -23,17 +27,17 @@ const getStyles = (props, context, state) => {
     },
   } = context.muiTheme;
 
+  // main input div for width here
+
   const styles = {
     root: {
       fontSize: 16,
       lineHeight: '24px',
-      width: props.fullWidth ? '100%' : 256,
       height: (props.rows - 1) * 24 + (props.floatingLabelText ? 72 : 48),
       display: 'inline-block',
       position: 'relative',
       backgroundColor: backgroundColor,
-      fontFamily: baseTheme.fontFamily,
-      transition: transitions.easeOut('200ms', 'height'),
+      fontFamily: baseTheme.fontFamily
     },
     error: {
       position: 'relative',
@@ -118,7 +122,7 @@ function isValid(value) {
 class TextField extends Component {
   static propTypes = {
 
-    expandSearch: PropTypes.bool,
+    openSearch: PropTypes.bool,
 
     children: PropTypes.node,
     /**
@@ -474,10 +478,25 @@ class TextField extends Component {
       rootProps = other;
     }
 
+    const CLASS_ROOT = CSSClassnames.BUTTON;
+
+    const { openSearch } = this.props
+
+    const classes = classnames(
+      {
+        [`${CLASS_ROOT}--search-focus`]: openSearch,
+        [`${CLASS_ROOT}--search-notfocus`]: !openSearch
+      }
+    )
+
+
     return (
       <div
         {...rootProps}
+        tabIndex = {11}
+        id="search-an"
         className={className}
+        className={classes}
         style={prepareStyles(Object.assign(styles.root, style))}
       >
         {floatingLabelTextElement}

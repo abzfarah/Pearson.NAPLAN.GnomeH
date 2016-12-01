@@ -63,6 +63,16 @@ $button-horizontal-padding:
     background-color: transparent;
 }
 
+
+#search-an:focus {
+	width: 130px !important;
+	background-color: #fff;
+	border-color: #66CC75;
+	
+	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
 .#{$grommet-namespace}button-icon--contrast {
 
 }
@@ -78,14 +88,28 @@ $button-horizontal-padding:
 
 }
 
-.#{$grommet-namespace}button-icon--primary {
+.#{$grommet-namespace}button--search-focus {
+  width: 100% !important;
+transition: all .8s;
 
 }
-
-
-.#{$grommet-namespace}button-icon--accent {
-
+.header-2 {
+  width: 80%;
+  margin: auto;
 }
+
+.#{$grommet-namespace}button--search-notfocus {
+  width: 0% !important;
+  color: white !important;
+
+  > input {
+    color: white !important;
+  }
+
+	//display: none !important;
+	transition: all .8s;
+};
+
 
 
 
