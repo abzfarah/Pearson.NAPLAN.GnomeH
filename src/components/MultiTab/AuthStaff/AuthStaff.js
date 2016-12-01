@@ -28,28 +28,27 @@ class AuthStaff extends React.Component {
         this.state = {
             open: false,
             isLoading: false,
-            authStaffData: []
+            authStaffData: [],
+            centerCode: ''
         }
-       // this.formatLockout = this.formatLockout.bind()
+        // this.formatLockout = this.formatLockout.bind()
     }
 
     componentWillReceiveProps(nextProps) {
+        debugger
+        if (this.props.authStaffData != nextProps.authStaff) {
+            this.setState({
+                authStaffData: nextProps.authStaffData,
+            });
+        }
 
-        //   this.setState({
-        //       authStaffData: nextProps.authStaffData,
-        //  });
     }
 
     componentDidMount() {
 
-        //--TODO
-        let centerCode = '01008';
-        this.props.getAuthStaffsAsync(centerCode).then((result) => {
+        var currentYear = new Date().getFullYear();
 
-            this.setState({
-                authStaffData: result
-            })
-        });
+        this.props.getAuthStaffsAsync(this.props.centerCode, currentYear);
     }
 
     handleUpdate(cell, row) {
@@ -92,7 +91,7 @@ class AuthStaff extends React.Component {
 
     render() {
 
-        console.log(this.state.authStaffData)
+        console.log(this.state.centerCode)
         const actions = [
             <FlatButton
                 label="Cancel"
@@ -120,7 +119,7 @@ class AuthStaff extends React.Component {
                         fullWidth={false}
                         style={{ marginBottom: 10, width: 200 }} />
                     <Dialog
-                    title="Add School Contact"
+                        title="Add School Contact"
                         actions={actions}
                         modal={true}
                         open={this.state.open}
@@ -128,7 +127,7 @@ class AuthStaff extends React.Component {
                         >
                         <AddAuthStaffContainer />
                     </Dialog>
-                    <panel className='grid'>                      
+                    <panel className='grid'>
                         <BootstrapTable data={this.state.authStaffData} striped={true} hover={true} selectRow={this.selectRowProp} tableStyle={{ width: 1300 }} >
                             <TableHeaderColumn dataField="userId" dataSort={true} width={200} isKey hidden> </TableHeaderColumn>
                             <TableHeaderColumn dataField="firstName" dataSort={true} width={200} columnTitle>First Name</TableHeaderColumn>
@@ -150,21 +149,26 @@ class AuthStaff extends React.Component {
 
 function mapStateToProps(globalState) {
 
+
+    //--TODO 
+    //-- Temp way as golablState.School.currentSchool doesnt have value
+    var schoolJSON = JSON.parse(sessionStorage.userSession);
+    var centerCode = '';
+    if (schoolJSON.schoolCode) {
+        centerCode = schoolJSON.schoolCode;
+    }
+   '
     return {
+        // centerCode: globalState.school.currentSchool.currentSchoolCode,
+        centerCode: centerCode,
         isLoading: globalState.manageSchool.isLoading,
-        // authStaffData: globalState.authStaff.authStaffList,
+        authStaffData: globalState.authStaff.authStaffList,
         error: globalState.manageSchool.error
     }
 }
 
-function mapDispatchToProps() {
 
-    return {
-        getAuthStaffsAsync: getAuthStaffsAsync
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthStaff)
+export default connect(mapStateToProps, { getAuthStaffsAsync })(AuthStaff)
 //export default AuthStaff
 //-- check claim
 //-- get current school code
