@@ -14,7 +14,15 @@
 .grommetux-table-row .grommetux-table-row--header:hover {
    background-color: #37a0eb !important;
 }
+.details-par {
+    max-width: none!important;
+    width: 80%;
+}
 
+.details-par .grommetux-paragraph {
+        max-width: none!important;
+    width: 80%;
+}
 .grommetux-table-row--header:hover {
    background-color: #37a0eb !important;
 }

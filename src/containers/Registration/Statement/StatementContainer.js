@@ -104,6 +104,7 @@ class StatementContainer extends Component {
                   Fields marked with * in the form below are required.
               </Paragraph>
             </Box>
+
             <Box colorIndex="light-1">
               <Box className="form-box">
                 <Heading tag="h4">
@@ -115,34 +116,45 @@ class StatementContainer extends Component {
                 <Field name="isConfirmed" disabled={isConfirmed && !isAdmin} component={Checkbox} label="I have read and accept the Principal responsibilities"/>
               </Box>
             </Box>
-            <Box className="PartA1">
-              <Box colorIndex="light-1">
-                <Box className="form-box">
-                  <Heading tag="h4"> Part B: Security Storage Arrangement</Heading>
-                  <Paragraph> The VCAA will be conducting visits to schools to audit the storage facilities for the NAPLAN 2016 test materials.</Paragraph>
-                  <Paragraph> Apart from when the tests are being administered, test materials are to be kept in a double secure area at all times. Please tick the option which best describes the
-                            double secure storage arrangement for NAPLAN test materials at your school.
-                  </Paragraph>
-                  <Paragraph className="required-field">Please select the option which best describes the two levels of security at your school </Paragraph>
-                  <Field name="securityLevel" ref="securityLevel" disabled={pristine} component={securityLevel =>
-                    <RadioButtonGroup {...securityLevel}>
-                      <RadioButton value="1" disabled={pristine} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                      <RadioButton value="2" disabled={pristine} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
-                      <RadioButton value="3" disabled={pristine} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
-                      <RadioButton value="4" disabled={pristine} label="Other" />
-                    </RadioButtonGroup>
-                  } /><br />
 
-                  <Field name="securityLevelOther" ref="securityLevelOther" disabled={otherDisabled} component={TextField} />
-                  <Paragraph>
-                    Please note:
-                    While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
-                    Security Log. The Test Materials Security Log should be kept by the school for 12 months after the test and may be subject to audit by the VCAA.
+
+
+            <Box className="PartA1" >
+
+              <Box className="form-box" >
+                <Heading tag="h4"> Part B: Security Storage Arrangement</Heading>
+
+                <Box className="details-par">
+                  <Paragraph className="details-par"> The VCAA will be conducting visits to schools to audit the storage facilities for the NAPLAN 2016 test materials.</Paragraph>
+                  <Paragraph className="details-par"> Apart from when the tests are being administered, test materials are to be kept in a double secure area at all times. 
+                              Please tick the option which best describes the
+                              double secure storage arrangement for NAPLAN test materials at your school.
                   </Paragraph>
                 </Box>
+
+
+
+                <Paragraph className="required-field">Please select the option which best describes the two levels of security at your school </Paragraph>
+                <Field name="securityLevel" ref="securityLevel" disabled={pristine} component={securityLevel =>
+                  <RadioButtonGroup {...securityLevel}>
+                    <RadioButton value="1" disabled={pristine} label="A locked filing cabinet which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                    <RadioButton value="2" disabled={pristine} label="A locked safe which is locked in a storeroom/office which is accessible only by authorised staff"/>
+                    <RadioButton value="3" disabled={pristine} label="A locked sealed container which is locked in a storeroom/office which is accessible only by authorised staff" />
+                    <RadioButton value="4" disabled={pristine} label="Other" />
+                  </RadioButtonGroup>
+                } /><br />
+
+                <Field name="securityLevelOther" ref="securityLevelOther" disabled={otherDisabled} component={TextField} />
+                <Paragraph className="details-par">
+                  Please note:
+                  While the test materials are held in the school prior to, during and after the testing period, any direct access to them within the security is to be recorded in the Test Materials
+                  Security Log. The Test Materials Security Log should be kept by the school for 12 months after the test and may be subject to audit by the VCAA.
+                </Paragraph>
               </Box>
+
+
+
               <Box className="PartA1">
-                <Box colorIndex="light-1">
                   <Box className="form-box">
                     <Heading tag="h4">
                     Part C: Principal's Declaration
@@ -162,14 +174,41 @@ class StatementContainer extends Component {
                     </Box>
                   </Box>
                 </Box>
-              </Box>
             </Box>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <Box className="button-group-padding">
               <div className="button-groups">
                 <Button className="separate-button" type="button" secondary={true} label="Return" />  
                 <Button className="separate-button" type="submit" disabled={invalid || (isConfirmed && !isAdmin)} primary={true } label="Submit"  />
               </div>
             </Box>
+
+
+
           </form>
         </Section>
       </Box>
