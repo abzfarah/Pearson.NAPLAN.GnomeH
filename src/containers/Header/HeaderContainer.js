@@ -90,19 +90,20 @@ class HeaderContainer extends React.Component {
           <LoginMenu status={this.props} />
         </Header>
 
-        <Header splash={false}
+     { centreSearch &&  <Header splash={false}
           float={false}
           fixed={false}
           size="xlarge">
           <Search currentSchool={this.props.currentSchool} openSearch={this.state.openSearch} handleSearchClick={this.handleSearchClick}/>
-        </Header>
+        </Header> }
 
+      { centreSearch && 
         <Header splash={false}
           float={false}
           fixed={false}
           size="xlarge">
           <NavigationMenu routeActions={this.props.routeActions} />
-        </Header>
+        </Header> }
 
 
       </div>
