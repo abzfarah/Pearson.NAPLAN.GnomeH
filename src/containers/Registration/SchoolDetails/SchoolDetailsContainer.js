@@ -61,7 +61,7 @@ class SchoolDetailsContainer extends Component {
         <Section className="test">
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
             <Box>
-              <Heading tag="h2">
+              <Heading tag="h3">
                 <div className="numberCircle">3</div>
                 <span className="sd_hColor">School Details</span>
               </Heading>

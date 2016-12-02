@@ -32,6 +32,7 @@ onUpdateInput (inputValue) {
 
 
 onNewRequest (selectedSchool) {
+  this.setState({ openSearch: false })
   const { schoolResults } = this.props
   const schools = schoolResults.schools
 
@@ -40,6 +41,7 @@ onNewRequest (selectedSchool) {
   this.props.registrationActions.fetchStatement(currentSchool.centreCode)
   this.props.registrationActions.fetchSchoolDetails(currentSchool.centreCode)
   this.props.registrationActions.fetchRegistrationStatus(currentSchool.centreCode)
+  this.forceUpdate()
 }
 
 performSearch (term) {
@@ -61,7 +63,7 @@ performSearch (term) {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    if (nextProps.openSearch) return true
+    if (this.props.openSearch !== nextProps.openSearch) return true
     if (this.state.term === '') return false
     if (this.state.term.length < 3) return false
     return true

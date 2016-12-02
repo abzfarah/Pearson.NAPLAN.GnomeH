@@ -23,7 +23,7 @@ function getStyles(props, context, state) {
     },
     list: {
       display: 'block',
-      width: fullWidth ? '105%' : 256,
+      width: fullWidth ? '97%' : 256,
     },
     innerDiv: {
       overflow: 'hidden',
@@ -189,6 +189,8 @@ class AutoComplete extends Component {
       text: 'text',
       value: 'value',
     },
+    closeSearch: false,
+    openSearch: false,
     disableFocusRipple: true,
     filter: (searchText, key) => searchText !== '' && key.indexOf(searchText) !== -1,
     fullWidth: false,
@@ -230,6 +232,14 @@ class AutoComplete extends Component {
         searchText: nextProps.searchText,
       });
     }
+
+    if (this.props.openSearch !== nextProps.openSearch) {
+      this.setState({
+        openSearch: nextProps.openSearch,
+      });
+    }
+
+
   }
 
   componentWillUnmount() {
@@ -281,8 +291,13 @@ class AutoComplete extends Component {
   };
 
   chosenRequestText = (chosenRequest) => {
+    this.setState({
+      openSearch: !this.state.openSearch,
+      searchText: ''
+    })
+
     if (typeof chosenRequest === 'string') {
-      return chosenRequest;
+      return chosenRequest
     } else {
       return chosenRequest[this.props.dataSourceConfig.text];
     }
@@ -508,7 +523,7 @@ class AutoComplete extends Component {
         <TextField
           {...other}
           ref="searchTextField"
-          openSearch={this.props.openSearch}
+          openSearch={this.state.openSearch}
      
           autoComplete="off"
           value={searchText}

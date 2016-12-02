@@ -4,13 +4,22 @@
     border-spacing: 0;
     border-collapse: collapse;
 }
+.summary-head {
+    color: white;
+    background-color: #37a0eb;
+    height: 64px;
+    font-weight: none !important;
+}
 
+.grommetux-table-row .grommetux-table-row--header:hover {
+   background-color: #37a0eb !important;
+}
+
+.grommetux-table-row--header:hover {
+   background-color: #37a0eb !important;
+}
 .#{$grommet-namespace}table-row {
-    height: 48px;
-    color: rgba(0, 0, 0, 0.54);
-    font-size: 12px;
-    font-weight: 500;
-
+    height: 56px;
     &:focus {
         outline: none;
         background: #eeeeee;
@@ -22,6 +31,9 @@
     
     .#{$grommet-namespace}table-row--header {
         height: 64px;
+        &:hover {
+         background-color: #37a0eb !important;
+        }   
     }
 
     .#{$grommet-namespace}table-row--footer {
@@ -35,7 +47,7 @@
 
 
 .#{$grommet-namespace}table-cell{
-
+    padding-left: 12px;
     overflow: hidden;
     text-align: left;
     white-space: nowrap;

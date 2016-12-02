@@ -13,7 +13,11 @@ export default class Search extends React.Component {
       backgroundColor: '#e3e0e0'
     }
     return (
-      <Box direction="row" className="footerContainer numba1 first-header" wrap={true} align="center">
+      <Box direction="row" className="search-header" pad="medium" wrap={true} align="center">
+
+        <Box direction="row" className="" justify="start">
+          <SchoolName school={this.props.currentSchool} />
+        </Box>	
         <div className="under"></div>
         <ul className="menu"></ul>
 									<Box direction="row" className="search-mary" justify="end">

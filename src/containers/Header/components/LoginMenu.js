@@ -20,12 +20,12 @@ class LoginMenu extends Component {
         <div className="button-groups">
           { loggedIn ?
             <div>
-              <Button className="separate-button" label="Help" secondary={true} />
-              <Button className="separate-button" label="Log Out" onClick={() => onLogout(event)} primary={true} />
+              <Button className="separate-button btn-extra" label="Help" secondary={true} />
+              <Button className="separate-button btn-extra btn-extra-2" label="Log Out" onClick={() => onLogout(event)} primary={true} />
             </div> :
             <div>
-              <Button className="separate-button" label="Help" secondary={true} />
-              <Button className="separate-button" label="Log In" onClick={onLogin} primary={true} />
+              <Button className="separate-button btn-extra" label="Help" secondary={true} />
+              <Button className="separate-button btn-extra" label="Log In" onClick={onLogin} primary={true} />
             </div> }
           </div>
         </Box>

@@ -7,9 +7,8 @@ import ManageSchools from '../components/layouts/ManageSchools'
 import StatementContainer from '../containers/Registration/Statement/StatementContainer'
 import SchoolDetailsContainer from '../containers/Registration/SchoolDetails/SchoolDetailsContainer'
 import SummaryTable from '../containers/Registration/Summary/SummaryTable'
-import LandingPage from '../layouts/LandingPage'
 import session from '../utils/session'
-
+//  { onEnter: redirectToHome }
 export default {
   path: '/',
   indexRoute: { onEnter: redirectToHome },

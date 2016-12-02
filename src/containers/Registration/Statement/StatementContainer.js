@@ -87,10 +87,10 @@ class StatementContainer extends Component {
 
     return (
       <Box>
-        <Section className="test">
+        <Section direction="row" className="test">
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
             <Box className="PartA">
-              <Heading tag="h2">
+              <Heading tag="h3">
               <div className="numberCircle">1</div>
                 Statement of Compliance
               </Heading>

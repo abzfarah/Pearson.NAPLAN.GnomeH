@@ -8,7 +8,7 @@ function getStyles(props, context) {
   return {
     root: {
       borderBottom: `1px solid ${tableHeader.borderColor}`,
-      background: '#64B5F6'
+      background: 'rgb(100, 181, 246)'
     },
   };
 }

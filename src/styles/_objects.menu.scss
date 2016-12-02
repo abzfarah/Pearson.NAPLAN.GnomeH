@@ -21,6 +21,9 @@
   width: 768px !important;  
 }
 
+.PartA .grommetux-paragraph {
+  max-width: none !important;
+}
 
 
 .school-info {
@@ -30,7 +33,8 @@
 }
 
 .search-mary {
-  width: 880px
+  width: 810px;
+  max-height: 47.99px;
 }
 
 .#{$grommet-namespace}menu {

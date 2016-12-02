@@ -124,8 +124,8 @@ class RegistrationContainer extends React.Component {
     var index=0
     const styles = getStyles()
 
-    const { stepIndex, statementData, currentSchool, schoolDetails, open } = this.state
-    const { isAdmin, router } = this.props
+    const { stepIndex, statementData, schoolDetails, open } = this.state
+    const { isAdmin, router, currentSchool } = this.props
     let children = React.Children.map(this.props.children, (child, index) => {
       return React.cloneElement(child, {
         ref: index++,
@@ -141,32 +141,32 @@ class RegistrationContainer extends React.Component {
     return (
       <div style={styles.root}>
         <Stepper linear={false} claims={this.props.claims}>
-          <Step completed={status[0]} active={stepIndex === 0}  >
+          <Step completed={false} active={stepIndex === 0}  >
             <StepButton onClick={() => this.handleActiveStep(0)}>
               Home
             </StepButton>
           </Step>
-          <Step completed={status[0]} active={stepIndex === 1} >
+          <Step completed={true} active={stepIndex === 1} >
             <StepButton onClick={() => this.handleActiveStep(1)}>
               Statement of Compliance
             </StepButton>
           </Step>
-          <Step completed={status[1]} active={stepIndex === 2}>
+          <Step completed={status[2]} active={stepIndex === 2}>
             <StepButton onClick={() => this.handleActiveStep(2)}>
               Authorised Staff
             </StepButton>
           </Step>
-          <Step completed={status[2]} active={stepIndex === 3}>
+          <Step completed={status[3]} active={stepIndex === 3}>
             <StepButton onClick={() => this.handleActiveStep(3)}>
               School Details
             </StepButton>
           </Step>
-          <Step completed={status[3]} active={stepIndex === 4}>
+          <Step completed={status[4]} active={stepIndex === 4}>
             <StepButton onClick={() => this.handleActiveStep(4)}>
               Alternative Test Order Format
             </StepButton>
           </Step>
-          <Step completed={status[4]} active={stepIndex === 5}>
+          <Step completed={status[5]} active={stepIndex === 5}>
             <StepButton onClick={() => this.handleActiveStep(6)}>
               Student Registration
             </StepButton>
@@ -214,6 +214,7 @@ function mapStateToProps (state, ownProps) {
     statementData: state.statement.statementData,
     form: state.form,
     route: ownProps.router,
+    currentSchool: state.school.currentSchool,
     status
   }
 }
