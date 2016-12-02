@@ -11,6 +11,11 @@ import Paper from 'material-ui/Paper'
 import Header from '../../components/common/Header'
 import MenuItem from '../../components/common/Menu/MenuItem'
 import NavigationMenu from './components/NavigationMenu'
+import Search from './components/Search'
+import IconButton from '../../components/common/IconButton'
+import ActionSearch from '../../components/common/svg-icons/action/search'
+
+
 
 const style = {
   paper: {
@@ -40,6 +45,15 @@ const style = {
 
 class HeaderContainer extends React.Component {
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      openSearch: false
+    }
+
+    this.handleSearchClick = this.handleSearchClick.bind(this)
+  }
+
   static contextTypes = {
     loggedIn: React.PropTypes.bool,
     user: React.PropTypes.object,
@@ -53,27 +67,46 @@ class HeaderContainer extends React.Component {
     return true
   }
 
+  handleSearchClick () {
+    this.setState({ openSearch: !this.state.openSearch })
+    this.forceUpdate()
+    console.log('you madafaka')
+  }
+
+
   render (props) {
     const { loggedIn, currentSchool, claims } = this.props
     const { centreSearch } = claims
 
-    return (
-      <StickyContainer>
-        <Sticky>
-          <LoginMenu status={this.props} />
-          <Box direction="row" wrap={true} align="center" className="second-header">
-            <Box direction="row" className="school-info">
-              { loggedIn && <SchoolName school={currentSchool} /> }
-            </Box>
-            <Box direction="row" className="school-search">
-              { centreSearch && <SchoolSearch /> }
-            </Box>
-          </Box>
-       
 
-        { loggedIn && <NavigationMenu routeActions={this.props.routeActions} /> }
- </Sticky>
-      </StickyContainer>
+
+    return (
+      <div>
+
+        <Header splash={false}
+          float={false}
+          fixed={false}
+          size="xlarge">
+          <LoginMenu status={this.props} />
+        </Header>
+
+     { centreSearch &&  <Header splash={false}
+          float={false}
+          fixed={false}
+          size="xlarge">
+          <Search currentSchool={this.props.currentSchool} openSearch={this.state.openSearch} handleSearchClick={this.handleSearchClick}/>
+        </Header> }
+
+      { centreSearch && 
+        <Header splash={false}
+          float={false}
+          fixed={false}
+          size="xlarge">
+          <NavigationMenu routeActions={this.props.routeActions} />
+        </Header> }
+
+
+      </div>
     )
   }
 }

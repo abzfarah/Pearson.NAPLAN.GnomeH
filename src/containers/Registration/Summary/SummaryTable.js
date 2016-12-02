@@ -1,7 +1,14 @@
 import React from 'react'
-import { Table, TableBody, TableHeader, TableRowColumn, TableHeaderColumn, TableRow } from 'material-ui/Table'
 
-const tableData = [
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell
+} from '../../../components/Table'
+
+const data = [
   {
     task: 'Statement of Compiance',
     requirement: 'Required for all schools',
@@ -65,43 +72,28 @@ class SummaryTable extends React.Component {
 
   render () {
     return (
-        <Table
-          height={this.state.height}
-          fixedHeader={this.state.fixedHeader}
-          fixedFooter={this.state.fixedFooter}
-          selectable={this.state.selectable}
-          multiSelectable={this.state.multiSelectable}
-        >
-          <TableHeader  style={{ backgroundColor:'rgb(100, 181, 246)', color: 'white' }}
-            displaySelectAll={this.state.showCheckboxes}
-            adjustForCheckbox={this.state.showCheckboxes}
-            enableSelectAll={this.state.enableSelectAll}
-          >
-            <TableRow >
-              <TableHeaderColumn style={{ color: 'white' }} tooltip="Task">Task</TableHeaderColumn>
-              <TableHeaderColumn style={{ color: 'white' }} tooltip="Requirement">Requirement</TableHeaderColumn>
-              <TableHeaderColumn style={{ color: 'white' }} tooltip="Due date">Due</TableHeaderColumn>
-              <TableHeaderColumn style={{ color: 'white' }} tooltip="Status">Status</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody
-            displayRowCheckbox={this.state.showCheckboxes}
-            deselectOnClickaway={this.state.deselectOnClickaway}
-            showRowHover={this.state.showRowHover}
-            stripedRows={this.state.stripedRows}
-          >
-
-            {tableData.map((row, index) => (
-              <TableRow key={index} selected={row.selected}>
-                <TableRowColumn style={{ backgroundColor:'#fcf9f9', texAlign: 'center' }} > {row.task} </TableRowColumn>
-                <TableRowColumn style={{ backgroundColor:'#fcf9f9', texAlign: 'center' }} > {row.requirement}</TableRowColumn>
-                <TableRowColumn style={{ backgroundColor:'#fcf9f9', texAlign: 'center' }} > {row.due} </TableRowColumn>
-                <TableRowColumn style={{ backgroundColor:'#fcf9f9', texAlign: 'center' }} > {row.status} </TableRowColumn>
+      <Table>
+        <TableHead className="summary-head">
+          <TableRow>
+            <TableCell>Task</TableCell>
+            <TableCell>Requirement</TableCell>
+            <TableCell>Due</TableCell>
+            <TableCell>Status</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((n) => {
+            return (
+              <TableRow key={n.task}>
+                <TableCell>{n.task}</TableCell>
+                <TableCell>{n.requirement}</TableCell>
+                <TableCell>{n.due}</TableCell>
+                <TableCell>{n.status}</TableCell>
               </TableRow>
-              ))}
-
-          </TableBody>
-        </Table>
+            )
+          })}
+        </TableBody>
+      </Table>
     )
   }
 }

@@ -2,7 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import transitions from '../../../../components/common/utils/transitions'
 import EnhancedButton from '../../../../components/common/utils/EnhancedButton'
 import StepLabel from './StepLabel'
+import classnames from 'classnames'
 
+import CSSClassnames from '../../../../components/common//utils/CSSClassnames';
+const CLASS_ROOT = CSSClassnames.TABLE
 const isLabel = (child) => {
   return child && child.type && child.type.muiName === 'StepLabel'
 };
@@ -126,9 +129,18 @@ class StepButton extends Component {
 
     const child = isLabel(children) ? children : <StepLabel>{children}</StepLabel>;
 
+        const classes = classnames(
+      CLASS_ROOT,
+      {
+        [`${CLASS_ROOT}--step-active`]: active
+      }
+    );
+
+
     return (
       <EnhancedButton
         disabled={disabled}
+        className={classes}
         style={Object.assign(styles.root, style)}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}

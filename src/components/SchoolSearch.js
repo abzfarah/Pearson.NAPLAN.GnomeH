@@ -13,15 +13,15 @@ class SchoolSearch extends Component {
     super(props)
     this.onUpdateInput = this.onUpdateInput.bind(this)
     this.onNewRequest = this.onNewRequest.bind(this)
+    
     this.state = {
       schools: [],
       options: [],
+      openSearch: false,
       selectedSchool: {},
       dataSource : [],
       term: ''
     }
-
-    this.handleSearchClick = this.handleSearchClick.bind(this)
   }
 
 onUpdateInput (inputValue) {
@@ -30,11 +30,9 @@ onUpdateInput (inputValue) {
   })
 }
 
-  handleSearchClick () {
-    console.log('you madafaka')
-  }
 
 onNewRequest (selectedSchool) {
+  this.setState({ openSearch: false })
   const { schoolResults } = this.props
   const schools = schoolResults.schools
 
@@ -43,6 +41,7 @@ onNewRequest (selectedSchool) {
   this.props.registrationActions.fetchStatement(currentSchool.centreCode)
   this.props.registrationActions.fetchSchoolDetails(currentSchool.centreCode)
   this.props.registrationActions.fetchRegistrationStatus(currentSchool.centreCode)
+  this.forceUpdate()
 }
 
 performSearch (term) {
@@ -64,6 +63,7 @@ performSearch (term) {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
+    if (this.props.openSearch !== nextProps.openSearch) return true
     if (this.state.term === '') return false
     if (this.state.term.length < 3) return false
     return true
@@ -78,22 +78,16 @@ performSearch (term) {
 
     searchLoading = searchLoading ? 'loading' : 'hide'
     return (
-      <div>
-        <Box direction="row" className="search-box">
-          <AutoComplete
-            fullWidth={ true}
-            filter={AutoComplete.noFilter}
-            searchText={this.state.term}
-            dataSource={this.state.dataSource} 
-            onUpdateInput={this.onUpdateInput}
-            onNewRequest={this.onNewRequest}
-            hintText="Search school"
-          />
-          <IconButton onClick={this.handleSearchClick}>
-            <ActionSearch color={iconStyle.color} hoverColor="white" backgroundColor={iconStyle.backgroundColor} />
-          </IconButton>
-        </Box>
-      </div>
+      <AutoComplete
+        fullWidth={ true}
+        openSearch={this.props.openSearch}
+        filter={AutoComplete.noFilter}
+        searchText={this.state.term}
+        dataSource={this.state.dataSource} 
+        onUpdateInput={this.onUpdateInput}
+        onNewRequest={this.onNewRequest}
+        hintText="Search school"
+      />
     )
   }
 }
