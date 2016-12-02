@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Box, Heading } from '../../components/common'
-import TablePagination from '../../components/DataTables/TablePagination'
+import TablePagination from './components/TablePagination'
 import EnhancedTableHead from './components/EnhancedTableHead'
 import Paper from '../../components/common/Paper'
 import Checkbox from 'material-ui/Checkbox'

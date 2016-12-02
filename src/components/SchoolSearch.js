@@ -35,8 +35,8 @@ onNewRequest (selectedSchool) {
   this.setState({ openSearch: false })
   const { schoolResults } = this.props
   const schools = schoolResults.schools
-
   const currentSchool = _.find(schools, { "centreName": selectedSchool})
+  sessionStorage.setItem('currentSchool', currentSchool.centreCode)
   this.props.searchActions.selectSchool(currentSchool)
   this.props.registrationActions.fetchStatement(currentSchool.centreCode)
   this.props.registrationActions.fetchSchoolDetails(currentSchool.centreCode)

@@ -84,6 +84,8 @@ class AppContainer extends React.Component {
         this.props.registrationActions.fetchSchoolDetails(centreCode)
         this.props.registrationActions.fetchRegistrationStatus(centreCode)
       }
+
+      
       this.setState({ claims: userClaims, loggedIn: true })
     }
   }

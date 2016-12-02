@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
-import IconButton from '../Buttons/IconButton';
+import IconButton from '../../../components/common/IconButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-import CSSClassnames from '../common/utils/CSSClassnames';
+import CSSClassnames from '../../../components/common/utils/CSSClassnames';
 
 const CLASS_ROOT = CSSClassnames.TABLE;
 
