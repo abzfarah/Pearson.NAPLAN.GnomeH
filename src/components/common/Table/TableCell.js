@@ -5,7 +5,7 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import classnames from 'classnames';
 
 
-import CSSClassnames from '../common/utils/CSSClassnames';
+import CSSClassnames from '../utils/CSSClassnames';
 const CLASS_ROOT = CSSClassnames.TABLE;
 
 const TABLE_CELL    = `${CLASS_ROOT}-cell`;

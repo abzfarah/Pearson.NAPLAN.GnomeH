@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom'
 import createFragment from 'react-addons-create-fragment'
 import classNames from 'classnames'
 import keycode from 'keycode'
-import addEventListener from './common/utils/addEventListener'
+import addEventListener from './utils/addEventListener'
 import { TouchRipple, createRippleHandler } from './Ripple'
 
-import CSSClassnames from '../components/common/utils/CSSClassnames'
+import CSSClassnames from './/utils/CSSClassnames'
 const CLASS_ROOT = CSSClassnames.BUTTON
 const BUTTON_BASE = `${CLASS_ROOT}-base`
 

@@ -7,7 +7,7 @@ import ButtonBase from '../ButtonBase';
 import classnames from 'classnames';
 
 
-import CSSClassnames from '../common/utils/CSSClassnames';
+import CSSClassnames from '../utils/CSSClassnames';
 const CLASS_ROOT = CSSClassnames.TABLE;
 
 const TABLE_SORT    = `${CLASS_ROOT}-sort`;

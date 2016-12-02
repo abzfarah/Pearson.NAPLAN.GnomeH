@@ -6,7 +6,7 @@ import {
   TableBody,
   TableRow,
   TableCell
-} from '../../../components/Table'
+} from '../../../components/common/Table'
 
 const data = [
   {

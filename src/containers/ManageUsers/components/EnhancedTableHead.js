@@ -5,7 +5,7 @@ import {
   TableRow,
   TableCell,
   TableSortLabel
-} from '../../../components/Table'
+} from '../../../components/common/Table'
 
 export default class EnhancedTableHead extends Component {
   static propTypes = {
