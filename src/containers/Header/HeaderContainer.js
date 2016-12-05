@@ -7,24 +7,22 @@ import Header from '../../components/common/Header'
 import NavigationMenu from './components/NavigationMenu'
 import Search from './components/Search'
 
-
 class HeaderContainer extends React.Component {
+  static propTypes = {
+    user: React.PropTypes.object,
+    children: React.PropTypes.element.isRequired,
+    actions: React.PropTypes.func,
+    searchActions: React.PropTypes.func,
+    registrationActions: React.PropTypes.func
+  }
 
   constructor (props) {
     super(props)
     this.state = {
       openSearch: false
     }
-
     this.handleSearchClick = this.handleSearchClick.bind(this)
   }
-
-  static contextTypes = {
-    loggedIn: React.PropTypes.bool,
-    user: React.PropTypes.object,
-    claims: React.PropTypes.array,
-    currentSchool: React.PropTypes.object
-  };
 
   shouldComponentUpdate (nextProps) {
     if (nextProps.isAdmin) return true
@@ -40,14 +38,12 @@ class HeaderContainer extends React.Component {
 
 
   render (props) {
-    const { loggedIn, currentSchool, claims } = this.props
+    const { currentSchool, claims } = this.context
     const { centreSearch } = claims
-
 
 
     return (
       <div>
-
         <Header splash={false}
           float={false}
           fixed={false}
@@ -55,14 +51,17 @@ class HeaderContainer extends React.Component {
           <LoginMenu status={this.props} />
         </Header>
 
-     { centreSearch &&  <Header splash={false}
+        { centreSearch &&
+        <Header splash={false}
           float={false}
           fixed={false}
           size="xlarge">
-          <Search currentSchool={this.props.currentSchool} openSearch={this.state.openSearch} handleSearchClick={this.handleSearchClick}/>
+          <Search currentSchool={currentSchool}
+            openSearch={this.state.openSearch}
+            handleSearchClick={this.handleSearchClick} />
         </Header> }
 
-      { centreSearch && 
+        { centreSearch &&
         <Header splash={false}
           float={false}
           fixed={false}
@@ -74,6 +73,13 @@ class HeaderContainer extends React.Component {
       </div>
     )
   }
+}
+
+HeaderContainer.contextTypes = {
+  loggedIn: React.PropTypes.bool,
+  user: React.PropTypes.object,
+  claims: React.PropTypes.object,
+  currentSchool: React.PropTypes.object
 }
 
 

@@ -7,6 +7,7 @@ import * as statementActions from '../../../actions'
 import { Button, Box, Heading, Paragraph, Section } from '../../../components/common'
 import { RadioButton } from 'material-ui'
 import { Checkbox, RadioButtonGroup, TextField } from 'redux-form-material-ui'
+import validate from '../utils/validation'
 
 class StatementContainer extends Component {
   constructor () {
@@ -81,7 +82,7 @@ class StatementContainer extends Component {
   }
 
   render () {
-    const { handleSubmit, pristine, reset, submitting, validated, invalid, isAdmin, otherDisabled } = this.props
+    const { handleSubmit, pristine, reset, submitting, validated, invalid, otherDisabled } = this.props
 
     let { isConfirmed, open } = this.state
 
@@ -113,7 +114,7 @@ class StatementContainer extends Component {
                 <Paragraph> Please read Principal's responsibilities</Paragraph>
               </Box>
               <Box className="man required">
-                <Field name="isConfirmed" disabled={isConfirmed && !isAdmin} component={Checkbox} label="I have read and accept the Principal responsibilities"/>
+                <Field name="isConfirmed" disabled={isConfirmed } component={Checkbox} label="I have read and accept the Principal responsibilities"/>
               </Box>
             </Box>
 
@@ -176,34 +177,10 @@ class StatementContainer extends Component {
                 </Box>
             </Box>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <Box className="button-group-padding">
               <div className="button-groups">
                 <Button className="separate-button" type="button" secondary={true} label="Return" />  
-                <Button className="separate-button" type="submit" disabled={invalid || (isConfirmed && !isAdmin)} primary={true } label="Submit"  />
+                <Button className="separate-button" type="submit" disabled={invalid || (isConfirmed )} primary={true } label="Submit"  />
               </div>
             </Box>
 
@@ -219,63 +196,6 @@ class StatementContainer extends Component {
 StatementContainer.contextTypes = {
   router: React.PropTypes.object
 }
-
-const validate = values => {
-  const errors = {}
-  function isNumeric (n) {
-    return n && !/[^a-zA-Z]/.test(n)
-  }
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
-  } else if (values.email.length > 50) {
-    errors.email = 'Email must not exceed 50 characters'
-  }
-
-  if (!values.firstName) {
-    errors.firstName = 'Required'
-  } else if (!isNumeric(values.firstName)) {
-    errors.firstName = 'Must not contain a number'
-  } else if (values.firstName.length > 50) {
-    errors.firstName = 'First name must not exceed 50 characters'
-  }
-
-  if (!values.lastName) {
-    errors.lastName = 'Required'
-  } else if (!isNumeric(values.lastName)) {
-    errors.lastName = 'Must not contain a number'
-  } else if (values.lastName.length > 50) {
-    errors.lastName = 'Last name must not exceed 50 characters'
-  }
-
-  if (values.securityLevel === '0') {
-    errors.securityLevel = 'Required'
-  } else if (values.securityLevelOther !== '' && values.securityLevel !== '4') {
-    errors.securityLevel = 'Please clear text field or select "other"'
-  } else if (isNumeric(values.securityLevel)) {
-    errors.securityLevel = 'Must choose security level'
-  }
-
-  if (!values.isConfirmed) {
-    errors.isConfirmed = 'Required'
-  } else if (!isNumeric(values.isConfirmed)) {
-    errors.isConfirmed = 'Must confirm'
-  }
-
-  if (!values.isDeclared) {
-    errors.isDeclared = 'Required'
-  } else if (!isNumeric(values.isDeclared)) {
-    errors.isDeclared = 'Must declare'
-  }
-  if (!values.isCertified) {
-    errors.isCertified = 'Required'
-  } else if (!isNumeric(values.isDeclared)) {
-    errors.isCertified = 'Must certify'
-  }
-  return errors
-}
-
 
 const selector = formValueSelector('Statement')
 

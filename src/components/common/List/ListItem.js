@@ -5,11 +5,11 @@ import { fade } from '../utils/colorManipulator'
 import transitions from '../utils/transitions'
 import EnhancedButton from '../utils/EnhancedButton'
 import IconButton from '../IconButton'
-import OpenIcon from '../svg-icons/navigation/expand-less'
-import CloseIcon from '../svg-icons/navigation/expand-more'
+import OpenIcon from 'material-ui/svg-icons/navigation/expand-less'
+import CloseIcon from 'material-ui/svg-icons/navigation/expand-more'
 import NestedList from './NestedList'
 
-function getStyles(props, context, state) {
+function getStyles (props, context, state) {
   const {
     insetChildren,
     leftAvatar,

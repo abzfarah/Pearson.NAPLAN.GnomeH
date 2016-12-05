@@ -14,7 +14,18 @@ import _ from 'lodash'
 injectTapEventPlugin()
 
 class AppContainer extends React.Component {
+  static propTypes = {
 
+  }
+
+  getChildContext () {
+    return {
+      loggedIn: this.state.loggedIn,
+      user: this.state.user,
+      claims: this.state.claims,
+      currentSchool: this.state.currentSchool
+    }
+  }
 
     /**
    * constructor
@@ -75,26 +86,20 @@ class AppContainer extends React.Component {
  */
 
   componentWillMount (props) {
-    if (session.exists) {
       let userClaims = session.claims
-      if (!session.isAdmin) {
-        let centreCode = session.schoolcode 
+      if (session.exists && session.isAdmin) {
+        let centreCode = session.schoolcode
         this.props.searchActions.selectSchool(centreCode)
-        this.props.registrationActions.fetchStatement(centreCode)
-        this.props.registrationActions.fetchSchoolDetails(centreCode)
-        this.props.registrationActions.fetchRegistrationStatus(centreCode)
+        this.props.registrationActions.fetchApplication(centreCode)
       }
-
-      
       this.setState({ claims: userClaims, loggedIn: true })
-    }
+    
   }
 
   componentWillReceiveProps (nextProps, nextState) {
     if (!_.isEqual(this.state.currentSchool, nextProps.currentSchool)) {
       this.setState({ currentSchool: nextProps.currentSchool })
     }
-
     // Create session only if it doesn't exist.
     // If it exists, session will be created during componentWillMount
     if (nextProps.user && !this.state.loggedIn) {
@@ -126,15 +131,6 @@ class AppContainer extends React.Component {
     const { loggedIn, claims, currentSchool } = this.state
     const isAdmin = this.state.isAdmin || session.isAdmin
 
-    // Attach props [ claims, currentSchool, isAdmin ] to all child components of AppContainer
-    let children = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, {
-        claims: claims,
-        currentSchool: currentSchool,
-        isAdmin: isAdmin
-      })
-    })
-
     return (
       <App centered={false}>
         <HeaderContainer
@@ -146,13 +142,19 @@ class AppContainer extends React.Component {
           onLogin={this.onLoginButtonClick} />
 
         { !loggedIn && <LandingPage /> }
-    
-        {children}
+        { this.props.children }
         <Footer />
       </App>
     )
   }
-  }
+}
+
+AppContainer.childContextTypes = {
+  loggedIn: React.PropTypes.bool,
+  user: React.PropTypes.object,
+  claims: React.PropTypes.object,
+  currentSchool: React.PropTypes.object
+}
 
 function mapStateToProps (state, ownProps) {
   return {

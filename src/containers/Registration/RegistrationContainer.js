@@ -7,6 +7,13 @@ import * as registrationActions from '../../actions/registrationActions'
 
 class RegistrationContainer extends React.Component {
 
+  static contextTypes = {
+    loggedIn: React.PropTypes.bool,
+    user: React.PropTypes.object,
+    claims: React.PropTypes.object,
+    currentSchool: React.PropTypes.object
+  }
+
   constructor () {
     super()
     this.state = {
@@ -78,6 +85,10 @@ class RegistrationContainer extends React.Component {
       case 3:
         this.props.dispatch(push('/school/schooldetails'))
         break
+      case 6:
+        this.props.dispatch(push('/school/studentregistration'))
+        break  
+
       default:
     }
   }
@@ -125,7 +136,7 @@ class RegistrationContainer extends React.Component {
     const styles = getStyles()
 
     const { stepIndex, statementData, schoolDetails, open } = this.state
-    const { isAdmin, router, currentSchool } = this.props
+    const { isAdmin, currentSchool } = this.context
     let children = React.Children.map(this.props.children, (child, index) => {
       return React.cloneElement(child, {
         ref: index++,
@@ -133,8 +144,7 @@ class RegistrationContainer extends React.Component {
         schoolDetails: schoolDetails,
         currentSchool: currentSchool,
         isAdmin: isAdmin,
-        unsaved: this.handleUnsaved,
-        router: router
+        unsaved: this.handleUnsaved
       })
     })
 
@@ -182,9 +192,6 @@ class RegistrationContainer extends React.Component {
   }
 }
 
-RegistrationContainer.contextTypes = {
-  router: React.PropTypes.func.isRequired
-}
 
 const getStyles = () => {
   return {
@@ -213,7 +220,6 @@ function mapStateToProps (state, ownProps) {
     schoolDetails: state.schoolDetails.schoolDetails,
     statementData: state.statement.statementData,
     form: state.form,
-    route: ownProps.router,
     currentSchool: state.school.currentSchool,
     status
   }

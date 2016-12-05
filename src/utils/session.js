@@ -39,7 +39,7 @@ class Session {
   }
 
   get schoolcode() {
-    return this._schoolcode
+    return sessionStorage.getItem('currentSchool')
   }
 
   get user() {

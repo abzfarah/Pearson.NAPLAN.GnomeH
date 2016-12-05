@@ -6,8 +6,7 @@ import Heading from '../../common/Heading'
 import Box from '../../common/Box'
 import Paragraph from '../../common/Paragraph'
 import CheckBox from '../../common/CheckBox'
-import List from '../../common/List'
-import ListItem from '../../common/ListItem'
+import { List, ListItem } from 'material-ui/List'
 import Select from '../../common/Select'
 
 import {orange500, blue500, black} from '../../common/utils/materialStyles/colors';

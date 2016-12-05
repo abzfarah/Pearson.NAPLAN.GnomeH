@@ -73,13 +73,18 @@ class Stepper extends Component {
     linear: true,
   };
 
-  static contextTypes = {muiTheme: PropTypes.object.isRequired};
+  static contextTypes = { 
+    muiTheme: PropTypes.object.isRequired,
+    claims: PropTypes.object
+  } 
 
-  static childContextTypes = {stepper: PropTypes.object};
+  static childContextTypes = { 
+    stepper: PropTypes.object
+  }
 
   getChildContext() {
-    const {orientation} = this.props;
-    return {stepper: {orientation}};
+    const { orientation } = this.props;
+    return { stepper: { orientation }};
   }
 
   render() {
@@ -87,11 +92,12 @@ class Stepper extends Component {
       activeStep,
       children,
       linear,
-      style,
-      claims
+      style
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const { claims } = this.context
+
+    const { prepareStyles } = this.context.muiTheme;
     const styles = getStyles(this.props, this.context);
     const menu = []
 

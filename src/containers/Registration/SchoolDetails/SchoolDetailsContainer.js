@@ -3,10 +3,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { toastr } from 'react-redux-toastr'
 import * as detailsActions from '../../../actions'
-import { Button, Box, Heading, Paragraph, Section, List, ListItem } from '../../../components/common'
+import { Button, Box, Heading, Paragraph, Section } from '../../../components/common'
 import { AutoComplete, Checkbox, TextField } from 'redux-form-material-ui'
 import { AutoComplete as MUIAutoComplete } from 'material-ui'
 import { Field, reduxForm } from 'redux-form'
+import { List, ListItem } from 'material-ui/List'
+import Divider from 'material-ui/Divider'
+import validate from '../utils/validation'
+
 
 class SchoolDetailsContainer extends Component {
 
@@ -65,13 +69,13 @@ class SchoolDetailsContainer extends Component {
                 <div className="numberCircle">3</div>
                 <span className="sd_hColor">School Details</span>
               </Heading>
-              <Paragraph>
+              <Paragraph  className="details-par">
                 Principals are responsible for the security of the NAPLAN test materials and for the administration
                 of the tests. Principals are required to submit an annual Statement of Compliance,
                 indicating their understanding of the VCAA’s requirements in relation to test security
                 and administration.
               </Paragraph>
-              <Paragraph>
+              <Paragraph  className="details-par">
                 While the test materials are held in the school prior to, during and after the testing period,
                 any direct access to them within the security is to be recorded in the Test Materials
                 Security Log. The Test Materials Security Log should be kept by the school for 12 months
@@ -209,7 +213,7 @@ class SchoolDetailsContainer extends Component {
                   <Box>
                     <div>
                       <Field name="phone" ref="phone" component={TextField}
-                        hintText="Phone" floatingLabelText="Phone" />
+                        hintText="Phone" floatingLabelText="Phone" /><br />
 
                       <Field name="fax" ref="fax" component={TextField}
                         hintText="Fax" floatingLabelText="Fax" /><br />
@@ -275,31 +279,6 @@ class SchoolDetailsContainer extends Component {
       </Box>
     )
   }
-}
-
-const validate = values => {
-  const errors = {}
-  function isNumeric (n) {
-    return n && /^[0-9 ]+$/g.test(n)
-  }
-  if (!values.reviewed) {
-    errors.reviewed = 'Must declare'
-  }
-  if (!values.phone) {
-    errors.phone = 'Required'
-  } else if (!isNumeric(values.phone)) {
-    errors.phone = 'Must be a number'
-  } else if (values.phone.length > 50) {
-    errors.phone = 'Must not exceed 50 characters'
-  }
-  if (!values.fax) {
-    errors.fax = 'Required'
-  } else if (!isNumeric(values.fax)) {
-    errors.fax = 'Must be a number'
-  } else if (values.fax.length > 50) {
-    errors.fax = 'Must not exceed 50 characters'
-  }
-  return errors
 }
 
 // eslint-disable-next-line no-class-assign
