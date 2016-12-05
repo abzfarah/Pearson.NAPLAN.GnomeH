@@ -3,6 +3,7 @@ import CallbackPage from '../components/callback'
 import RegistrationContainer from '../containers/Registration/RegistrationContainer'
 import AuthorizedStaff from '../components/MultiTab/AuthStaff/AuthStaff'
 import ManageUsersContainer from '../containers/ManageUsers/ManageUsersContainer'
+import StudentRegistrationContainer from '../containers/Registration/StudentRegistrationData/StudentRegistrationContainer'
 import ManageSchools from '../components/layouts/ManageSchools'
 import StatementContainer from '../containers/Registration/Statement/StatementContainer'
 import SchoolDetailsContainer from '../containers/Registration/SchoolDetails/SchoolDetailsContainer'
@@ -23,7 +24,6 @@ export default {
         { path: 'soc', component: StatementContainer },
         { path: 'authorisedstaff', component: AuthorizedStaff },
         { path: 'schooldetails', component: SchoolDetailsContainer }
-  //      { path: 'studentregistration', component: Summary },
       ]
     },
     {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Box from '../components/common/Box'
 import Columns from '../components/common/Columns'
-import { StickyContainer, Sticky } from '../components/common/Sticky'
 import Footer from '../components/common/Footer'
 
 export default class BlogFooter extends Component {

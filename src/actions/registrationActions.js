@@ -16,6 +16,16 @@ import { FETCH_SCHOOL_DETAILS,
          STATUS_FETCH_FAILURE,
 } from '../constants'
 
+
+export function fetchApplication (schoolCode) {
+  return dispatch => Promise.all([
+    dispatch(fetchStatement(schoolCode)),
+    dispatch(fetchSchoolDetails(schoolCode)),
+    dispatch(fetchRegistrationStatus(schoolCode))
+  ])
+}
+
+
 export function fetchRegistrationStatus(schoolCode) {
     return dispatch => {
         dispatch({
@@ -43,6 +53,8 @@ export function fetchRegistrationStatus(schoolCode) {
     }
 }
 
+
+
 export function fetchSchoolDetails(keyword) {
     return dispatch => {
         dispatch({
@@ -66,6 +78,7 @@ export function fetchSchoolDetails(keyword) {
             });
     }
 }
+
 
 //-- Insert statement
 export function submitDetails(data) {

@@ -1,20 +1,10 @@
-import React from 'react';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import React from 'react'
 import { connect } from 'react-redux';
-import Box from '../common/Box';
-import Tab from '../common/Tab';
-import Tabs from '../common/Tabs';
-import  CallbackComponent  from './CallbackComponent';
-import { push } from 'react-router-redux';
+import { push } from 'react-router-redux'
+import CallbackComponent from './CallbackComponent'
 
 
 class CallbackPage extends React.Component {
-
-  componentWillMount() {
-  }
-
-  componentDidlMount() {
-  }
 
   successCallback = (user) => {
     const { dispatch } = this.props;
@@ -36,7 +26,7 @@ class CallbackPage extends React.Component {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch
-  };
+  }
 }
 
 export default connect(null, mapDispatchToProps)(CallbackPage);

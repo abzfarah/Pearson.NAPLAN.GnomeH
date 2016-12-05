@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react';
-import ReactDOM from 'react-dom';
-import shallowEqual from 'recompose/shallowEqual';
-import Popover from '../Popover/Popover';
-import CheckIcon from '../svg-icons/navigation/check';
-import ListItem from '../List/ListItem';
-import Menu from './Menu';
+import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
+import shallowEqual from 'recompose/shallowEqual'
+import Popover from '../Popover/Popover'
+import CheckIcon from 'material-ui/svg-icons/navigation/check'
+import ListItem from '../List/ListItem'
+import Menu from './Menu'
 
 const nestedMenuStyle = {
   position: 'relative',

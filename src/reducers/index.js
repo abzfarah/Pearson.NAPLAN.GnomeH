@@ -26,7 +26,7 @@ const reducers = combineReducers(
     schoolDetails: schoolDetailsReducer,
     manageSchool: manageSchoolReducer,
     authStaff: authStaffReducer,
-   toastr: toastrReducer
+    toastr: toastrReducer
    
   }
 );

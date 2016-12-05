@@ -4,9 +4,6 @@ import AutoComplete from '../components/common/AutoComplete'
 import { bindActionCreators } from 'redux'
 import * as searchSchoolActions from '../actions/schoolSearchActions'
 import * as registrationActions from '../actions/registrationActions'
-import { Box } from './common'
-import IconButton from './common/IconButton'
-import ActionSearch from './common/svg-icons/action/search'
 
 class SchoolSearch extends Component {
   constructor (props) {
@@ -35,12 +32,10 @@ onNewRequest (selectedSchool) {
   this.setState({ openSearch: false })
   const { schoolResults } = this.props
   const schools = schoolResults.schools
-
   const currentSchool = _.find(schools, { "centreName": selectedSchool})
-  this.props.searchActions.selectSchool(currentSchool)
-  this.props.registrationActions.fetchStatement(currentSchool.centreCode)
-  this.props.registrationActions.fetchSchoolDetails(currentSchool.centreCode)
-  this.props.registrationActions.fetchRegistrationStatus(currentSchool.centreCode)
+  sessionStorage.setItem('currentSchool', currentSchool.centreCode)
+  this.props.searchActions.selectSchool( currentSchool.centreCode)
+  this.props.registrationActions.fetchApplication(currentSchool.centreCode)
   this.forceUpdate()
 }
 

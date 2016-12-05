@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
-import ButtonBase from '../ButtonBase'
+import ButtonBase from './ButtonBase'
 import CSSClassnames from './utils/CSSClassnames'
 
 const CLASS_ROOT = CSSClassnames.BUTTON

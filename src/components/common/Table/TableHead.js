@@ -4,38 +4,27 @@ import React, { Component, PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import classnames from 'classnames';
 
-export const styleSheet = createStyleSheet('TableBody', (theme) => {
-  return {
-    root: {
-      fontSize: 13,
-      color: 'yellow',
-    },
-  };
-});
-
-
 import CSSClassnames from '../utils/CSSClassnames';
 const CLASS_ROOT = CSSClassnames.TABLE;
 
 const TABLE_ROW    = `${CLASS_ROOT}-row`;
-const TABLE_HEAD = `${TABLE_ROW}-header`;
-const TABLE_BODY   = `${TABLE_ROW}-body`;
-const TABLE_FOOTER   = `${TABLE_ROW}-footer`;
+const TABLE_HEADER = `${CLASS_ROOT}-header`;
+const TABLE_BODY   = `${CLASS_ROOT}-body`;
 
 
 /**
- * A material table body.
+ * A material table head.
  *
  * ```jsx
- * <TableBody>
+ * <TableHead>
  *   <TableRow>....</TableRow>
- * </TableBody>
+ * </TableHead>
  * ```
  */
-export default class TableBody extends Component {
+export default class TableHead extends Component {
   static propTypes = {
     /**
-     * Should be valid `<tbody>` children such as `TableRow`.
+     * Should be valid `<thead>` children such as `TableRow`.
      */
     children: PropTypes.node,
     /**
@@ -46,6 +35,7 @@ export default class TableBody extends Component {
 
   static contextTypes = {
     table: PropTypes.object
+
   };
 
   static childContextTypes = { table: PropTypes.object };
@@ -53,26 +43,26 @@ export default class TableBody extends Component {
   getChildContext() { // eslint-disable-line class-methods-use-this
     return {
       table: {
-        body: true,
+        head: true,
       },
     };
   }
 
   render() {
     const {
-      className: classNameProp,
       children,
       ...other
     } = this.props;
 
-
-    const classes = classnames(TABLE_BODY, classNameProp);
+    const tableHead = classnames(
+      `${TABLE_ROW}`
+    );
 
 
     return (
-      <tbody  className={classes} {...other}>
+      <thead  className={tableHead} {...other}>
         {children}
-      </tbody>
+      </thead>
     );
   }
 }
