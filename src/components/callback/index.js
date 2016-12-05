@@ -12,7 +12,7 @@ class CallbackPage extends React.Component {
 
 
     var userSession = JSON.stringify(user.profile)
-    sessionStorage.setItem('userSession', userSession);
+    window.sessionStorage.setItem('userSession', userSession);
     this.props.dispatch(push('/'));
   }
 

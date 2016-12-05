@@ -151,7 +151,7 @@ function mapStateToProps(globalState) {
     debugger
     //--TODO 
     //-- Temp way as golablState.School.currentSchool doesnt have value
-    var schoolJSON = JSON.parse(sessionStorage.userSession);
+    var schoolJSON = JSON.parse(window.sessionStorage.userSession);
     var centerCode = '';
     if (schoolJSON.schoolCode) {
         centerCode = schoolJSON.schoolCode;

@@ -95,6 +95,7 @@
     "axios": "^0.15.2",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.3.17",
+    "babel-jest": "17.0.2",
     "babel-loader": "^6.2.0",
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-polyfill": "^6.9.0",
@@ -149,7 +150,7 @@
     "inuit-shared": "~0.1.5",
     "ip": "^1.1.2",
     "jeet": "^6.1.4",
-    "jest": "^15.1.1",
+    "jest": "17.0.2",
     "joi": "^9.1.1",
     "json-loader": "^0.5.4",
     "json-server": "^0.8.22",
@@ -237,6 +238,9 @@
     "babel-plugin-lodash": "^3.2.9",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-1": "^6.16.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "babel-preset-stage-3": "^6.17.0",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "chai-enzyme": "^0.5.0",
@@ -259,10 +263,7 @@
     "inuitcss": "^6.0.0-beta.3",
     "isparta-loader": "^2.0.0",
     "istanbul-instrumenter-loader": "^1.0.0",
-    "jest": "^15.1.1",
-    "jest-cli": "^15.1.1",
-    "jest-mock": "^15.0.0",
-    "jest-snapshot": "^15.1.1",
+    "jest": "^17.0.3",
     "json-loader": "^0.5.4",
     "karma": "^1.0.0",
     "karma-chrome-launcher": "^2.0.0",
@@ -282,6 +283,7 @@
     "phantomjs-prebuilt": "^2.1.3",
     "redbox-react": "^1.2.10",
     "redux-form": "^6.2.0",
+    "redux-mock-store": "^1.2.1",
     "redux-search": "^2.3.2",
     "reselect": "^2.5.4",
     "sinon": "^1.17.3",
@@ -291,18 +293,19 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "setupTestFrameworkScriptFile": "./setupTestFrameworkScriptFile.js",
     "coverageReporters": [
       "text",
       "cobertura",
       "lcov"
     ],
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react/",
-      "<rootDir>/node_modules/react-dom/",
-      "<rootDir>/node_modules/react-bootstrap/",
-      "<rootDir>/node_modules/react-addons-test-utils/",
-      "<rootDir>/node_modules/jasmine-reporters"
-    ]
+    "globals": {
+      "__DEV__": true,
+      "__DEVSERVER__": false,
+      "__INTSTG__": false,
+      "__STG__": false
+    }
   },
   "bugs": {
     "url": "https://github.com/davezuko/react-redux-starter-kit/issues"

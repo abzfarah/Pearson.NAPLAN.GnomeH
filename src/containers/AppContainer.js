@@ -65,7 +65,7 @@ class AppContainer extends React.Component {
 
   onLogoutButtonClick = (e) => {
     e.preventDefault()
-    sessionStorage.clear()
+    window.sessionStorage.clear()
     localStorage.clear()
     userManager.removeUser()
     userManager.signoutRedirect()
@@ -73,7 +73,7 @@ class AppContainer extends React.Component {
 
   /**
  * componentWillMount is used to initialise the currentSchool state when an existing
- * session is found in sessionStorage. Only useful during refresh.
+ * session is found in window.sessionStorage. Only useful during refresh.
  *
  * An admin user is not associated with any school, so no school data will be found in session storage.
  * In either case, initialise login status and claims [claims, loggedIn] if session is found.
@@ -86,14 +86,15 @@ class AppContainer extends React.Component {
  */
 
   componentWillMount (props) {
-      let userClaims = session.claims
+      
       if (session.exists && session.isAdmin) {
+        let userClaims = session.claims
         let centreCode = session.schoolcode
         this.props.searchActions.selectSchool(centreCode)
         this.props.registrationActions.fetchApplication(centreCode)
+        this.setState({ claims: userClaims, loggedIn: true })
       }
-      this.setState({ claims: userClaims, loggedIn: true })
-    
+ 
   }
 
   componentWillReceiveProps (nextProps, nextState) {

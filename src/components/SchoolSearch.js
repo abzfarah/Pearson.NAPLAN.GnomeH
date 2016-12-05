@@ -33,7 +33,7 @@ onNewRequest (selectedSchool) {
   const { schoolResults } = this.props
   const schools = schoolResults.schools
   const currentSchool = _.find(schools, { "centreName": selectedSchool})
-  sessionStorage.setItem('currentSchool', currentSchool.centreCode)
+  window.sessionStorage.setItem('currentSchool', currentSchool.centreCode)
   this.props.searchActions.selectSchool( currentSchool.centreCode)
   this.props.registrationActions.fetchApplication(currentSchool.centreCode)
   this.forceUpdate()
