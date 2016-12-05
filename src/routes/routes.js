@@ -22,8 +22,8 @@ export default {
       childRoutes: [
         { path: 'summary', component: SummaryTable },
         { path: 'soc', component: StatementContainer },
-        { path: 'schooldetails', component: SchoolDetailsContainer },
-        { path: 'studentregistration', component: StudentRegistrationContainer }
+        { path: 'authorisedstaff', component: AuthorizedStaff },
+        { path: 'schooldetails', component: SchoolDetailsContainer }
       ]
     },
     {
