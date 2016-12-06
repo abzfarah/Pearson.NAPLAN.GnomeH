@@ -86,15 +86,15 @@ export class AppContainer extends React.Component {
  */
 
   componentWillMount (props) {
-      
-      if (session.exists && session.isAdmin) {
-        let userClaims = session.claims
+    if (session.exists) {
+      let userClaims = session.claims
+      if (session.isAdmin) {
         let centreCode = session.schoolcode
         this.props.searchActions.selectSchool(centreCode)
         this.props.registrationActions.fetchApplication(centreCode)
         this.setState({ claims: userClaims, loggedIn: true })
       }
- 
+    }
   }
 
   componentWillReceiveProps (nextProps, nextState) {

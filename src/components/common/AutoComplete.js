@@ -47,7 +47,7 @@ class AutoComplete extends Component {
      */
     anchorOrigin: propTypes.origin,
 
-    openSearch: propTypes.bool,
+ 
     /**
      * If true, the auto complete is animated as it is toggled.
      */
@@ -176,7 +176,9 @@ class AutoComplete extends Component {
     /**
      * Override the inline-styles of AutoComplete's TextField element.
      */
-    textFieldStyle: PropTypes.object,
+    textFieldStyle: PropTypes.object
+
+
   };
 
   static defaultProps = {
@@ -189,8 +191,6 @@ class AutoComplete extends Component {
       text: 'text',
       value: 'value',
     },
-    closeSearch: false,
-    openSearch: false,
     disableFocusRipple: true,
     filter: (searchText, key) => searchText !== '' && key.indexOf(searchText) !== -1,
     fullWidth: false,
@@ -377,11 +377,11 @@ class AutoComplete extends Component {
     }
 
     this.setState({
-      focusTextField: true,
-    });
+      focusTextField: true
+    })
 
     if (this.props.onFocus) {
-      this.props.onFocus(event);
+      this.props.onFocus(event)
     }
   };
 
@@ -426,23 +426,23 @@ class AutoComplete extends Component {
     const {
       style: popoverStyle,
       ...popoverOther
-    } = popoverProps || {};
+    } = popoverProps || {}
 
     const {
       open,
       anchorEl,
       searchText,
       focusTextField,
-    } = this.state;
+    } = this.state
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.context.muiTheme
+    const styles = getStyles(this.props, this.context, this.state)
 
     const requestsList = [];
 
     const schoolsList = dataSource
 
-    const schoolNames = _.map(dataSource, 'centreName');
+    const schoolNames = _.map(dataSource, 'centreName')
     schoolNames.every((item, index) => {
       switch (typeof item) {
         case 'string':

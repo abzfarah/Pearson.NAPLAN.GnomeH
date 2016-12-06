@@ -64,7 +64,8 @@ class Step extends Component {
       completed,
       disabled,
       index,
-      last
+      last,
+      hasClaim // eslint-disable-line no-unused-vars
     } = this.props
 
     const icon = index + 1
@@ -84,6 +85,7 @@ class Step extends Component {
       last, // eslint-disable-line no-unused-vars
       children,
       style,
+      hasClaim, // eslint-disable-line no-unused-vars
       ...other
     } = this.props
 

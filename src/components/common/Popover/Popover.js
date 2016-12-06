@@ -82,7 +82,7 @@ class Popover extends Component {
     /**
      * The zDepth of the popover.
      */
-    zDepth: propTypes.zDepth,
+    zDepth: PropTypes.any,
   };
 
   static defaultProps = {

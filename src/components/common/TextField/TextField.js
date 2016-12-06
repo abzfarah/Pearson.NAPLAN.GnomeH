@@ -122,8 +122,6 @@ function isValid(value) {
 class TextField extends Component {
   static propTypes = {
 
-    openSearch: PropTypes.bool,
-
     children: PropTypes.node,
     /**
      * The css class name of the root element.
@@ -406,8 +404,9 @@ class TextField extends Component {
       rows,
       rowsMax,
       textareaStyle,
+      openSearch,
       ...other
-    } = this.props;
+    } = this.props
 
     const {prepareStyles} = this.context.muiTheme;
     const styles = getStyles(this.props, this.context, this.state);
@@ -469,22 +468,20 @@ class TextField extends Component {
           type={type}
           className="simple-search-input"
         />
-      );
+      )
     }
 
-    let rootProps = {};
+    let rootProps = {}
 
     if (children) {
-      rootProps = other;
+      rootProps = other
     }
 
-    const CLASS_ROOT = CSSClassnames.BUTTON;
-
-    const { openSearch } = this.props
+    const CLASS_ROOT = CSSClassnames.BUTTON
 
     const classes = classnames(
       {
-        [`${CLASS_ROOT}--search-focus`]: openSearch,
+        [`${CLASS_ROOT}--search-focus`]: openSearch || false,
         [`${CLASS_ROOT}--search-notfocus`]: !openSearch
       }
     )
@@ -495,7 +492,6 @@ class TextField extends Component {
         {...rootProps}
         tabIndex = {11}
         id="search-an"
-        className={className}
         className={classes}
         style={prepareStyles(Object.assign(styles.root, style))}
       >

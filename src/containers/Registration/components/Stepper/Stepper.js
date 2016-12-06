@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
-import StepConnector from './StepConnector';
+import React, { Component, PropTypes } from 'react'
+import StepConnector from './StepConnector'
 
 const getStyles = (props) => {
-  const {orientation} = props;
+  const { orientation } = props
   return {
     root: {
       display: 'flex',
@@ -10,10 +10,10 @@ const getStyles = (props) => {
       alignContent: 'center',
       alignItems: orientation === 'horizontal' ? 'center' : 'stretch',
       justifyContent: 'flex-start',
-      paddingTop: 20,
-    },
-  };
-};
+      paddingTop: 20
+    }
+  }
+}
 
 var mapTabs = {
   summary: 0,
@@ -25,20 +25,20 @@ var mapTabs = {
 }
 
 var mapTabtoClaim = {
-  "0": "home",
-  "1": "soc",
-  "2": "authorizedStaff",
-  "3": "schooldetails",
-  "4": "alternativeTestFormatOrder",
-  "5": "studentRegistrationData"
+  '0': 'home',
+  '1': 'soc',
+  '2': 'authorizedStaff',
+  '3': 'schooldetails',
+  '4': 'alternativeTestFormatOrder',
+  '5': 'studentRegistrationData'
 }
 
 var mapClaims = {
-  soc: mapTabs["statement"],
-  authorisedstaff: mapTabs["authorizedStaff"],
-  schooldetails: mapTabs["schooldetails"],
-  alternativeTestFormatOrder: mapTabs["alternativeTest"],
-  studentRegistrationData: mapTabs["studentRegistration"]
+  soc: mapTabs['statement'],
+  authorisedstaff: mapTabs['authorizedStaff'],
+  schooldetails: mapTabs['schooldetails'],
+  alternativeTestFormatOrder: mapTabs['alternativeTest'],
+  studentRegistrationData: mapTabs['studentRegistration']
 }
 
 class Stepper extends Component {
@@ -64,86 +64,80 @@ class Stepper extends Component {
      * Override the inline-style of the root element.
      */
     style: PropTypes.object,
-    
+
     hasClaim:  PropTypes.any
   };
 
   static defaultProps = {
     orientation: 'horizontal',
-    linear: true,
+    linear: true
   };
 
-  static contextTypes = { 
+  static contextTypes = {
     muiTheme: PropTypes.object.isRequired,
     claims: PropTypes.object
-  } 
+  }
 
-  static childContextTypes = { 
+  static childContextTypes = {
     stepper: PropTypes.object
   }
 
-  getChildContext() {
-    const { orientation } = this.props;
-    return { stepper: { orientation }};
+  getChildContext () {
+    const { orientation } = this.props
+    return { stepper: { orientation } }
   }
 
-  render() {
+  render () {
     const {
       activeStep,
       children,
       linear,
       style
-    } = this.props;
+    } = this.props
 
     const { claims } = this.context
 
-    const { prepareStyles } = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
-    const menu = []
+    const { prepareStyles } = this.context.muiTheme
+    const styles = getStyles(this.props, this.context)
+    const Menu = []
 
-    /**
-     * One day, we may be able to use real CSS tools
-     * For now, we need to create our own "pseudo" elements
-     * and nth child selectors, etc
-     * That's what some of this garbage is for :)
-     */
-    const steps = React.Children.map(children, (step, index) => {
-
-      const hasClaim = claims[mapTabtoClaim[index]];
-      const controlProps = {index};
+    const Steps = React.Children.map(children, (Step, index) => {
+      const hasClaim = claims[mapTabtoClaim[index]] || false
+      const controlProps = { index }
 
       if (activeStep === index) {
-        controlProps.active = true;
+        controlProps.active = true
       } else if (linear && activeStep > index) {
-        controlProps.completed = true;
+        controlProps.completed = true
       } else if (linear && activeStep < index) {
-        controlProps.disabled = true;
+        controlProps.disabled = true
       }
 
       if (index + 1 === children.length) {
-        controlProps.last = true;
+        controlProps.last = true
       }
 
-      return [
-        React.cloneElement(step, Object.assign(controlProps, step.props, {hasClaim: hasClaim})),
-      ];
-    });
+      controlProps.hasClaim = hasClaim
 
-    _.forEach(steps, function(step, index) {
-          if (step.props.hasClaim == true ) {
-              menu.push(step)
-          }
-          else if (step.props.index == 0 || step.props.index == 3) {
-             menu.push(step)
-          }
-      });
+      return [
+        React.cloneElement(Step, Object.assign(controlProps, Step.props))
+      ]
+    })
+    // eslint-disable-next-line no-undef
+    _.forEach(Steps, function (Step, index) {
+      if (Step.props.hasClaim === true) {
+        Menu.push(Step)
+      } else if (Step.props.index === 0 || Step.props.index === 3) {
+        Menu.push(Step)
+      }
+    })
 
     return (
       <div style={prepareStyles(Object.assign(styles.root, style))}>
-        {menu}
+        {Menu}
       </div>
-    );
+    )
   }
 }
 
-export default Stepper;
+export default Stepper

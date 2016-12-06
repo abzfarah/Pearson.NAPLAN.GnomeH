@@ -37,7 +37,7 @@ class NavigationMenu extends Component {
     return (
       <div>
         <Paper style={style.paper}>
-          <Menu listStyle={style.list} innerDivStyle={style.menu}>
+          <Menu listStyle={style.list} style={style.menu}>
             { <MenuItem onClick={() => this.props.routeActions.push('/school')} primaryText="Home" /> }
             {<MenuItem onClick={() => this.props.routeActions.push('/manageschools')} primaryText="Manage Schools" /> }
             {<MenuItem onClick={() => this.props.routeActions.push('/manageusers')} primaryText="Manage Users" /> }

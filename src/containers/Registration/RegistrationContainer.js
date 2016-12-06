@@ -150,7 +150,7 @@ class RegistrationContainer extends React.Component {
 
     return (
       <div style={styles.root}>
-        <Stepper linear={false} claims={this.props.claims}>
+        <Stepper linear={false}>
           <Step completed={false} active={stepIndex === 0}  >
             <StepButton onClick={() => this.handleActiveStep(0)}>
               Home

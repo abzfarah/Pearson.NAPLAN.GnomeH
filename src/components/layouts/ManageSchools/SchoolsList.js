@@ -275,12 +275,12 @@ class SchoolList extends React.Component {
                         <AddSchoolContainer actions={actions} submitForm={this.submitForm} ref={'addSchoolForm'} centreCode={this.state.centreCode} />
                     </Dialog>
 
-                    <panel className='grid' style={{ width: 1050 }}>
-                        <BootstrapTable data={this.state.schoolData} striped={true} hover={true} pagination={true} selectRow={this.selectRowProp} tableStyle={{ width: 1200 }} >
-                            <TableHeaderColumn dataField="centreCode" isKey={true} dataSort={true} width={200} filter={{ type: "TextFilter", placeholder: "Filter by code" }}></TableHeaderColumn>
-                            <TableHeaderColumn dataField="sector" dataSort={true} width={200} filter={{ type: "SelectFilter", options: sectorType, placeholder: "Select sector" }}></TableHeaderColumn>
+                    <panel className='grid' style={{ width: "1050" }}>
+                        <BootstrapTable data={this.state.schoolData} striped={true} hover={true} pagination={true} selectRow={this.selectRowProp} tableStyle={{ width: "1200" }} >
+                            <TableHeaderColumn dataField="centreCode" isKey={true} dataSort={true} width="200" filter={{ type: "TextFilter", placeholder: "Filter by code" }}></TableHeaderColumn>
+                            <TableHeaderColumn dataField="sector" dataSort={true} width="300" filter={{ type: "SelectFilter", options: sectorType, placeholder: "Select sector" }}></TableHeaderColumn>
                             <TableHeaderColumn dataField="centreName" dataSort={true} filter={{ type: "TextFilter", placeholder: "Filter by name" }}></TableHeaderColumn>
-                            <TableHeaderColumn dataField="centreCode" width={300} dataFormat={(cell, row) => { return this.renderActions(cell, row) } }>Actions</TableHeaderColumn>
+                            <TableHeaderColumn dataField="centreCode" width="300"  dataFormat={(cell, row) => { return this.renderActions(cell, row) } }>Actions</TableHeaderColumn>
                         </BootstrapTable>
                     </panel>
 
