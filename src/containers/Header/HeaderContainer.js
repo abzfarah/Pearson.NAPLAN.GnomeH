@@ -10,7 +10,7 @@ import Search from './components/Search'
 export class HeaderContainer extends React.Component {
   static propTypes = {
     user: React.PropTypes.object,
-    children: React.PropTypes.element.isRequired,
+    currentSchool: React.PropTypes.object,
     actions: React.PropTypes.func,
     searchActions: React.PropTypes.func,
     registrationActions: React.PropTypes.func
@@ -46,16 +46,14 @@ export class HeaderContainer extends React.Component {
       <div>
         <Header splash={false}
           float={false}
-          fixed={false}
-          size="xlarge">
+          fixed={false}>
           <LoginMenu status={this.props} />
         </Header>
 
         { centreSearch &&
         <Header splash={false}
           float={false}
-          fixed={false}
-          size="xlarge">
+          fixed={false}>
           <Search currentSchool={currentSchool}
             openSearch={this.state.openSearch}
             handleSearchClick={this.handleSearchClick} />
@@ -64,8 +62,7 @@ export class HeaderContainer extends React.Component {
         { centreSearch &&
         <Header splash={false}
           float={false}
-          fixed={false}
-          size="xlarge">
+          fixed={false}>
           <NavigationMenu routeActions={this.props.routeActions} />
         </Header> }
 

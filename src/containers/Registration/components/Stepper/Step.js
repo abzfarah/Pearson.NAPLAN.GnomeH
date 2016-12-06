@@ -50,7 +50,7 @@ class Step extends Component {
      */
     style: PropTypes.object,
 
-    hasClaim: PropTypes.bool
+    hasClaim:  PropTypes.any
   };
 
   static contextTypes = {
