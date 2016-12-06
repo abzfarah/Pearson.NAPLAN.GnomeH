@@ -13,7 +13,7 @@ import App from '../components/common/App'
 import _ from 'lodash'
 injectTapEventPlugin()
 
-class AppContainer extends React.Component {
+export class AppContainer extends React.Component {
   static propTypes = {
 
   }

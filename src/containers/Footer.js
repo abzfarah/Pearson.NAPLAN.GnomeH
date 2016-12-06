@@ -3,7 +3,7 @@ import Box from '../components/common/Box'
 import Columns from '../components/common/Columns'
 import Footer from '../components/common/Footer'
 
-export default class BlogFooter extends Component {
+export default class PageFooter extends Component {
   render () {
     return (
       <Footer>

@@ -113,7 +113,7 @@
     "dom-helpers": "^3.0.0",
     "domify": "^1.4.0",
     "elemental": "^0.6.1",
-    "enzyme": "^2.4.1",
+    "enzyme": "^2.6.0",
     "es6-object-assign": "^1.0.3",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-find-rules": "^1.14.3",

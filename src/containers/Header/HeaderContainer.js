@@ -7,7 +7,7 @@ import Header from '../../components/common/Header'
 import NavigationMenu from './components/NavigationMenu'
 import Search from './components/Search'
 
-class HeaderContainer extends React.Component {
+export class HeaderContainer extends React.Component {
   static propTypes = {
     user: React.PropTypes.object,
     children: React.PropTypes.element.isRequired,
