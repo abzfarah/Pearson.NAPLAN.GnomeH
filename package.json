@@ -293,6 +293,7 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "./setupTestFrameworkScriptFile.js",
     "coverageReporters": [
       "text",
       "cobertura",
