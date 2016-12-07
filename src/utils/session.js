@@ -1,16 +1,17 @@
-import userManager from './userManager';
+import userManager from './userManager'
 
-const claims_list =
-[ 'centreSearch',
-  'centre',
-  'soc',
-  'schoolCode',
-  'authorizedStaff',
-  'userService',
-  'socService',
-  'alternativeTestFormatOrder',
-  'studentRegistrationData'
-]
+const claimsList =
+// eslint-disable-next-line
+[   'centreSearch',
+    'centre',
+    'soc',
+    'schoolCode',
+    'authorizedStaff',
+    'userService',
+    'socService',
+    'alternativeTestFormatOrder',
+    'studentRegistrationData'
+  ]
 
 class Session {
 
@@ -24,8 +25,8 @@ class Session {
     this._key = ''
   }
 
-  set login(status) {
-    this._loggedIn = status;
+  set login (status) {
+    this._loggedIn = status
   }
 
   set _prefix (d) {
@@ -37,7 +38,7 @@ class Session {
   }
 
   get login () {
-    return this._loggedIn;
+    return this._loggedIn
   }
 
   get exists () {
@@ -49,7 +50,7 @@ class Session {
   }
 
   get schoolcode () {
-    return window.sessionStorage.getItem('currentSchool')
+    return window.sessionStorage.getItem('currentSchool') || this._schoolcode
   }
 
   get user () {
@@ -65,7 +66,7 @@ class Session {
   }
 
   get _sessionKey () {
-    return this._prefix+this._key
+    return this._prefix + this._key
   }
 
   get _prefix () {
@@ -75,28 +76,29 @@ class Session {
   get _key () {
     return userManager._userStoreKey
   }
-  
+
   get _retrieveClaims () {
-    let claims = this.user.profile;
-    let filter_claims = _.pick(claims, claims_list);
-    let user_claims = _.pickBy(filter_claims, _.isString);
-    //if there is a "schoolCode" claim, user is NOT an admin
-    this._isAdmin = user_claims["schoolCode"] ? false : true
+    let claims = this.user.profile
+    let filterClaims = _.pick(claims, claimsList)
+    let userClaims = _.pickBy(filterClaims, _.isString)
+    // if there is a "schoolCode" claim, user is NOT an admin
+    this._schoolcode = userClaims['schoolCode']
+    this._isAdmin = userClaims['schoolCode'] ? false : true
     this._schoolUser = this._isAdmin ? true : false
 
-    if (this._schoolUser) this._schoolcode = user_claims["schoolCode"] 
-    
-    //Normalise user claims properties
-    user_claims = _.mapValues(user_claims, function(value) {
+    if (this._schoolUser) this._schoolcode = userClaims["schoolCode"] 
+
+    // Normalise user claims properties
+    userClaims = _.mapValues(userClaims, function (value) {
           value = _.toLower(value)
 
           if (value == "false") return false
               else return true
         }
       )
-    this._claims = user_claims
-    return user_claims
-  }  
+    this._claims = userClaims
+    return userClaims
+  }
 
 }
 

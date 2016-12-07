@@ -97,7 +97,8 @@ class Step extends Component {
         {React.Children.map(children, this.renderChild)}
       </div>
     )
-  }
+  } 
 }
 
 export default Step
+

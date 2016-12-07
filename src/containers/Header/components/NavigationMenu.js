@@ -32,16 +32,16 @@ const style = {
 
 
 class NavigationMenu extends Component {
-
   render () {
+    const { claims: { centreSearch } } = this.context
     return (
       <div>
         <Paper style={style.paper}>
           <Menu listStyle={style.list} style={style.menu}>
-            { <MenuItem onClick={() => this.props.routeActions.push('/school')} primaryText="Home" /> }
-            {<MenuItem onClick={() => this.props.routeActions.push('/manageschools')} primaryText="Manage Schools" /> }
-            {<MenuItem onClick={() => this.props.routeActions.push('/manageusers')} primaryText="Manage Users" /> }
-            {<MenuItem primaryText="Reports" /> }
+            {<MenuItem onClick={() => this.props.routeActions.push('/school')} primaryText="Home" /> }
+            { centreSearch && <MenuItem onClick={() => this.props.routeActions.push('/manageschools')} primaryText="Manage Schools" /> }
+            { centreSearch && <MenuItem onClick={() => this.props.routeActions.push('/manageusers')} primaryText="Manage Users" /> }
+            { centreSearch && <MenuItem primaryText="Reports" /> }
           </Menu>
         </Paper>
       </div>
@@ -49,4 +49,7 @@ class NavigationMenu extends Component {
   }
 }
 
+NavigationMenu.contextTypes = {
+  claims: React.PropTypes.object
+}
 export default NavigationMenu

@@ -38,8 +38,7 @@ export class HeaderContainer extends React.Component {
 
 
   render (props) {
-    const { currentSchool, claims } = this.context
-    const { centreSearch } = claims
+    const { claims: { centreSearch }, currentSchool, loggedIn } = this.context
 
 
     return (
@@ -59,7 +58,7 @@ export class HeaderContainer extends React.Component {
             handleSearchClick={this.handleSearchClick} />
         </Header> }
 
-        { centreSearch &&
+        { loggedIn &&
         <Header splash={false}
           float={false}
           fixed={false}>

@@ -88,7 +88,7 @@ export class AppContainer extends React.Component {
   componentWillMount (props) {
     if (session.exists) {
       let userClaims = session.claims
-      if (session.isAdmin) {
+      if (1) {
         let centreCode = session.schoolcode
         this.props.searchActions.selectSchool(centreCode)
         this.props.registrationActions.fetchApplication(centreCode)
@@ -110,8 +110,8 @@ export class AppContainer extends React.Component {
 
       // if user is not an admin, user will be determined to be a school user
       if (!session.isAdmin) {
-        let schoolcode = session._schoolcode
-        this.props.actions.selectSchool(schoolcode)
+        let schoolcode = session.schoolcode
+        this.props.searchActions.selectSchool(schoolcode)
       }
 
       this.setState({
@@ -121,7 +121,7 @@ export class AppContainer extends React.Component {
       })
     }
   }
-  
+
   shouldComponentUpdate (nextProps, nextState) {
     if (!this.props.user && !nextProps.user) return false
     if (_.isEmpty(this.state.currentSchool) && _.isEmpty(nextProps.currentSchool) && !session.isAdmin) return false
