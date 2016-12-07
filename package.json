@@ -293,8 +293,6 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "setupTestFrameworkScriptFile": "./setupTestFrameworkScriptFile.js",
     "coverageReporters": [
       "text",
       "cobertura",

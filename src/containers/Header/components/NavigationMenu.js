@@ -31,7 +31,7 @@ const style = {
 }
 
 
-class NavigationMenu extends Component {
+export class NavigationMenu extends Component {
   render () {
     const { claims: { centreSearch } } = this.context
     return (
