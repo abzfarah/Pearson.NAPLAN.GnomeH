@@ -1,34 +1,34 @@
 // @flow weak
 /* eslint-disable react/no-multi-comp */
 
-import React, { Component, PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
-import keycode from 'keycode';
+import React, { Component, PropTypes } from 'react'
+import { createStyleSheet } from 'jss-theme-reactor'
+import keycode from 'keycode'
 import {
   Table,
   TableHead,
   TableBody,
   TableRow,
   TableCell,
-  TableSortLabel,
-} from 'material-ui/Table';
-import Toolbar from 'material-ui/Toolbar';
-import Text from 'material-ui/Text';
-import Paper from 'material-ui/Paper';
-import Checkbox from 'material-ui/Checkbox';
-import IconButton from 'material-ui/IconButton';
+  TableSortLabel
+} from 'material-ui/Table'
+import Toolbar from 'material-ui/Toolbar'
+import Text from '../Text'
+import Paper from 'material-ui/Paper'
+import Checkbox from 'material-ui/Checkbox'
+import IconButton from 'material-ui/IconButton'
 
 const styleSheet = createStyleSheet('EnhancedTable', () => ({
   paper: {
     width: '100%',
-    marginTop: 30,
-  },
-}));
+    marginTop: 30
+  }
+}))
 
-let counter = 0;
-function createData(name, calories, fat, carbs, protein) {
-  counter += 1;
-  return { id: counter, name, calories, fat, carbs, protein };
+let counter = 0
+function createData (name, calories, fat, carbs, protein) {
+  counter += 1
+  return { id: counter, name, calories, fat, carbs, protein }
 }
 
 class EnhancedTableHead extends Component {
@@ -36,15 +36,15 @@ class EnhancedTableHead extends Component {
     onRequestSort: PropTypes.func,
     onSelectAllClick: PropTypes.func,
     order: PropTypes.string,
-    orderBy: PropTypes.string,
-  };
+    orderBy: PropTypes.string
+  }
 
   createSortHandler = (property) => {
-    return (event) => this.props.onRequestSort(event, property);
+    return (event) => this.props.onRequestSort(event, property)
   };
 
-  render() {
-    const { order, orderBy } = this.props;
+  render () {
+    const { order, orderBy } = this.props
 
     return (
       <TableHead>
@@ -99,7 +99,7 @@ class EnhancedTableHead extends Component {
           </TableCell>
         </TableRow>
       </TableHead>
-    );
+    )
   }
 }
 
@@ -107,7 +107,7 @@ class EnhancedTableHead extends Component {
 
 export default class EnhancedTable extends Component {
   static contextTypes = {
-    styleManager: PropTypes.object.isRequired,
+    styleManager: PropTypes.object.isRequired
   };
 
   state = {
@@ -119,51 +119,51 @@ export default class EnhancedTable extends Component {
       createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
       createData('Eclair', 262, 16.0, 24, 6.0),
       createData('Cupcake', 305, 3.7, 67, 4.3),
-      createData('Gingerbread', 356, 16.0, 49, 3.9),
-    ],
+      createData('Gingerbread', 356, 16.0, 49, 3.9)
+    ]
   };
 
   handleRequestSort = (event, property) => {
-    const orderBy = property;
-    let order = 'desc';
+    const orderBy = property
+    let order = 'desc'
 
     if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
+      order = 'asc'
     }
 
     const data = this.state.data.sort(
       (a, b) => (
         order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]
       ),
-    );
+    )
 
-    this.setState({ data, order, orderBy });
-  };
+    this.setState({ data, order, orderBy })
+  }
 
   handleSelectAllClick = (event, checked) => {
     if (checked) {
-      return this.setState({ selected: this.state.data.map((n) => n.id) });
+      return this.setState({ selected: this.state.data.map((n) => n.id) })
     }
-    return this.setState({ selected: [] });
+    return this.setState({ selected: [] })
   };
 
   handleKeyDown = (event, id) => {
     if (keycode(event) === 'space') {
-      this.handleClick(event, id);
+      this.handleClick(event, id)
     }
   }
 
   handleClick = (event, id) => {
-    const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
+    const { selected } = this.state
+    const selectedIndex = selected.indexOf(id)
+    let newSelected = []
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
+      newSelected = newSelected.concat(selected, id)
     } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
+      newSelected = newSelected.concat(selected.slice(1))
     } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
+      newSelected = newSelected.concat(selected.slice(0, -1))
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
@@ -171,16 +171,16 @@ export default class EnhancedTable extends Component {
       );
     }
 
-    this.setState({ selected: newSelected });
+    this.setState({ selected: newSelected })
   };
 
   isSelected = (id) => {
-    return this.state.selected.indexOf(id) !== -1;
+    return this.state.selected.indexOf(id) !== -1
   }
 
-  render() {
-    const classes = this.context.styleManager.render(styleSheet);
-    const { data, order, orderBy, selected } = this.state;
+  render () {
+    const classes = this.context.styleManager.render(styleSheet)
+    const { data, order, orderBy, selected } = this.state
 
     return (
       <Paper zDepth={2} className={classes.paper}>
@@ -193,7 +193,7 @@ export default class EnhancedTable extends Component {
           />
           <TableBody>
             {data.map((n) => {
-              const isSelected = this.isSelected(n.id);
+              const isSelected = this.isSelected(n.id)
               return (
                 <TableRow
                   hover
@@ -214,30 +214,14 @@ export default class EnhancedTable extends Component {
                   <TableCell numeric>{n.carbs}</TableCell>
                   <TableCell numeric>{n.protein}</TableCell>
                 </TableRow>
-              );
+              )
             })}
           </TableBody>
         </Table>
       </Paper>
-    );
+    )
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const toolbarStyleSheet = createStyleSheet('EnhancedTableToolbar', (theme) => {
   return {

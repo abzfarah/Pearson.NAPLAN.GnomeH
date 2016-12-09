@@ -5,13 +5,12 @@ import {
 } from '../constants'
 
 const initialState = {
-    isLoading = false,
+    isLoading: false,
     schoolData: [],
     error: {}
 }
 
-export default (state = initialState, action = {}){
-
+export default (state = initialState, action = {}) => {
     switch (action.type) {
 
         case GETSCHOOL_FETCH_SUCCESS:

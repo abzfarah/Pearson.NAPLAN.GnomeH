@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as searchSchoolActions from '../actions/schoolSearchActions'
 import * as registrationActions from '../actions/registrationActions'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import Footer from './Footer'
 import HeaderContainer from './Header/HeaderContainer'
 import userManager from '../utils/userManager'
@@ -11,9 +10,8 @@ import session from '../utils/session'
 import LandingPage from '../layouts/LandingPage'
 import App from '../components/common/App'
 import _ from 'lodash'
-injectTapEventPlugin()
 
-export class AppContainer extends React.Component {
+export class AppContainer extends Component {
   static propTypes = {
 
   }

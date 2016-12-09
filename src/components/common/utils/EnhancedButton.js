@@ -5,6 +5,7 @@ import keycode from 'keycode';
 import FocusRipple from './FocusRipple';
 import TouchRipple from './TouchRipple';
 
+
 let styleInjected = false;
 let listening = false;
 let tabPressed = false;

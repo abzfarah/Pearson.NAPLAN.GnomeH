@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import classnames from 'classnames';
-import CSSClassnames from './utils/CSSClassnames';
-import Props from './utils/Props';
-import Box from './Box';
+import React, { Component, PropTypes } from 'react'
+import ReactDOM from 'react-dom'
+import classnames from 'classnames'
+import CSSClassnames from './utils/CSSClassnames'
+import Props from './utils/Props'
+import Box from './Box'
 
 const CLASS_ROOT = CSSClassnames.HEADER;
 
@@ -12,13 +12,13 @@ export default class Header extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this._onResize = this._onResize.bind(this);
+    this._onResize = this._onResize.bind(this)
   }
 
   componentDidMount () {
     if (this.props.fixed) {
       this._alignMirror();
-      window.addEventListener('resize', this._onResize);
+      window.addEventListener('resize', this._onResize)
     }
   }
 
@@ -30,7 +30,7 @@ export default class Header extends Component {
 
   componentWillUnmount () {
     if (this.props.fixed) {
-      window.removeEventListener('resize', this._onResize);
+      window.removeEventListener('resize', this._onResize)
     }
   }
 
@@ -39,16 +39,16 @@ export default class Header extends Component {
   }
 
   _alignMirror () {
-    var contentElement = ReactDOM.findDOMNode(this.contentRef);
-    var mirrorElement = this.mirrorRef;
+    var contentElement = ReactDOM.findDOMNode(this.contentRef)
+    var mirrorElement = this.mirrorRef
 
     // constrain fixed content to the width of the mirror
-    var mirrorRect = mirrorElement.getBoundingClientRect();
-    contentElement.style.width = `${Math.floor(mirrorRect.width)}px`;
+    var mirrorRect = mirrorElement.getBoundingClientRect()
+    contentElement.style.width = `${Math.floor(mirrorRect.width)}px`
 
     // align the mirror height with the content's height
-    var contentRect = contentElement.getBoundingClientRect();
-    mirrorElement.style.height = `${Math.floor(contentRect.height)}px`;
+    var contentRect = contentElement.getBoundingClientRect()
+    mirrorElement.style.height = `${Math.floor(contentRect.height)}px`
   }
 
   render () {
@@ -62,7 +62,7 @@ export default class Header extends Component {
         [`${CLASS_ROOT}--splash`]: splash
       },
       className
-    );
+    )
     const containerClasses = classnames(
       `${CLASS_ROOT}__container`, {
         [`${CLASS_ROOT}__container--fixed`]: fixed,
@@ -70,17 +70,17 @@ export default class Header extends Component {
         [`${CLASS_ROOT}__container--fill`]: (fixed && !colorIndex),
         [`${CLASS_ROOT}__container--float`]: float
       }
-    );
+    )
     const wrapperClasses = classnames(
       `${CLASS_ROOT}__wrapper`, {
         [`${CLASS_ROOT}__wrapper--${size}`]: (size && typeof size === 'string')
       }
-    );
+    )
     var other = Props.pick(this.props, Object.keys(Box.propTypes));
     let restProps = Props.omit(this.props, Object.keys(Header.propTypes));
     if (size && typeof size === 'string') {
       // don't transfer size to Box since it means something different
-      delete other.size;
+      delete other.size
     }
 
     if (fixed) {
@@ -116,11 +116,11 @@ Header.propTypes = {
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   splash: PropTypes.bool,
   ...Box.propTypes
-};
+}
 
 Header.defaultProps = {
   pad: { horizontal: 'none', vertical: 'none', between: 'small'},
   direction: 'row',
   align: 'center',
   responsive: false
-};
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Box, Button } from '../../../components/common'
 
-class LoginMenu extends Component {
+export class LoginMenu extends Component {
 
   render() {
   

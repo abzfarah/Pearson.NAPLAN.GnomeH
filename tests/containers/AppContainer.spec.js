@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { AppContainer } from '../AppContainer'
+import { AppContainer } from 'containers/AppContainer'
 
 describe('AppContainer', () => {
   let _component
@@ -10,7 +10,7 @@ describe('AppContainer', () => {
   })
 
   it('Should return a route configuration object', () => {
-    expect(typeof HomeRoute).to.equal('object')
+    expect(typeof AppContainer).to.equal('object')
   })
 
 })

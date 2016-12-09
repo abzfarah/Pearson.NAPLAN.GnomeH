@@ -9,10 +9,10 @@ import ReduxToastr from 'react-redux-toastr'
 import userManager from './utils/userManager'
 import MuiThemeProvider from './components/common/utils/MuiThemeProvider'
 import getMuiTheme from './components/common/utils/getMuiTheme'
-
+import injectTapEventPlugin from 'react-tap-event-plugin'
 import { routes } from './routes'
 import store from './store'
-
+injectTapEventPlugin()
 // eslint-disable-next-line no-unused-vars
 const initialState = window.___INITIAL_STATE__
 const history = syncHistoryWithStore(browserHistory, store)

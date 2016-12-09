@@ -33,7 +33,8 @@ const style = {
 
 export class NavigationMenu extends Component {
   render () {
-    const { claims: { centreSearch } } = this.context
+    const { claims } = this.context
+    const { centreSearch } = claims
     return (
       <div>
         <Paper style={style.paper}>

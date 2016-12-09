@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as routeActions from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import LoginMenu from './components/LoginMenu'
-import Header from '../../components/common/Header'
+import Header from 'grommet/components/Header'
 import NavigationMenu from './components/NavigationMenu'
 import Search from './components/Search'
 
